@@ -4,8 +4,8 @@
 var _spt = {
     hero: {
         url: [
-            "style/img/sprite/hero.png",
-            "style/img/sprite/hero1.png"
+            "img/sprite/hero.png",
+            "img/sprite/hero1.png"
 
         ],
         map: undefined, //Массив с картами.
@@ -31,9 +31,9 @@ var _spt = {
     },
     enemy: {
         url: [
-            "style/img/sprite/enemy.png",
-            "style/img/sprite/enemy2.png",
-            "style/img/sprite/batman.png"
+            "img/sprite/enemy.png",
+            "img/sprite/enemy2.png",
+            "img/sprite/batman.png"
         ],
         count: {
             x: 4,
@@ -54,8 +54,8 @@ var _spt = {
     },
     animal: {
         url: [
-            "style/img/sprite/animal.png",
-            "style/img/sprite/children.png",
+            "img/sprite/animal.png",
+            "img/sprite/children.png",
         ],
         count: {
             x: 4,
@@ -76,10 +76,10 @@ var _spt = {
     },
     nps: {
         url: [
-            "style/img/sprite/nps0.png",
-            "style/img/sprite/batman.png",
-            "style/img/sprite/nps1.png",
-            "style/img/sprite/children.png"
+            "img/sprite/nps0.png",
+            "img/sprite/batman.png",
+            "img/sprite/nps1.png",
+            "img/sprite/children.png"
         ],
         count: {
             x: 4,
@@ -100,7 +100,7 @@ var _spt = {
     },
     interface: {
         url: [
-            'style/img/sprite/interface.png'
+            'img/sprite/interface.png'
         ],
         type: "path",
         dom: {}
@@ -123,20 +123,20 @@ var _spt = {
         },
         dom: {}, //Массив с лицами.
         url: [
-            "style/img/sprite/face/hero0.png",
-            "style/img/sprite/face/hero1.png",
-            "style/img/sprite/face/17.png",
-            "style/img/sprite/face/18.png",
-            "style/img/sprite/face/19.png",
-            "style/img/sprite/face/20.png",
-            "style/img/sprite/face/21.png",
-            "style/img/sprite/face/22.png",
-            "style/img/sprite/face/23.png",
-            "style/img/sprite/face/24.png",
-            "style/img/sprite/face/25.png",
-            "style/img/sprite/face/26.png",
-            "style/img/sprite/face/27.png",
-            "style/img/sprite/face/16.png"
+            "img/sprite/face/hero0.png",
+            "img/sprite/face/hero1.png",
+            "img/sprite/face/17.png",
+            "img/sprite/face/18.png",
+            "img/sprite/face/19.png",
+            "img/sprite/face/20.png",
+            "img/sprite/face/21.png",
+            "img/sprite/face/22.png",
+            "img/sprite/face/23.png",
+            "img/sprite/face/24.png",
+            "img/sprite/face/25.png",
+            "img/sprite/face/26.png",
+            "img/sprite/face/27.png",
+            "img/sprite/face/16.png"
         ]
     }
 };

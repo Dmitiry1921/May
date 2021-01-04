@@ -4,4 +4,4 @@
 ![](https://raw.githubusercontent.com/Dmitiry1921/May/main/doc/img/0.jpg)
 
 # Результаты конкурса: 
-[![Watch the video](https://raw.githubusercontent.com/Dmitiry1921/May/main/doc/img/video.jpg)](https://www.youtube.com/watch?v=CAdfAJsH_9U)
+[![Watch the video](https://raw.githubusercontent.com/Dmitiry1921/May/main/doc/img/video.png)](https://www.youtube.com/watch?v=CAdfAJsH_9U)

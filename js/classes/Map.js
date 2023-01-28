@@ -1,12 +1,13 @@
 import Storage from "./Storage.js";
 import {_gameSet} from "../lib/engine.js";
+import {_LevelLoader} from "../game.js";
 
 
 import global from '../config/global.js'
 import _lvl from '../config/lvl.js'
 
 let _Mobs = global._Mobs;
-let _level = Storage.get('_lvl');
+let _level = global._level;
 
 export default new class Map {
   constructor() {
@@ -117,8 +118,7 @@ export default new class Map {
 
   saveStat() {
     //Сохраняем состояние уровня каждый раз когда вызвана функция.
-    // TODO УБРАТЬ ПОСЛЕ ТОГО КАК РАЗБЕРУСЬ С ТЕМ КАК ПЕРЕПИСАТЬ _code
-    // Storage.save(); //Сохраняем весь уровень.
+    Storage.save(); //Сохраняем весь уровень.
   }
 
   searchNPS(value) {

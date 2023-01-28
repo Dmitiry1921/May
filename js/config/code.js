@@ -175,8 +175,8 @@ export default {
         ]
         , function () {
           var farmerBob = Map.searchNPS('Кирил').options;
-          farmerBob.code = '_code.nps.famerBob1()';
-          $this.options.code = '_code.nps.IamBatman()';
+          farmerBob.code = this.nps.famerBob1;
+          $this.options.code = this.nps.IamBatman;
           $this.movePath(15, 4, function () {
             $this.memory.pos = 'bottom'; //Поворачиваем НПС лицом к игроку.
           });
@@ -233,7 +233,7 @@ export default {
       ], () => {
         const boy = Map.searchNPS('Я похож на настоящего.. но Охраняю морковь');
         _Interface.quest.set('Выкопать морковку');
-        $this.options.code = '_code.nps.busy()'; //Задаем НПС следующее действие.
+        $this.options.code = this.nps.busy; //Задаем НПС следующее действие.
         boy.movePath(33, 4, () => {
           boy.memory.pos = 'bottom';
         });
@@ -398,7 +398,7 @@ export default {
         $this.options.visibility = false;
         $this.options.life = false;
 
-        _code.hero.stage1();
+        this.hero.stage1();
         _Interface.quest.set('Надрать жопу Бэтмену');
         global._Hero.setQuest({callback: this.end, lvl: 3});
       });
@@ -409,25 +409,25 @@ export default {
       var astof = Map.searchNPS('Астоф').options;
       //Задаем функцию, которая будет выполенна после того как мы выполнили квест.
       _Interface.quest.set("Вернитесь к причалу");
-      astof.code = "_code.nps.astofComeBack('Поговорите с Ваннессой','_code.nps.vanessaComplete()')";
+      astof.code = this.nps.astofComeBack.bind(this, 'Поговорите с Ваннессой', this.nps.vanessaComplete);
     },
     killAll_lvl1: () => {
       var astof = Map.searchNPS('Астоф').options;
       //Задаем функцию, которая будет выполенна после того как мы выполнили квест.
       _Interface.quest.set("Вернитесь в деревню");
-      astof.code = "_code.nps.astofComeBack('Даздраперма ждем вас','_code.nps.permaComplete()')";
+      astof.code = this.nps.astofComeBack.bind(this, 'Даздраперма ждем вас', this.nps.permaComplete);
       global._Hero.can.attack = false;
     },
     sunflouwer: () => {
       var astof = Map.searchNPS('Астоф').options;
       _Interface.quest.set("Вернитесь к Астофу");
-      astof.code = "_code.nps.astofComeBack('Вернитесь за наградой','_code.nps.artakComplete()')";
+      astof.code = this.nps.astofComeBack.bind(this, 'Вернитесь за наградой',this.nps.artakComplete);
     },
     stage0: () => {
       var batmen = Map.searchNPS('Бэтмен').options;
       batmen.visibility = true;
       batmen.life = true;
-      batmen.code = "_code.nps.batmanEnd()";
+      batmen.code = this.nps.batmanEnd;
       _Interface.quest.set('Бэтмену что то Надо');
     },
     stage1: () => {
@@ -436,7 +436,7 @@ export default {
       global._Mobs.push(new _Enemy("enemy", 2, 0, 0, 21, 7, {max: {health: 300}, health: 300, damage: 4}));
       global._Mobs.push(new _Enemy("enemy", 0, 2, 0, 21, 7, {max: {health: 100}, health: 100, damage: 1}));
       global._Mobs.push(new _Enemy("enemy", 0, 1, 0, 21, 7, {max: {health: 100}, health: 100, damage: 1}));
-      global._Hero.setQuest({callback: "_code.end()", lvl: 3});
+      global._Hero.setQuest({callback: this.end, lvl: 3});
     }
   },
   enemy: {

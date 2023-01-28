@@ -13,11 +13,7 @@ import _lvl from "./config/lvl.js";
 import global from "./config/global.js";
 import {_gameStart, _gameSet} from "./lib/engine.js";
 
-// const _level = Storage.get("_lvl");
-// TODO: УБРАТЬ ПОСЛЕ ТОГО КАК РАЗБЕРУСЬ С ТЕМ КАК ПЕРЕПИСАТЬ _code
-const _level = 0;
-
-
+const _level = global._level;
 let _Mobs =  global._Mobs;
 
 function createMobs() {
@@ -96,7 +92,7 @@ function drawMobs(ctx) {
   }
 }
 
-function _LevelLoader(lvl) {
+export function _LevelLoader(lvl) {
   //Загружаем всех персонажей, NPS и противников, которые есть на карте.
   // _Interface = _Interface === undefined ? new Interface() : _Interface;
   Sprite.load(function () { //Загружаем спрайт карты.

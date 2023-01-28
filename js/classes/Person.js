@@ -9,7 +9,7 @@ import {_com} from "../config/main.js";
 import global from "../config/global.js";
 import items from "../config/items.js";
 
-let _level = Storage.get('_lvl');
+let _level = global._level;
 
 export default class Person {
   constructor(ctx, x, y) {
@@ -251,7 +251,7 @@ export default class Person {
         i.actFlag = true;//Вызываем сценарий в случае такого столкновения.
       }
     }
-    //Вызываем колбэк есть он есть
+    //Вызываем callback есть он есть
     if (typeof callback == 'function' && !bool) callback(nx, ny);
   };
   event(ctx){
@@ -282,7 +282,7 @@ export default class Person {
         });
       }
       if(KeyBoard.isKeyDown('SPACE')){
-        //Выполняем дейтвие..
+        //Выполняем действие..
         this.canTakeIt(ctx);
         this.drawTool(ctx);
         this.attack(ctx);
@@ -333,8 +333,8 @@ export default class Person {
     }
   };
   gameOver() {
-    _Hero.can.walk = false;
-    _Hero.can.attack = false;
+    global._Hero.can.walk = false;
+    global._Hero.can.attack = false;
     _Interface.dialog.set([
       ["...",'right',4,3,0],
       ["3.."],

@@ -3318,10 +3318,10 @@ export default {
   },
   1: {
     enemy: [
-      [1, 0, 0, 15, 5, {code: "_code.enemy.attack()"}],
-      [1, 0, 0, 24, 12, {code: "_code.enemy.attack()"}],
-      [1, 0, 0, 35, 5, {code: "_code.enemy.attack()"}],
-      [1, 0, 0, 35, 14, {code: "_code.enemy.attack()"}]
+      [1, 0, 0, 15, 5, {code: code.enemy.attack}],
+      [1, 0, 0, 24, 12, {code: code.enemy.attack}],
+      [1, 0, 0, 35, 5, {code: code.enemy.attack}],
+      [1, 0, 0, 35, 14, {code: code.enemy.attack}]
     ],
     animal: [
       [0, 3, 0, 7, 6], //Корова
@@ -3333,19 +3333,19 @@ export default {
     ],
     nps: [
       [1, 0, 0, 21, 7, {name: 'Бэтмен', type: 'nps', visibility: false, life: false, face: 12}],
-      [0, 2, 0, 21, 20, {name: 'Астоф', type: 'nps', code: "_code.nps.astifWait()", face: 9}],
-      [2, 2, 0, 33, 4, {name: 'Кирил', type: 'nps', code: "_code.nps.farmerBob()", face: 7}],
+      [0, 2, 0, 21, 20, {name: 'Астоф', type: 'nps', code: code.nps.astifWait, face: 9}],
+      [2, 2, 0, 33, 4, {name: 'Кирил', type: 'nps', code: code.nps.farmerBob, face: 7}],
       [3, 0, 0, 33, 16, {
         name: 'Я похож на настоящего.. но Охраняю морковь',
         type: 'nps',
-        code: "_code.nps.ask()",
+        code: code.nps.ask,
         face: 13
       }],
-      [2, 0, 1, 17, 10, {name: 'Ярик. Где мои 500р ?', type: 'nps', code: "_code.nps.ask()", face: 13}],
+      [2, 0, 1, 17, 10, {name: 'Ярик. Где мои 500р ?', type: 'nps', code: code.nps.ask, face: 13}],
       [2, 3, 1, 2, 3, {
         name: 'Автор. Тот самый что написал все это.. А Лица одинаковые у нас потому что нет подходящих.. ^.^',
         type: 'nps',
-        code: "_code.nps.ask()",
+        code: code.nps.ask,
         face: 13
       }],
     ],
@@ -6651,7 +6651,7 @@ export default {
   },
   2: {
     nps: [
-      [0, 2, 0, 27, 20, {name: 'Астоф', type: 'nps', code: "_code.nps.astifWait()", face: 9}],
+      [0, 2, 0, 27, 20, {name: 'Астоф', type: 'nps', code: code.nps.astifWait, face: 9}],
     ],
     animal: [
       [0, 3, 0, 7, 14], //Корова
@@ -6661,13 +6661,13 @@ export default {
       [0, 3, 1, 25, 17], //бабачка розовая
     ],//sid, sx, sy, x, y, option
     enemy: [
-      [1, 0, 1, 4, 5, {code: "_code.enemy.attack()"}],
-      [1, 0, 0, 11, 7, {code: "_code.enemy.attack()"}],
-      [1, 1, 0, 19, 8, {code: "_code.enemy.attack()"}],
-      [1, 3, 0, 25, 9, {code: "_code.enemy.attack()"}],
-      [1, 2, 0, 5, 19, {code: "_code.enemy.attack()"}],
-      [1, 2, 1, 31, 16, {code: "_code.enemy.attack()"}],
-      [1, 2, 1, 29, 5, {code: "_code.enemy.attack()"}]
+      [1, 0, 1, 4, 5, {code: code.enemy.attack}],
+      [1, 0, 0, 11, 7, {code: code.enemy.attack}],
+      [1, 1, 0, 19, 8, {code: code.enemy.attack}],
+      [1, 3, 0, 25, 9, {code: code.enemy.attack}],
+      [1, 2, 0, 5, 19, {code: code.enemy.attack}],
+      [1, 2, 1, 31, 16, {code: code.enemy.attack}],
+      [1, 2, 1, 29, 5, {code: code.enemy.attack}]
     ],
     hero: {x: 25, y: 20},
     map: [[[{"id": 84, "tile": 1}, {"tile": null, "id": null}, {"tile": null, "id": null}, {
@@ -9968,8 +9968,8 @@ export default {
   },
   3: {
     nps: [
-      [0, 2, 0, 5, 15, {name: 'Астоф', type: 'nps', code: "_code.nps.astifWait()", face: 9}],
-      [2, 3, 1, 12, 8, {name: 'Автор', type: 'nps', code: "_code.nps.starec()", face: 4}],
+      [0, 2, 0, 5, 15, {name: 'Астоф', type: 'nps', code: code.nps.astifWait, face: 9}],
+      [2, 3, 1, 12, 8, {name: 'Автор', type: 'nps', code: code.nps.starec, face: 4}],
       [1, 0, 0, 32, 8, {name: 'Бэтмен', type: 'nps', visibility: false, life: false, face: 12}]
     ],
     animal: [
@@ -9978,20 +9978,20 @@ export default {
       [0, 3, 1, 3, 9], //бабачка розовая
     ],//sid, sx, sy, x, y, option
     enemy: [
-      [1, 0, 0, 19, 8, {code: "_code.enemy.attack()", damage: 3, health: 15, max: {health: 15}}],
-      [1, 1, 0, 26, 4, {code: "_code.enemy.attack()", damage: 3, health: 15, max: {health: 15}}],
-      [1, 2, 0, 35, 7, {code: "_code.enemy.attack()", damage: 3, health: 15, max: {health: 15}}],
-      [1, 3, 0, 20, 10, {code: "_code.enemy.attack()", damage: 3, health: 15, max: {health: 15}}],
-      [1, 0, 1, 16, 10, {code: "_code.enemy.attack()", damage: 3, health: 15, max: {health: 15}}],
-      [1, 1, 1, 15, 10, {code: "_code.enemy.attack()", damage: 3, health: 15, max: {health: 15}}],
-      [1, 2, 1, 32, 15, {code: "_code.enemy.attack()", damage: 3, health: 15, max: {health: 15}}],
-      [1, 3, 1, 30, 16, {code: "_code.enemy.attack()", damage: 3, health: 15, max: {health: 15}}],
-      [1, 0, 0, 34, 17, {code: "_code.enemy.attack()", damage: 3, health: 15, max: {health: 15}}],
-      [1, 1, 0, 18, 19, {code: "_code.enemy.attack()", damage: 3, health: 15, max: {health: 15}}],
-      [1, 2, 0, 20, 18, {code: "_code.enemy.attack()", damage: 3, health: 15, max: {health: 15}}],
-      [1, 3, 0, 21, 16, {code: "_code.enemy.attack()", damage: 3, health: 15, max: {health: 15}}],
-      [1, 0, 1, 25, 16, {code: "_code.enemy.attack()", damage: 3, health: 15, max: {health: 15}}],
-      [1, 1, 1, 34, 13, {code: "_code.enemy.attack()", damage: 3, health: 15, max: {health: 15}}]
+      [1, 0, 0, 19, 8, {code: code.enemy.attack, damage: 3, health: 15, max: {health: 15}}],
+      [1, 1, 0, 26, 4, {code: code.enemy.attack, damage: 3, health: 15, max: {health: 15}}],
+      [1, 2, 0, 35, 7, {code: code.enemy.attack, damage: 3, health: 15, max: {health: 15}}],
+      [1, 3, 0, 20, 10, {code: code.enemy.attack, damage: 3, health: 15, max: {health: 15}}],
+      [1, 0, 1, 16, 10, {code: code.enemy.attack, damage: 3, health: 15, max: {health: 15}}],
+      [1, 1, 1, 15, 10, {code: code.enemy.attack, damage: 3, health: 15, max: {health: 15}}],
+      [1, 2, 1, 32, 15, {code: code.enemy.attack, damage: 3, health: 15, max: {health: 15}}],
+      [1, 3, 1, 30, 16, {code: code.enemy.attack, damage: 3, health: 15, max: {health: 15}}],
+      [1, 0, 0, 34, 17, {code: code.enemy.attack, damage: 3, health: 15, max: {health: 15}}],
+      [1, 1, 0, 18, 19, {code: code.enemy.attack, damage: 3, health: 15, max: {health: 15}}],
+      [1, 2, 0, 20, 18, {code: code.enemy.attack, damage: 3, health: 15, max: {health: 15}}],
+      [1, 3, 0, 21, 16, {code: code.enemy.attack, damage: 3, health: 15, max: {health: 15}}],
+      [1, 0, 1, 25, 16, {code: code.enemy.attack, damage: 3, health: 15, max: {health: 15}}],
+      [1, 1, 1, 34, 13, {code: code.enemy.attack, damage: 3, health: 15, max: {health: 15}}]
     ],
     hero: {x: 5, y: 13},
     map: [[[{"id": 84, "tile": 1}, {"tile": null, "id": null}, {"tile": null, "id": null}, {

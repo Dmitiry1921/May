@@ -1,5 +1,4 @@
 import Map from "./Map.js";
-import Storage from "./Storage.js";
 
 import _lvl from "../config/lvl.js";
 import sprite from "../config/sprite.js";
@@ -7,7 +6,7 @@ import {_com} from "../config/main.js";
 import global from "../config/global.js";
 import code from "../config/code.js";
 
-let _level = Storage.get('_lvl');
+let _level = global._level;
 
 export default class Enemy {
   /**

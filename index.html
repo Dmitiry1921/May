@@ -1,54 +1,48 @@
 <html>
-    <head>
-        <title>Я Майские острова</title>
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <link rel="stylesheet" href="style.css">
-        <meta charset="utf-8"/>
-    </head>
-    <body>
-        <div class="game">
-            <div class="gameField">
-                <canvas id="myCanvas" width="1280" height="704"></canvas>
-                <div id="controls">
-                    <div class="itm">
-                        <div class="key">W</div>
-                        <div class="key">&#8593;</div>
-                        <div class="value">Вперед</div>
-                    </div>
-                    <div class="itm">
-                        <div class="key">A</div>
-                        <div class="key">&#8592;</div>
-                        <div class="value">Влево</div>
-                    </div>
-                    <div class="itm">
-                        <div class="key">S</div>
-                        <div class="key">&#8594;</div>
-                        <div class="value">Назад</div>
-                    </div>
-                    <div class="itm">
-                        <div class="key">D</div>
-                        <div class="key">&#8595;</div>
-                        <div class="value">Вправо</div>
-                    </div>
-                    <div class="itm">
-                        <!--<div class="key"><img src="style/img/lkm.png" alt=""></div>-->
-                        <!--<div class="key"><img src="style/img/rkm.png" alt=""></div>-->
-                        <div class="key space">SPACE</div>
-                        <div class="value">Действие</div>
-                    </div>
-                </div>
+<head>
+    <title>Я Майские острова</title>
+    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8"/>
+</head>
+<body>
+<div class="game">
+    <div class="gameField">
+        <canvas id="myCanvas" width="1280" height="704"></canvas>
+        <div id="controls">
+            <div class="itm">
+                <div class="key">W</div>
+                <div class="key">&#8593;</div>
+                <div class="value">Вперед</div>
+            </div>
+            <div class="itm">
+                <div class="key">A</div>
+                <div class="key">&#8592;</div>
+                <div class="value">Влево</div>
+            </div>
+            <div class="itm">
+                <div class="key">S</div>
+                <div class="key">&#8594;</div>
+                <div class="value">Назад</div>
+            </div>
+            <div class="itm">
+                <div class="key">D</div>
+                <div class="key">&#8595;</div>
+                <div class="value">Вправо</div>
+            </div>
+            <div class="itm">
+                <!--<div class="key"><img src="style/img/lkm.png" alt=""></div>-->
+                <!--<div class="key"><img src="style/img/rkm.png" alt=""></div>-->
+                <div class="key space">SPACE</div>
+                <div class="value">Действие</div>
             </div>
         </div>
-        <script type="text/javascript" src="js/lib/jquery-1.11.0.min.js"></script>
+    </div>
+</div>
 
-        <script type="text/javascript" src="js/spt.js"></script>
-        <script type="text/javascript" src="js/lib/engine.js"></script>
-        <script type="text/javascript" src="js/tile.js"></script>
+<script type="module" src="js/lib/engine.js"></script>
+<script type="text/javascript" src="js/tile.js"></script>
 
-        <script type="text/javascript" src="js/lvl.js"></script>
-
-        <script type="text/javascript" src="js/game.js"></script>
-        <script type="text/javascript" src="js/code.js"></script>
-        <script type="text/javascript" src="js/itms.js"></script>
-    </body>
+<script type="module" src="js/game.js"></script>
+</body>
 </html>

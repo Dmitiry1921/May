@@ -1,12 +1,11 @@
 /**
  * Created by Dima101 on 23.04.2016.
  */
-var _spt = {
+const sprite = {
     hero: {
         url: [
             "img/sprite/hero.png",
             "img/sprite/hero1.png"
-
         ],
         map: undefined, //Массив с картами.
         count: {
@@ -23,9 +22,9 @@ var _spt = {
             bw: null,
             bh: null,
             frameMap: [0,1,2,1],//Показывать кадры в порядке.
-            speed: 3, //задержка отображение следеющего кадра
+            speed: 3, //задержка отображение следующего кадра
             msp: 0, //Счетчик задержки
-            im: 0 //Кадр с которого начнеться воспроизведение.
+            im: 0 //Кадр с которого начнется воспроизведение.
         }//Параметры одного кадра.
 
     },
@@ -139,4 +138,6 @@ var _spt = {
             "img/sprite/face/16.png"
         ]
     }
-};
+}
+export default sprite;
+

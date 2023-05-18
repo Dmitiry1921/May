@@ -64,13 +64,6 @@ var _Map = {
         ctx.dom = document.getElementById(el.canvasID).getContext('2d');
         width = _tile.param.w*map.count.x;
         height = _tile.param.h*map.count.y;
-        /*$("#"+el.canvasID).css({
-            width:width,
-            height: height
-        });
-        ctx.dom.canvas.width = width;
-        ctx.dom.canvas.height = height;
-        console.log(width,height);*/
         console.log('Dom..');
     },
     randomInteger: function(min, max) {
@@ -365,7 +358,7 @@ var Interface = function(){
                     }
                 }
 
-                
+
                 ctx.drawImage(img, p.main.x, p.main.y, p.main.w, p.main.h, x, y, p.main.w, p.main.h);
                 ctx.drawImage(left, m[l.x][l.y].x, m[l.x][l.y].y, face.w, face.h, x, y, face.w, face.h);
                 ctx.drawImage(right, m[r.x][r.y].x, m[r.x][r.y].y, face.w, face.h, x + p.main.w - face.w, y, face.w, face.h);
@@ -1380,6 +1373,6 @@ var gameOver = function(){
     });
 };
 
-$(document).ready(function(){
+document.addEventListener('DOMContentLoaded', function() {
     _gameStart(init);
 });

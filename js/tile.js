@@ -1,7 +1,8 @@
 /**
  * Created by Dima101 on 22.04.2016.
  */
-var _tile = {
+// ex _tile
+export default {
     defMap: null,  //устанавливаем стандартный тайл.
     default: null, //Этим значение будет наполняться карта по умолчанию.
     param: {

@@ -1,7 +1,8 @@
 /**
  * Created by Dima101 on 23.04.2016.
  */
-var _spt = {
+// ex _spt
+export default {
     hero: {
         url: [
             "img/sprite/hero.png",

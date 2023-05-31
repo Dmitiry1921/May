@@ -1,4 +1,5 @@
-var _lvl = {
+// ex _lvl
+export default {
     0: {
         enemy: [], //На этому уровне монстры не объявленны это мирная деревня.
         animal: [
@@ -14,9 +15,9 @@ var _lvl = {
           [1,1,1,13,3] //Девочка
         ],//sid, sx, sy, x, y, option
         nps: [
-        [0,0,1,12,14],
-        [0,1,1,16,4,{name:'Даздраперма',type:'nps',code: "_code.nps.perma()",face: 2}],
-        [2,0,0,24,5,{name:'Артака',type:'nps',code: "_code.nps.busy()",face: 6}],
+         // [0,0,1,12,14],
+         [0,1,1,16,4,{name:'Даздраперма',type:'nps',code: "_code.nps.perma()",face: 2}],
+         [2,0,0,24,5,{name:'Артака',type:'nps',code: "_code.nps.busy()",face: 6}],
          [0,2,0,5,5,{name: 'Астоф',type: 'nps',code: "_code.nps.astof()" ,face: 9}],
          [0,0,0,21,15,{name: 'Ванесса',type: 'nps',code: "_code.nps.vanessa()" ,face: 11}]
         ],//sid, sx, sy, x, y, option

@@ -1,16 +1,20 @@
 /**
  * Created by Dima101 on 24.04.2016.
  */
-var doit = true; //Флаг доступности чего либо..
-var _code = {
+import MobMicroTask from "./class/MobMicroTask.js";
+import storage from "./class/Storage.js";
+
+// TODO удалить this и bind из кода
+let doit = true; //Флаг доступности чего-либо..
+export default {
     nps: {
-        astof: function(){
-            var $this =  _Mobs[_Hero.nps], //Активный NPS
-                hf = _Hero.face,//Лицо  геряя..
-                f = $this.options.face;//Лицо персонажа..
-            _Interface.dialog.set([
+        astof() {
+            // this Активный NPS
+            var hf = this._Hero.face,//Лицо  героя..
+                f = this.options.face;//Лицо персонажа..
+            this.Interface.dialog.set([
                 ["- Привет Салага, я слышал о тебе..",'left',hf,0,0,'right',f,1,0],
-                [" ..Ты тот критин который отправился на майские праздники на острова..",'left',hf,3,1],
+                [" ..Ты тот кретин, который отправился на майские праздники на острова..",'left',hf,3,1],
                 [" ..В КРИЗИС !!!",'left',hf,1,1,'right',f,3,1],
                 ["Угу. Да эт. Я.."],
                 ["- Как мне известно валюты у тебя больше не осталось.."],
@@ -18,123 +22,116 @@ var _code = {
                 ["..когда он обвалился моих денег хватило только на рулон туалетной бумаги..",'left',hf,1,1],
                 ["- И что же ты собираешься делать ?"],
                 ["Надо свалить с этих островов..",'left',hf,3,1],
-                ["- А что это с тобой.. Где тебя так потаскало ?"],
+                ["- А что это с тобой. Где тебя так потаскало ?"],
                 ["Хотел есть, пришлось драться с котом за кусок тухлой рыбы.."],
                 ["- Ну в общем я всегда в твоем распоряжении..",'right',f,2,1],
                 [" .. у меня есть лодка я могу отвезти тебе.."],
                 [" .. но только на соседние острова, горючего у меня не так много..."],
                 [" ..Не брагодари, я тебя подлечил :)"],
                 ["Отлично, пойду осмотрюсь может какая работенка найдеться.",'left',hf,3,0],
-                ["- Кстати, меня завут: "+$this.options.name,'right',f,2,1]
-            ],function(){
-                _Interface.quest.set("Найти уже девушку..^.^");
-                $this.options.code = '_code.nps.busy()'; //Задаем НПС следующее действие.
-                $this.movePath(5,1,function(){
-                    $this.memory.pos = 'bottom'; //Поворачиваем НПС лицом к игроку.
-                }); //Перемещаем НПС на координату..
-                _Hero.options.health = 5; //Лечим игрока.
+                ["- Кстати, меня зовут: "+this.options.name,'right',f,2,1]
+            ],() => {
+                this.Interface.quest.set("Найти уже девушку..^.^");
+                this.options.code = '_code.nps.busy()'; //Задаем НПС следующее действие.
+                this.movePath(5,1, () => {
+                    this.memory.pos = 'bottom'; //Поворачиваем НПС лицом к игроку.
+                }); //Перемещаем НПС на координату.
+                this._Hero.options.health = 5; //Лечим игрока.
             });
         }, //НПС который встречает игрока..
-        astifWait: function(){
-            var $this = _Mobs[_Hero.nps];
-            _Interface.dialog.set([
-                [" - Я подожду тебя тут пока ты ищешь то что тебя интересует..",'right',$this.options.face,0,0],
+        astifWait() {
+            this.Interface.dialog.set([
+                [" - Я подожду тебя тут пока ты ищешь то что тебя интересует..",'right',this.options.face,0,0],
                 ["Возвращайся сюда когда найдешь.."]
             ]);
         },
-        astofComeBack: function(text,callback){
-            var $this = _Mobs[_Hero.nps];
-            _Interface.dialog.set([
-                ["Я смотрю вы нашли что искали, ну раз так я отвезу тебя в Деревню..",'right',$this.options.face,0,0]
-            ],function(){
-                $this.options.code = "_code.nps.busy()";
-                _Map.levelSet(0); //Возвращаем персонажа обратно.
-                _Interface.quest.set(text);
-               eval(callback);
-                var Astof = _Map.searchNPS('Астоф').options;
-                Astof.code = "_code.nps.busy()";
+        astofComeBack(text, textCallback) {
+            this.Interface.dialog.set([
+                ["Я смотрю вы нашли что искали, ну раз так я отвезу тебя в Деревню..",'right',this.options.face,0,0]
+            ], () => {
+                this.addHookAfterLoadMob(textCallback);
+                this._Map.levelSet(0); //Возвращаем персонажа обратно.
+                this.Interface.quest.set(text);
+                this.options.code = "_code.nps.busy()";
             });
         },
-        busy: function(){
-            var $this =  _Mobs[_Hero.nps],
-                f = $this.options.face;//Лицо персонажа..
-            _Interface.dialog.set([
-                ["Мне не когда, поговори с кем то другим..",'right',f,1,0]
+        busy(){
+            this.Interface.dialog.set([
+                ["Мне не когда, поговори с кем то другим..",'right',this.options.face,1,0]
             ]);
         },
-        vanessa: function(){
-            var $this = _Mobs[_Hero.nps],
-                astof = _Map.searchNPS('Астоф').options;
-            _Interface.dialog.set([
-                [" - Здравствуй! Меня зовут: "+$this.options.name+", это тебе нужны деньги что бы выбраться..",'right',11,0,0],
+        vanessa(){
+            const astof = this._Map.searchNPS('Астоф').options;
+            this.Interface.dialog.set([
+                [" - Здравствуй! Меня зовут: "+this.options.name+", это тебе нужны деньги что бы выбраться..",'right',11,0,0],
                 ["Да все верно.."],
                 ['- Я могу помочь тебе, отправляйся к причалу, и поговори с '+astof.name+"ом он отвезет тебя на остров 'Труд'"],
                 ['..Добудь мне 9 морковок к праздничному столу, а я в замен пропущу тебя дальше и дам тебе не большой топорик что бы ты мог отбиваться от врагов..'],
                 ['Топорик, это интересно, отправлюсь сейчас же..'],
+                // TODO имя НПС должно быть переменной.
                 ['На острове найди Кирилла он фермер у него есть морковь, может он поможет тебе.. Но этот гад слишком жадный что бы делиться. Попробуй поговори  сним..'],
                 ['Хорошо, одна нога здесь другая там..'],
                 [' - Погоди ты, куда ты во что ты ее положишь то ?'],
                 ['... Не знаю.'],
                 ['Балда, вот тебе Рюкзак, теперь ступай к причалу..']
-            ],function(){
-                _Hero.setQuest({itm: 0, count: 9, callback: "_code.hero.carrot()"});
-                _Interface.inventory.show(); //ООтображаем инвентарь игрока..
-                _Interface.quest.set("Отправляйтесь к причалу");
+            ],() => {
+                this._Hero.setQuest({itm: 0, count: 9, callback: "_code.hero.carrot()"});
+                this.Interface.inventory.show(); //Отображаем инвентарь игрока..
+                this.Interface.quest.set("Отправляйтесь к причалу");
                 astof.code = "_code.nps.setLvl('Поговори с Кирилом',1)";
             });
         }, //Даем игроку первое задание.
-        vanessaComplete: function(){
+        vanessaComplete() {
             //Вернулись в деревню после мисси морковь
-            var vanessa = _Map.searchNPS('Ванесса').options;
+            var vanessa = this._Map.searchNPS('Ванесса').options;
             vanessa.code = "_code.nps.vanessaGetOut()";
         },
-        vanessaGetOut: function(){
-            var $this = _Mobs[_Hero.nps];
-            _Interface.dialog.set([
-                ["Я вижу ты достал мне то что я просила, отлично вот тебе твой обещанный топорик, Проходи, Добро пожаловать в деревню..","right",$this.options.face,0,0],
+        vanessaGetOut(){
+            this.Interface.dialog.set([
+                ["Я вижу ты достал мне то что я просила, отлично вот тебе твой обещанный топорик, Проходи, Добро пожаловать в деревню..","right",this.options.face,0,0],
                 ["..Даздраперма !!"],
                 ["Вот тебе одежда, а то ходишь тут в одних трусах.. Она защитит тебя от врагов и даст тебе больший запас здоровья.."]
-            ],function(){
-                _Hero.setTool(0); //Даем игроку топорик в руки..
-                _Hero.options.max.health = 10;
-                _Hero.options.health = 10;
-                _Hero.sprite.x = 0;
-                _Hero.sprite.y = 1;
-                _Interface.inventory.delete(0,9); //Удаляем морковь в кол-ве 9 шт из инвенторя.
-                $this.options.code = "_code.nps.busy()";
-                $this.movePath(35,15,function(){
-                    $this.memory.pos = 'bottom'; //Поворачиваем НПС лицом к игроку.
+            ],() => {
+                this._Hero.setTool(0); //Даем игроку топорик в руки.
+                this._Hero.options.max.health = 10;
+                this._Hero.options.health = 10;
+                this._Hero.sprite.x = 0;
+                this._Hero.sprite.y = 1;
+                this.Interface.inventory.delete(0,9); //Удаляем морковь в кол-ве 9 шт из инвентаря.
+                this.options.code = "_code.nps.busy()";
+                this.movePath(35,15,() => {
+                    this.memory.pos = 'bottom'; //Поворачиваем НПС лицом к игроку.
                 });
-                _Interface.quest.set('Найти работу..');
+                this.Interface.quest.set('Найти работу..');
             });
         },
-        setLvl: function(text,lvl){
-            var $this = _Mobs[_Hero.nps];
-            _Interface.dialog.set([
-                [" - И снова здравствуй, смотрю для тебя нашлась работенка..",'right',$this.options.face,0,0],
+        setLvl(text,lvl) {
+            this.Interface.dialog.set([
+                [" - И снова здравствуй, смотрю для тебя нашлась работенка..",'right',this.options.face,0,0],
                 [" Ага.."],
                 ['Ну что тогда отпровляемся..']
-            ],function(){
-                _Interface.quest.set(text);
-                _Map.levelSet(lvl);
-                var Astof = _Map.searchNPS('Астоф').options;
-                Astof.code = "_code.nps.astifWait()";
+            ],() => {
+                this.Interface.quest.set(text);
+                this._Map.levelSet(lvl);
+                this.addHookAfterLoadMob('_code.nps.setLvlHook()');
             });
         },
-        IamBatman: function(){
-            var $this =  _Mobs[_Hero.nps], //Активный NPS
-                f = $this.options.face;//Лицо персонажа..
-            _Interface.dialog.set([
+        setLvlHook(text,lvl) {
+            var Astof = this._Map.searchNPS('Астоф').options;
+            Astof.code = "_code.nps.astifWait()";
+        },
+        IamBatman() {
+            const f = this.options.face;//Лицо персонажа..
+            this.Interface.dialog.set([
                 [" - Я Бэтмен !",'right',f,0,0]
             ]);
         },
-        BatmenBoo:function(){
-            var $this =  _Mobs[_Hero.nps], //Активный NPS
-                f = $this.options.face;//Лицо персонажа..
+        BatmenBoo(){
+            const  f = this.options.face;//Лицо персонажа..
             //Отображаем бетмена..
-            $this.options.visibility = true;
+            this.options.visibility = true;
 
-            _Interface.dialog.set(
+            this.Interface.dialog.set(
             [
                 [" - Я Бэтмен !",'right',f,0,0],
                 ["Чур меня чур. Изыди"],
@@ -166,54 +163,51 @@ var _code = {
                 [" - ЯБЭТМЕН !!"],
                 [" - ЯБЭТМЕН !!"]
             ]
-            ,function(){
-                var farmerBob = _Map.searchNPS('Кирил').options;
+            ,() => {
+                var farmerBob = this._Map.searchNPS('Кирил').options;
                 farmerBob.code = '_code.nps.famerBob1()';
-                $this.options.code = '_code.nps.IamBatman()';
-                $this.movePath(15,4,function(){
-                    $this.memory.pos = 'bottom'; //Поворачиваем НПС лицом к игроку.
+                this.options.code = '_code.nps.IamBatman()';
+                this.movePath(15,4,() => {
+                    this.memory.pos = 'bottom'; //Поворачиваем НПС лицом к игроку.
                 });
-                _Interface.quest.set('Расскажите Кирилу о Бэтмене');
+                this.Interface.quest.set('Расскажите Кирилу о Бэтмене');
             });
         },
-        ask: function(){
-            var $this = _Mobs[_Hero.nps].options;
-            _Interface.dialog.set([
-                ["Кирил ?",'right',$this.face,0,0],
-                [" - Похож но нет, "+$this.name]
+        ask(){
+            this.Interface.dialog.set([
+                ["Кирил ?",'right',this.options.face,0,0],
+                [" - Похож но нет, "+this.options.name]
             ]);
         },
-        farmerBob: function(){
-            var $this =  _Mobs[_Hero.nps].options, //Активный NPS
-                hf = _Hero.face;
-            _Interface.dialog.set([
-                [" - Привет чудила, за чем пожаловал ?",'right',$this.face,3,0],
-                ["Дело к тебе есть, это ты "+$this.name+" ?"],
-                [" - "+$this.name+", с утра был, а за чем спрашиваешь ?",'right',$this.face,1,0],
-                ["Меня послала Ванесса что бы я принес ей морковь которую ты выращиваешь, для праздничного ужина. Ведь скоро 1 Мая - Праздник Труда ..",'right',$this.face,3,1],
-                [' - Я так понимаю ты очередной чувак в очередной игре в которой нужно ходить тудым сюдым что бы пройти ее ?','right',$this.face,1,0],
-                ['Ага, разраб еще та ленивая жопа, ему просто не хватает кофе. По этому давай вернемся к делу..','left',hf,3,0],
-                ['- В общем расклад таков мне кажеться что я схожу с ума, или же на до мной кто то зло шутит..','left',hf,0,0,'right',$this.face,2,1],
+        farmerBob() {
+            const hf = this._Hero.face;
+            this.Interface.dialog.set([
+                [" - Привет чудила, за чем пожаловал ?",'right',this.options.face,3,0],
+                ["Дело к тебе есть, это ты "+this.options.name+" ?"],
+                [" - "+this.options.name+", с утра был, а за чем спрашиваешь ?",'right',this.options.face,1,0],
+                ["Меня послала Ванесса, что бы я принес ей морковь которую ты выращиваешь, для праздничного ужина. Ведь скоро 1 Мая - Праздник Труда ..",'right',this.options.face,3,1],
+                [' - Я так понимаю ты очередной чувак в очередной игре в которой нужно ходить тудой сюдой что бы пройти ее ?','right',this.options.face,1,0],
+                ['Ага, разработчик еще та ленивая жопа, ему просто не хватает кофе. По этому давай вернемся к делу..','left',hf,3,0],
+                ['- В общем расклад таков мне кажется что я схожу с ума, или же надо мной кто-то зло шутит..','left',hf,0,0,'right',this.options.face,2,1],
                 ['..Сижу я такой не давно на своем любимом пеньке, за который косарь отдал.. сижу как вдруг...'],
                 ['...'],
                 ['...Проноситься какой то темный силуэт и жутким голосом говорит...'],
-                ["..Я Б * # ^ Н!!!!...",'right',$this.face,0,1,'left',hf,0,1],
-                ['.. И молнееносно умчался в сторону храма..'],
-                ['..так что я думаю либо я схожу с ума, либо кто то очень плохо шутит, разберись в чем дело тогда и поговорим..'],
-                ['Хорошо но мне все же кажеться что ты просто бальной на голову который съел что то гнилое со своего огорода..','right',$this.face,3,1,'left',hf,3,0],
-                ['Но так уж и быть я поищю то что тебя так напугало..','right',$this.face,1,1,'left',hf,0,0]
-            ],function(){
+                ["..Я Б * # ^ Н!!!!...",'right',this.options.face,0,1,'left',hf,0,1],
+                ['.. И молниеносно умчался в сторону храма..'],
+                ['..так что я думаю либо я схожу с ума, либо кто-то очень плохо шутит, разберись в чем дело тогда и поговорим..'],
+                ['Хорошо но мне все же кажется что ты просто бальной на голову который съел что-то гнилое со своего огорода..','right',this.options.face,3,1,'left',hf,3,0],
+                ['Но так уж и быть я поищу то что тебя так напугало..','right',this.options.face,1,1,'left',hf,0,0]
+            ], () => {
                 //Создаем на карте Бэтмена..
-               var batman = _Map.searchNPS('Бэтмен').options;
+               var batman = this._Map.searchNPS('Бэтмен').options;
                 batman.life = true; //Включаем возможность контактировать с Бэтменом..
                 batman.code = "_code.nps.BatmenBoo()"; //Устанавливаем функцию которую будет выполнять Бэтмен.
-                _Interface.quest.set('Найти подшутившего над Кирилом..');
+                this.Interface.quest.set('Найти подшутившего над Кирилом..');
             });
         },
-        famerBob1: function(){
-            var $this =  _Mobs[_Hero.nps];
-            _Interface.dialog.set([
-                [" - Есть что рассказать мне ?",'right',$this.options.face,3,0],
+        famerBob1(){
+            this.Interface.dialog.set([
+                [" - Есть что рассказать мне ?",'right',this.options.face,3,0],
                 ["Да, в общем это был Бэтмен."],
                 [" - Бэтмен ? - из Продиджи что ли ?"],
                 ["Ага, тот самый.."],
@@ -223,259 +217,252 @@ var _code = {
                 ["Да ты че ? - А позже сказать не мог ?"],
                 [" - Кстати будь аккуратнее тут по всюду зомби.."],
                 ["Мля.."]
-            ],function(){
-                var boy = _Map.searchNPS('Я похож на настоящего.. но Охраняю морковь');
-                _Interface.quest.set('Выкопать морковку');
-                $this.options.code = '_code.nps.busy()'; //Задаем НПС следующее действие.
-                boy.movePath(33,4,function(){
+            ],() => {
+                var boy = this._Map.searchNPS('Я похож на настоящего.. но Охраняю морковь');
+                this.Interface.quest.set('Выкопать морковку');
+                this.options.code = '_code.nps.busy()'; //Задаем НПС следующее действие.
+                boy.movePath(33,4,() => {
                     boy.memory.pos = 'bottom';
                 });
-                $this.movePath(31,15,function(){
-                    $this.memory.pos = 'bottom'; //Поворачиваем НПС лицом к игроку.
+                this.movePath(31,15,() => {
+                    this.memory.pos = 'bottom'; //Поворачиваем НПС лицом к игроку.
                 });
             });
         },
-        perma: function(){
-            var $this = _Mobs[_Hero.nps],
-                astof = _Map.searchNPS('Астоф').options;
-            _Interface.dialog.set([
-                [" - Привет, меня зовут Даздраперма..",'right',$this.options.face,0,0],
+        perma(){
+            const astof = this._Map.searchNPS('Астоф').options;
+            this.Interface.dialog.set([
+                [" - Привет, меня зовут Даздраперма..",'right',this.options.face,0,0],
                 ["Нихрена себе имечко.."],
                 [" - Ну в общем не чего страшного всего лишь, Да здравствует первое мая!!"],
                 ["Ага.. Слава сатане.."],
                 [" - Слава.."],
                 ["И так я понимаю у тебя есть для меня работенка ?"],
                 [" - Да есть, в локации 'Труд' ты наверное видел, сколько там ходит нежити, перебей их всех, и возвращайся ко мне.."],
-                ["Ага, я так понимаю что спрашивать почему именно Я, а не какой то спец отряд это должен сделать нет смысла просто потому что так задумано С Выше.. "],
+                ["Ага, я так понимаю что спрашивать почему именно Я, а не какой-то спец отряд это должен сделать нет смысла просто потому что так задумано С Выше.. "],
                 [" - Щито поделать.."],
                 ["Ну тогда я пошел."],
                 [" - Топорик свой не забудь, Раскольников хренов.."],
                 ['Ага, спасиб.'],
                 ["500 руб."],
                 ["...Шутка минутка.."]
-            ],function(){
-                _Hero.setQuest({callback: "_code.hero.killAll_lvl1()",lvl: 1});
-                _Interface.quest.set("Иди в порт..");
+            ],() => {
+                this._Hero.setQuest({callback: "_code.hero.killAll_lvl1()",lvl: 1});
+                this.Interface.quest.set("Иди в порт..");
                 astof.code= "_code.nps.setLvl('Завалите гадов!',1)";
-                _Hero.can.attack = true;
+                this._Hero.can.attack = true;
             });
         },
-        permaComplete: function(){
-            var perm  = _Map.searchNPS('Даздраперма').options;
+        permaComplete() {
+            var perm  = this._Map.searchNPS('Даздраперма').options;
             perm.code="_code.nps.permaEnd()";
         },
-        permaEnd: function(){
-            var $this = _Mobs[_Hero.nps],
-                artaka = _Map.searchNPS("Артака").options;
-            _Interface.dialog.set([
-                [" - Привет медвед!",'right',$this.options.face,0,0],
+        permaEnd() {
+            const artaka = this._Map.searchNPS("Артака").options;
+            this.Interface.dialog.set([
+                [" - Привет медвед!",'right',this.options.face,0,0],
                 ["Привет как там тебя.."],
                 [" - Даздраперма я вообще т0.."],
                 ["Ага, слава сатане"],
                 [" - Ага, ты еще скажи Замля моздайкер лук форевер."],
-                ["Так значет ты мне там че то обещала дать ?"],
+                ["Так значит ты мне там чё то обещала дать ?"],
                 [" - Не я просто проходной Этап.."],
-                ["Аж да.. разраб же жадина.."],
+                ["Аж да.. разраб жадина же.."],
                 [" - Ну не знаю, ты о ком, я же просто код JS, не понимаю вообще о чем ты.."],
                 ["А забей.."],
-                [" - Короче видешь тип на горе стоит ?"],
+                [" - Короче видишь тип на горе стоит ?"],
                 ["Вот тот рыжий что ли ?"],
-                [" - Ага.. у него найдеться поручение для тебя.."],
-                ["Отлично покончем же с этим.."],
+                [" - Ага.. у него найдется поручение для тебя.."],
+                ["Отлично покончим же с этим.."],
                 [" - Коммон.."]
-            ],function(){
-                _Interface.quest.set("Найти Артаку");
-                $this.options.code="_code.nps.busy()";
+            ],() => {
+                this.Interface.quest.set("Найти Артаку");
+                this.options.code="_code.nps.busy()";
                 artaka.code = "_code.nps.artak()";
             });
         },
-        artak: function(){
-            var $this = _Mobs[_Hero.nps],
-                astof = _Map.searchNPS('Астоф').options;
-            _Interface.dialog.set([
-                [" - Привет Я Артака",'right',$this.options.face,0,0],
+        artak() {
+             const astof = this._Map.searchNPS('Астоф').options;
+            this.Interface.dialog.set([
+                [" - Привет Я Артака",'right',this.options.face,0,0],
                 ["А почему у тебя внешний вид один, а лицо у тебя вообще розовое, ну просто Разраб что нашел и инете то и всуну, рисовать этот тип видимо не умеет совсем.."],
-                ["Ну давай сократим нашей действо, давай мне быстро задание и я пошел, кстати что ты мне дашь в замен ?"],
-                [" - Я дам тебе в замен Меч которым ты сможешь убить Босса который находиться на локации о которой я расскажу Астофу когда ты .."],
-                [' - Принесешь мне подсолнухи, так семок охота..'],
+                ["Ну давай сократим нашей действо, давай мне быстро задание и я пошел, кстати что ты мне дашь взамен ?"],
+                [" - Я дам тебе взамен Меч которым ты сможешь убить Босса, который находиться на локации о которой я расскажу Астофу когда ты .."],
+                [' - Принесешь мне подсолнухи, так семак охота..'],
                 ['Че реально ?'],
-                ["А в магаз сгонять не вариат ?"],
+                ["А в магаз сгонять не вариант ?"],
                 [" - Тут нет магазинов.."],
                 ["А туалетную бумагу я где купил ?"],
                 [" - Где ?"],
                 ["Ясно, очередной глупый NPС, ладно что там тебе принести надо ?"],
-                [" - Говорю же подсолнухи принеси мне но будь аккуратнее атаковать ты не можешь противников иначе было бы слишком легко игру пройти"],
+                [" - Говорю же подсолнухи принеси мне, но будь аккуратнее атаковать ты не можешь противников иначе было бы слишком легко игру пройти"],
                 ['Окай постараюсь.']
-            ],function(){
+            ],() => {
                 astof.code = "_code.nps.setLvl('Добудьте 8 подсолнухов',2);"; //переносим игрока на уровень 2.
-                _Hero.setQuest({itm: 1, count: 8,callback: "_code.hero.sunflouwer()"}); //Добыть подсолнухи.
-                _Interface.quest.set("Отпровляйтесь на остров..");
+                this._Hero.setQuest({itm: 1, count: 8, callback: "_code.hero.sunflouwer()"}); //Добыть подсолнухи.
+                this.Interface.quest.set("Отправляйтесь на остров..");
             });
         },
-        artakComplete: function(){
-            var $this = _Map.searchNPS('Артака').options;
-            $this.code = "_code.nps.artakEnd()";
+        artakComplete() {
+            const artaka = this._Map.searchNPS('Артака').options;
+            artaka.code = "_code.nps.artakEnd()";
         },
-        artakEnd: function(){
-            var $this = _Mobs[_Hero.nps].options,
-                astof = _Map.searchNPS('Астоф').options;
-            _Interface.dialog.set([
-                [" - Опа семки подъехали..",'right',$this.face,0,0],
-                ["Да на здоровье, давай качай мне статы гони мне меч. и еще Давай как мне какой то новый шмот, знаешь что там было.."],
+        artakEnd() {
+            const astof = this._Map.searchNPS('Астоф').options;
+            this.Interface.dialog.set([
+                [" - Опа семки подъехали..",'right',this.options.face,0,0],
+                ["Да на здоровье, качай мне статы, гони мне меч. И еще давай как мне какой-то новый шмот, знаешь что там было.."],
                 [' ...полнейший пипец.'],
                 [' - Знаю, но семок то хотелось..'],
                 [" - Все готово. не ругайся насяйника.."]
-            ],function(){
-                $this.code = "_code.nps.busy()";
+            ],() => {
+                this.code = "_code.nps.busy()";
                 astof.code="_code.nps.setLvl('Поговорите с Создателем',3)";
-                _Hero.sprite.x = 1;
-                _Hero.sprite.y = 0;
-                _Hero.setTool(2); //Даем игроку меч
-                _Interface.inventory.delete(1,8);
-                _Hero.options.max.health = 20; //Увеличиваем кол-во жизней игрока.
-                _Hero.options.damage+=1; //увеличиваем его урон
-                _Hero.options.health = 15; //Лечим игрока на полную.
-                _Interface.inventory.delete(0,9); //Удаляем морковь в кол-ве 9 шт из инвенторя.
-                _Interface.quest.set('Отправляйтесь с Автофу');
+                this._Hero.sprite.x = 1;
+                this._Hero.sprite.y = 0;
+                this._Hero.setTool(2); //Даем игроку меч
+                this.Interface.inventory.delete(1,8);
+                this._Hero.options.max.health = 20; //Увеличиваем кол-во жизней игрока.
+                this._Hero.options.damage+=1; //увеличиваем его урон
+                this._Hero.options.health = 15; //Лечим игрока на полную.
+                this.Interface.inventory.delete(0,9); //Удаляем морковь в кол-ве 9 шт из инвенторя.
+                this.Interface.quest.set('Отправляйтесь с Астовом');
             });
         },
-        starec: function(){
-            var $this = _Mobs[_Hero.nps].options;
-            _Interface.dialog.set([
-                [" - Приветствую тебя юноша..",'right',$this.face,0,0],
-                ["Я так понимаю ты Создатель, это ты создал весь этот Трэш.."],
+        starec(){
+            this.Interface.dialog.set([
+                [" - Приветствую тебя юноша..",'right',this.options.face,0,0],
+                ["Я так понимаю ты Создатель, это ты создал весь этот треш.."],
                 [" - Да, это я, когда я разрабатывал эту игру времени у меня совсем не было.."],
                 ["..Я очень хочу спать и у меня осталось не много сил.."],
                 ["Постой, расскажи почему в игре так много косяков ?"],
-                [" - Ну во первых мало времени, и не так много материалов в открыытом доступе.."],
+                [" - Ну во первых мало времени, и не так много материалов в открытом доступе.."],
                 ["А создать текстуры полностью свои ?"],
                 [" - Я не так силен в рисовании"],
                 ["А почему имена персонажей такие дурацкие ?"],
                 [" - Так как это моя первая игра я решил вложить в нее часть 'Людей' которые мне помогали.."],
-                ["Ага, тоесть люди которые помогали тебе частично присудствуют в этом мире ?"],
+                ["Ага, то есть люди которые помогали тебе частично присутствуют в этом мире ?"],
                 [" - Да именно так, сейчас я наконец то избавлюсь от наглеца который мучает вопросами.."],
-                [" -  Сейчас у тебя стоит выбор.. либо пройти игру и и произойдет ... либо ты умрешь сдесь сражаясь с боссом игра начнеться сначала.."],
+                [" -  Сейчас у тебя стоит выбор либо пройти игру и произойдет ... либо ты умрешь здесь сражаясь с боссом игра начнется сначала.."],
                 ["Ну хотелось бы закончить и вернуться в реальный мир, выпить чашечку кофе.."],
                 [" - Отдельное спасибо: Любе - За терпение и помощь с текстурами, Егору - За то что он Бэтмен, Skanerу - За Мотивацию :)"],
                 [" - Прощай, и до скорой встречи.."]
-            ],function(){
+            ],() => {
                 //получаем последний квест убить всех монстров..
-                _Hero.sprite.x = 0;
-                _Hero.sprite.y = 0;
+                this._Hero.sprite.x = 0;
+                this._Hero.sprite.y = 0;
 
-                _Hero.setTool(1);
+                this._Hero.setTool(1);
 
-                _Hero.options.max.health = 30; //Увеличиваем кол-во жизней игрока.
-                _Hero.options.health = _Hero.options.max.health; //Лечим игрока на полную.
+                this._Hero.options.max.health = 30; //Увеличиваем кол-во жизней игрока.
+                this._Hero.options.health = this._Hero.options.max.health; //Лечим игрока на полную.
 
-                _Hero.can.attack = true;
+                this._Hero.can.attack = true;
 
-                _Hero.options.damage = 3;
+                this._Hero.options.damage = 3;
 
-                _Hero.init(15,8);
-                _Hero.setQuest({callback: "_code.hero.stage0()",lvl: 3 }); //Квест получен..
+                this._Hero.init(15,8);
+                this._Hero.setQuest({callback: "_code.hero.stage0()",lvl: 3 }); //Квест получен..
 
-                _Interface.quest.set('Убей и Выживи');
+                this.Interface.quest.set('Убей и Выживи');
             });
         },
-        batmanEnd: function(){
-            var $this = _Mobs[_Hero.nps];
-            _Interface.dialog.set([
-                [" - За чем ты убил всех этих Людей ?",'right',$this.options.face,0,0],
+        batmanEnd() {
+            this.Interface.dialog.set([
+                [" - За чем ты убил всех этих Людей ?",'right',this.options.face,0,0],
                 ["Их убил не Я, а Брюс Уэйн."],
                 [" - Не может быть потому что Брюс Уэйн это.."],
-                [" - Ага подловил меня.. Ты огребаешь.. Я и мои братки завалим тебя..",'right',$this.options.face,1,0],
-                ["Фак..",'right',$this.face,0,0]
-            ],function(){
-                $this.type = 'animal';
-                $this.options.visibility = false;
-                $this.options.life = false;
+                [" - Ага подловил меня.. Ты огребаешь.. Я и мои братки завалим тебя..",'right',this.options.face,1,0],
+                ["Фак..",'right',this.options.face,0,0]
+            ], () => {
+                this.type = 'animal';
+                this.options.visibility = false;
+                this.options.life = false;
 
-                _code.hero.stage1();
-                _Interface.quest.set('Надрать жопу Бэтмену');
-                _Hero.setQuest({callback: "_code.end()",lvl: 3});
+                this._Hero.options.damage = 15;
+                //Все монстры убиты создаем бэтмена который будет Боссом.
+                this._Mobs.push(new this.Enemy("enemy",2,0,0,21,7,{max: {health : 300},health : 300,damage: 4}));
+                this._Mobs.push(new this.Enemy("enemy",0,2,0,21,7,{max: {health : 100},health : 100,damage: 1}));
+                this._Mobs.push(new this.Enemy("enemy",0,1,0,21,7,{max: {health : 100},health : 100,damage: 1}));
+
+
+                this.Interface.quest.set('Надрать жопу Бэтмену');
+                this._Hero.setQuest({callback: "_code.end()",lvl: 3});
             });
         }
     },
     hero: {
-        carrot: function(){
-            var astof = _Map.searchNPS('Астоф').options;
-            //Задаем функцию которая будет выполенна после того как мы выполнили квест.
-            _Interface.quest.set("Вернитесь к причалу");
-            astof.code="_code.nps.astofComeBack('Поговорите с Ваннессой','_code.nps.vanessaComplete()')";
+        carrot(){
+            var astof = this._Map.searchNPS('Астоф').options;
+            //Задаем функцию, которая будет выполнена после того как мы выполнили квест.
+            this.Interface.quest.set("Вернитесь к причалу");
+            astof.code="_code.nps.astofComeBack('Поговорите с Ваннессой', '_code.nps.vanessaComplete()')";
         },
-        killAll_lvl1: function(){
-            var astof = _Map.searchNPS('Астоф').options;
-            //Задаем функцию которая будет выполенна после того как мы выполнили квест.
-            _Interface.quest.set("Вернитесь в деревню");
-            astof.code="_code.nps.astofComeBack('Даздраперма ждем вас','_code.nps.permaComplete()')";
-            _Hero.can.attack = false;
+        killAll_lvl1(){
+            var astof = this._Map.searchNPS('Астоф').options;
+            //Задаем функцию, которая будет выполнена после того как мы выполнили квест.
+            this.Interface.quest.set("Вернитесь в деревню");
+            astof.code="_code.nps.astofComeBack('Даздраперма ждем вас', '_code.nps.permaComplete()')";
+            this._Hero.can.attack = false;
         },
-        sunflouwer: function(){
-            var astof = _Map.searchNPS('Астоф').options;
-            _Interface.quest.set("Вернитесь к Астофу");
-            astof.code = "_code.nps.astofComeBack('Вернитесь за наградой','_code.nps.artakComplete()')";
+        sunflouwer(){
+            var astof = this._Map.searchNPS('Астоф').options;
+            this.Interface.quest.set("Вернитесь к Астофу");
+            astof.code = "_code.nps.astofComeBack('Вернитесь за наградой', '_code.nps.artakComplete()')";
         },
-        stage0: function(){
-            var batmen = _Map.searchNPS('Бэтмен').options;
+        stage0(){
+            var batmen = this._Map.searchNPS('Бэтмен').options;
             batmen.visibility = true;
             batmen.life = true;
             batmen.code = "_code.nps.batmanEnd()";
-            _Interface.quest.set('Бэтмену что то Надо');
-        },
-        stage1: function(){
-            _Hero.options.damage = 15;
-            //Все монстры убиты создаем бэтмена который будет Боссом.
-            _Mobs.push(new _Enemy("enemy",2,0,0,21,7,{max: {health : 300},health : 300,damage: 4}));
-            _Mobs.push(new _Enemy("enemy",0,2,0,21,7,{max: {health : 100},health : 100,damage: 1}));
-            _Mobs.push(new _Enemy("enemy",0,1,0,21,7,{max: {health : 100},health : 100,damage: 1}));
-            _Hero.setQuest({callback: "_code.end()",lvl: 3});
+            this.Interface.quest.set('Бэтмену что то Надо');
         }
     },
     enemy: {
-        attack: function(){
-            var $this =  _Mobs[_Hero.nps]; //Активный NPS
-            _Hero.can.walk = true;
-           if($this != undefined){
+        attack(){
+            var $this =  this._Mobs[this._Hero.nps]; //Активный NPS
+            this._Hero.can.walk = true;
+           if($this != undefined) {
                $this.actFlag = false;
-               _Hero.nps = null;
+               this._Hero.nps = null;
                if($this.doit){
                    $this.doit = false;
-                   _Hero.options.health = _Hero.options.health-$this.options.damage >= 0 ? _Hero.options.health-$this.options.damage: 0; //отнимаем одно очко жазней за сталкновение с Зомби.
+                   this._Hero.options.health = this._Hero.options.health-$this.options.damage >= 0 ? this._Hero.options.health-$this.options.damage: 0; //отнимаем одно очко жазней за сталкновение с Зомби.
                    setTimeout(function(){
                        $this.doit = true;
                    },700);
                }
            }else{
-               for(var i in _Mobs){
-                   var mob = _Mobs[i];
+               for(var i in this._Mobs){
+                   var mob = this._Mobs[i];
                    if(mob.type != "enemy") continue;
                    mob.actFlag = false;
                }
            }
         } //Работает !! НЕ ТРОЖ!!
     },
-    end: function(){
-        _Interface.dialog.set([
+    end(){
+        this.Interface.dialog.set([
             ["...",'right',4,3,0],
             ["3.."],
             ["2.."],
             ["1.."],
-            ["Что произходит ?"],
+            ["Что происходит ?"],
             ["Игра окончена Большое спасибо: Друзьям которые поддерживали и верили что у меня все получиться, Отдельные спасибо.."],
             ["Koshke_mr за помощь в рисовании текстур для редактора карт этой игры"],
             ["И Егору то что натолкнул на идею взять Бэтмена :) Панки Oi бро )"],
-            ["Skanery, органезатору конкурса, если бы не он игра бы вышла только после написание диплома. А так же спасибо ему за его уроки. Продолжай в тоже духе."],
-            ["И вам за то что не поленлись потратить час своей жизни на ее прохождение.. Всех Люблю ^.^"],
+            ["Skanery, организатору конкурса, если бы не он игра бы вышла только после написание диплома. А так же спасибо ему за его уроки. Продолжай в тоже духе."],
+            ["И вам за то что не поленились потратить час своей жизни на ее прохождение.. Всех Люблю ^.^"],
             ["Если хотите более серьезное продолжение этой версии игры пишите мне в ВК"],
-            ["Ссылка на страницу в ВК будет в консоле что бы ее открыть нажмите F12->Console"],
+            ["Ссылка на страницу в ВК будет в консоли, что бы ее открыть нажмите F12->Console"],
             ["GG WP"],
-            ["Через 30 сек. все начнеться по новой."]
-        ],function(){
+            ["Через 30 сек. все начнется по новой."]
+        ],() => {
             console.log('https://vk.com/dmitriy1921');
-            _Interface.quest.set('Игра пройдена. Спасибо.');
-            setTimeout(function(){
-                _Storage.unset();
+            this.Interface.quest.set('Игра пройдена. Спасибо.');
+            setTimeout(() => {
+                this._gameSet(() => {});
+                storage.clearAll();
                 location.reload()
             },30000);
         });

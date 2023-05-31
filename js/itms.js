@@ -1,7 +1,8 @@
 /**
  * Created by Dima101 on 27.04.2016.
  */
-var _itms = {
+// ex _itms
+export default {
     0: {
         map: {
             tile: 11,

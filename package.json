@@ -1,0 +1,27 @@
+{
+  "name": "may",
+  "version": "1.0.0",
+  "description": "Игра созданная для участия в конкурсе [SkanerSoft](https://www.youtube.com/c/SkanerSoft) # Скриншоты ![](https://raw.githubusercontent.com/Dmitiry1921/May/main/doc/img/0.jpg)",
+  "main": "index.js",
+  "type": "module",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dmitiry1921/May.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dmitiry1921/May/issues"
+  },
+  "homepage": "https://github.com/Dmitiry1921/May#readme",
+  "devDependencies": {
+    "mocha": "10.2.0"
+  }
+}

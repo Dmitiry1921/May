@@ -45,6 +45,10 @@ const caseData = {
     path: ['to', 'code', 'to', 'code'],
     arguments: ['to.code', 'to.code'],
   },
+  "_code.nps.setLvl('Добудьте 8 подсолнухов',2);": {
+    path: ['_code', 'nps', 'setLvl'],
+    arguments: ['Добудьте 8 подсолнухов', 2],
+  },
 }
 
 describe("#MobMicroTask", () => {

@@ -1,30 +1,43 @@
 const SAVE_INTERVAL = 1000;
+let INTERVAL_ID = null;
 
-const storage = new class Storage {
-  #data = {};
+const REGISTERED_KEYS = [
+  'stopAutoSave',
+  'clearAll',
+  'setOnce',
+  'startAutoSave',
+  'save',
+  'load',
+  'validate',
+  'data',
+];
+
+export default new class Storage {
   constructor() {
-    // Загрузка данных из localStorage
-    this.#load();
-    // Запуск таймера сохранения
-    setInterval(this.#save.bind(this), SAVE_INTERVAL);
-    // Возвращаем прокси для работы с данными
+    this.data = {};
+    this.load();
+    this.startAutoSave();
     return new Proxy(this, {
       set(target, property, value) {
-        console.info(`Установлено свойство "${property}" со значением "${value}"`);
-        target.#data[property] = value;
+        if (REGISTERED_KEYS.includes(property)) {
+          throw new Error(`Property "${property}" is reserved`);
+        }
+        target.data[property] = value;
         return true;
       },
       get(target, property) {
-        const data = target.#data[property];
-        return data === undefined ? null : data;
+        if (REGISTERED_KEYS.includes(property)) {
+          return target[property].bind(target);
+        }
+        return Storage.getDataWrapper(target.data[property]);
       },
     });
   }
 
-  #load() {
+  load() {
     Object.keys(localStorage).forEach(key => {
       try {
-        this.#data[key] = JSON.parse(localStorage.getItem(key));
+        this.data[key] = JSON.parse(localStorage.getItem(key));
       } catch (err) {
         console.warn('Local storage data corrupted', key, err);
         localStorage.removeItem(key);
@@ -32,7 +45,7 @@ const storage = new class Storage {
     });
   }
 
-  #validate(data) {
+  validate(data) {
     try {
       JSON.parse(JSON.stringify(data));
       return true;
@@ -41,25 +54,35 @@ const storage = new class Storage {
     }
   }
 
-  #save() {
-    Object.entries(this.#data)
-      .forEach(([key, value]) => {
-        // В случае если данные не валидны, удаляем их из localStorage
-        localStorage[this.#validate(value) ? 'setItem': 'removeItem'](key, JSON.stringify(this.#data[key]));
-      });
+  save() {
+    Object.entries(this.data).forEach(([key, value]) => {
+      localStorage[this.validate(value) ? 'setItem' : 'removeItem'](key, JSON.stringify(value));
+    });
   }
-}
 
-export function setOne(key, data) {
-  if(storage[key] == null){
-    storage[key] = data;
+  stopAutoSave(cause) {
+    console.warn('Storage.stopAutoSave()', {cause}, new Error().stack);
+    clearInterval(INTERVAL_ID);
   }
-}
-export function unSet() {
 
-}
+  clearAll() {
+    this.stopAutoSave('clearAll');
+    localStorage.clear();
+  }
 
-export default storage;
+  setOnce(key, data) {
+    if (Storage.getDataWrapper(this.data[key]) === null) {
+      this.data[key] = data;
+    }
+  }
 
+  startAutoSave() {
+    // Останавливаем предыдущий интервал, если он был запущен
+    if(INTERVAL_ID !== null) this.stopAutoSave('startAutoSave');
+    INTERVAL_ID = setInterval(this.save.bind(this), SAVE_INTERVAL);
+  }
 
-
+  static getDataWrapper(data) {
+    return data === undefined ? null : data;
+  }
+};

@@ -7,7 +7,6 @@ export default {
         url: [
             "img/sprite/hero.png",
             "img/sprite/hero1.png"
-
         ],
         map: undefined, //Массив с картами.
         count: {
@@ -28,7 +27,6 @@ export default {
             msp: 0, //Счетчик задержки
             im: 0 //Кадр с которого начнеться воспроизведение.
         }//Параметры одного кадра.
-
     },
     enemy: {
         url: [

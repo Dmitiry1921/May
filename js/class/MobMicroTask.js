@@ -5,6 +5,7 @@ export default class MobMicroTask {
     this.code = codePath;
     this.path = pathString.split('.');
     this.arguments = argString
+      .replace(/;$/, '')
       .slice(1, -1)
       .split(/\s*,\s*/)
       .filter(Boolean)

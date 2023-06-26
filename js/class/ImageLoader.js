@@ -10,6 +10,6 @@ export default class ImageLoader {
   }
 
   static async all(urls) {
-    return Promise.all(urls.map(url => new ImageLoader(url)));
+    return Promise.all(urls.map(async url => new ImageLoader(url)));
   }
 }

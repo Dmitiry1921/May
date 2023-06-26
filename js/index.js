@@ -1,5 +1,6 @@
 /**
  * Created by Dima101 on 24.04.2016.
+ * Updated by Dima101 on 05.06.2023.
  */
 
 import _spt from './spt.js';
@@ -37,7 +38,7 @@ var _nextStep = (() => {
     window.oRequestAnimationFrame ||
     window.msRequestAnimationFrame ||
     function (callback) {
-      window.setTimeout(callback, 1000 / 60);
+      setTimeout(callback, 1000 / 60);
     };
 })();
 (function _gameStep() {
@@ -78,8 +79,6 @@ function genArr(columns, rows) {
   }
   return arr;
 }
-
-// const genArr = (columns, rows) => Array.from({ length: columns }, () => Object.fromEntries(Array.from({ length: rows }, () => [null])));
 
 var _Sprite = {
   loaded: false,
@@ -267,7 +266,24 @@ var _Map = {
     storage.stopAutoSave();
     _gameSet(() => {}); //останавливаем игровой процесс
     _Mobs.length = 0;
-    _LevelLoader(lvl, runHookAfterLoadMob);
+
+    //
+    //Загружаем всех персонажей, NPS и противников, которые есть на карте.
+    _Interface = !_Interface ? new Interface() : _Interface;
+    _Sprite.load(function () { //Загружаем спрайт карты.
+      if (storage[lvl] === null) {
+        createMobs(lvl);
+      } else {
+        mapInit(lvl);
+        mobInit(lvl);
+        heroInit(lvl);
+      }
+      _Map.canvasSetting(); //Настраиваем canvas.
+      _Map.tileLoader(_gameSet.bind(this, loop)); //Загружаем тайл карты которые у нас имеются.
+
+      runHookAfterLoadMob();
+    });
+    //
     storage.startAutoSave();
     storage._lvl = lvl;
   },
@@ -793,26 +809,6 @@ function drawMobs() {
     im.draw();
   }
 }
-
-var _LevelLoader = function (lvl, callback) {
-  //Загружаем всех персонажей, NPS и противников, которые есть на карте.
-  _Interface = !_Interface ? new Interface() : _Interface;
-  _Sprite.load(function () { //Загружаем спрайт карты.
-    if (storage[lvl] === null) {
-      createMobs(lvl);
-    } else {
-      mapInit(lvl);
-      mobInit(lvl);
-      heroInit(lvl);
-    }
-    _Map.canvasSetting(); //Настраиваем canvas.
-    _Map.tileLoader(_gameSet.bind(this, loop)); //Загружаем тайл карты которые у нас имеются.
-
-    if(typeof callback === 'function') {
-      callback();
-    }
-  });
-}; //Функция меняющая уровни..
 
 var Interface = function () {
   this.dialog = {
@@ -1510,7 +1506,7 @@ var _Person = function (x, y) {
 };
 
 var loop = function () {
-  _Map.draw(); //Отрисовка карты.
+  _Map.draw(); // Отрисовка карты.
   drawMobs(); //Прорисовываем мобов.
   _Map.overlay(); //Перекрываем персонажа.
   _Interface.draw(); //Рисуем диалог.

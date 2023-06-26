@@ -2,7 +2,7 @@
 
 import assert from 'node:assert/strict';
 
-import MobMicroTask from '../MobMicroTask.js';
+import MobMicroTask from '../../js/class/MobMicroTask.js';
 
 const caseData = {
   '_code.hero.carrot()': {

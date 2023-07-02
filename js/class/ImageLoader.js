@@ -17,6 +17,7 @@ export default class ImageLoader {
   }
 
   static async all(urls) {
-    return Promise.all(urls.map(async url => new ImageLoader(url)));
+    const uniqUrls = [...new Set(urls)]
+    return Promise.all(uniqUrls.map(async url => new ImageLoader(url)));
   }
 }

@@ -71,9 +71,8 @@ window.onkeyup = function (e) {
 };
 
 async function SpriteLoader() {
-  const alUrls = Object.values(_spt).map((item) => item.url).flat();
-  const uniqUrls = [...new Set(alUrls)];
-  const images = await ImageLoader.all(uniqUrls);
+  const alUrls = Object.values(_spt).flatMap((item) => item.url);
+  const images = await ImageLoader.all(alUrls);
   images.forEach((image) => {
     Object.keys(_spt).forEach(key => {
       const item = _spt[key];
@@ -134,21 +133,14 @@ var _Map = {
       sett.canvas.dom.drawImage(itm[0], itm[1], itm[2], itm[3], itm[4], itm[5], itm[6], itm[7], itm[8]);
     }
   }, //Функция рисования поверх персонажа.
-  tileLoader: function (callback) {
-    const tile = this.setting.tile;
-    tile.loaded = 0;
-    tile.count = 0;
-    Object.entries(_tile).forEach(([key, value]) => {
-      if (['defMap', 'default', 'param'].includes(key)) return;
-      value.dom = document.createElement("img");
-      tile.count += 1;
-      value.dom.onload = function () {
-        tile.loaded++;
-        if (tile.loaded === tile.count && typeof callback == "function") {
-          callback();
-        }
-      };
-      value.dom.src = value.url;
+  async tileLoader() {
+    const alUrls = Object.entries(_tile)
+      .filter(([key]) => !['defMap', 'default', 'param'].includes(key))
+      .map(([,value]) => value.url);
+    const images = await ImageLoader.all(alUrls)
+    images.forEach((image) => {
+      const tileKey = Object.keys(_tile).find((key) => image.src.includes(_tile[key].url));
+      _tile[tileKey].dom = image;
     });
   },//Функция загружает тайл карты.
   canvasSetting: function () {
@@ -214,8 +206,12 @@ var _Map = {
 
     //Загружаем всех персонажей, NPS и противников, которые есть на карте.
     _Interface = !_Interface ? new Interface() : _Interface;
-    //Загружаем спрайт карты.
-    SpriteLoader().then(() => {
+
+    Promise.all([
+      _Map.tileLoader(), //Загружаем спрайт карты.
+      SpriteLoader(), // Загружаем спрайты персонажей
+    ])
+    .then(() => {
       if (storage[lvl] === null) {
         createMobs(lvl);
       } else {
@@ -224,8 +220,8 @@ var _Map = {
         heroInit(lvl);
       }
       _Map.canvasSetting(); //Настраиваем canvas.
-      _Map.tileLoader(_gameSet.bind(this, loop)); //Загружаем тайл карты которые у нас имеются.
-      // _gameSet(loop);
+      // _Map.tileLoader().then(_gameSet.bind(this, loop));
+      _gameSet(loop);
       runHookAfterLoadMob();
     });
     //

@@ -10,6 +10,7 @@ import _tile from './tile.js';
 import code from './code.js';
 import MobMicroTask from "./class/MobMicroTask.js";
 import storage from "./class/Storage.js";
+import ImageLoader from "./class/ImageLoader.js";
 
 
 let _engine = console.warn.bind(this, 'Engine not set');
@@ -69,75 +70,19 @@ window.onkeyup = function (e) {
   clearKey(e.keyCode);
 };
 
-function genArr(columns, rows) {
-  var arr = {};
-  for (var i = 0; i < columns; i++) {
-    arr[i] = {};
-    for (var j = 0; j < rows; j++) {
-      arr[i][j] = null;//Двухмерный массив.
-    }
-  }
-  return arr;
+async function SpriteLoader() {
+  const alUrls = Object.values(_spt).map((item) => item.url).flat();
+  const uniqUrls = [...new Set(alUrls)];
+  const images = await ImageLoader.all(uniqUrls);
+  images.forEach((image) => {
+    Object.keys(_spt).forEach(key => {
+      const item = _spt[key];
+      if (!item.url.some(url => image.src.includes(url))) return;
+      const index = item.url.findIndex((url) => image.src.includes(url))
+      item.dom[index] = image;
+    });
+  });
 }
-
-var _Sprite = {
-  loaded: false,
-  count: null, //Кол-во картинок.
-  isload: 0, //Ко-во загруженных картинок.
-  load(callback) {
-    var j = 0; //счетчик загруженных картинок.
-      var $this = this;
-      Object.entries(_spt).forEach(([key, itm]) => {
-        for (let j in itm.url) {
-          const url = itm.url[j];
-          if (itm.dom === undefined) itm['dom'] = {};
-          itm['dom'][j] = document.createElement("img");
-          itm['dom'][j].onload = () => {
-            $this.isload += 1;
-            if (this.count === this.isload && typeof callback === 'function') {
-              this.genMap();
-              callback();
-            }
-          };
-          itm['dom'][j].src = url;
-          this.count += 1;
-        }
-      });
-  },
-  genMap: function () {
-    for (var id in _spt) {
-      var itm = _spt[id],
-        count = itm.count,
-        f = itm.frame,
-        img = itm.dom[0];
-      if (count !== undefined) {
-        f.w = img.width / count.mini.x;
-        f.h = img.height / count.mini.y;
-        f.bw = img.width / count.x;
-        f.bh = img.height / count.y;
-
-        itm.map = genArr(count.x, count.y);
-
-        for (var x = 0; x < count.x; x++) {
-          for (var y = 0; y < count.y; y++) {
-            var nx = 0;
-            var ny = 0;
-            if (x) {
-              nx = f.bw * x;
-            }
-            if (y) {
-              ny = f.bh * y;
-            }
-            itm.map[x][y] = {
-              x: nx,
-              y: ny
-            };
-          }
-        }
-      }
-    }
-  }
-};
 
 // Class Hook
 function addHookAfterLoadMob(hook) {
@@ -267,10 +212,10 @@ var _Map = {
     _gameSet(() => {}); //останавливаем игровой процесс
     _Mobs.length = 0;
 
-    //
     //Загружаем всех персонажей, NPS и противников, которые есть на карте.
     _Interface = !_Interface ? new Interface() : _Interface;
-    _Sprite.load(function () { //Загружаем спрайт карты.
+    //Загружаем спрайт карты.
+    SpriteLoader().then(() => {
       if (storage[lvl] === null) {
         createMobs(lvl);
       } else {
@@ -280,7 +225,7 @@ var _Map = {
       }
       _Map.canvasSetting(); //Настраиваем canvas.
       _Map.tileLoader(_gameSet.bind(this, loop)); //Загружаем тайл карты которые у нас имеются.
-
+      // _gameSet(loop);
       runHookAfterLoadMob();
     });
     //

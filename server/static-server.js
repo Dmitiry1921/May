@@ -5,8 +5,7 @@ import {fileURLToPath} from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-const POST = 3000;
+const [POST = 3000] = process.argv.slice(2);
 
 const server = http.createServer((req, res) => {
   if(req.url === '/') {
@@ -56,5 +55,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(POST, () => {
-  console.log('Server is running on http://localhost:3000');
+  console.log(`Server is running on http://localhost:${POST}`);
 });

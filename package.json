@@ -6,6 +6,7 @@
   "type": "module",
   "directories": {},
   "scripts": {
+    "prepare": "husky install",
     "static-server": "node ./server/static-server.js",
     "test-playwright": "npx playwright test",
     "test-mocha": "mocha ./tests/mocha/*.spec.js",

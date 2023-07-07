@@ -1,15 +1,9 @@
 export default class ImageLoader {
-  constructor(url, options = {}) {
-    const {onload} = options;
-
-    this.onloadhook = onload || (() => undefined);
+  constructor(url) {
 
     return new Promise((resolve, reject) => {
       const elem = new Image();
-      elem.onload = () => {
-        this.onloadhook(elem);
-        resolve(elem);
-      };
+      elem.onload = () => resolve(elem);
       elem.onerror = reject;
       elem.src = url;
       return elem;

@@ -11,24 +11,13 @@ import code from './code.js';
 import MobMicroTask from "./class/MobMicroTask.js";
 import storage from "./class/Storage.js";
 import ImageLoader from "./class/ImageLoader.js";
+import KeyController from "./class/KeyController.js";
 
 
 let _engine = console.warn.bind(this, 'Engine not set');
 const _com = {top: 3, left: 1, right: 2, bottom: 0};
 let _Hero;
 let _Interface;
-const keys = {
-  'W': 87,
-  'A': 65,
-  'S': 83,
-  'D': 68,
-  'LEFT': 37,
-  'RIGHT': 39,
-  'TOP': 38,
-  'DOWN': 40,
-  'SPACE': 32
-};
-const keyDown = {};
 const _Mobs = []; //Объявляем переменные.
 
 //Позиция персонажа (боком, лицом, спиной..)
@@ -49,26 +38,6 @@ var _nextStep = (() => {
 function _gameSet(callback) {
   _engine = callback;
 }
-
-
-function setKey(k) {
-  keyDown[k] = true;
-}
-
-function clearKey(k) {
-  keyDown[k] = false;
-}
-
-function isKeyDown(k) {
-  return keyDown[keys[k]] === true;
-}
-
-window.onkeydown = function (e) {
-  setKey(e.keyCode);
-};
-window.onkeyup = function (e) {
-  clearKey(e.keyCode);
-};
 
 async function SpriteLoader() {
   const alUrls = Object.values(_spt).flatMap((item) => item.url);
@@ -337,7 +306,7 @@ var Enemy = function (type, sid, sx, sy, x, y, option) {
     this.attack(); //Нападаем на игрока если наш персонаж типа enemy
   };
   this.attack = function () {
-    if (this.type == 'enemy' && _Hero.nps === null) { //Если персонаж не взаимодействует с НПС тогда может его атаковать.
+    if (this.type === 'enemy' && _Hero.nps === null) { //Если персонаж не взаимодействует с НПС тогда может его атаковать.
       var e = {w: this.width, h: this.height, x: this.x, y: this.y}, //enemy
         h = {w: _spt.hero.frame.w, h: _spt.hero.frame.h, x: _Hero.memory.x, y: _Hero.memory.y}; //hero
       //Проверяем столкнулся ли я с игроком
@@ -896,7 +865,7 @@ var Interface = function () {
         var text = this.text[this.textid] != undefined ? this.text[this.textid][0] : "";
 
         this.wrapText(ctx, text, dx + 5, dy + 20, p.say.w, 20);
-        if (isKeyDown('SPACE') && this.doit) {
+        if (KeyController.isPressed('SPACE') && this.doit) {
           this.doit = false;
           _Interface.dialog.next();
           var $this = this;
@@ -1306,9 +1275,9 @@ var _Person = function (x, y) {
       for (var y in arr[x]) {
         for (var l in arr[x][y]) {
           var i = arr[x][y][l];
-          if (i.tile == tile.defMap || i.id == tile.default) continue;
+          if (i.tile === tile.defMap || i.id === tile.default) continue;
           var itm = tile[i.tile].map[i.id];
-          if (itm.wall == 0) continue;
+          if (itm.wall === 0) continue;
           var titm = tile.param;
           if (!this.isCollision(x * titm.w, y * titm.h, titm.w, titm.h, (hero.x + sp), (hero.y + ((hero.h / 4) * 3)), (hero.w - (sp * 2)), hero.h / 4))
             continue;
@@ -1340,31 +1309,31 @@ var _Person = function (x, y) {
     var mem = this.memory,
       opt = this.options;
     if (this.can.walk) {
-      if (isKeyDown('LEFT') || isKeyDown('A')) {
+      if (KeyController.oneOf('LEFT', 'A')) {
         this.collision(mem.x - opt.speed, mem.y, function (x, y) {
           mem.x = x;
           mem.y = y;
         });
       }
-      if (isKeyDown('RIGHT') || isKeyDown('D')) {
+      if (KeyController.oneOf('RIGHT', 'D')) {
         this.collision(mem.x + opt.speed, mem.y, function (x, y) {
           mem.x = x;
           mem.y = y;
         });
       }
-      if (isKeyDown('TOP') || isKeyDown('W')) {
+      if (KeyController.oneOf('UP', 'W')) {
         this.collision(mem.x, mem.y - opt.speed, function (x, y) {
           mem.x = x;
           mem.y = y;
         });
       }
-      if (isKeyDown('DOWN') || isKeyDown('S')) {
+      if (KeyController.oneOf('DOWN', 'S')) {
         this.collision(mem.x, mem.y + opt.speed, function (x, y) {
           mem.x = x;
           mem.y = y;
         });
       }
-      if (isKeyDown('SPACE')) {
+      if (KeyController.oneOf('SPACE', 'ENTER')) {
         //Выполняем действие..
         this.canTakeIt();
         this.drawTool();

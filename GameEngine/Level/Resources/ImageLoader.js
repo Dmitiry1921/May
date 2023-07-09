@@ -1,6 +1,6 @@
-export default class ImageLoader {
+export default class ImageLoader extends Image {
   constructor(url) {
-
+    super();
     return new Promise((resolve, reject) => {
       const elem = new Image();
       elem.onload = () => resolve(elem);

@@ -1,4 +1,4 @@
-export default new class KeyController {
+export default new class KeyboardController {
   constructor() {
     this.state = new Set();
 
@@ -28,7 +28,6 @@ export default new class KeyController {
 
   pressKey(event) {
     const keyCode = this.getKeyCode(event);
-    console.log(keyCode, [...this.state]);
     this.state.add(keyCode);
   }
 

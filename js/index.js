@@ -8,36 +8,17 @@ import _itms from './itms.js';
 import _lvl from './lvl.js';
 import _tile from './tile.js';
 import code from './code.js';
-import MobMicroTask from "./class/MobMicroTask.js";
-import storage from "./class/Storage.js";
-import ImageLoader from "./class/ImageLoader.js";
-import KeyController from "./class/KeyController.js";
+import MobMicroTask from "../GameEngine/Level/Character/MobMicroTask.js";
+import storage from "../GameEngine/Storage/Storage.js";
+import ImageLoader from "../GameEngine/Level/Resources/ImageLoader.js";
+import KeyController from "../GameEngine/InputManager/KeyboardController.js";
+import GameEngine from "../GameEngine/GameEngine.js";
 
-
-let _engine = console.warn.bind(this, 'Engine not set');
+//Позиция персонажа (боком, лицом, спиной..)
 const _com = {top: 3, left: 1, right: 2, bottom: 0};
 let _Hero;
 let _Interface;
 const _Mobs = []; //Объявляем переменные.
-
-//Позиция персонажа (боком, лицом, спиной..)
-var _nextStep = (() => {
-  return window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    window.mozRequestAnimationFrame ||
-    window.oRequestAnimationFrame ||
-    window.msRequestAnimationFrame ||
-    function (callback) {
-      setTimeout(callback, 1000 / 60);
-    };
-})();
-(function _gameStep() {
-  if(typeof _engine === 'function') _engine();
-  _nextStep(_gameStep);
-})();
-function _gameSet(callback) {
-  _engine = callback;
-}
 
 async function SpriteLoader() {
   const alUrls = Object.values(_spt).flatMap((item) => item.url);
@@ -170,7 +151,7 @@ var _Map = {
   // TODO вынести эту функцию в класс Game
   levelSet: function (lvl) {
     storage.stopAutoSave();
-    _gameSet(() => {}); //останавливаем игровой процесс
+    GameEngine.stopLoop(); //останавливаем игровой процесс
     _Mobs.length = 0;
 
     //Загружаем всех персонажей, NPS и противников, которые есть на карте.
@@ -190,12 +171,14 @@ var _Map = {
       }
       _Map.canvasSetting(); //Настраиваем canvas.
       // _Map.tileLoader().then(_gameSet.bind(this, loop));
-      _gameSet(loop);
+      GameEngine.setLoop(loop);
       runHookAfterLoadMob();
+    })
+    .catch(console.error)
+    .finally(() => {
+      storage.startAutoSave();
+      storage._lvl = lvl;
     });
-    //
-    storage.startAutoSave();
-    storage._lvl = lvl;
   },
   countEnemy: function () {
     var j = 0;
@@ -338,7 +321,7 @@ var Enemy = function (type, sid, sx, sy, x, y, option) {
     // way you like, commercial or otherwise. Enjoy!
     // world is a 2d array of integers (eg world[10][15] = 0)
     // pathStart and pathEnd are arrays like [5,10]
-    //Эта функция взята мной из интернета и не много изменена. Права на нее я не заявляю она является доступной всем на сайте: http://www.websketches.ru/blog/algoritm-poiska-pitu-v-brauzernih-igrax
+    // Эта функция взята мной из интернета и не много изменена. Права на нее я не заявляю она является доступной всем на сайте: http://www.websketches.ru/blog/algoritm-poiska-pitu-v-brauzernih-igrax
     var abs = Math.abs;
     var max = Math.max;
     var pow = Math.pow;
@@ -350,8 +333,7 @@ var Enemy = function (type, sid, sx, sy, x, y, option) {
     var worldSize = worldWidth * worldHeight;
 
     var distanceFunction = ManhattanDistance;
-    var findNeighbours = function () {
-    }; // empty
+    var findNeighbours = function () {}; // empty
 
     function ManhattanDistance(Point, Goal) {
       return abs(Point.x - Goal.x) + abs(Point.y - Goal.y);
@@ -402,8 +384,22 @@ var Enemy = function (type, sid, sx, sy, x, y, option) {
       return bool;
     }
 
+    // function canWalkHere(x, y) {
+    //   const world = _lvl[storage._lvl].map;
+    //
+    //   if (world[x]?.[y]) {
+    //     return Object.values(world[x][y]).some(itm => {
+    //       if (!itm.id || !itm.tile) return false;
+    //       const tile = _tile[itm.tile].map[itm.id];
+    //       return tile.wall === maxWalkableTileNum;
+    //     });
+    //   }
+    //
+    //   return false;
+    // }
+
     function Node(Parent, Point) {
-      var newNode = {
+      return {
         Parent: Parent,
         value: Point.x + (Point.y * worldWidth),
         x: Point.x,
@@ -411,8 +407,6 @@ var Enemy = function (type, sid, sx, sy, x, y, option) {
         f: 0,
         g: 0
       };
-
-      return newNode;
     }
 
     function calculatePath() {
@@ -546,7 +540,7 @@ var Enemy = function (type, sid, sx, sy, x, y, option) {
       c = this.cell,
       x1, y1, path;
 
-    if (_lvl[storage._lvl]['accessibly'] == undefined) {
+    if (_lvl[storage._lvl]['accessibly'] === undefined) {
       var arr = _lvl[storage._lvl].map;
       _lvl[storage._lvl]['accessibly'] = []; //Создаем массив.
       for (var x in arr) {
@@ -566,7 +560,7 @@ var Enemy = function (type, sid, sx, sy, x, y, option) {
     }
     if (!this.path.arr.length && !this.path.wait) {
       //генерируем случайные клетки по x, y b Проверяем доступность маршрута.
-      if (b1 != undefined && b2 != undefined) {
+      if (b1 !== undefined && b2 !== undefined) {
         x1 = b1;
         y1 = b2;
       } else {
@@ -640,7 +634,8 @@ function getContextForMicrotask() {
     _Mobs,
     _Hero,
     Enemy,
-    _gameSet,
+    // TODO удалить внутри _code _gameSet заменить на GameEngine
+    _gameSet: GameEngine.stopLoop,
     Interface: _Interface,
     addHookAfterLoadMob,
   }
@@ -874,6 +869,9 @@ var Interface = function () {
           }, 500);
         }
       }
+    },
+    randomDialog(dialogArray) {
+      return dialogArray[Math.floor(Math.random() * dialogArray.length)];
     }
   }; //Функция отображает диалоги..
   this.inventory = {
@@ -943,7 +941,7 @@ var Interface = function () {
       for (var i in inv) {
         var cell = inv[i];
         if (cell !== null) {
-          if (cell.itm == itm && cell.count >= count) {
+          if (cell.itm === itm && cell.count >= count) {
             this.lastSearch = i; //Записываем результат поиска
             bool = true;
             break;
@@ -1155,7 +1153,7 @@ var _Person = function (x, y) {
       if (stop) break;
     }
     if (bool) {
-      var i = this.memory,
+      const i = this.memory,
         max = this.options,
         ps = i.digger / max.digger,
         w = (h.s.w - 2) * ps;
@@ -1250,12 +1248,12 @@ var _Person = function (x, y) {
     ctx.fillStyle = '#610101';
     x = mem.x + st.pos.x;
     y = mem.y + st.pos.y;
-    if (pst != 1) {
+    if (pst !== 1) {
       ctx.fillRect(x, y, st.w, st.h);
       ctx.fillStyle = '#e11e26';
       ctx.fillRect(x + 1, y + 1, (st.w - 2) * pst, st.h - 2);
     }
-    if (pst == 0) gameOver();
+    if (pst === 0) gameOver();
   };
   this.isCollision = function (x1, y1, w1, h1, x2, y2, w2, h2) {
     return x1 < x2 + w2 && x1 + w1 > x2 && y1 < y2 + h2 && h1 + y1 > y2;
@@ -1286,8 +1284,8 @@ var _Person = function (x, y) {
       }
     }
     //Столкновение с мобоми
-    for (var id in _Mobs) {
-      var i = _Mobs[id];
+    for (const id in _Mobs) {
+      const i = _Mobs[id];
       if (i.type === this.type) continue;
       //Получаем габариты и координаты для проверки столкновения.
       var en = {x: i.x, y: i.y, w: i.width, h: i.height};
@@ -1416,6 +1414,7 @@ var _Person = function (x, y) {
 };
 
 var loop = function () {
+  // TODO нужно будет переписать.
   _Map.draw(); // Отрисовка карты.
   drawMobs(); //Прорисовываем мобов.
   _Map.overlay(); //Перекрываем персонажа.
@@ -1432,7 +1431,7 @@ var gameOver = function () {
     ["Ты кто вообще ? "],
     ["ППпппрррррРРРРрррруУУУУУууФФФффффф...."]
   ], function () {
-    _gameSet(() => {});
+    GameEngine.stopLoop();
     storage.clearAll();
     location.reload();
   });
@@ -1449,13 +1448,13 @@ window.May = () => {};
 window.May.stopGame = function() {
   _Hero.can.walk = false;
   _Hero.can.attack = false;
-  _gameSet(() => {});
+  GameEngine.stopLoop();
   storage.clearAll();
 }
 window.May.pauseGame = function() {
-  _gameSet(() => {});
+  GameEngine.pause();
 }
 window.May.resumeGame = function() {
-  _gameSet(loop);
+  GameEngine.resume();
 }
 window.May.levelSet = _Map.levelSet.bind(this);

@@ -2,10 +2,11 @@ import http from 'http';
 import fs from 'fs';
 import path from 'path';
 import {fileURLToPath} from 'node:url';
+import {STATIC_SERVER_PORT, STATIC_SERVER_URL} from "./config.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const [POST = 3000] = process.argv.slice(2);
+const [POST = STATIC_SERVER_PORT] = process.argv.slice(2);
 
 const server = http.createServer((req, res) => {
   if(req.url === '/') {
@@ -55,5 +56,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(POST, () => {
-  console.log(`Server is running on http://localhost:${POST}`);
+  console.log(`Server is running on ${STATIC_SERVER_URL}:${POST}`);
 });

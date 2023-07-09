@@ -1,5 +1,7 @@
 import  { test, expect } from '@playwright/test';
-import {STATIC_SERVER_URL} from "../../playwright.config.js";
+import { STATIC_SERVER_URL } from "../../server/config.js";
+
+const filePath = './GameEngine/Storage/Storage.js';
 
 test.describe('Storage', () => {
   test.describe.parallel('parallel', () => {
@@ -23,27 +25,27 @@ test.describe('Storage', () => {
       localStorage.setItem('key1', JSON.stringify('value1'));
       localStorage.setItem('key2', JSON.stringify('value2'));
     `});
-      await page.addScriptTag({ content: `import storage from "./js/class/Storage.js"; window.storage = storage;`, type: `module`});
+      await page.addScriptTag({ content: `import storage from "${filePath}"; window.storage = storage;`, type: `module`});
 
       const data = await page.evaluate(async () => {
         return await new Promise((resolve) => {
           setTimeout(() => {
-            resolve(storage._data);
+            resolve(window.storage._data);
           }, 10);
-          // return storage._data;
+          // return window.storage._data;
         });
       });
 
       expect(data).toEqual({ key1: 'value1', key2: 'value2' });
     });
     test('#autoSave', async () => {
-      await page.addScriptTag({ content: `import storage from "./js/class/Storage.js"; window.storage = storage;`, type: `module`});
+      await page.addScriptTag({ content: `import storage from "${filePath}"; window.storage = storage;`, type: `module`});
       await page.evaluate(() => {
-        storage._setAutoSaveInterval(10); // задаем более быстрый интервал сохранения чтобы не тормозить тестирование
+        window.window.storage._setAutoSaveInterval(10); // задаем более быстрый интервал сохранения чтобы не тормозить тестирование
       });
       await page.evaluate(() => {
-        storage.key1 = 'value1';
-        storage.key2 = 'value2';
+        window.storage.key1 = 'value1';
+        window.storage.key2 = 'value2';
       });
       const data = await page.evaluate(async () => {
         return await new Promise((resolve) => {
@@ -52,7 +54,7 @@ test.describe('Storage', () => {
               key1: JSON.parse(localStorage.getItem('key1')),
               key2: JSON.parse(localStorage.getItem('key2'))
             })
-          }, storage._getAutoSaveInterval() * 2) // должно быть больше чем интервал автосохранения
+          }, window.storage._getAutoSaveInterval() * 2) // должно быть больше чем интервал автосохранения
         });
       });
 
@@ -60,11 +62,11 @@ test.describe('Storage', () => {
       expect(data.key2).toBe('value2');
     });
     test('#stopAutoSave', async () => {
-      await page.addScriptTag({ content: `import storage from "./js/class/Storage.js"; window.storage = storage;`, type: `module`});
+      await page.addScriptTag({ content: `import storage from "${filePath}"; window.storage = storage;`, type: `module`});
       const intervalId = await page.evaluate(async () => {
         return await new Promise((resolve) => {
           setTimeout(() => {
-            resolve(storage.stopAutoSave());
+            resolve(window.storage.stopAutoSave());
           }, 100);
         })
           ;
@@ -72,13 +74,13 @@ test.describe('Storage', () => {
       expect(intervalId).toBeNull();
     });
     test('#startAutoSave', async () => {
-      await page.addScriptTag({ content: `import storage from "./js/class/Storage.js"; window.storage = storage;`, type: `module`});
+      await page.addScriptTag({ content: `import storage from "${filePath}"; window.storage = storage;`, type: `module`});
       const intervalId = await page.evaluate(async () => {
         return await new Promise((resolve) => {
           setTimeout(() => {
-            storage.stopAutoSave();
+            window.storage.stopAutoSave();
             setTimeout(() => {
-              resolve(storage.startAutoSave());
+              resolve(window.storage.startAutoSave());
             },0);
           }, 50);
         });
@@ -91,13 +93,13 @@ test.describe('Storage', () => {
       localStorage.setItem('key1', JSON.stringify('value1'));
       localStorage.setItem('key2', JSON.stringify('value2'));
       `,  type: 'module'});
-      await page.addScriptTag({ content: `import storage from "./js/class/Storage.js"; window.storage = storage;`, type: `module`});
+      await page.addScriptTag({ content: `import storage from "${filePath}"; window.storage = storage;`, type: `module`});
       let data;
       // Проверка, что данные загружены
       data = await page.evaluate(async () => {
         return await new Promise((resolve) => {
           setTimeout(() => {
-            resolve(storage._data);
+            resolve(window.storage._data);
           }, 50);
         })
       });
@@ -107,9 +109,9 @@ test.describe('Storage', () => {
       data = await page.evaluate(async () => {
         return await new Promise((resolve) => {
           setTimeout(() => {
-            storage.clearAll();
+            window.storage.clearAll();
             setTimeout(() => {
-              resolve(storage._data);
+              resolve(window.storage._data);
             },0);
           }, 50);
         });
@@ -132,22 +134,17 @@ test.describe('Storage', () => {
     });
     test('#setOnce', async () => {
       await page.addScriptTag({content: `localStorage.setItem('key1', JSON.stringify('value1'));`,  type: 'module'});
-      await page.addScriptTag({ content: `import storage from "./js/class/Storage.js"; window.storage = storage;`, type: `module`});
+      await page.addScriptTag({ content: `import storage from "${filePath}"; window.storage = storage;`, type: `module`});
       const data = await page.evaluate(async () => {
-        try {
           return await new Promise((resolve) => {
             setTimeout(() => {
-              storage.setOnce('key1', 'newValue1');
-              storage.setOnce('key2', 'newValue2');
+              window.storage.setOnce('key1', 'newValue1');
+              window.storage.setOnce('key2', 'newValue2');
               setTimeout(() => {
-                resolve(storage._data);
+                resolve(window.storage._data);
               },0);
             }, 50);
           });
-        } catch (err) {
-
-        }
-
       });
       expect(data.key1).toBe('value1');
       expect(data.key2).toBe('newValue2');

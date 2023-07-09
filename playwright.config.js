@@ -1,8 +1,6 @@
 import { defineConfig, devices} from '@playwright/test';
 
-export const STATIC_SERVER_HOST = 'localhost';
-export const STATIC_SERVER_PORT = 8080;
-export const STATIC_SERVER_URL = `http://${STATIC_SERVER_HOST}:${STATIC_SERVER_PORT}`;
+import {STATIC_SERVER_PORT, STATIC_SERVER_URL} from "./server/config.js";
 
 export default defineConfig({
   workers: process.env.CI ? 3 : undefined,

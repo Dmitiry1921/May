@@ -56,5 +56,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(POST, () => {
-  console.log(`Server is running on ${STATIC_SERVER_URL}:${POST}`);
+  console.log(`Server is running on ${STATIC_SERVER_URL}`);
 });

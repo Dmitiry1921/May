@@ -1,8 +1,26 @@
-export class Level {
-  constructor(levelData) {
-    const {
+import {GameObject} from "../GameObject.js";
 
-    } = levelData;
+export class Level extends GameObject {
+  constructor(levelData) {
+    super();
+    const {} = levelData;
+
+  }
+
+  processInput() {
+
+  }
+
+  update() {
+
+  }
+
+  render() {
+
+  }
+
+  // загрузка уровня
+  #tileLoader() {
 
   }
 

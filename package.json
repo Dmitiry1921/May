@@ -1,41 +1,45 @@
 {
-  "name": "may",
-  "version": "1.0.0",
-  "description": "Игра созданная для участия в конкурсе [SkanerSoft](https://www.youtube.com/c/SkanerSoft) # Скриншоты ![](https://raw.githubusercontent.com/Dmitiry1921/May/main/doc/img/0.jpg)",
-  "main": "index.js",
-  "type": "module",
-  "directories": {},
-  "scripts": {
-    "prepare": "husky install",
-    "static-server": "node ./server/static-server.js",
-    "test-playwright": "npx playwright test",
-    "test-mocha": "mocha ./tests/mocha/*.spec.js",
-    "lint": "eslint . --ext .js --ext .ts",
-    "test": "npm run test-playwright && npm run test-mocha"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Dmitiry1921/May.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Dmitiry1921/May/issues"
-  },
-  "homepage": "https://github.com/Dmitiry1921/May#readme",
-  "devDependencies": {
-    "@playwright/test": "1.35.0",
-    "@typescript-eslint/eslint-plugin": "^5.61.0",
-    "@typescript-eslint/parser": "^5.61.0",
-    "eslint": "8.44.0",
-    "eslint-plugin-mocha": "10.1.0",
-    "husky": "8.0.3",
-    "mocha": "10.2.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run test"
-    }
-  }
+	"name": "may",
+	"version": "1.0.0",
+	"description": "Игра созданная для участия в конкурсе [SkanerSoft](https://www.youtube.com/c/SkanerSoft) # Скриншоты ![](https://raw.githubusercontent.com/Dmitiry1921/May/main/doc/img/0.jpg)",
+	"main": "index.js",
+	"type": "module",
+	"directories": {},
+	"scripts": {
+		"prepare": "husky install",
+		"static-server": "node ./server/static-server.js",
+		"test-playwright": "npx playwright test",
+		"test-mocha": "mocha ./tests/mocha/*.spec.js",
+		"lint": "eslint . --ext .js --ext .ts",
+		"test": "npm run test-playwright && npm run test-mocha"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Dmitiry1921/May.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Dmitiry1921/May/issues"
+	},
+	"homepage": "https://github.com/Dmitiry1921/May#readme",
+	"devDependencies": {
+		"@playwright/test": "1.35.0",
+		"@typescript-eslint/eslint-plugin": "5.61.0",
+		"@typescript-eslint/parser": "5.61.0",
+		"eslint": "8.44.0",
+		"eslint-plugin-mocha": "10.1.0",
+		"husky": "8.0.3",
+		"mocha": "10.2.0"
+	},
+	"husky": {
+		"hooks": {
+			"pre-push": "npm run test"
+		}
+	},
+	"engines": {
+		"node": "18.17.1",
+		"npm": "9.6.7"
+	}
 }

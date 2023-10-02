@@ -75,6 +75,7 @@ var _Map = {
     },
     overlay: [] //Массив с перекрытиями
   },
+  //TODO Level.render() -> Map.render() -> Layer.render()
   overlay: function () {
     var sett = this.setting,
       map = sett.overlay;
@@ -83,6 +84,8 @@ var _Map = {
       sett.canvas.dom.drawImage(itm[0], itm[1], itm[2], itm[3], itm[4], itm[5], itm[6], itm[7], itm[8]);
     }
   }, //Функция рисования поверх персонажа.
+  //TODO Level.tileLoader
+  // TODO Level.tileLoader
   async tileLoader() {
     const alUrls = Object.entries(_tile)
       .filter(([key]) => !['defMap', 'default', 'param'].includes(key))
@@ -93,20 +96,21 @@ var _Map = {
       _tile[tileKey].dom = image;
     });
   },//Функция загружает тайл карты.
+  //TODO GameEngine.canvasSetting
   canvasSetting: function () {
     var el = this.setting.elem,
-      map = this.setting.map,
-      ctx = this.setting.canvas,
-      width, height;
+      // map = this.setting.map,
+      ctx = this.setting.canvas;
+      // width, height;
     ctx.dom = document.getElementById(el.canvasID).getContext('2d');
-    width = _tile.param.w * map.count.x;
-    height = _tile.param.h * map.count.y;
+    // width = _tile.param.w * map.count.x;
+    // height = _tile.param.h * map.count.y;
   },
-  randomInteger: function (min, max) {
-    var rand = min + Math.random() * (max - min);
-    rand = Math.round(rand);
-    return rand;
+  //TODO Утилитарная функция
+  randomInteger(min, max) {
+    return Math.round(min + Math.random() * (max - min));
   },
+  //TODO Level.draw() -> Map.draw() -> Layer.draw()
   draw: function () {
     var map = _lvl[storage._lvl].map, //Игровая карта
       cns = this.setting.canvas.dom,
@@ -138,17 +142,18 @@ var _Map = {
       }
     }
   },
+  // TODO
   saveStat: function () {
     //Сохраняем состояние уровня каждый раз когда вызвана функция.
     storage[storage._lvl] = {_mobs: JSON.parse(JSON.stringify(_Mobs)), _map: _lvl[storage._lvl].map};
     storage._hero = _Hero;
   },
-
+  // TODO CharacterArray.findCharacter
   searchNPS: function (name) {
     //выполняем поиск НПС по его имени
     return Object.values(_Mobs).find((mob) => mob.type === "nps" && mob.options.name === name);
   },
-  // TODO вынести эту функцию в класс Game
+  // TODO Level.load()
   levelSet: function (lvl) {
     storage.stopAutoSave();
     GameEngine.stopLoop(); //останавливаем игровой процесс
@@ -180,6 +185,7 @@ var _Map = {
       storage._lvl = lvl;
     });
   },
+  // CharacterArray.getLengthByType
   countEnemy: function () {
     var j = 0;
     for (var id in _Mobs) {

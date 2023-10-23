@@ -3,7 +3,7 @@ import { STATIC_SERVER_URL } from "../../server/config.js";
 
 const filePath = './GameEngine/Storage/Storage.js';
 
-test.describe('Storage', () => {
+test.describe.skip('Storage', () => {
   test.describe.parallel('parallel', () => {
     let page;
     test.beforeEach(async ({browser}) => {

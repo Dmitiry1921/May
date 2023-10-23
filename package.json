@@ -9,6 +9,7 @@
 		"prepare": "husky install",
 		"static-server": "node ./server/static-server.js",
 		"test-playwright": "npx playwright test",
+		"test-playwright-debug": "npx playwright test --debug",
 		"test-mocha": "mocha ./tests/mocha/*.spec.js",
 		"lint": "eslint . --ext .js --ext .ts",
 		"test": "npm run test-playwright && npm run test-mocha"

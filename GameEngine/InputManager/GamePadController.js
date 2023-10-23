@@ -1,78 +1,153 @@
-const XBOX360 = {
-  A: 0,
-  B: 1,
-  X: 2,
-  Y: 3,
-  LB: 4,
-  RB: 5,
-  LT: 6,
-  RT: 7,
-  BACK: 8,
-  START: 9,
-  UP: 12,
-  DOWN: 13,
-  LEFT: 14,
-  RIGHT: 15,
+'use strict';
+import {reverse} from "../utils/object";
+
+const XBOX = {
+	A: 0,
+	B: 1,
+	X: 2,
+	Y: 3,
+	LB: 4,
+	RB: 5,
+	LT: 6,
+	RT: 7,
+	VIEW: 8,
+	MENU: 9,
+	LSB: 10,
+	RSB: 11,
+	UP: 12,
+	DOWN: 13,
+	LEFT: 14,
+	RIGHT: 15,
+	XBOX: 16,
+	SHARE: 17,
 };
 
-// const PS4 = {
-//   SQUARE: 0,
-//   X: 1,
-//   CIRCLE: 2,
-//   TRIANGLE: 3,
-//   L1: 4,
-//   R1: 5,
-//   L2: 6,
-//   R2: 7,
-//   PS: 12,
-//   UP: 14,
-//   DOWN: 15,
-//   LEFT: 16,
-//   RIGHT: 17,
-// }
+export const GAMEPAD = {
+	XBOX,
+}
 
-export default new class GamePadController {
-  constructor() {
-    window.addEventListener("gamepadconnected", (e) => {
-      console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
-        e.gamepad.index, e.gamepad.id,
-        e.gamepad.buttons.length, e.gamepad.axes.length);
-      console.log(e.gamepad.buttons);
-      console.log(navigator.getGamepads());
+const TYPE = 'GAMEPAD';
 
-    });
-    window.addEventListener("gamepaddisconnected", (e) => {
-      console.log("Gamepad disconnected from index %d: %s",
-        e.gamepad.index, e.gamepad.id);
-    });
-    requestAnimationFrame(() => {
-      this.checkGamePadState();
-    });
-    this.state = new Set();
-  }
+// TODO поддержать оси
+// TODO поддержать вибрацию
 
-  checkGamePadState() {
-    Object.entries(XBOX360).forEach(([key, value]) => {
-      if (this.isPressed(value)) {
+export default class GamePadController {
+	#gpIndex;
+	#buttonsMapper;
+	#state;
+	#isVibrate;
+	#events;
 
-      }
-      if (this.isReleased(value)) {
-        this.emit("release", key);
-      }
-    });
-  }
+	constructor(gamepadIndex) {
+		this.#gpIndex = gamepadIndex;
+		this.#buttonsMapper = reverse(XBOX); //  TODO Добавить поддержку других геймпадов
+		this.#state = new Set();
+		this.#isVibrate = false;
+		this.#events = new Map();
+	}
 
-  isPressed(value) {
-    if(!this.state.has(value)) {
-      this.state.add(value)
-      this.emit("press", {
+	get type() {
+		return 'GAMEPAD';
+	}
 
-      });
-    }
-    return false;
-  }
+	get gamepadIndex() {
+		return this.#gpIndex;
+	}
 
-  isReleased() {
-    return false;
-  }
+	get #gamepad() {
+		return navigator.getGamepads()[this.#gpIndex];
+	}
+
+	log(...args) {
+		console.log('Gamepad', this.#gpIndex, ...args);
+	}
+
+	on(event, callback) {
+		if(typeof event !== 'string') throw new TypeError('event must be string');
+		if(typeof callback !== 'function') throw new TypeError('callback must be function');
+		this.#events.set(event, callback);
+	}
+
+	#checkState() {
+		this.vibrate();
+		// console.log(this.#gamepad.vibrationActuator.playEffect('dual-rumble', {}));
+		// console.log(this.#gamepad.axes.map(Math.round.bind(2)));
+		this.#gamepad.buttons.forEach((button, index) => {
+			if (button.pressed || button.touched || button.value > 0) {
+				this.log('button', index, button.pressed, button.touched, button.value, this.#buttonsMapper[index]);
+				if (!this.#state.has(index)) {
+					this.#state.add(index);
+				}
+			} else {
+				this.#state.delete(index);
+			}
+		});
+	}
+
+	vibrate(duration = 200, strongMagnitude = 1.0, weakMagnitude = 1.0) {
+		if (this.#isVibrate) return;
+		this.#isVibrate = true;
+		const hapticActuator = this.#gamepad.vibrationActuator || this.#gamepad.hapticActuators[0];
+		if (hapticActuator) {
+			hapticActuator.playEffect(hapticActuator.type, {
+				duration, // Длительность эффекта
+				strongMagnitude, // Сила эффекта (от 0.0 до 1.0)
+				weakMagnitude, // Слабая сила эффекта (от 0.0 до 1.0)
+			})
+				.then(() => {
+					this.#isVibrate = false;
+				})
+				.catch((error) => {
+					console.error("Ошибка воспроизведения эффекта обратной связи: " + error);
+				})
+				.finally(() => {
+					this.#isVibrate = false;
+				});
+		}
+		// playEffect(type, {
+		// 	startDelay: 0,
+		// 	duration,
+		// 	strongMagnitude: 1.0,
+		// 	weakMagnitude: 1.0
+		// }).then(console.log)
+		// 	.catch(console.error)
+		// 	.finally(() => {
+		// 	this.#isVibrate = false;
+		// });
+	}
+
+	/**
+	 * Проверка нажатия кнопки
+	 * @param key
+	 * @return {*}
+	 */
+	isPressed(key) {
+		return this.#state.has(key);
+	}
+
+	/**
+	 * Проверка отпускания кнопки
+	 * @param key
+	 * @return {boolean}
+	 */
+	isReleased(key) {
+		return !this.#state.has(key);
+	}
+
+	/**
+	 * Проверка нажатия одной из кнопок
+	 * @param keys
+	 * @return {boolean}
+	 */
+	oneOf(...keys) {
+		return keys.flatMap(key => key[TYPE]).some(key => this.#state.has(key));
+		;
+	}
+
+	/**
+	 * Обработка ввода
+	 */
+	processInput() {
+		this.#checkState();
+	}
 }

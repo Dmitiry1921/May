@@ -1,3 +1,5 @@
 {
-  "canvasId": "myCanvas"
+	"canvasId": "myCanvas",
+	"imageSmoothingEnabled": false,
+	"clearCanvasBeforeRender": true
 }

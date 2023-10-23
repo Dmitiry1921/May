@@ -16,7 +16,9 @@ const server = http.createServer((req, res) => {
     res.end('<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Playwright test Page</title></head><body></body></html>');
     return;
   }
-  const filePath = path.join(__dirname, '../', req.url);
+	const parsedPath = path.parse(req.url);
+  const filePath = path.join(__dirname, '../', req.url, parsedPath.ext ? '' : 'index.js');
+	console.log({parsedPath, filePath});
   fs.access(filePath, fs.constants.F_OK, (err) => {
     if (err) {
       res.statusCode = 404;

@@ -1,7 +1,9 @@
-import Character from "./Character.js";
+import {Character} from "./Character.js";
+import {Rectangle} from "../../GameObject/index.js";
 
-export default class Enemy extends Character {
+export class Enemy extends Character {
   constructor() {
-    super();
-  }
+		super(new Rectangle(0, 0, 32, 32));
+		this.setType('Enemy');
+	}
 }

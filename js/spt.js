@@ -43,7 +43,7 @@ const map32x32 = {
       "y": 128
     }
   }
-}
+};
 const map96x96 = {
   "0": {
     "0": {
@@ -97,7 +97,6 @@ const count32x32 = {
     y: 8
   }
 };
-
 const count92x92 = {
 	x: 4,
 	y: 2,
@@ -112,13 +111,14 @@ const frame32x32 = {
 	h: 32,
 	bw: 96,
 	bh: 128,
-}
+};
 const frame96x96 = {
 	w: 96,
 	h: 96,
 	bw: 96,
 	bh: 96
-}
+};
+
 export default {
   hero: {
     url: [
@@ -192,20 +192,20 @@ export default {
     dom: {},
     //Массив с лицами.
     url: [
-      "img/sprite/face/hero0.png",
-      "img/sprite/face/hero1.png",
-      "img/sprite/face/17.png",
-      "img/sprite/face/18.png",
-      "img/sprite/face/19.png",
-      "img/sprite/face/20.png",
-      "img/sprite/face/21.png",
-      "img/sprite/face/22.png",
-      "img/sprite/face/23.png",
-      "img/sprite/face/24.png",
-      "img/sprite/face/25.png",
-      "img/sprite/face/26.png",
-      "img/sprite/face/27.png",
-      "img/sprite/face/16.png"
+      "img/sprite/face/hero0.png", // 0
+      "img/sprite/face/hero1.png", // 1
+      "img/sprite/face/17.png", // 2
+      "img/sprite/face/18.png", // 3
+      "img/sprite/face/19.png",// 4
+      "img/sprite/face/20.png", // 5
+      "img/sprite/face/21.png", // 6
+      "img/sprite/face/22.png", // 7
+      "img/sprite/face/23.png", // 8
+      "img/sprite/face/24.png", // 9
+      "img/sprite/face/25.png", // 10
+      "img/sprite/face/26.png", // 11
+      "img/sprite/face/27.png", // 12
+      "img/sprite/face/16.png" // 13
     ]
   }
 };

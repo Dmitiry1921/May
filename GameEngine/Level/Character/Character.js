@@ -7,7 +7,6 @@ import {
 	AnimationState,
 	Vector2,
 	Rectangle,
-	Level,
 	Collider,
 	Circle
 } from "../../../GameEngine";
@@ -15,27 +14,29 @@ import {
 export class Character extends GameObject {
 
 	#type;
-	#level;
 	#bound;
 	#hitBox;
 	#velocity;
 	#collisionBox;
+	#inputProcesses;
 	#stateAnimation;
 	#updateProcesses;
-	#inputProcesses;
 
-  constructor(rect) {
-		if(!(rect instanceof Rectangle)) throw new TypeError('rect must be instance of Rectangle');
+	constructor(rect) {
+		if (!(rect instanceof Rectangle)) throw new TypeError('rect must be instance of Rectangle');
 		super();
 		this.#type = 'Character';
 		this.#bound = new Rectangle(rect.x, rect.y, rect.width, rect.height); // по умолчанию
 		this.#velocity = new Vector2(0, 0); // по умолчанию
-		this.#collisionBox = new Collider(new Rectangle()); // TODO поддержать
-		this.#hitBox = new Collider(new Circle()); // TODO поддержать
+		this.#collisionBox = new Collider(this.#type, new Rectangle());
+		this.#hitBox = new Collider(this.#type, new Circle()); // TODO поддержать
 		this.#stateAnimation = new AnimationStateMachine();
 		this.#updateProcesses = new Set();
 		this.#inputProcesses = new Set();
-  }
+
+		this.#collisionBox.setVelocity(this.#velocity);
+		this.#hitBox.setVelocity(this.#velocity);
+	}
 
 	get type() {
 		return this.#type;
@@ -52,13 +53,20 @@ export class Character extends GameObject {
 	get collisionBox() {
 		return this.#collisionBox;
 	}
+
 	get hitBox() {
 		return this.#hitBox;
 	}
 
+	hasCollider() {
+		return this.#collisionBox.hasCollider();
+	}
+
 	setType(type) {
-		if(typeof type !== 'string') throw new TypeError('type must be string');
+		if (typeof type !== 'string') throw new TypeError('type must be string');
 		this.#type = type;
+		this.#collisionBox.type = type;
+		this.#hitBox.type = type;
 	}
 
 	/**
@@ -66,16 +74,34 @@ export class Character extends GameObject {
 	 * @param animationState {AnimationState}
 	 */
 	addAnimationState(animationState) {
-		if(!(animationState instanceof AnimationState)) throw new TypeError('animationState must be instance of AnimationState');
+		if (!(animationState instanceof AnimationState)) throw new TypeError('animationState must be instance of AnimationState');
 		this.addResources(animationState.resources);
 		animationState.resize(this.#bound.width, this.#bound.height);
 		this.#stateAnimation.addState(animationState);
 		this.#bound.resize(animationState.animation.bound);
 	}
 
+	#getNextPosition() {
+		this.#collisionBox.getNextPosition(this.#velocity);
+		this.#hitBox.getNextPosition(this.#velocity);
+		this.#bound.getNextPosition(this.#velocity);
+		this.#stateAnimation.getNextPosition(this.#velocity);
+
+		return this;
+	}
+
+	/**
+	 * Перемещает персонажа на вектор его скорости;
+	 */
+	move() {
+		this.#collisionBox.moveBy(this.#velocity);
+		this.#hitBox.moveBy(this.#velocity);
+		this.#bound.moveBy(this.#velocity);
+		this.#stateAnimation.moveBy(this.#velocity);
+	}
+
 	moveTo(point) {
-		if(!(point instanceof Point)) throw new TypeError('point must be instance of Point');
-		this.#velocity = new Vector2(0, 0);
+		if (!(point instanceof Point)) throw new TypeError('point must be instance of Point');
 		this.#collisionBox.moveTo(point);
 		this.#hitBox.moveTo(point);
 		this.#bound.moveTo(point);
@@ -83,8 +109,7 @@ export class Character extends GameObject {
 	}
 
 	moveBy(vector2) {
-		if(!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
-		this.#velocity = vector2;
+		if (!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
 		this.#collisionBox.moveBy(vector2);
 		this.#hitBox.moveBy(vector2);
 		this.#bound.moveBy(vector2);
@@ -97,8 +122,8 @@ export class Character extends GameObject {
 	}
 
 	setState(stateName) {
-		if(this.#stateAnimation)
-		this.#stateAnimation.setState(stateName);
+		if (this.#stateAnimation)
+			this.#stateAnimation.setState(stateName);
 	}
 
 	playAnimation() {
@@ -113,28 +138,27 @@ export class Character extends GameObject {
 		this.#stateAnimation.stopAnimation();
 	}
 
-	setLevel(level) {
-		if(!(level instanceof Level)) throw new TypeError('level must be instance of Level');
-		this.#level = level;
-	}
-
 
 	/**
 	 * Обработка ввода
 	 */
 	processInput(deltaTime) {
 		this.#inputProcesses.forEach(func => func(deltaTime));
+		this.#getNextPosition();
 	}
+
 	/**
 	 * Обновление персонажа
 	 * @param deltaTime
 	 */
 	update(deltaTime) {
+		this.#collisionBox.update(deltaTime);
 		this.#stateAnimation.update(deltaTime);
 		this.#updateProcesses.forEach(func => func(deltaTime));
 	}
+
 	render(canvasContext) {
-		if(this.#stateAnimation.currentState === null) {
+		if (this.#stateAnimation.currentState === null) {
 			console.warn(this.name, 'use setState() for draw Character', new Error().stack);
 		}
 		this.#stateAnimation.render(canvasContext);
@@ -143,11 +167,12 @@ export class Character extends GameObject {
 	}
 
 	addUpdateProcess(func) {
-		if(typeof func !== 'function') throw new TypeError('func must be function');
+		if (typeof func !== 'function') throw new TypeError('func must be function');
 		this.#updateProcesses.add(func);
 	}
+
 	addProcessInput(func) {
-		if(typeof func !== 'function') throw new TypeError('func must be function');
+		if (typeof func !== 'function') throw new TypeError('func must be function');
 		this.#inputProcesses.add(func);
 	}
 

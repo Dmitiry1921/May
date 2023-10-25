@@ -1,4 +1,9 @@
+'use strict';
+
 import {Loader} from "../../GameEngine";
+import {logOnce} from "../utils/logger.js";
+
+
 
 export class GameObject {
 	#resources;
@@ -37,7 +42,7 @@ export class GameObject {
 	 * @param point {Point} - точка, в которую перемещаем объект
 	 */
 	moveTo(point) {
-		console.warn('moveTo', this.constructor.name, 'not implemented');
+		logOnce('moveTo', this.constructor.name, 'not implemented');
 	}
 
 	/**
@@ -45,30 +50,41 @@ export class GameObject {
 	 * @param vector2
 	 */
 	moveBy(vector2) {
-		console.warn('moveBy', this.constructor.name, 'not implemented');
+		logOnce('moveBy', this.constructor.name, 'not implemented');
 	}
 
 	processInput() {
-		console.warn('processInput', this.constructor.name, 'not implemented');
+		logOnce('processInput', this.constructor.name, 'not implemented');
 	}
 
 	resize() {
-		console.warn('resize', this.constructor.name, 'not implemented');
+		logOnce('resize', this.constructor.name, 'not implemented');
 	}
 
 	update(deltaTime) {
-		console.warn('update', this.constructor.name, 'not implemented');
+		logOnce('update', this.constructor.name, 'not implemented');
 	}
 
 	render(canvasContext) {
-		console.warn('render', this.constructor.name, 'not implemented');
-	}
-
-	toString() {
-		console.warn('toString', this.constructor.name, 'not implemented');
+		logOnce('render', this.constructor.name, 'not implemented');
 	}
 
 	toJSON() {
-		console.warn('toJSON', this.constructor.name, 'not implemented');
+		logOnce('toJSON', this.constructor.name, 'not implemented');
+	}
+
+	/**
+	 * Проверяет, есть ли у объекта коллайдер
+	 * @returns {boolean}
+	 */
+	hasCollider() {
+		logOnce('hasCollider', this.constructor.name, 'not implemented');
+	}
+
+	/**
+	 * @returns {Collider}
+	 */
+	getCollider() {
+		logOnce('getCollider', this.constructor.name, 'not implemented');
 	}
 }

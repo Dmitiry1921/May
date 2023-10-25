@@ -22,6 +22,10 @@ export class SpriteAnimation extends GameObject {
 		this.#play = true; // Воспроизводить анимацию
 	}
 
+	get bound() {
+		return this.#frames[this.#currentFrame].bound;
+	}
+
 	/**
 	 * Сбрасывает анимацию
 	 */
@@ -69,6 +73,10 @@ export class SpriteAnimation extends GameObject {
 		}
 	}
 
+	getNextPosition(vector2) {
+		this.#frames.forEach(frame => frame.getNextPosition(vector2));
+	}
+
 	moveTo(point) {
 		this.#frames.forEach(frame => frame.moveTo(point));
 	}
@@ -80,16 +88,17 @@ export class SpriteAnimation extends GameObject {
 		this.#frames.forEach(frame => frame.resize(width, height));
 	}
 
-	get bound() {
-		return this.#frames[this.#currentFrame].bound;
+	hasCollider() {
+		return false;
+	}
+
+	toString() {
+		return `${this.constructor.name}(${this.#frames.map(frame => frame.toString()).join(', ')})`;
 	}
 
 	processInput() {
 
 	}
-
-
-
 	render(canvasContext) {
 		this.#frames[this.#currentFrame].render(canvasContext);
 	}

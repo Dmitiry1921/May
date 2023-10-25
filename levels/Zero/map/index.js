@@ -1,6 +1,6 @@
 'use strict';
 
-import {Layout, LayoutMap, SpriteAnimation, Point, Wall} from "../../../GameEngine";
+import {Layout, LayoutMap, SpriteAnimation, Point, Rectangle, Collider} from "../../../GameEngine";
 import {spritesConfiguration, sprites} from "../../../levels";
 
 import mapData from './mapData.json' assert {type: 'json'};
@@ -19,9 +19,6 @@ const tileResources = {
 };
 
 // Разделяем карту на слои для отрисовки
-
-// console.log(mapData, spritesConfiguration);
-
 export const layoutBackground = new LayoutMap();
 export const layoutBackward1 = new LayoutMap();
 export const layoutBackward2 = new LayoutMap();
@@ -53,7 +50,7 @@ mapData.forEach((xArr, x) => {
 				return;
 			}
 			if (tileMap[item.tile][item.id].wall) {
-				const wall = new Wall();
+				const wall = new Collider('wall', new Rectangle());
 				wall.moveTo(new Point(x * resource.tileWidth, y * resource.tileHeight));
 				wall.resize(resource.tileWidth, resource.tileHeight);
 				layoutWalls.addChild(wall);

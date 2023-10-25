@@ -82,6 +82,37 @@ export class Rectangle {
 	}
 
 	/**
+	 * Возвращает предыдущую точку
+	 * @returns {Point}
+	 */
+	getPreviousPoint() {
+		return this.#point.getPreviousPoint()
+	}
+
+	/**
+	 * Вычисляет следующую точку
+	 * @param vector2
+	 * @returns {*}
+	 */
+	getNextPosition(vector2) {
+		return this.#point.getNextPosition(vector2);
+	}
+
+	/**
+	 * Перемещает точку будущую позицию
+	 */
+	release() {
+		this.#point.release();
+	}
+
+	/**
+	 * Возвращает точку в исходную позицию
+	 */
+	rollback() {
+		this.#point.rollback();
+	}
+
+	/**
 	 * Изменяет размеры прямоугольника
 	 * @param width {number | {width: number, height: number}} - ширина
 	 * @param [height] {number} - высота
@@ -102,5 +133,13 @@ export class Rectangle {
 		canvasContext.beginPath();
 		canvasContext.rect(Math.round(this.x) + .5, Math.round(this.y) + .5, this.width, this.height);
 		canvasContext.stroke();
+	}
+
+	clone() {
+		return new Rectangle(this.x, this.y, this.width, this.height);
+	}
+
+	isEmpty() {
+		return this.width === 0 && this.height === 0;
 	}
 }

@@ -1,3 +1,5 @@
+'use strict';
+
 export class LayoutArray extends Array {
 	processInput(inputManager) {
 		this.forEach(layout => layout.processInput(inputManager));

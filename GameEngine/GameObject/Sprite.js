@@ -59,15 +59,19 @@ export class Sprite extends GameObject {
 	render(canvasContext) {
 		canvasContext.drawImage(
 			this.#image,
-			this.#sourceRectangle.x,
-			this.#sourceRectangle.y,
-			this.#sourceRectangle.width,
-			this.#sourceRectangle.height,
-			this.#destinationRectangle.x,
-			this.#destinationRectangle.y,
-			this.#destinationRectangle.width,
-			this.#destinationRectangle.height
+			Math.round(this.#sourceRectangle.x),
+			Math.round(this.#sourceRectangle.y),
+			Math.round(this.#sourceRectangle.width),
+			Math.round(this.#sourceRectangle.height),
+			Math.round(this.#destinationRectangle.x),
+			Math.round(this.#destinationRectangle.y),
+			Math.round(this.#destinationRectangle.width),
+			Math.round(this.#destinationRectangle.height)
 		);
+	}
+
+	getNextPosition(vector2) {
+		this.#destinationRectangle.getNextPosition(vector2);
 	}
 
 	/**

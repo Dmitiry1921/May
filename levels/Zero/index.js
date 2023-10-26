@@ -1,8 +1,8 @@
 'use strict';
 
-import { Level, Point } from "../../GameEngine";
+import {Level, Point} from "../../GameEngine";
 import {Hero} from '../Hero.js';
-import {Vanessa, Hodgepodge, Astof, Artaka, Boy, Girl} from './characters';
+import {Vanessa, Hodgepodge, Astof, Artaka, Boy, Girl, Her} from './characters';
 import {layoutForward1, layoutBackground, layoutBackward1, layoutForward, layoutBackward2, layoutWalls} from './map';
 
 // Скрываем слой стен
@@ -30,6 +30,7 @@ levelZero.addCharacter(Hero);
 levelZero.addCharacter(Artaka);
 levelZero.addCharacter(Boy);
 levelZero.addCharacter(Girl);
+levelZero.addCharacter(Her);
 
 // TODO раскоментить для финальной версии
 // Hero.moveTo(new Point(5 * 32, 3 * 32));

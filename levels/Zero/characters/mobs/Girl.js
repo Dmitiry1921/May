@@ -1,113 +1,12 @@
 'use strict';
 
-import {AnimationState, Circle, Mob, Point, SpriteAnimation} from "../../../../GameEngine";
-import {sprites, STATE} from "../../../../levels";
+import {Circle, Mob, Point, Vector2} from "../../../../GameEngine";
+import {sprites, STATE, GameLogic} from "../../../../levels";
 
 const {children} = sprites;
 
-const ANIMATION = {
-	// WALK
-	[STATE.WALK_BOTTOM]: new SpriteAnimation(children, [
-		children.getTile(4, 4),
-		children.getTile(3, 4),
-		children.getTile(4, 4),
-		children.getTile(5, 4),
-	]),
-	[STATE.WALK_LEFT]: new SpriteAnimation(children, [
-		children.getTile(4, 5),
-		children.getTile(3, 5),
-		children.getTile(4, 5),
-		children.getTile(5, 5),
-	]),
-	[STATE.WALK_RIGHT]: new SpriteAnimation(children, [
-		children.getTile(4, 6),
-		children.getTile(3, 6),
-		children.getTile(4, 6),
-		children.getTile(5, 6),
-	]),
-	[STATE.WALK_TOP]: new SpriteAnimation(children, [
-		children.getTile(4, 7),
-		children.getTile(3, 7),
-		children.getTile(4, 7),
-		children.getTile(5, 7),
-	]),
-}
-
-// TODO Вынести в отдельный файл для разных типов персонажей
-const STATES = {
-	[STATE.WALK_TOP]: new AnimationState(STATE.WALK_TOP, ANIMATION.WALK_TOP, {
-		enter() {
-			// console.log(STATE.WALK_TOP, 'enter');
-		},
-		exit() {
-			// console.log(STATE.WALK_TOP, 'exit');
-		},
-		handleEvent(event) {
-			switch (event) {
-				case STATE.WALK_BOTTOM:
-				case STATE.WALK_LEFT:
-				case STATE.WALK_RIGHT:
-					// Осуществляем переход в другое состояние
-					this.setState(event);
-					break;
-			}
-		},
-	}),
-	[STATE.WALK_BOTTOM]: new AnimationState(STATE.WALK_BOTTOM, ANIMATION.WALK_BOTTOM, {
-		enter() {
-			// console.log(STATE.WALK_BOTTOM, 'enter');
-		},
-		exit() {
-			// console.log(STATE.WALK_BOTTOM, 'exit');
-		},
-		handleEvent(event) {
-			switch (event) {
-				case STATE.WALK_TOP:
-				case STATE.WALK_LEFT:
-				case STATE.WALK_RIGHT:
-					// Осуществляем переход в другое состояние
-					this.setState(event);
-					break;
-			}
-		},
-	}),
-	[STATE.WALK_LEFT]: new AnimationState(STATE.WALK_LEFT, ANIMATION.WALK_LEFT, {
-		enter() {
-			// console.log(STATE.WALK_LEFT, 'enter');
-		},
-		exit() {
-			// console.log(STATE.WALK_LEFT, 'exit');
-		},
-		handleEvent(event) {
-			switch (event) {
-				case STATE.WALK_TOP:
-				case STATE.WALK_BOTTOM:
-				case STATE.WALK_RIGHT:
-					// Осуществляем переход в другое состояние
-					this.setState(event);
-					break;
-			}
-		},
-	}),
-	[STATE.WALK_RIGHT]: new AnimationState(STATE.WALK_RIGHT, ANIMATION.WALK_RIGHT, {
-		enter() {
-			// console.log(STATE.WALK_RIGHT, 'enter');
-		},
-		exit() {
-			// console.log(STATE.WALK_RIGHT, 'exit');
-		},
-		handleEvent(event) {
-			switch (event) {
-				case STATE.WALK_TOP:
-				case STATE.WALK_BOTTOM:
-				case STATE.WALK_LEFT:
-					// Осуществляем переход в другое состояние
-					this.setState(event);
-					break;
-			}
-		},
-	}),
-};
+const ANIMATION =  GameLogic.getAnimations(children, new Vector2(3, 4));
+const STATES = GameLogic.getAnimationStates(ANIMATION);
 
 export const Girl = new Mob('Девочка'); // Девочка
 

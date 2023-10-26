@@ -1,112 +1,16 @@
 'use strict';
 
-import {AnimationState, Rectangle, Player, SpriteAnimation, Vector2, InputManager} from "../GameEngine";
-import {sprites, STATE, KEYS} from "../levels";
+import { Player, Vector2, Point, InputManager} from "../GameEngine";
+import {sprites, STATE, KEYS, COLLIDER_TYPE, GameLogic} from "../levels";
 
 const {hero0} = sprites;
-const ANIMATION = {
-	// Walk
-	[STATE.WALK_BOTTOM]: new SpriteAnimation(hero0, [
-		hero0.getTile(7, 0),
-		hero0.getTile(6, 0),
-		hero0.getTile(7, 0),
-		hero0.getTile(8, 0),
-	]),
-	[STATE.WALK_LEFT]: new SpriteAnimation(hero0, [
-		hero0.getTile(7, 1),
-		hero0.getTile(6, 1),
-		hero0.getTile(7, 1),
-		hero0.getTile(8, 1),
-	]),
-	[STATE.WALK_RIGHT]: new SpriteAnimation(hero0, [
-		hero0.getTile(7, 2),
-		hero0.getTile(6, 2),
-		hero0.getTile(7, 2),
-		hero0.getTile(8, 2),
-	]),
-	[STATE.WALK_TOP]: new SpriteAnimation(hero0, [
-		hero0.getTile(7, 3),
-		hero0.getTile(6, 3),
-		hero0.getTile(7, 3),
-		hero0.getTile(8, 3),
-	]),
-};
 
-const STATES = {
-	// Walk
-	[STATE.WALK_TOP]: new AnimationState(STATE.WALK_TOP, ANIMATION.WALK_TOP, {
-		enter() {
-			// console.log(STATE.WALK_TOP, 'enter');
-		},
-		exit() {
-			// console.log(STATE.WALK_TOP, 'exit');
-		},
-		handleEvent(event) {
-			switch (event) {
-				case STATE.WALK_BOTTOM:
-				case STATE.WALK_LEFT:
-				case STATE.WALK_RIGHT:
-					Hero.setState(event);
-					break;
-			}
-		},
-	}),
-	[STATE.WALK_LEFT]: new AnimationState(STATE.WALK_LEFT, ANIMATION.WALK_LEFT, {
-		enter() {
-			// console.log(STATE.WALK_LEFT, 'enter');
-		},
-		exit() {
-			// console.log(STATE.WALK_LEFT, 'exit');
-		},
-		handleEvent(event) {
-			switch (event) {
-				case STATE.WALK_TOP:
-				case STATE.WALK_BOTTOM:
-				case STATE.WALK_RIGHT:
-					Hero.setState(event);
-					break;
-			}
-		},
-	}),
-	[STATE.WALK_RIGHT]: new AnimationState(STATE.WALK_RIGHT, ANIMATION.WALK_RIGHT, {
-		enter() {
-			// console.log(STATE.WALK_RIGHT, 'enter');
-		},
-		exit() {
-			// console.log(STATE.WALK_RIGHT, 'exit');
-		},
-		handleEvent(event) {
-			switch (event) {
-				case STATE.WALK_TOP:
-				case STATE.WALK_LEFT:
-				case STATE.WALK_BOTTOM:
-					Hero.setState(event);
-					break;
-			}
-		},
-	}),
-	[STATE.WALK_BOTTOM]: new AnimationState(STATE.WALK_BOTTOM, ANIMATION.WALK_BOTTOM, {
-		enter() {
-			// console.log(STATE.WALK_BOTTOM, 'enter');
-		},
-		exit() {
-			// console.log(STATE.WALK_BOTTOM, 'exit');
-		},
-		handleEvent(event) {
-			switch (event) {
-				case STATE.WALK_TOP:
-				case STATE.WALK_LEFT:
-				case STATE.WALK_RIGHT:
-					Hero.setState(event);
-					break;
-			}
-		},
-	}),
-};
+const ANIMATION = GameLogic.getAnimations(hero0, new Vector2(6, 0));
+const STATES = GameLogic.getAnimationStates(ANIMATION);
 
 export const Hero = new Player('Персонаж');
 
-const speed = 3;
+const speed = 1.5;
 
 // Walk
 Hero.addAnimationState(STATES.WALK_BOTTOM);
@@ -116,13 +20,8 @@ Hero.addAnimationState(STATES.WALK_RIGHT);
 
 Hero.setState(STATE.WALK_BOTTOM);
 
-const collisionRect = {
-	width: 10,
-	height: 10,
-};
-const collisionBox = new Rectangle((Hero.bound.width - collisionRect.width) / 2, Hero.bound.height - (collisionRect.height), collisionRect.width, collisionRect.height);
-Hero.collisionBox.resize(collisionBox.width, collisionBox.height);
-Hero.collisionBox.delta.moveTo(collisionBox.point);
+Hero.collider.resize(10, 10);
+Hero.collider.delta.moveTo(new Point((Hero.bound.width - Hero.collider.width) / 2, Hero.bound.height - Hero.collider.height));
 
 // Hero.resize(32 * 8, 32 * 8);
 
@@ -148,17 +47,14 @@ Hero.addUpdateProcess(() => {
 	// знак вектора скорости
 	const velocitySign = Hero.velocity.sign();
 
-	const availableDirections = Hero.collisionBox.getAvailableDirections();
+	const availableDirections = Hero.collider.getAvailableDirections();
 	// Если персонаж столкнулся со стеной, то
-	if(Hero.collisionBox.hasIntersectedInNextFrameWithType('wall')) {
+	if(Hero.collider.hasIntersectedInNextFrameWithType(COLLIDER_TYPE.WALL)) {
 		const {x: projectX, y: projectY } = velocitySign.project();
-		console.log(availableDirections);
 		if(!availableDirections.has(projectX.toString())) {
-			console.log('projectX', projectX.toString());
 			Hero.velocity.x = 0; // останавливаем персонажа по оси X
 		}
 		if(!availableDirections.has(projectY.toString())) {
-			console.log('projectY', projectY.toString());
 			Hero.velocity.y = 0; // останавливаем персонажа по оси Y
 		}
 	}
@@ -193,5 +89,6 @@ Hero.addUpdateProcess(() => {
 	Hero.move();
 });
 
-Hero.collisionBox.handelType('wall');
+Hero.collider.handelType(COLLIDER_TYPE.WALL);
+Hero.collider.handelType(COLLIDER_TYPE.NPC);
 

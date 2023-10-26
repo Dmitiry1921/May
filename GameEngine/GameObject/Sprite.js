@@ -34,7 +34,7 @@ export class Sprite extends GameObject {
 
 	/**
 	 * Возвращает прямоугольник на canvas
-	 * @return {x, y, width, height} - координаты и размеры прямоугольника
+	 * @return {Rectangle} - координаты и размеры прямоугольника
 	 */
 	get bound() {
 		return this.#destinationRectangle;
@@ -68,10 +68,6 @@ export class Sprite extends GameObject {
 			Math.round(this.#destinationRectangle.width),
 			Math.round(this.#destinationRectangle.height)
 		);
-	}
-
-	getNextPosition(vector2) {
-		this.#destinationRectangle.getNextPosition(vector2);
 	}
 
 	/**

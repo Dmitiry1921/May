@@ -1,7 +1,7 @@
 'use strict';
 
 export * from "./GameObject.js";
-export  * from "./Circle.js";
+export * from "./Circle.js";
 export * from "./Collider.js";
 export * from "./Point.js";
 export * from "./Rectangle.js";

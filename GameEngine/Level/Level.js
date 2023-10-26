@@ -7,7 +7,6 @@ export class Level extends GameObject {
 	#colliders;
 	#characters;
 	#charactersLayer;
-	#compareCharactersBeforeRender;
 
 	/**
 	 *
@@ -18,7 +17,6 @@ export class Level extends GameObject {
 		this.#layouts = new LayoutArray();
 		this.#characters = new Map();
 		this.#colliders = new Set();
-		this.#compareCharactersBeforeRender = () => 0;
 
 		this.addLayouts(...layouts);
 	}
@@ -52,12 +50,15 @@ export class Level extends GameObject {
 
 	addCharacter(character) {
 		this.#checkCharacterLayer();
+		this.addCollider(character);
 		this.addResources(character.resources);
 		this.#characters.set(character.name, character);
 		this.#charactersLayer.addCharacter(character);
-		character.collisionBox.addColliders(this.#colliders);
+		// обновляем для всех персонажей коллайдеры
+		this.#characters.forEach(char => {
+			char.collider.addColliders(this.#colliders);
+		});
 	}
-
 
 	/**
 	 * Задает функцию сортировки персонажей перед рисованием на canvas
@@ -68,12 +69,14 @@ export class Level extends GameObject {
 		this.#charactersLayer.setSortBeforeRender(compareFn);
 	}
 
+	addCollider(collider) {
+		if(!(collider instanceof GameObject)) throw new TypeError('collider must be instance of GameObject');
+		this.#colliders.add(collider);
+	}
+
 	addColliders(colliders) {
 		if(!Array.isArray(colliders)) throw new TypeError('colliders must be array');
-		colliders.forEach(collider => {
-			if(!(collider instanceof GameObject)) throw new TypeError('collider must be instance of GameObject');
-			this.#colliders.add(collider);
-		});
+		colliders.forEach(collider => this.addCollider(collider));
 	}
 
 	addLayout(layout) {

@@ -5,7 +5,9 @@ import {Point} from "./index.js";
 export class Circle {
 
 	#point;
+	#delta;
 	#radius;
+
 
 	/**
 	 * Круг
@@ -14,8 +16,8 @@ export class Circle {
 	 * @param [radius] {number} - радиус
 	 */
 	constructor(x = 0, y = 0, radius = 0) {
-		if(typeof radius !== 'number') throw new TypeError('radius must be number');
 		this.#point = new Point(x, y);
+		this.#delta = new Point(0, 0);
 		this.#radius = radius;
 	}
 
@@ -23,37 +25,27 @@ export class Circle {
 		return this.#point;
 	}
 	get x() {
-		return this.#point.x;
+		return this.#point.x + this.#delta.x;
 	}
 	get y() {
-		return this.#point.y;
+		return this.#point.y + this.#delta.y;
 	}
-
 	get radius() {
 		return this.#radius;
+	}
+	get delta() {
+		return this.#delta;
+	}
+	set radius(value) {
+		if(typeof value !== 'number') throw new TypeError('radius must be number');
+		if(value < 0) throw new RangeError('radius must be greater than or equal to 0');
+		this.#radius = value;
 	}
 
 	render(canvasContext) {
 		canvasContext.beginPath();
 		canvasContext.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
 		canvasContext.stroke();
-	}
-
-	/**
-	 * Вычисляет следующую точку
-	 * @param vector2
-	 * @returns {*}
-	 */
-	getNextPosition(vector2) {
-		return this.#point.getNextPosition(vector2);
-	}
-
-
-	/**
-	 * Перемещает точку будущую позицию
-	 */
-	release() {
-		this.#point.release();
 	}
 
 	/**
@@ -68,6 +60,9 @@ export class Circle {
 	}
 	moveBy(vector2) {
 		this.#point.moveBy(vector2)
+	}
+	resize(radius) {
+		this.radius = radius;
 	}
 	clone() {
 		return new Circle(this.x, this.y, this.radius);

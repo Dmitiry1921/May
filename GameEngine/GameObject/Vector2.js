@@ -9,7 +9,7 @@ export class Vector2 {
 	 * @param x { number} - если первый аргумент объект, то второй аргумент должен быть undefined
 	 * @param y {number} - если первый аргумент не объект, то второй аргумент должен быть числом
 	 * @throws {TypeError} - если аргументы не соответствуют типам
-	 * @returns {Point}
+	 * @returns {Vector2}
 	 */
 	constructor(x, y) {
 		this.#x = x;
@@ -40,26 +40,57 @@ export class Vector2 {
 	 * @return {Vector2}
 	 */
 	add(vector2) {
-		if (!(vector2 instanceof Vector2)) throw new TypeError('point must be instance of Vector2');
+		if (!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
 		this.#x += vector2.x;
 		this.#y += vector2.y;
 		return this;
 	}
 
+	/**
+	 * Умножение векторов
+	 * @param vector2
+	 * @example new Vector2(1, 2).multiply(new Vector2(1, 2)) // Vector2(1, 4)
+	 * @returns {Vector2}
+	 */
 	multiply(vector2) {
-		if (!(vector2 instanceof Vector2)) throw new TypeError('point must be instance of Vector2');
+		if (!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
 		this.#x *= vector2.x;
 		this.#y *= vector2.y;
 		return this;
 	}
 
+	/**
+	 * Вычитание векторов
+	 * @param vector2
+	 * @example new Vector2(1, 2).diff(new Vector2(1, 2)) // Vector2(0, 0)
+	 * @returns {Vector2}
+	 */
 	diff(vector2) {
-		if (!(vector2 instanceof Vector2)) throw new TypeError('point must be instance of Vector2');
+		if (!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
 		this.#x -= vector2.x;
 		this.#y -= vector2.y;
 		return this;
 	}
 
+	/**
+	 * Метод получения нормализованного вектора
+	 * @example new Vector2(1, 2).normalize() // Vector2(0.4472135954999579, 0.8944271909999159)
+	 * @returns {Vector2}
+	 */
+	normalize() {
+		const length = Math.sqrt(this.x * this.x + this.y * this.y);
+		if (length !== 0) {
+			this.x /= length;
+			this.y /= length;
+		}
+		return this;
+	}
+
+	/**
+	 * Инвертирует вектор
+	 * @example new Vector2(1, 2).invert() // Vector2(-1, -2)
+	 * @returns {Vector2}
+	 */
 	invert() {
 		this.#x *= -1;
 		this.#y *= -1;
@@ -68,6 +99,7 @@ export class Vector2 {
 
 	/**
 	 * Разложение векторов на оси
+	 * @example new Vector2(1, 2).project() // {x: Vector2(1, 0), y: Vector2(0, 2)}
 	 * @returns {{x: Vector2, y: Vector2}}
 	 */
 	project() {
@@ -77,14 +109,28 @@ export class Vector2 {
 		};
 	}
 
+	/**
+	 * Возвращает новый вектор с тем же направлением, но с длиной 1|0|-1
+	 * @example new Vector2(1, 2).sign() // Vector2(1, 1)
+	 * @example new Vector2(-100500, 10).sign() // Vector2(-1, 0)
+	 * @returns {Vector2}
+	 */
 	sign(){
 		return new Vector2(Math.sign(this.x), Math.sign(this.y));
 	}
 
+	/**
+	 * Создает новый вектор из текущего
+	 * @returns {Vector2}
+	 */
 	clone() {
 		return new Vector2(this.#x, this.#y);
 	}
 
+	/**
+	 * Строковое представление вектора
+	 * @returns {string}
+	 */
 	toString() {
 		return `${this.constructor.name}(${this.#x}, ${this.#y})`;
 	}
@@ -93,11 +139,12 @@ export class Vector2 {
 	 * Разность векторов
 	 * @param vector1
 	 * @param vector2
+	 * @example Vector2.diff(new Vector2(1, 2), new Vector2(1, 2)) // Vector2(0, 0)
 	 * @returns {Vector2}
 	 */
 	static diff(vector1, vector2) {
-		if (!(vector1 instanceof Vector2)) throw new TypeError('point must be instance of Vector2');
-		if (!(vector2 instanceof Vector2)) throw new TypeError('point must be instance of Vector2');
+		if (!(vector1 instanceof Vector2)) throw new TypeError('vector1 must be instance of Vector2');
+		if (!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
 		return new Vector2(vector1.x - vector2.x, vector1.y - vector2.y);
 	}
 
@@ -108,9 +155,49 @@ export class Vector2 {
 	 * @returns {Vector2}
 	 */
 	static add(vector1, vector2) {
-		if (!(vector1 instanceof Vector2)) throw new TypeError('point must be instance of Vector2');
-		if (!(vector2 instanceof Vector2)) throw new TypeError('point must be instance of Vector2');
+		if (!(vector1 instanceof Vector2)) throw new TypeError('vector1 must be instance of Vector2');
+		if (!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
 		return new Vector2(vector1.x + vector2.x, vector1.y + vector2.y);
+	}
+
+	static multiply(vector1, vector2) {
+		if (!(vector1 instanceof Vector2)) throw new TypeError('vector1 must be instance of Vector2');
+		if (!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
+		return new Vector2(vector1.x * vector2.x, vector1.y * vector2.x);
+	}
+
+	/**
+	 * Метод получения нормализованного вектора
+	 * @returns {Vector2}
+	 */
+	static normalize(vector) {
+		if(!(vector instanceof Vector2)) throw new TypeError('vector must be instance of Vector2');
+		const length = Math.sqrt(vector.x * vector.x + vector.y * vector.y);
+		if (length === 0) {
+			// Если вектор имеет нулевую длину, возвращаем копию исходного вектора
+			return vector;
+
+		}
+		return new Vector2(vector.x / length, vector.y / length);
+	}
+
+	/**
+	 * Создает новый вектор из текущего
+	 * @returns {Vector2}
+	 */
+	static clone(vector) {
+		if(!(vector instanceof Vector2)) throw new TypeError('vector must be instance of Vector2');
+		return new Vector2(vector.x, vector.y);
+	}
+
+	/**
+	 * Инвертирует вектор
+	 * @param vector
+	 * @returns {Vector2}
+	 */
+	static invert(vector) {
+		if(!(vector instanceof Vector2)) throw new TypeError('vector must be instance of Vector2');
+		return new Vector2(vector.x * -1, vector.y * -1);
 	}
 
 	/**

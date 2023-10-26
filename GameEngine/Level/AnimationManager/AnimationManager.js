@@ -1,6 +1,5 @@
 'use strict';
 
-import { Sprite } from '../../GameObject';
 
 export class AnimationManager {
 	#animations;

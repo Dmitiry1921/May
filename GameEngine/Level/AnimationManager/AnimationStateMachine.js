@@ -41,10 +41,6 @@ export class AnimationStateMachine extends StateMachine {
 		return this.#currentAnimation.bound;
 	}
 
-	getNextPosition(vector2) {
-		this.states.forEach(state => state.animation.getNextPosition(vector2))
-	}
-
 	moveTo(point) {
 		this.states.forEach(state => state.animation.moveTo(point))
 	}

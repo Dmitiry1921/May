@@ -17,7 +17,7 @@ export class Character extends GameObject {
 	#bound;
 	#hitBox;
 	#velocity;
-	#collisionBox;
+	#collider;
 	#inputProcesses;
 	#stateAnimation;
 	#updateProcesses;
@@ -28,13 +28,13 @@ export class Character extends GameObject {
 		this.#type = 'Character';
 		this.#bound = new Rectangle(rect.x, rect.y, rect.width, rect.height); // по умолчанию
 		this.#velocity = new Vector2(0, 0); // по умолчанию
-		this.#collisionBox = new Collider(this.#type, new Rectangle());
+		this.#collider = new Collider(this.#type, new Rectangle());
 		this.#hitBox = new Collider(this.#type, new Circle()); // TODO поддержать
 		this.#stateAnimation = new AnimationStateMachine();
 		this.#updateProcesses = new Set();
 		this.#inputProcesses = new Set();
 
-		this.#collisionBox.setVelocity(this.#velocity);
+		this.#collider.setVelocity(this.#velocity);
 		this.#hitBox.setVelocity(this.#velocity);
 	}
 
@@ -50,8 +50,8 @@ export class Character extends GameObject {
 		return this.#velocity;
 	}
 
-	get collisionBox() {
-		return this.#collisionBox;
+	get collider() {
+		return this.#collider;
 	}
 
 	get hitBox() {
@@ -59,13 +59,13 @@ export class Character extends GameObject {
 	}
 
 	hasCollider() {
-		return this.#collisionBox.hasCollider();
+		return this.#collider.hasCollider();
 	}
 
 	setType(type) {
 		if (typeof type !== 'string') throw new TypeError('type must be string');
 		this.#type = type;
-		this.#collisionBox.type = type;
+		this.#collider.type = type;
 		this.#hitBox.type = type;
 	}
 
@@ -81,20 +81,11 @@ export class Character extends GameObject {
 		this.#bound.resize(animationState.animation.bound);
 	}
 
-	#getNextPosition() {
-		this.#collisionBox.getNextPosition(this.#velocity);
-		this.#hitBox.getNextPosition(this.#velocity);
-		this.#bound.getNextPosition(this.#velocity);
-		this.#stateAnimation.getNextPosition(this.#velocity);
-
-		return this;
-	}
-
 	/**
 	 * Перемещает персонажа на вектор его скорости;
 	 */
 	move() {
-		this.#collisionBox.moveBy(this.#velocity);
+		this.#collider.moveBy(this.#velocity);
 		this.#hitBox.moveBy(this.#velocity);
 		this.#bound.moveBy(this.#velocity);
 		this.#stateAnimation.moveBy(this.#velocity);
@@ -102,7 +93,7 @@ export class Character extends GameObject {
 
 	moveTo(point) {
 		if (!(point instanceof Point)) throw new TypeError('point must be instance of Point');
-		this.#collisionBox.moveTo(point);
+		this.#collider.moveTo(point);
 		this.#hitBox.moveTo(point);
 		this.#bound.moveTo(point);
 		this.#stateAnimation.moveTo(point);
@@ -110,7 +101,7 @@ export class Character extends GameObject {
 
 	moveBy(vector2) {
 		if (!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
-		this.#collisionBox.moveBy(vector2);
+		this.#collider.moveBy(vector2);
 		this.#hitBox.moveBy(vector2);
 		this.#bound.moveBy(vector2);
 		this.#stateAnimation.moveBy(vector2);
@@ -123,7 +114,7 @@ export class Character extends GameObject {
 
 	setState(stateName) {
 		if (this.#stateAnimation)
-			this.#stateAnimation.setState(stateName);
+			this.#stateAnimation.handleEvent(stateName);
 	}
 
 	playAnimation() {
@@ -138,13 +129,11 @@ export class Character extends GameObject {
 		this.#stateAnimation.stopAnimation();
 	}
 
-
 	/**
 	 * Обработка ввода
 	 */
 	processInput(deltaTime) {
 		this.#inputProcesses.forEach(func => func(deltaTime));
-		this.#getNextPosition();
 	}
 
 	/**
@@ -152,7 +141,7 @@ export class Character extends GameObject {
 	 * @param deltaTime
 	 */
 	update(deltaTime) {
-		this.#collisionBox.update(deltaTime);
+		this.#collider.update(deltaTime);
 		this.#stateAnimation.update(deltaTime);
 		this.#updateProcesses.forEach(func => func(deltaTime));
 	}
@@ -163,7 +152,7 @@ export class Character extends GameObject {
 		}
 		this.#stateAnimation.render(canvasContext);
 		this.#hitBox.render(canvasContext);
-		this.#collisionBox.render(canvasContext);
+		this.#collider.render(canvasContext);
 	}
 
 	addUpdateProcess(func) {
@@ -178,5 +167,9 @@ export class Character extends GameObject {
 
 	handleEvent(event) {
 		this.#stateAnimation.handleEvent(event);
+	}
+
+	getCollider() {
+		return this.#collider;
 	}
 }

@@ -41,7 +41,7 @@ export class ImageLoader extends Loader {
 	/**
 	 * Загружает переданный ресурсы и возвращает Promise
 	 * @param urls {string[]} - массив путей к ресурсам
-	 * @return {Promise<Awaited<unknown>[]>}
+	 * @return {Promise<Image[]>} - массив изображений
 	 */
 	static async all(urls) {
 		const uniqUrls = [...new Set(urls)];

@@ -40,7 +40,7 @@ export default class GamePadController {
 
 	constructor(gamepadIndex) {
 		this.#gpIndex = gamepadIndex;
-		this.#buttonsMapper = reverse(XBOX); //  TODO Добавить поддержку других геймпадов
+		this.#buttonsMapper = reverse(XBOX); //  TODO Добавить поддержку других геймпад'ов
 		this.#state = new Set();
 		this.#isVibrate = false;
 		this.#events = new Map();
@@ -141,7 +141,6 @@ export default class GamePadController {
 	 */
 	oneOf(...keys) {
 		return keys.flatMap(key => key[TYPE]).some(key => this.#state.has(key));
-		;
 	}
 
 	/**

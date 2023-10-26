@@ -26,14 +26,6 @@ export class SpriteAnimation extends GameObject {
 		return this.#frames[this.#currentFrame].bound;
 	}
 
-	/**
-	 * Сбрасывает анимацию
-	 */
-	reset() {
-		this.#currentFrame = 0;
-		this.#elapsedTime = 0;
-	}
-
 	set frames(frames) {
 		if (!Array.isArray(frames)) throw new TypeError('frames must be array');
 		if (frames.length === 0) throw new Error('frames must be not empty');
@@ -46,6 +38,14 @@ export class SpriteAnimation extends GameObject {
 		return this.#frames;
 	}
 
+	/**
+	 * Сбрасывает анимацию
+	 */
+	#reset() {
+		this.#currentFrame = 0;
+		this.#elapsedTime = 0;
+	}
+
 	play() {
 		this.#play = true;
 	}
@@ -54,7 +54,7 @@ export class SpriteAnimation extends GameObject {
 	}
 	stop() {
 		this.#play = false;
-		this.reset();
+		this.#reset();
 	}
 
 	update(deltaTime) {
@@ -71,10 +71,6 @@ export class SpriteAnimation extends GameObject {
 			// Сбрасываем время
 			this.#elapsedTime = 0;
 		}
-	}
-
-	getNextPosition(vector2) {
-		this.#frames.forEach(frame => frame.getNextPosition(vector2));
 	}
 
 	moveTo(point) {

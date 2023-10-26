@@ -3,8 +3,6 @@
 import {Loader} from "../../GameEngine";
 import {logOnce} from "../utils/logger.js";
 
-
-
 export class GameObject {
 	#resources;
 

@@ -1,7 +1,7 @@
 'use strict';
 
 import {Layout, LayoutMap, SpriteAnimation, Point, Rectangle, Collider} from "../../../GameEngine";
-import {spritesConfiguration, sprites} from "../../../levels";
+import {spritesConfiguration, sprites, COLLIDER_TYPE} from "../../../levels";
 
 import mapData from './mapData.json' assert {type: 'json'};
 
@@ -50,7 +50,7 @@ mapData.forEach((xArr, x) => {
 				return;
 			}
 			if (tileMap[item.tile][item.id].wall) {
-				const wall = new Collider('wall', new Rectangle());
+				const wall = new Collider(COLLIDER_TYPE.WALL, new Rectangle());
 				wall.moveTo(new Point(x * resource.tileWidth, y * resource.tileHeight));
 				wall.resize(resource.tileWidth, resource.tileHeight);
 				layoutWalls.addChild(wall);

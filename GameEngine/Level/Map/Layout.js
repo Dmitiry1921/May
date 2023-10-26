@@ -9,10 +9,12 @@ export class Layout extends GameObject {
 	#children;
 	#colliders;
 	#compareBeforeRender;
+	#visible;
   constructor() {
     super();
 		this.#children = [];
 		this.#colliders = [];
+		this.#visible = true;
   }
 
 	get children() {
@@ -21,6 +23,21 @@ export class Layout extends GameObject {
 
 	get colliders() {
 		return this.#colliders;
+	}
+
+	/**
+	 * Показывает слой
+	 */
+	show() {
+		this.#visible = true;
+	}
+
+	/**
+	 * Скрывает слой
+	 */
+	hide() {
+		this.#visible = false;
+		return this;
 	}
 
   processInput() {
@@ -32,6 +49,7 @@ export class Layout extends GameObject {
   }
 
   render(canvasContext) {
+		if(!this.#visible) return;
 		this.#children
 			.sort(this.#compareBeforeRender)
 			.forEach(child => child.render(canvasContext));

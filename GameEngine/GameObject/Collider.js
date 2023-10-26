@@ -1,7 +1,6 @@
 'use strict';
 
-import {GameObject, Vector2} from "../../GameEngine";
-import {logOnce} from "../utils/logger.js";
+import {GameObject, Vector2, Circle, Rectangle} from "../../GameEngine";
 
 const Shapes = [
 	'Circle',
@@ -11,7 +10,7 @@ const Shapes = [
 export class Collider extends GameObject {
 	#shape;
 	#type;
-	// Другие колайдеры, с которыми может столкнуться данный колайдер
+	// Другие коллайдеры, с которыми может столкнуться данный коллайдер
 	#colliders;
 	#handlers;
 	#handledTypes;
@@ -20,6 +19,7 @@ export class Collider extends GameObject {
 	#collidedNextFrame;
 	#availableDirections;
 	#velocity;
+	#visible;
 
 	constructor(type, shape) {
 		super();
@@ -29,9 +29,13 @@ export class Collider extends GameObject {
 		this.#handlers = new Map();
 		this.#handledTypes = new Set();
 
+		this.#collided = new Map();
+		this.#collidedNextFrame = new Map();
+		this.#availableDirections = new Map();
+		this.#visible = false;
+
 		this.#reset();
 	}
-
 
 	get type() {
 		return this.#type;
@@ -42,13 +46,13 @@ export class Collider extends GameObject {
 		this.#type = value;
 	}
 
+	get shape() {
+		return this.#shape;
+	}
+
 	set shape(value) {
 		if (!Shapes.some(name => value.constructor.name === name)) throw new TypeError(`shape must be instance of Shape [${Shapes.join(', ')}]`);
 		this.#shape = value;
-	}
-
-	get shape() {
-		return this.#shape.constructor.name;
 	}
 
 	get x() {
@@ -57,6 +61,10 @@ export class Collider extends GameObject {
 
 	get y() {
 		return this.#shape.y;
+	}
+
+	get radius() {
+		return this.#shape.radius;
 	}
 
 	get width() {
@@ -82,9 +90,9 @@ export class Collider extends GameObject {
 	get velocity() {
 		return this.#velocity;
 	}
+
 	setVelocity(value) {
 		if (!(value instanceof Vector2)) throw new TypeError('velocity must be instance of Vector2');
-		console.log('set velocity', value);
 		this.#velocity = value;
 	}
 
@@ -96,10 +104,6 @@ export class Collider extends GameObject {
 		this.#shape.moveBy(vector2);
 	}
 
-	getNextPosition(vector2) {
-		this.#shape.getNextPosition(vector2);
-	}
-
 	resize(width, height) {
 		this.#shape.resize(width, height);
 	}
@@ -109,17 +113,10 @@ export class Collider extends GameObject {
 		// проверяем пересечение в следующем кадре
 		neighbors.forEach((neighbor) => {
 			// перемещаем коллайдер в следующую позицию
-			if(this.#velocity.x !== 0 || this.#velocity.y !== 0) {
-			logOnce('========');
-			logOnce('neighbor speed:', this.#velocity, neighbor.multiply(this.#velocity))
-			}
 			this.moveBy(neighbor.multiply(this.#velocity));
 			if (this.intersects(collider)) {
 				// console.log(neighbor.sign().toString());
 				this.#availableDirections.delete(neighbor.sign().toString());
-			}
-			if(this.#velocity.x !== 0 || this.#velocity.y !== 0) {
-				logOnce('!!!!========!!!!');
 			}
 			this.moveBy(neighbor.invert());
 		});
@@ -137,7 +134,6 @@ export class Collider extends GameObject {
 
 	#detectCollisionsInNextFrame(collider) {
 		// проверяем пересечение в следующем кадре
-		// this.#shape.release(); // перемещаем коллайдер в следующую позицию
 		this.moveBy(this.#velocity);
 		if (this.intersects(collider)) {
 			if (!this.#collidedNextFrame.has(collider.type)) {
@@ -146,8 +142,6 @@ export class Collider extends GameObject {
 			this.#collidedNextFrame.get(collider.type).add(collider);
 		}
 		this.moveBy(this.#velocity.clone().invert());
-
-		// this.#shape.rollback(); // возвращаем коллайдер в текущую позицию
 	}
 
 	#detectCollisionsForHandler(type, collider) {
@@ -179,9 +173,9 @@ export class Collider extends GameObject {
 
 	#reset() {
 		// Сбрасываем состояние
-		this.#collided = new Map();
-		this.#collidedNextFrame = new Map();
-		this.#availableDirections = new Map();
+		this.#collided.clear();
+		this.#collidedNextFrame.clear();
+		this.#availableDirections.clear();
 		Vector2.getVonNeumannNeighborhood().forEach((neighbor) => {
 			this.#availableDirections.set(neighbor.sign().toString(), neighbor);
 		});
@@ -196,17 +190,23 @@ export class Collider extends GameObject {
 
 		this.#shape.render(canvasContext);
 
-		// Отрисовываем диагональные линии
+		// Рисуем диагональные линии
 		canvasContext.beginPath();
 		canvasContext.moveTo(Math.round(this.x) + .5, Math.round(this.y) + .5);
 		canvasContext.lineTo(Math.round(this.x) + .5 + this.width, Math.round(this.y) + .5 + this.height);
 		canvasContext.stroke();
 
-		// Отрисовываем диагональные линии
+		// Рисуем диагональные линии
 		canvasContext.beginPath();
 		canvasContext.moveTo(Math.round(this.x) + .5 + this.width, Math.round(this.y) + .5);
 		canvasContext.lineTo(Math.round(this.x) + .5, Math.round(this.y) + .5 + this.height);
 		canvasContext.stroke();
+	}
+
+	#checkHandlerType(type, funcName) {
+		if(typeof type !== "string") throw new TypeError('type must be string');
+		if(!this.#handledTypes.has(type))
+			throw new Error(`Before using function ${funcName}() you must add handler for type ${type} for it use .handelType('${type}') or .addHandler('${type}', () => {})`);
 	}
 
 	/**
@@ -238,7 +238,7 @@ export class Collider extends GameObject {
 	 * @returns {boolean} - true если столкнулся, иначе false
 	 */
 	hasIntersectedInCurrentFrameWithType(type) {
-		if (typeof type !== "string") throw new TypeError('type must be string');
+		this.#checkHandlerType(type, 'hasIntersectedInCurrentFrameWithType');
 		return this.#collided.has(type);
 	}
 
@@ -248,10 +248,9 @@ export class Collider extends GameObject {
 	 * @returns {boolean} - true если столкнулся, иначе false
 	 */
 	hasIntersectedInNextFrameWithType(type) {
-		if (typeof type !== "string") throw new TypeError('type must be string');
+		this.#checkHandlerType(type, 'hasIntersectedInNextFrameWithType');
 		return this.#collidedNextFrame.has(type);
 	}
-
 
 	/**
 	 * Возвращает доступные направления для перемещения
@@ -259,6 +258,16 @@ export class Collider extends GameObject {
 	 */
 	getAvailableDirections() {
 		return this.#availableDirections;
+	}
+
+	/**
+	 * Возвращает коллайдеры, с которыми столкнулся данный коллайдер в текущий кадр
+	 * @param type {String} - тип коллайдера
+	 * @returns {Set}
+	 */
+	getCollidedWithType(type) {
+		this.#checkHandlerType(type, 'getCollidedWithType');
+		return this.#collided.get(type);
 	}
 
 	/**
@@ -281,7 +290,7 @@ export class Collider extends GameObject {
 	 * @param collider {Collider}
 	 */
 	addCollider(collider) {
-		if (!(collider instanceof Collider)) throw new TypeError('collider must be instance of Collider');
+		if (!(collider instanceof GameObject)) throw new TypeError('collider must be instance of GameObject');
 		if (!this.#colliders.has(collider.type)) {
 			this.#colliders.set(collider.type, new Set());
 		}
@@ -291,7 +300,6 @@ export class Collider extends GameObject {
 	addColliders(colliders) {
 		[...colliders].flat().forEach(collider => this.addCollider(collider.getCollider()));
 	}
-
 
 	/**
 	 * Проверяет столкнуться ли данный коллайдер с другим коллайдером
@@ -310,7 +318,7 @@ export class Collider extends GameObject {
 	static intersects(collider1, collider2) {
 		if (!(collider1 instanceof Collider)) throw new TypeError('collider1 must be instance of Collider');
 		if (!(collider2 instanceof Collider)) throw new TypeError('collider2 must be instance of Collider');
-		const collisionKey = [collider1.shape, '2', collider2.shape];
+		const collisionKey = [collider1.shape.constructor.name, '2', collider2.shape.constructor.name];
 		const collision = Collider[collisionKey.join('')] || Collider[collisionKey.reverse().join('')];
 		if (typeof collision !== "function") throw new Error(`Collision method ${collisionKey.join(', ')} not implemented`);
 		return collision(collider1, collider2);
@@ -342,23 +350,21 @@ export class Collider extends GameObject {
 	}
 
 	/**
-	 * @param collider1 {Collider}
-	 * @param collider2 {Collider}
-	 * @returns {boolean}
-	 * @constructor
+	 * Определяет, пересекаются ли окружность и прямоугольник.
+	 * @param {Collider} collider1 - Коллайдер
+	 * @param {Collider} collider2 - Коллайдер
+	 * @returns {boolean} - `true`, если окружность и прямоугольник пересекаются, иначе `false`.
 	 */
 	static Circle2Rectangle(collider1, collider2) {
-		const circleDistanceX = Math.abs(collider1.x - collider2.x);
-		const circleDistanceY = Math.abs(collider1.y - collider2.y);
+		const circle = collider1.shape instanceof Circle ? collider1 : collider2;
+		const rect = collider2.shape instanceof Rectangle ? collider2 : collider1;
 
-		if (circleDistanceX > (collider2.width / 2 + collider1.width / 2)) return false
-		if (circleDistanceY > (collider2.height / 2 + collider1.width / 2)) return false
-		if (circleDistanceX <= (collider2.width / 2)) return true;
-		if (circleDistanceY <= (collider2.height / 2)) return true;
+		const closestX = Math.max(rect.x, Math.min(circle.x, rect.x + rect.width));
+		const closestY = Math.max(rect.y, Math.min(circle.y, rect.y + rect.height));
+		const distanceX = circle.x - closestX;
+		const distanceY = circle.y - closestY;
+		const distanceSquared = (distanceX ** 2) + (distanceY ** 2);
 
-		const cornerDistance_sq = (circleDistanceX - collider2.width / 2) ** 2 +
-			(circleDistanceY - collider2.height / 2) ** 2;
-
-		return (cornerDistance_sq <= (collider1.width / 2) ** 2);
+		return distanceSquared < (circle.radius ** 2);
 	}
 }

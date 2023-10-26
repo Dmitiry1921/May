@@ -19,7 +19,8 @@ export class StateMachine {
 	addState(state) {
 		if(!(state instanceof State)) throw new TypeError('state must be instance of State');
 		if (this.states.has(state.name)) throw new Error('State already exists');
-
+		// Если текущее состояние не установлено, то устанавливаем его
+		if(this.currentState === null) this.currentState = state.name;
 		this.states.set(state.name, state);
 	}
 

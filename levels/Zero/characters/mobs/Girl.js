@@ -1,12 +1,9 @@
-import {AnimationState, Mob, Point, SpriteAnimation} from "../../../../GameEngine";
-import {sprites} from "../../../assets";
-import {STATE} from "../../../common";
+'use strict';
+
+import {AnimationState, Circle, Mob, Point, SpriteAnimation} from "../../../../GameEngine";
+import {sprites, STATE} from "../../../../levels";
 
 const {children} = sprites;
-
-export const Girl = new Mob('Девочка'); // Девочка
-
-// Girl.resize(32 * 8, 32 * 8);
 
 const ANIMATION = {
 	// WALK
@@ -40,10 +37,10 @@ const ANIMATION = {
 const STATES = {
 	[STATE.WALK_TOP]: new AnimationState(STATE.WALK_TOP, ANIMATION.WALK_TOP, {
 		enter() {
-			console.log(STATE.WALK_TOP, 'enter');
+			// console.log(STATE.WALK_TOP, 'enter');
 		},
 		exit() {
-			console.log(STATE.WALK_TOP, 'exit');
+			// console.log(STATE.WALK_TOP, 'exit');
 		},
 		handleEvent(event) {
 			switch (event) {
@@ -58,10 +55,10 @@ const STATES = {
 	}),
 	[STATE.WALK_BOTTOM]: new AnimationState(STATE.WALK_BOTTOM, ANIMATION.WALK_BOTTOM, {
 		enter() {
-			console.log(STATE.WALK_BOTTOM, 'enter');
+			// console.log(STATE.WALK_BOTTOM, 'enter');
 		},
 		exit() {
-			console.log(STATE.WALK_BOTTOM, 'exit');
+			// console.log(STATE.WALK_BOTTOM, 'exit');
 		},
 		handleEvent(event) {
 			switch (event) {
@@ -76,10 +73,10 @@ const STATES = {
 	}),
 	[STATE.WALK_LEFT]: new AnimationState(STATE.WALK_LEFT, ANIMATION.WALK_LEFT, {
 		enter() {
-			console.log(STATE.WALK_LEFT, 'enter');
+			// console.log(STATE.WALK_LEFT, 'enter');
 		},
 		exit() {
-			console.log(STATE.WALK_LEFT, 'exit');
+			// console.log(STATE.WALK_LEFT, 'exit');
 		},
 		handleEvent(event) {
 			switch (event) {
@@ -94,10 +91,10 @@ const STATES = {
 	}),
 	[STATE.WALK_RIGHT]: new AnimationState(STATE.WALK_RIGHT, ANIMATION.WALK_RIGHT, {
 		enter() {
-			console.log(STATE.WALK_RIGHT, 'enter');
+			// console.log(STATE.WALK_RIGHT, 'enter');
 		},
 		exit() {
-			console.log(STATE.WALK_RIGHT, 'exit');
+			// console.log(STATE.WALK_RIGHT, 'exit');
 		},
 		handleEvent(event) {
 			switch (event) {
@@ -112,6 +109,12 @@ const STATES = {
 	}),
 };
 
+export const Girl = new Mob('Девочка'); // Девочка
+
+Girl.collider.shape = new Circle(0, 0, 32 / 3);
+Girl.collider.delta.moveTo(new Point(Girl.bound.width / 2, Girl.bound.height));
+
+// Girl.resize(32 * 8, 32 * 8);
 // WALK
 Girl.addAnimationState(STATES.WALK_TOP);
 Girl.addAnimationState(STATES.WALK_LEFT);

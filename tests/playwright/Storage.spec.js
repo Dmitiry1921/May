@@ -54,7 +54,7 @@ test.describe.skip('Storage', () => {
               key1: JSON.parse(localStorage.getItem('key1')),
               key2: JSON.parse(localStorage.getItem('key2'))
             })
-          }, window.storage._getAutoSaveInterval() * 2) // должно быть больше чем интервал автосохранения
+          }, window.storage._getAutoSaveInterval() * 2) // должно быть больше чем интервал авто-сохранения
         });
       });
 

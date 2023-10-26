@@ -5,6 +5,9 @@ import {Hero} from '../Hero.js';
 import {Vanessa, Hodgepodge, Astof, Artaka, Boy, Girl} from './characters';
 import {layoutForward1, layoutBackground, layoutBackward1, layoutForward, layoutBackward2, layoutWalls} from './map';
 
+// Скрываем слой стен
+layoutWalls.hide();
+
 // TODO есть что оптимизировать
 const levelZero = new Level(
 	layoutBackground,
@@ -28,7 +31,11 @@ levelZero.addCharacter(Artaka);
 levelZero.addCharacter(Boy);
 levelZero.addCharacter(Girl);
 
-Hero.moveTo(new Point(5 * 32, 3 * 32));
+// TODO раскоментить для финальной версии
+// Hero.moveTo(new Point(5 * 32, 3 * 32));
+
+Hero.moveTo(new Point(21 * 32, 13 * 32));
+
 // Hero.resize(32 * 2, 32 * 2);
 
 console.log('before loaders')

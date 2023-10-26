@@ -82,23 +82,6 @@ export class Rectangle {
 	}
 
 	/**
-	 * Возвращает предыдущую точку
-	 * @returns {Point}
-	 */
-	getPreviousPoint() {
-		return this.#point.getPreviousPoint()
-	}
-
-	/**
-	 * Вычисляет следующую точку
-	 * @param vector2
-	 * @returns {*}
-	 */
-	getNextPosition(vector2) {
-		return this.#point.getNextPosition(vector2);
-	}
-
-	/**
 	 * Перемещает точку будущую позицию
 	 */
 	release() {

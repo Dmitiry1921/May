@@ -5,8 +5,6 @@ export class Point {
 	#y;
 	#prevX;
 	#prevY;
-	#nextX;
-	#nextY;
 	/**
 	 * Создает объект Point
 	 * @param x {number} - координата x
@@ -35,12 +33,6 @@ export class Point {
 	get prevY() {
 		return this.#prevY;
 	}
-	get nextX() {
-		return this.#nextX;
-	}
-	get nextY() {
-		return this.#nextY;
-	}
 
 	/**
 	 * Перемещает прямоугольник в указанную точку
@@ -61,43 +53,13 @@ export class Point {
 	 * @param vector2 {Vector2} - вектор
 	 */
 	moveBy(vector2) {
-		if (vector2.constructor.name !== "Vector2") throw new TypeError('point must be instance of Vector2');
-		// console.log('prev:', this.#prevX, this.#prevY, 'cur:', this.#x, this.#y,  'next:', this.#nextX, this.#nextY);
-
+		if (vector2.constructor.name !== "Vector2") throw new TypeError('vector2 must be instance of Vector2');
 		// Сохраняем предыдущие координаты
 		this.#prevX = this.#x;
 		this.#prevY = this.#y;
 		// Перемещаем точку
 		this.#x += vector2.x;
 		this.#y += vector2.y;
-	}
-
-	/**
-	 * Возвращает следующую точку
-	 * @param vector2
-	 * @returns {Point} - Возвращает текущую точку у которой есть будущие координаты
-	 */
-	getNextPosition(vector2) {
-		if(vector2.constructor.name !== "Vector2") throw new TypeError('vector2 must be instance of Vector2');
-		this.#nextX = this.#x + vector2.x;
-		this.#nextY = this.#y + vector2.y;
-		return this;
-	}
-
-	release() {
-		this.moveTo(new Point(this.nextX, this.nextY));
-	}
-	rollback() {
-		this.moveTo(new Point(this.prevX, this.prevY));
-		return this;
-	}
-
-	/**
-	 * Возвращает предыдущую точку
-	 * @returns {Point}
-	 */
-	getPreviousPoint() {
-		return new Point(this.#prevX, this.#prevY);
 	}
 
 	toString() {

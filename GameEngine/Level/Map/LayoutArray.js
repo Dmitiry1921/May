@@ -1,8 +1,8 @@
 'use strict';
 
 export class LayoutArray extends Array {
-	processInput(inputManager) {
-		this.forEach(layout => layout.processInput(inputManager));
+	processInput(deltaTime) {
+		this.forEach(layout => layout.processInput(deltaTime));
 	}
 	update(deltaTime) {
 		this.forEach(layout => layout.update(deltaTime));

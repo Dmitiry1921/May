@@ -62,6 +62,17 @@ export class Point {
 		this.#y += vector2.y;
 	}
 
+	clone() {
+		return new Point(this.x, this.y);
+	}
+
+	toJSON() {
+		return {
+			x: this.x,
+			y: this.y,
+		};
+	}
+
 	toString() {
 		return `${this.constructor.name}(${this.#x}, ${this.#y})`;
 	}

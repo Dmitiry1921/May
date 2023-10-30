@@ -8,18 +8,18 @@ const Shapes = [
 ];
 
 export class Collider extends GameObject {
-	#shape;
 	#type;
-	// Другие коллайдеры, с которыми может столкнуться данный коллайдер
-	#colliders;
+	#shape;
+	#visible;
 	#handlers;
-	#handledTypes;
-	// С каким коллайдером столкнулся данный коллайдер
+	// Другие коллайдеры, с которыми может столкнуться данный коллайдер
 	#collided;
+	#velocity;
+	// С каким коллайдером столкнулся данный коллайдер
+	#colliders;
+	#handledTypes;
 	#collidedNextFrame;
 	#availableDirections;
-	#velocity;
-	#visible;
 
 	constructor(type, shape) {
 		super();
@@ -53,6 +53,10 @@ export class Collider extends GameObject {
 	set shape(value) {
 		if (!Shapes.some(name => value.constructor.name === name)) throw new TypeError(`shape must be instance of Shape [${Shapes.join(', ')}]`);
 		this.#shape = value;
+	}
+
+	get point() {
+		return this.#shape.point;
 	}
 
 	get x() {
@@ -91,6 +95,10 @@ export class Collider extends GameObject {
 		return this.#velocity;
 	}
 
+	bound() {
+		this.#shape.bound();
+	}
+
 	setVelocity(value) {
 		if (!(value instanceof Vector2)) throw new TypeError('velocity must be instance of Vector2');
 		this.#velocity = value;
@@ -106,6 +114,20 @@ export class Collider extends GameObject {
 
 	resize(width, height) {
 		this.#shape.resize(width, height);
+	}
+
+	eachAvailableCollider(callback) {
+		const uniqTypes = [
+			...new Set([...this.#handlers.keys(),
+				...this.#handledTypes,
+			])];
+		// Если есть события для обработки пересечения
+		uniqTypes.forEach(type => {
+			// Берем все коллайдеры с этим типом
+			this.#colliders.get(type)?.forEach((collider) => {
+				callback(collider, type);
+			});
+		});
 	}
 
 	#calcAvailableDirections(collider) {
@@ -155,19 +177,11 @@ export class Collider extends GameObject {
 	}
 
 	update(deltaTime) {
-		const uniqTypes = [
-			...new Set([...this.#handlers.keys(),
-				...this.#handledTypes,
-			])];
-		// Если есть события для обработки пересечения
-		uniqTypes.forEach(type => {
-			// Берем все коллайдеры с этим типом
-			this.#colliders.get(type)?.forEach((collider) => {
-				this.#detectCollisionsForHandler(type, collider)
-				this.#detectCollisionsInCurrentFrame(collider);
-				this.#detectCollisionsInNextFrame(collider);
-				this.#calcAvailableDirections(collider);
-			});
+		this.eachAvailableCollider((collider, type) => {
+			this.#detectCollisionsForHandler(type, )
+			this.#detectCollisionsInCurrentFrame(collider);
+			this.#detectCollisionsInNextFrame(collider);
+			this.#calcAvailableDirections(collider);
 		});
 	}
 
@@ -192,15 +206,17 @@ export class Collider extends GameObject {
 
 		// Рисуем диагональные линии
 		canvasContext.beginPath();
-		canvasContext.moveTo(Math.round(this.x) + .5, Math.round(this.y) + .5);
-		canvasContext.lineTo(Math.round(this.x) + .5 + this.width, Math.round(this.y) + .5 + this.height);
+		canvasContext.moveTo(Math.round(this.#shape.bound().x) + .5, Math.round(this.#shape.bound().y) + .5);
+		canvasContext.lineTo(Math.round(this.#shape.bound().x) + .5 + this.width, Math.round(this.#shape.bound().y) + .5 + this.height);
 		canvasContext.stroke();
 
 		// Рисуем диагональные линии
 		canvasContext.beginPath();
-		canvasContext.moveTo(Math.round(this.x) + .5 + this.width, Math.round(this.y) + .5);
-		canvasContext.lineTo(Math.round(this.x) + .5, Math.round(this.y) + .5 + this.height);
+		canvasContext.moveTo(Math.round(this.#shape.bound().x) + .5 + this.width, Math.round(this.#shape.bound().y) + .5);
+		canvasContext.lineTo(Math.round(this.#shape.bound().x) + .5, Math.round(this.#shape.bound().y) + .5 + this.height);
 		canvasContext.stroke();
+
+		this.#shape.bound().render(canvasContext);
 	}
 
 	#checkHandlerType(type, funcName) {
@@ -298,6 +314,7 @@ export class Collider extends GameObject {
 	}
 
 	addColliders(colliders) {
+		// console.log(colliders);
 		[...colliders].flat().forEach(collider => this.addCollider(collider.getCollider()));
 	}
 
@@ -309,6 +326,7 @@ export class Collider extends GameObject {
 	intersects(collider) {
 		return Collider.intersects(this, collider);
 	}
+
 	/**
 	 * Проверяет столкнуться ли данный коллайдер с другим коллайдером
 	 * @param collider1 {Collider}
@@ -337,8 +355,8 @@ export class Collider extends GameObject {
 	}
 
 	/**
-	 * @param collider1 {Collider}
-	 * @param collider2 {Collider}
+	 * @param collider1 {Collider | Rectangle}
+	 * @param collider2 {Collider | Rectangle}
 	 * @returns {boolean}
 	 * @constructor
 	 */

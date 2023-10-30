@@ -1,8 +1,8 @@
 'use strict';
 
-import {Face, NPC, Rectangle, Point, Circle, Vector2} from "../../../../GameEngine";
+import {Face, NPC, Rectangle, Point, Vector2} from "../../../../GameEngine";
 import {sprites} from "../../../assets";
-import {GameLogic, STATE} from "../../../common";
+import {DEFAULT, GameLogic, STATE} from "../../../common";
 
 const {nps1, face21} = sprites;
 
@@ -11,8 +11,12 @@ const STATES = GameLogic.getAnimationStates(ANIMATION);
 
 export const Artaka = new NPC('Артака'); // Артака
 
-Artaka.collider.shape = new Circle(0, 0, 32);
-Artaka.collider.delta.moveTo(new Point(Artaka.bound.width / 2, Artaka.bound.height));
+Artaka.collider.resize(DEFAULT.COLLISION_BOX.width, DEFAULT.COLLISION_BOX.height);
+Artaka.collider.delta.moveTo(DEFAULT.COLLISION_BOX.delta);
+
+Artaka.vision.resize(DEFAULT.VISION.radius);
+Artaka.vision.delta.moveTo(DEFAULT.VISION.delta);
+
 
 Artaka.addAnimationState(STATES.IDLE_BOTTOM);
 Artaka.addAnimationState(STATES.IDLE_LEFT);

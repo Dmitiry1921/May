@@ -1,14 +1,15 @@
 'use strict';
 
 import {
-	GameObject,
 	Point,
-	AnimationStateMachine,
-	AnimationState,
+	Circle,
 	Vector2,
-	Rectangle,
 	Collider,
-	Circle
+	Rectangle,
+	PathFinder,
+	GameObject,
+	AnimationState,
+	AnimationStateMachine,
 } from "../../../GameEngine";
 
 export class Character extends GameObject {
@@ -16,8 +17,10 @@ export class Character extends GameObject {
 	#type;
 	#bound;
 	#hitBox;
+	#vision;
 	#velocity;
 	#collider;
+	#pathFinder;
 	#inputProcesses;
 	#stateAnimation;
 	#updateProcesses;
@@ -28,13 +31,16 @@ export class Character extends GameObject {
 		this.#type = 'Character';
 		this.#bound = new Rectangle(rect.x, rect.y, rect.width, rect.height); // по умолчанию
 		this.#velocity = new Vector2(0, 0); // по умолчанию
+		this.#vision = new Collider(this.#type, new Circle());
 		this.#collider = new Collider(this.#type, new Rectangle());
+		this.#pathFinder = new PathFinder(new Point(0, 0)); // Создаем болванку, все равно будет перезаписан в Level
 		this.#hitBox = new Collider(this.#type, new Circle()); // TODO поддержать
 		this.#stateAnimation = new AnimationStateMachine();
 		this.#updateProcesses = new Set();
 		this.#inputProcesses = new Set();
 
 		this.#collider.setVelocity(this.#velocity);
+		this.#vision.setVelocity(this.#velocity);
 		this.#hitBox.setVelocity(this.#velocity);
 	}
 
@@ -53,9 +59,26 @@ export class Character extends GameObject {
 	get collider() {
 		return this.#collider;
 	}
+	get vision() {
+		return this.#vision;
+	}
 
 	get hitBox() {
 		return this.#hitBox;
+	}
+
+	get pathFinder() {
+		return this.#pathFinder;
+	}
+
+	setScale(value) {
+		this.#bound.setScale(value);
+		this.#stateAnimation.setScale(value);
+	}
+
+	setPathFinder(pathFinder) {
+		if(!(pathFinder instanceof PathFinder)) throw new TypeError('pathFinder must be instance of PathFinder');
+		this.#pathFinder = pathFinder;
 	}
 
 	hasCollider() {
@@ -86,6 +109,7 @@ export class Character extends GameObject {
 	 */
 	move() {
 		this.#collider.moveBy(this.#velocity);
+		this.#vision.moveBy(this.#velocity);
 		this.#hitBox.moveBy(this.#velocity);
 		this.#bound.moveBy(this.#velocity);
 		this.#stateAnimation.moveBy(this.#velocity);
@@ -94,6 +118,7 @@ export class Character extends GameObject {
 	moveTo(point) {
 		if (!(point instanceof Point)) throw new TypeError('point must be instance of Point');
 		this.#collider.moveTo(point);
+		this.#vision.moveTo(point);
 		this.#hitBox.moveTo(point);
 		this.#bound.moveTo(point);
 		this.#stateAnimation.moveTo(point);
@@ -102,6 +127,7 @@ export class Character extends GameObject {
 	moveBy(vector2) {
 		if (!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
 		this.#collider.moveBy(vector2);
+		this.#vision.moveBy(vector2);
 		this.#hitBox.moveBy(vector2);
 		this.#bound.moveBy(vector2);
 		this.#stateAnimation.moveBy(vector2);
@@ -142,6 +168,7 @@ export class Character extends GameObject {
 	 */
 	update(deltaTime) {
 		this.#collider.update(deltaTime);
+		this.#vision.update(deltaTime);
 		this.#stateAnimation.update(deltaTime);
 		this.#updateProcesses.forEach(func => func(deltaTime));
 	}
@@ -153,6 +180,7 @@ export class Character extends GameObject {
 		this.#stateAnimation.render(canvasContext);
 		this.#hitBox.render(canvasContext);
 		this.#collider.render(canvasContext);
+		this.#vision.render(canvasContext);
 	}
 
 	addUpdateProcess(func) {
@@ -169,6 +197,9 @@ export class Character extends GameObject {
 		this.#stateAnimation.handleEvent(event);
 	}
 
+	/**
+	 * @returns {Collider}
+	 */
 	getCollider() {
 		return this.#collider;
 	}

@@ -1,7 +1,5 @@
 'use strict';
 
-import gameEngineConfig from '../config/gameEngine.config.json' assert {type: "json"};
-
 const nextStep = (() => (
   window.requestAnimationFrame ||
   window.webkitRequestAnimationFrame ||
@@ -13,7 +11,9 @@ const nextStep = (() => (
   }
 ))();
 
-export default new class GameEngine {
+export class GameEngine {
+	#config;
+	#canvasId;
   #lastFrameTime; // Переменная времени на предыдущем кадре
   #currentLoop; // Переменная для хранения текущего цикла игры
 
@@ -21,10 +21,15 @@ export default new class GameEngine {
 	#updateProcesses; // Набор уникальных функций для обработки обновлений
 	#renderProcesses; // Набор уникальных функций для обработки отрисовки
 
-  constructor() {
-    const {canvasId} = gameEngineConfig;
-		if(typeof canvasId !== "string") throw new TypeError('canvasId must be string');
-		this.canvasId = canvasId;
+	/**
+	 *
+	 * @param gameEngineConfig {Object}
+	 */
+  constructor(gameEngineConfig) {
+		if(typeof gameEngineConfig !== "object") throw new TypeError('gameEngineConfig must be object');
+		if(typeof gameEngineConfig.canvasId !== "string") throw new TypeError('canvasId must be string');
+		this.#config = gameEngineConfig;
+		this.#canvasId = gameEngineConfig.canvasId;
 
     this.#lastFrameTime = performance.now(); // Инициализация переменной времени на предыдущем кадре
     this.#currentLoop = console.warn.bind(this, 'Engine not set');
@@ -38,14 +43,17 @@ export default new class GameEngine {
 		this.#renderProcesses = new Set();
   }
 
-  #initCanvas() {
+	#setCanvasSettings() {
 		const {
 			imageSmoothingEnabled = true, // Сглаживанием по умолчанию - true
-		} = gameEngineConfig;
+		} = this.#config;
 		if(typeof imageSmoothingEnabled !== "boolean") throw new TypeError('imageSmoothingEnabled must be boolean');
-    this.canvas = document.getElementById(this.canvasId);
-    this.ctx = this.canvas.getContext('2d');
 		this.ctx.imageSmoothingEnabled = imageSmoothingEnabled;
+	}
+
+  #initCanvas() {
+    this.canvas = document.getElementById(this.#canvasId);
+    this.ctx = this.canvas.getContext('2d');
 	}
 
   #gameLoop() {
@@ -59,6 +67,7 @@ export default new class GameEngine {
   }
 
   #loop() {
+		this.#setCanvasSettings();
 		this.#clearCanvas(this.ctx);
     this.#processInput(this.deltaTime);
     this.#processUpdate(this.deltaTime);
@@ -79,7 +88,7 @@ export default new class GameEngine {
   }
 
 	#clearCanvas() {
-		const {clearCanvasBeforeRender = false} = gameEngineConfig;
+		const {clearCanvasBeforeRender = false} = this.#config;
 		if(typeof clearCanvasBeforeRender !== "boolean") throw new TypeError('clearCanvasBeforeRender must be boolean');
 		if(clearCanvasBeforeRender) {
 			this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -87,15 +96,16 @@ export default new class GameEngine {
 	}
 
   #processInput(deltaTime) {
-		console.log(this.#inputProcesses);
+		this.#inputProcesses.forEach((process) => process(deltaTime))
   }
 
   #processUpdate(deltaTime) {
+		this.#updateProcesses.forEach((process) => process(deltaTime))
 
   }
 
   #processRender(canvasContext) {
-
+		this.#renderProcesses.forEach((process) => process(canvasContext))
   }
 
   /**

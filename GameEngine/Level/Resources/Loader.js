@@ -2,6 +2,7 @@ export class Loader {
 	resource;
 	resourceId;
 	loaded;
+
 	constructor(element, url, id = null) {
 		this.resource = new element();
 		this.url = url;
@@ -21,11 +22,10 @@ export class Loader {
 			this.resource.onerror = reject;
 			this.resource.src = this.url;
 			// Удаляем метод load, чтобы не было возможности повторно загрузить ресурс
-			this.load = () => {
-				console.error('Resource already loaded', new Error().stack);
-			};
+			this.load = () => Promise.resolve(this.resource);
 		});
 	}
 
-	static async all(urls) {};
+	static async all(urls) {
+	};
 }

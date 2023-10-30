@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Редактор Тайлов</title>
+	<link rel="shortcut icon" href="./images/favicon.ico">
+	<link rel="stylesheet" href="./bootstrap.min.css">
+	<link rel="stylesheet" href="./style.css">
+	<script src="./bootstrap.bundle.min.js"></script>
+	<script src="./js/index.js" type="module"></script>
+</head>
+<body>
+<!--Меню-->
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+	 aria-labelledby="offcanvasWithBothOptionsLabel">
+	<div class="offcanvas-header">
+		<h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Tile Map Editor Navigator</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+	</div>
+	<div class="offcanvas-body">
+		<ul class="nav nav-pills flex-column mb-auto">
+			<li class="nav-item">
+				<a href="#" onclick="showScreen('imageLoading')" data-target="imageLoading"
+				   class="nav-link link-secondary">
+					Open
+				</a>
+			</li>
+			<li>
+				<a href="#" onclick="showScreen('tileProperties')" data-target="tileProperties"
+				   class="nav-link link-secondary">
+					Tile Properties
+				</a>
+			</li>
+			<li>
+				<a href="#" onclick="showScreen('jsonDataLoading')" data-target="jsonDataLoading"
+				   class="nav-link link-secondary">
+					Json Data
+				</a>
+			</li>
+			<li>
+				<a href="#" onclick="showScreen('wallEditor')" data-target="wallEditor" class="nav-link link-secondary">
+					Wall Editor
+				</a>
+			</li>
+			<li>
+				<a href="#" onclick="showScreen('exportJsonData')" data-target="exportJsonData"
+				   class="nav-link link-secondary">
+					Export Json Data
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<!--Кнопка меню-->
+<div class="position-relative">
+	<a class="position-absolute top-0 start-0 p-1 m-2" data-bs-toggle="offcanvas"
+	   data-bs-target="#offcanvasWithBothOptions"
+	   aria-controls="offcanvasWithBothOptions" href="#">
+		<img src="./images/bars.svg" alt="Bootstrap" width="32" height="32">
+	</a>
+</div>
+<!--Загрузить изображение-->
+<div class="screen hide" id="screen-01">
+	<div class="container-fluid d-flex justify-content-center align-items-center">
+		<div class="col-8 text-center">
+			Загрузите изображение для настройки TileMap
+		</div>
+		<div class="col-4">
+			<button type="submit" class="btn btn-outline-primary"
+					onclick="document.getElementById('fileInputImage').click()">Выбрать файл
+			</button>
+			<input type="file" class="form-control-file hide" id="fileInputImage" accept="image/png">
+		</div>
+	</div>
+</div>
+<!--Загрузить JSON Data-->
+<div class="screen hide" id="screen-02">
+	<div class="container-fluid d-flex justify-content-center align-items-center">
+		<div class="col-12 text-center">
+			<div class="row">
+				<div class="col-12">
+					<h3>JSON Dataset</h3>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<div class="col-12 text-center">
+					<div class="btn-group">
+						<button type="submit" class="btn btn-outline-success" id="createJSON">Создать</button>
+						<button type="submit" class="btn btn-outline-primary"
+								onclick="document.getElementById('fileInputJson').click()">Импортировать
+						</button>
+					</div>
+					<input type="file" class="form-control-file hide" id="fileInputJson" accept="application/json">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Tile properties-->
+<div class="screen hide" id="screen-03">
+	<div class="container-fluid d-flex">
+		<div class="col-10">
+			<div class="row">
+				asdas
+			</div>
+		</div>
+		<div class="col-2">
+			<div class="container">
+				<div class="col-12">
+					<h5>Tile properties</h5>
+					<div class="row mb-2">
+						<div class="input-group input-group-sm">
+							<span class="input-group-text">Tile Width</span>
+							<input min="1" id="tileWidth" value="16" class="form-control form-control-sm" type="number"
+								   placeholder="Tile Width" aria-label=".form-control-sm example">
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="input-group input-group-sm">
+							<span class="input-group-text">Tile Height</span>
+							<input min="1" id="tileHeight" value="16" class="form-control form-control-sm" type="number"
+								   placeholder="Tile Height" aria-label=".form-control-sm example">
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="input-group input-group-sm">
+							<span class="input-group-text">Tile Offset X</span>
+							<input min="0" id="tileOffsetX" value="0" class="form-control form-control-sm" type="number"
+								   placeholder="Tile Offset X" aria-label=".form-control-sm example">
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="input-group input-group-sm">
+							<span class="input-group-text">Tile Offset Y</span>
+							<input min="0" id="tileOffsetY" value="0" class="form-control form-control-sm" type="number"
+								   placeholder="Tile Offset Y" aria-label=".form-control-sm example">
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="input-group input-group-sm">
+							<span class="input-group-text">Tile Separation X</span>
+							<input min="0" id="tileSeparationX" value="0" class="form-control form-control-sm" type="number"
+								   placeholder="Tile Offset Y" aria-label=".form-control-sm example">
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="input-group input-group-sm">
+							<span class="input-group-text">Tile Separation Y</span>
+							<input min="0" id="tileSeparationY" value="0" class="form-control form-control-sm" type="number"
+								   placeholder="Tile Separation Y" aria-label=".form-control-sm example">
+						</div>
+					</div>
+					<div class="row mb-2">
+						<div class="d-grid gap-2">
+							<button type="button" class="btn btn-sm btn-outline-primary" onclick="showScreen('jsonDataLoading')">Next</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!--Настройка стен-->
+<div class="screen hide" id="screen-04">
+	<div class="container-fluid d-flex p-0">
+		<div class="col-7">
+			<div class="col-12 h-100 p-0">
+				<canvas id="wallEditorCanvas"></canvas>
+			</div>
+		</div>
+		<div class="col-5 border-start border-primary d-flex flex-column">
+			<div class="d-flex">
+				<h5 class="col-12 text-center border-bottom border-primary pt-3 pb-2 m-0">Настройка стен</h5>
+			</div>
+			<div class="d-flex flex-fill position-relative">
+				<canvas class="position-absolute" id="tilesEditorCanvas"></canvas>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Экспортировать JSON Dataset-->
+<div class="screen hide" id="screen-05">
+	<div class="container-fluid d-flex justify-content-center align-items-center">
+		<div class="col-12 text-center">
+			<div class="row">
+				<div class="col-12">
+					<h3>Экспортировать JSON Dataset</h3>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<div class="col-12 text-center">
+					<button type="submit" class="btn btn-outline-success" id="downloadJSON">Скачать</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

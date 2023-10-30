@@ -24,15 +24,6 @@ export class Sprite extends GameObject {
 	}
 
 	/**
-	 * Изменяет размер спрайта
-	 * @param width
-	 * @param height
-	 */
-	resize(width, height) {
-		this.#destinationRectangle.resize(width, height);
-	}
-
-	/**
 	 * Возвращает прямоугольник на canvas
 	 * @return {Rectangle} - координаты и размеры прямоугольника
 	 */
@@ -52,9 +43,19 @@ export class Sprite extends GameObject {
 		return this.#destinationRectangle.height;
 	}
 
-	get sourceRectangle() {
-		return this.#sourceRectangle;
+	setScale(value) {
+		this.#destinationRectangle.setScale(value);
 	}
+
+	/**
+	 * Изменяет размер спрайта
+	 * @param width
+	 * @param height
+	 */
+	resize(width, height) {
+		this.#destinationRectangle.resize(width, height);
+	}
+
 
 	render(canvasContext) {
 		canvasContext.drawImage(

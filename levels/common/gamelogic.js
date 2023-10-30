@@ -5,6 +5,7 @@ import {COLLIDER_TYPE} from "./constants.js";
 import {ImageLoader, SpriteAnimation, Vector2, AnimationState} from "../../GameEngine";
 import {STATE} from "./states.js";
 import {ANIMATION_FRAMES} from "./aminationFrames.js";
+import {logOnce} from "../../GameEngine/utils/logger.js";
 
 export class GameLogic {
 	/**
@@ -14,12 +15,12 @@ export class GameLogic {
 	 */
 	static npcLookAtPlayer(npc, defaultState = STATE.IDLE_BOTTOM) {
 		// Добавляем обработчик столкновения с персонажем
-		npc.collider.handelType(COLLIDER_TYPE.PLAYER);
+		npc.vision.handelType(COLLIDER_TYPE.PLAYER);
 		// Если персонаж столкнулся с NPC
-		if (npc.collider.hasIntersectedInCurrentFrameWithType(COLLIDER_TYPE.PLAYER)) {
-			const [PlayerCollider] = npc.collider.getCollidedWithType(COLLIDER_TYPE.PLAYER).values();
+		if (npc.vision.hasIntersectedInCurrentFrameWithType(COLLIDER_TYPE.PLAYER)) {
+			const [PlayerCollider] = npc.vision.getCollidedWithType(COLLIDER_TYPE.PLAYER).values();
 			const playerCenter = new Vector2(PlayerCollider.x + PlayerCollider.width / 2, PlayerCollider.y + PlayerCollider.height / 2);
-			const astofCenter = new Vector2(npc.collider.x, npc.collider.y);
+			const astofCenter = new Vector2(npc.vision.x, npc.vision.y);
 			const distance = Vector2.diff(astofCenter, playerCenter).normalize();
 			if (distance.x > .5) {
 				npc.handleEvent(STATE.IDLE_LEFT);
@@ -33,7 +34,6 @@ export class GameLogic {
 			if (distance.y < -.5) {
 				npc.handleEvent(STATE.IDLE_BOTTOM);
 			}
-
 			return;
 		}
 		npc.handleEvent(defaultState);

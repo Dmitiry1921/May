@@ -1,5 +1,5 @@
 'use strict';
-import {reverse} from "../utils/object";
+import {reverse} from "../utils";
 
 const XBOX = {
 	A: 0,

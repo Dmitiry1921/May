@@ -53,6 +53,10 @@ export class AnimationStateMachine extends StateMachine {
 		this.states.forEach(state => state.animation.resize(width, height))
 	}
 
+	setScale(value) {
+		this.states.forEach(state => state.animation.setScale(value))
+	}
+
 	render(canvasContext) {
 		if(this.currentState === null) return;
 		this.#currentAnimation.render(canvasContext);

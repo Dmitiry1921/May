@@ -40,8 +40,8 @@ export class Layout extends GameObject {
 		return this;
 	}
 
-  processInput() {
-		this.#children.forEach(child => child.processInput());
+  processInput(deltaTime) {
+		this.#children.forEach(child => child.processInput(deltaTime));
   }
 
   update(deltaTime) {

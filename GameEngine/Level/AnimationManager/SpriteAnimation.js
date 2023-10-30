@@ -80,6 +80,10 @@ export class SpriteAnimation extends GameObject {
 		this.#frames.forEach(frame => frame.moveBy(vector2));
 	}
 
+	setScale(value) {
+		this.#frames.forEach(frame => frame.setScale(value));
+	}
+
 	resize(width, height) {
 		this.#frames.forEach(frame => frame.resize(width, height));
 	}

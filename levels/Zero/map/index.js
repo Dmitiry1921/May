@@ -49,11 +49,15 @@ mapData.forEach((xArr, x) => {
 				}
 				return;
 			}
-			if (tileMap[item.tile][item.id].wall) {
-				const wall = new Collider(COLLIDER_TYPE.WALL, new Rectangle());
-				wall.moveTo(new Point(x * resource.tileWidth, y * resource.tileHeight));
-				wall.resize(resource.tileWidth, resource.tileHeight);
-				layoutWalls.addChild(wall);
+			if (tileMap[item.tile][item.id].walls) {
+				tileMap[item.tile][item.id].walls.forEach((wallData) => {
+					const rect = new Rectangle((x * resource.tileWidth) + wallData.x % resource.tileWidth, y * resource.tileHeight + wallData.y % resource.tileWidth, wallData.width, wallData.height);
+					// rect.delta.moveTo();
+					const wall = new Collider(COLLIDER_TYPE.WALL, rect);
+					// wall.resize(wallData.width, wallData.height);
+					layoutWalls.addChild(wall);
+				})
+
 			}
 			if (index === 0) {
 				layoutBackground.addSpriteAnimation(x, y, animation);

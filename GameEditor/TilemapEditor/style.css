@@ -1,0 +1,20 @@
+.screen {
+	display: flex;
+	width: 100vw;
+	height: 100vh;
+	background-color: #eaedf0;
+}
+
+.hide {
+	display: none;
+}
+
+#fileInput {
+	display: none;
+}
+
+canvas {
+	background-image: url("images/empty.png");
+	image-rendering: pixelated;
+}
+

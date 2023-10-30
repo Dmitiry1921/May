@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Reverses the keys and values of an object
  * @param inputObject {Object}

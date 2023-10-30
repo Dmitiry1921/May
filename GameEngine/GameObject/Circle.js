@@ -1,13 +1,12 @@
 'use strict';
 
-import {Point} from "./index.js";
+import {Point, Rectangle} from "./index.js";
 
 export class Circle {
 
 	#point;
 	#delta;
 	#radius;
-
 
 	/**
 	 * Круг
@@ -33,6 +32,12 @@ export class Circle {
 	get radius() {
 		return this.#radius;
 	}
+	get width() {
+		return this.#radius * 2;
+	}
+	get height() {
+		return this.#radius * 2;
+	}
 	get delta() {
 		return this.#delta;
 	}
@@ -49,10 +54,10 @@ export class Circle {
 	}
 
 	/**
-	 * Возвращает точку в исходную позицию
+	 * @returns {Rectangle}
 	 */
-	rollback() {
-		this.#point.rollback();
+	bound() {
+		return new Rectangle(this.x - this.radius, this.y - this.radius, this.width, this.height);
 	}
 
 	moveTo(point) {

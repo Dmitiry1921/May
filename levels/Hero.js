@@ -10,7 +10,7 @@ const STATES = GameLogic.getAnimationStates(ANIMATION);
 
 export const Hero = new Player('Персонаж');
 
-const speed = 1.5;
+const speed = 64;
 
 // Walk
 Hero.addAnimationState(STATES.WALK_BOTTOM);
@@ -23,24 +23,24 @@ Hero.setState(STATE.WALK_BOTTOM);
 Hero.collider.resize(10, 10);
 Hero.collider.delta.moveTo(new Point((Hero.bound.width - Hero.collider.width) / 2, Hero.bound.height - Hero.collider.height));
 
-// Hero.resize(32 * 8, 32 * 8);
+// Hero.setScale(8);
 
-Hero.addProcessInput(() => {
+Hero.addProcessInput((deltaTime) => {
 	// сбрасываем вектор скорости
 	Hero.velocity.x = 0;
 	Hero.velocity.y = 0;
 	// Обработка нажатий клавиш
 	if(InputManager.isPressed(KEYS.UP)) {
-		Hero.velocity.add(new Vector2(0, -speed));
+		Hero.velocity.add(new Vector2(0, -speed * deltaTime));
 	}
 	if(InputManager.isPressed(KEYS.DOWN)) {
-		Hero.velocity.add(new Vector2(0, speed));
+		Hero.velocity.add(new Vector2(0, speed * deltaTime));
 	}
 	if(InputManager.isPressed(KEYS.LEFT)) {
-		Hero.velocity.add(new Vector2(-speed, 0));
+		Hero.velocity.add(new Vector2(-speed * deltaTime, 0));
 	}
 	if(InputManager.isPressed(KEYS.RIGHT)) {
-		Hero.velocity.add(new Vector2(speed, 0));
+		Hero.velocity.add(new Vector2(speed * deltaTime, 0));
 	}
 })
 Hero.addUpdateProcess(() => {
@@ -91,4 +91,7 @@ Hero.addUpdateProcess(() => {
 
 Hero.collider.handelType(COLLIDER_TYPE.WALL);
 Hero.collider.handelType(COLLIDER_TYPE.NPC);
+
+// Hero.pathFinder.walkRadius(30)
+
 

@@ -8,6 +8,7 @@ export class Rectangle {
 	#delta;
 	#width;
 	#height;
+	#scale;
 	#rotation;
 	#visible;
 
@@ -26,6 +27,7 @@ export class Rectangle {
 		if(typeof height !== 'number') throw new TypeError('height must be number');
 		this.#point = new Point(x, y);
 		this.#delta = new Point(0, 0);
+		this.#scale = 1;
 		this.#width = width;
 		this.#height = height;
 	}
@@ -43,11 +45,11 @@ export class Rectangle {
 	}
 
 	get width() {
-		return this.#width;
+		return this.#width * this.#scale;
 	}
 
 	get height() {
-		return this.#height;
+		return this.#height * this.#scale;
 	}
 
 	get delta() {
@@ -72,7 +74,6 @@ export class Rectangle {
 	moveTo(point) {
 		this.#point.moveTo(point);
 	}
-
 	/**
 	 * Перемещает прямоугольник на указанный вектор
 	 * @param vector2 {Vector2} - вектор
@@ -80,21 +81,12 @@ export class Rectangle {
 	moveBy(vector2) {
 		this.#point.moveBy(vector2);
 	}
-
 	/**
-	 * Перемещает точку будущую позицию
+	 * @returns {Rectangle}
 	 */
-	release() {
-		this.#point.release();
+	bound() {
+		return new Rectangle(this.x, this.y, this.width, this.height);
 	}
-
-	/**
-	 * Возвращает точку в исходную позицию
-	 */
-	rollback() {
-		this.#point.rollback();
-	}
-
 	/**
 	 * Изменяет размеры прямоугольника
 	 * @param width {number | {width: number, height: number}} - ширина
@@ -110,12 +102,27 @@ export class Rectangle {
 		this.height = height;
 		return this;
 	}
-
-	render(canvasContext) {
+	/**
+	 * Изменяет размеры прямоугольника
+	 * @param value
+	 */
+	setScale(value) {
+		if(typeof value !== "number") throw new TypeError('value must be number');
+		this.#scale = value;
+	}
+	render(canvasContext, {style = "#0d6efd", width = 1} = {}) {
+		// Задаем цвет и толщину линии
+		canvasContext.lineWidth = width;
+		canvasContext.strokeStyle = style;
 		// Рисуем прямоугольник на холсте
 		canvasContext.beginPath();
 		canvasContext.rect(Math.round(this.x) + .5, Math.round(this.y) + .5, this.width, this.height);
 		canvasContext.stroke();
+	}
+
+	fill(canvasContext, {style = "#0d6efd"} = {}) {
+		canvasContext.fillStyle = style;
+		canvasContext.fillRect(Math.round(this.x) + .5, Math.round(this.y) + .5, this.width, this.height);
 	}
 
 	clone() {
@@ -124,5 +131,14 @@ export class Rectangle {
 
 	isEmpty() {
 		return this.width === 0 && this.height === 0;
+	}
+
+	toJSON() {
+		return {
+			x: this.#point.x,
+			y: this.#point.y,
+			width: this.#width,
+			height: this.#height,
+		}
 	}
 }

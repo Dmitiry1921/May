@@ -3,6 +3,8 @@
  * Updated by Dima101 on 05.06.2023.
  */
 
+import gameEngineConfig from '../config/gameEngine.config.json' assert {type: "json"};
+
 import {KEYS} from "../levels/common";
 import {levelZero} from "../levels/Zero"
 
@@ -13,10 +15,10 @@ import _tile from './tile.js';
 import code from './code.js';
 import MobMicroTask from "../GameEngine/Level/Character/MobMicroTask.js";
 import storage from "../GameEngine/Storage/Storage.js";
-import {ImageLoader, InputManager} from "../GameEngine";
-import gameEngine from "../GameEngine/GameEngine.js";
+import {ImageLoader, InputManager, GameEngine} from "../GameEngine";
 import {getRandomInt} from "../GameEngine/utils";
 
+const gameEngine = new GameEngine(gameEngineConfig);
 // TODO Добавляем manager ввода в движок
 // gameEngine.addProcessInput(InputManager.processInput);
 
@@ -1438,8 +1440,10 @@ var loop = function () {
 	// _Map.overlay(); //Перекрываем персонажа.
 	// _Interface.draw(); //Рисуем диалог.
 
-	levelZero.processInput(InputManager);
+	levelZero.processInput(gameEngine.deltaTime);
 	levelZero.update(gameEngine.deltaTime);
+	// TODO вместо этого gameEngine.#setCanvasSettings();
+	ctx.imageSmoothingEnabled = false;
 	levelZero.render(ctx);
 
 

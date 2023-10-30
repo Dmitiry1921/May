@@ -6,7 +6,7 @@ import {Vanessa, Hodgepodge, Astof, Artaka, Boy, Girl, Her} from './characters';
 import {layoutForward1, layoutBackground, layoutBackward1, layoutForward, layoutBackward2, layoutWalls} from './map';
 
 // Скрываем слой стен
-layoutWalls.hide();
+// layoutWalls.hide();
 
 // TODO есть что оптимизировать
 const levelZero = new Level(
@@ -19,6 +19,8 @@ const levelZero = new Level(
 	layoutWalls,
 );
 
+levelZero.pathFinder.resize(32, 2);
+
 // Задаем сортировку отображения персонажей в зависимости от их координат и размера
 levelZero.setSortCharactersBeforeRender((a, b) => (a.bound.y + a.bound.height) - (b.bound.y + b.bound.height));
 
@@ -28,14 +30,14 @@ levelZero.addCharacter(Hodgepodge);
 levelZero.addCharacter(Astof);
 levelZero.addCharacter(Hero);
 levelZero.addCharacter(Artaka);
-levelZero.addCharacter(Boy);
+// levelZero.addCharacter(Boy);
 levelZero.addCharacter(Girl);
 levelZero.addCharacter(Her);
 
 // TODO раскоментить для финальной версии
-// Hero.moveTo(new Point(5 * 32, 3 * 32));
+Hero.moveTo(new Point(5 * 32, 3 * 32));
 
-Hero.moveTo(new Point(21 * 32, 13 * 32));
+// Hero.moveTo(new Point(21 * 32, 13 * 32));
 
 // Hero.resize(32 * 2, 32 * 2);
 

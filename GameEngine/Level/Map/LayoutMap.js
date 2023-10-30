@@ -42,4 +42,12 @@ export class LayoutMap extends Layout {
 		if(typeof x !== "number" || typeof y !== "number") throw new TypeError('x and y must be number');
 		return Boolean(this.#map[x] && this.#map[x][y]);
 	}
+
+	/**
+	 * Возвращает размер сетки тайлов (количество тайлов по горизонтали и вертикали).
+	 * @returns {Point}
+	 */
+	getTileGridSize() {
+		return new Point(this.#map.length, this.#map[0].length);
+	}
 }

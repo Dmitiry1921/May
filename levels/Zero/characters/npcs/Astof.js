@@ -1,7 +1,7 @@
 'use strict';
 
 import {Face, NPC, Rectangle, Point, Circle, Vector2} from "../../../../GameEngine";
-import {sprites, STATE, GameLogic} from "../../../../levels";
+import {sprites, STATE, GameLogic, DEFAULT} from "../../../../levels";
 
 const {nps0, face24} = sprites;
 
@@ -11,8 +11,11 @@ const STATES = GameLogic.getAnimationStates(ANIMATION);
 export const Astof = new NPC('Астоф'); // Астоф
 // Astof.resize(32 * 8, 32 * 8);
 
-Astof.collider.shape = new Circle(0, 0, 32);
-Astof.collider.delta.moveTo(new Point(Astof.bound.width / 2, Astof.bound.height));
+Astof.collider.resize(DEFAULT.COLLISION_BOX.width, DEFAULT.COLLISION_BOX.height);
+Astof.collider.delta.moveTo(DEFAULT.COLLISION_BOX.delta);
+
+Astof.vision.resize(DEFAULT.VISION.radius);
+Astof.vision.delta.moveTo(DEFAULT.VISION.delta);
 
 Astof.addAnimationState(STATES.IDLE_BOTTOM);
 Astof.addAnimationState(STATES.IDLE_LEFT);

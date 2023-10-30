@@ -59,6 +59,13 @@ export class Vector2 {
 		return this;
 	}
 
+	divide(vector2) {
+		if (!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
+		this.#x /= vector2.x;
+		this.#y /= vector2.y;
+		return this;
+	}
+
 	/**
 	 * Вычитание векторов
 	 * @param vector2
@@ -119,6 +126,13 @@ export class Vector2 {
 		return new Vector2(Math.sign(this.x), Math.sign(this.y));
 	}
 
+	// Метод для вычисления расстояния между текущей точкой и другой точкой
+	distanceTo(otherPoint) {
+		const dx = this.x - otherPoint.x;
+		const dy = this.y - otherPoint.y;
+		return Math.sqrt(dx * dx + dy * dy);
+	}
+
 	/**
 	 * Создает новый вектор из текущего
 	 * @returns {Vector2}
@@ -164,6 +178,12 @@ export class Vector2 {
 		if (!(vector1 instanceof Vector2)) throw new TypeError('vector1 must be instance of Vector2');
 		if (!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
 		return new Vector2(vector1.x * vector2.x, vector1.y * vector2.x);
+	}
+
+	static divide(vector1, vector2) {
+		if (!(vector1 instanceof Vector2)) throw new TypeError('vector1 must be instance of Vector2');
+		if (!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
+		return new Vector2(vector1.x / vector2.x, vector1.y / vector2.x);
 	}
 
 	/**

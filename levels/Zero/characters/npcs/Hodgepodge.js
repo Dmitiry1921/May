@@ -1,8 +1,8 @@
 'use strict';
 
-import {Face, NPC, Rectangle, Point, Circle, Vector2} from "../../../../GameEngine";
+import {Face, NPC, Rectangle, Point, Vector2} from "../../../../GameEngine";
 import {sprites} from "../../../assets";
-import {GameLogic, STATE} from "../../../common";
+import {DEFAULT, GameLogic, STATE} from "../../../common";
 
 const {nps0, face17} = sprites;
 
@@ -11,8 +11,11 @@ const STATES = GameLogic.getAnimationStates(ANIMATION);
 
 export const Hodgepodge = new NPC('Даздраперма'); // Даздраперма
 
-Hodgepodge.collider.shape = new Circle(0, 0, 32);
-Hodgepodge.collider.delta.moveTo(new Point(Hodgepodge.bound.width / 2, Hodgepodge.bound.height));
+Hodgepodge.collider.resize(DEFAULT.COLLISION_BOX.width, DEFAULT.COLLISION_BOX.height);
+Hodgepodge.collider.delta.moveTo(DEFAULT.COLLISION_BOX.delta);
+
+Hodgepodge.vision.resize(DEFAULT.VISION.radius);
+Hodgepodge.vision.delta.moveTo(DEFAULT.VISION.delta);
 
 Hodgepodge.setFace(new Face(face17, new Rectangle(0, 96, 96, 96)));
 

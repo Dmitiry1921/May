@@ -1,7 +1,7 @@
 'use strict';
 
-import {NPC, Vector2, Point, Circle} from "../../../../GameEngine"
-import {GameLogic, sprites, STATE} from "../../../../levels";
+import {NPC, Vector2, Point} from "../../../../GameEngine"
+import {DEFAULT, GameLogic, sprites, STATE} from "../../../../levels";
 
 const {nps0} = sprites;
 
@@ -10,8 +10,11 @@ const STATES = GameLogic.getAnimationStates(ANIMATION);
 
 export const Her = new NPC('HerKringe');
 
-Her.collider.shape = new Circle(0, 0, 32);
-Her.collider.delta.moveTo(new Point(Her.bound.width / 2, Her.bound.height));
+Her.collider.resize(DEFAULT.COLLISION_BOX.width, DEFAULT.COLLISION_BOX.height);
+Her.collider.delta.moveTo(DEFAULT.COLLISION_BOX.delta);
+
+Her.vision.resize(DEFAULT.VISION.radius);
+Her.vision.delta.moveTo(DEFAULT.VISION.delta);
 
 Her.addAnimationState(STATES.IDLE_BOTTOM);
 Her.addAnimationState(STATES.IDLE_LEFT);

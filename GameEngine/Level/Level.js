@@ -1,11 +1,21 @@
 'use strict';
 
-import {GameObject, ImageLoader, LayoutArray, Layout, LayoutCharacters} from "../../GameEngine";
+import {
+	GameObject,
+	ImageLoader,
+	LayoutArray,
+	Layout,
+	LayoutCharacters,
+	PathFinder,
+	Point,
+	LayoutMap
+} from "../../GameEngine";
 
 export class Level extends GameObject {
 	#layouts;
 	#colliders;
 	#characters;
+	#pathFinder;
 	#charactersLayer;
 
 	/**
@@ -19,10 +29,20 @@ export class Level extends GameObject {
 		this.#colliders = new Set();
 
 		this.addLayouts(...layouts);
+		this.#pathFinder = new PathFinder(this.#getTileGridSize());
+		this.pathFinder.addColliders(this.#colliders);
 	}
 
-	processInput(inputManager) {
-		this.#layouts.processInput(inputManager);
+	get pathFinder() {
+		return this.#pathFinder;
+	}
+
+	#getTileGridSize() {
+		return this.#layouts.find(layout => layout instanceof LayoutMap)?.getTileGridSize() || new Point(0, 0);
+	}
+
+	processInput(deltaTime) {
+		this.#layouts.processInput(deltaTime);
 	}
 
 	update(deltaTime) {
@@ -35,6 +55,7 @@ export class Level extends GameObject {
 	 */
 	render(canvasContext) {
 		this.#layouts.render(canvasContext);
+		this.#pathFinder.render(canvasContext);
 	}
 
 	async init() {
@@ -42,6 +63,7 @@ export class Level extends GameObject {
 		this.resources.forEach(resource => {
 			if(resource instanceof ImageLoader) resource.sliceIntoTiles();
 		});
+		this.#pathFinder.init();
 	}
 
 	#checkCharacterLayer() {
@@ -54,9 +76,11 @@ export class Level extends GameObject {
 		this.addResources(character.resources);
 		this.#characters.set(character.name, character);
 		this.#charactersLayer.addCharacter(character);
+		character.setPathFinder(this.#pathFinder);
 		// обновляем для всех персонажей коллайдеры
 		this.#characters.forEach(char => {
 			char.collider.addColliders(this.#colliders);
+			char.vision.addColliders(this.#colliders);
 		});
 	}
 

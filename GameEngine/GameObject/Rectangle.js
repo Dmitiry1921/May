@@ -56,6 +56,12 @@ export class Rectangle {
 		return this.#delta;
 	}
 
+	set x(value) {
+		this.#point.x = value;
+	}
+	set y(value) {
+		this.#point.y = value;
+	}
 	set width(value) {
 		if(typeof value !== 'number') throw new TypeError('width must be number');
 		if(value < 0) throw new RangeError('width must be greater than or equal to 0');

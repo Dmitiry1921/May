@@ -6,7 +6,7 @@ import {Vanessa, Hodgepodge, Astof, Artaka, Boy, Girl, Her} from './characters';
 import {layoutForward1, layoutBackground, layoutBackward1, layoutForward, layoutBackward2, layoutWalls} from './map';
 
 // Скрываем слой стен
-// layoutWalls.hide();
+layoutWalls.hide();
 
 // TODO есть что оптимизировать
 const levelZero = new Level(
@@ -30,7 +30,7 @@ levelZero.addCharacter(Hodgepodge);
 levelZero.addCharacter(Astof);
 levelZero.addCharacter(Hero);
 levelZero.addCharacter(Artaka);
-// levelZero.addCharacter(Boy);
+levelZero.addCharacter(Boy);
 levelZero.addCharacter(Girl);
 levelZero.addCharacter(Her);
 

@@ -5,7 +5,6 @@ import {COLLIDER_TYPE} from "./constants.js";
 import {ImageLoader, SpriteAnimation, Vector2, AnimationState} from "../../GameEngine";
 import {STATE} from "./states.js";
 import {ANIMATION_FRAMES} from "./aminationFrames.js";
-import {logOnce} from "../../GameEngine/utils/logger.js";
 
 export class GameLogic {
 	/**
@@ -39,6 +38,8 @@ export class GameLogic {
 		npc.handleEvent(defaultState);
 	}
 
+	static npc
+
 	/**
 	 * Возвращает набор анимаций для персонажа
 	 * @param resource {ImageLoader} - Sprite Sheet
@@ -57,6 +58,11 @@ export class GameLogic {
 		}, {});
 	}
 
+	/**
+	 * Возвращает набор состояний для персонажа
+	 * @param animations
+	 * @returns {{}}
+	 */
 	static getAnimationStates(animations) {
 		return Object.keys(STATE).reduce((res, state) => {
 			res[state] = new AnimationState(state, animations[state], {

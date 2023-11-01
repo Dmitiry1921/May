@@ -12,6 +12,7 @@ const nextStep = (() => (
 ))();
 
 export class GameEngine {
+	#debugLogs = false;
 	#config;
 	#canvasId;
   #lastFrameTime; // Переменная времени на предыдущем кадре
@@ -32,7 +33,9 @@ export class GameEngine {
 		this.#canvasId = gameEngineConfig.canvasId;
 
     this.#lastFrameTime = performance.now(); // Инициализация переменной времени на предыдущем кадре
-    this.#currentLoop = console.warn.bind(this, 'Engine not set');
+    this.#currentLoop = () => {
+			if(this.#debugLogs) console.warn(this, 'Engine not set')
+		};
     this.deltaTime = 0; // Инициализация переменной delta time
 
     this.#initCanvas(); // инициализируем холст
@@ -116,7 +119,9 @@ export class GameEngine {
   }
 
   stopLoop() {
-    this.#currentLoop = console.info.bind(this, 'Engine stopped');
+    this.#currentLoop = () => {
+			if(this.#debugLogs) console.info(this, 'Engine stopped')
+    };
   }
 
   startLoop() {
@@ -130,6 +135,12 @@ export class GameEngine {
   resume() {
     return this.startLoop();
   }
+
+	debugLogs(value) {
+		if(typeof value !== "boolean") throw new TypeError('value must be boolean');
+		this.#debugLogs = value;
+
+	}
 
 	/**
 	 * Добавляет функцию в цикл игры на этапе обработки ввода

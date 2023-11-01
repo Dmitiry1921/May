@@ -27,6 +27,14 @@ export class Point {
 	get y() {
 		return this.#y;
 	}
+	set x(value) {
+		if(typeof value !== "number") throw new TypeError('x must be number');
+		this.#x = value;
+	}
+	set y(value) {
+		if(typeof value !== "number") throw new TypeError('y must be number');
+		this.#y = value;
+	}
 	get prevX() {
 		return this.#prevX;
 	}

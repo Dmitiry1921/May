@@ -50,9 +50,13 @@ export class Collider extends GameObject {
 		return this.#shape;
 	}
 
-	set shape(value) {
-		if (!Shapes.some(name => value.constructor.name === name)) throw new TypeError(`shape must be instance of Shape [${Shapes.join(', ')}]`);
-		this.#shape = value;
+	get visible() {
+		return this.#visible;
+	}
+
+	set visible(value) {
+		if (typeof value !== 'boolean') throw new TypeError('value must be boolean');
+		this.#visible = value;
 	}
 
 	get point() {
@@ -83,16 +87,17 @@ export class Collider extends GameObject {
 		return this.#shape.rotation;
 	}
 
-	get visible() {
-		return this.#shape.visible;
-	}
-
 	get delta() {
 		return this.#shape.delta;
 	}
 
 	get velocity() {
 		return this.#velocity;
+	}
+
+	set shape(value) {
+		if (!Shapes.some(name => value.constructor.name === name)) throw new TypeError(`shape must be instance of Shape [${Shapes.join(', ')}]`);
+		this.#shape = value;
 	}
 
 	bound() {
@@ -198,6 +203,7 @@ export class Collider extends GameObject {
 	render(canvasContext) {
 		this.#reset();
 
+		if(this.#visible === false) return;
 		// Задаем цвет и толщину линии
 		canvasContext.lineWidth = .5;
 		canvasContext.strokeStyle = "red";

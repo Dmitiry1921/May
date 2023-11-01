@@ -36,6 +36,9 @@ export class PathFinder {
 		this.#pathways = new Set();
 	}
 
+	get tileSize() {
+		return this.#tileSize;
+	}
 	get walls() {
 		return this.#walls;
 	}
@@ -65,7 +68,7 @@ export class PathFinder {
 	get #cellCountY() {
 		return this.#tileCounts.y * this.#sectionCount;
 	}
-	get #cellSize() {
+	get cellSize() {
 		return this.#tileSize / this.#sectionCount;
 	}
 
@@ -75,10 +78,10 @@ export class PathFinder {
 		for (let x = 0; x < arr2d.length; x++) {
 			for (let y = 0; y < arr2d[x].length; y++) {
 				const rect = new Rectangle(
-					x * this.#cellSize + this.#point.x,
-					y * this.#cellSize + this.#point.y,
-					this.#cellSize,
-					this.#cellSize,
+					x * this.cellSize + this.#point.x,
+					y * this.cellSize + this.#point.y,
+					this.cellSize,
+					this.cellSize,
 				);
 				if(colliders.some(collider => {
 					return Collider.Rectangle2Rectangle(rect, collider);
@@ -96,7 +99,7 @@ export class PathFinder {
 	}
 	#getGridRect() {
 		if (this.#grid.length === 0) return new Rectangle(0, 0, 0, 0);
-		return new Rectangle(this.#point.x, this.#point.y, this.#grid.length * this.#cellSize, this.#grid[0].length * this.#cellSize);
+		return new Rectangle(this.#point.x, this.#point.y, this.#grid.length * this.cellSize, this.#grid[0].length * this.cellSize);
 	}
 	#drawGrid(canvasContext) {
 		if (!this.#grid?.length) return;
@@ -106,7 +109,7 @@ export class PathFinder {
 		const rect = this.#getGridRect();
 		// Рисуем горизонтальные линии
 		for (let i = 0; i < this.#grid[0].length; i++) {
-			const y = i * this.#cellSize + rect.y;
+			const y = i * this.cellSize + rect.y;
 			canvasContext.beginPath();
 			canvasContext.moveTo(rect.x, y);
 			canvasContext.lineTo(rect.x + rect.width, y);
@@ -114,7 +117,7 @@ export class PathFinder {
 		}
 		// Рисуем вертикальные линии
 		for (let i = 0; i < this.#grid.length; i++) {
-			const x = i * this.#cellSize + rect.x;
+			const x = i * this.cellSize + rect.x;
 			canvasContext.beginPath();
 			canvasContext.moveTo(x, rect.y);
 			canvasContext.lineTo(x, rect.y + rect.height);
@@ -126,10 +129,10 @@ export class PathFinder {
 		canvasContext.fillStyle = "black";
 		this.#graph.nodes.forEach((node) => {
 			if(!node.isWall()) return;
-			const x = node.x * this.#cellSize + this.#point.x;
-			const y = node.y * this.#cellSize + this.#point.y;
+			const x = node.x * this.cellSize + this.#point.x;
+			const y = node.y * this.cellSize + this.#point.y;
 
-			canvasContext.fillRect(x, y, this.#cellSize, this.#cellSize);
+			canvasContext.fillRect(x, y, this.cellSize, this.cellSize);
 		});
 	}
 	#drawPath(canvasContext) {
@@ -137,22 +140,22 @@ export class PathFinder {
 		canvasContext.fillStyle = "red";
 		this.#path.forEach(item => {
 			const point = this.#getPointOnGrid(item);
-			const x = point.x * this.#cellSize + this.#point.x;
-			const y = point.y * this.#cellSize + this.#point.y;
+			const x = point.x * this.cellSize + this.#point.x;
+			const y = point.y * this.cellSize + this.#point.y;
 
-			canvasContext.fillRect(x, y, this.#cellSize, this.#cellSize);
+			canvasContext.fillRect(x, y, this.cellSize, this.cellSize);
 		});
 	}
 	#getPointOnGrid(point) {
 		if(!(point instanceof Point)) throw new TypeError('point must be instance of Point');
-		const x = Math.round((point.x - this.#point.x) / this.#cellSize);
-		const y = Math.round((point.y - this.#point.y) / this.#cellSize);
+		const x = Math.round((point.x - this.#point.x) / this.cellSize);
+		const y = Math.round((point.y - this.#point.y) / this.cellSize);
 		return new Point(x, y);
 	}
 	#getPointOnMap(point) {
 		if(!(point instanceof Point)) throw new TypeError('point must be instance of Point');
-		const x = point.x * this.#cellSize + this.#point.x;
-		const y = point.y * this.#cellSize + this.#point.y;
+		const x = point.x * this.cellSize + this.#point.x;
+		const y = point.y * this.cellSize + this.#point.y;
 		return new Point(x, y);
 	}
 

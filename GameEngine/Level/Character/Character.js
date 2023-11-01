@@ -21,9 +21,10 @@ export class Character extends GameObject {
 	#velocity;
 	#collider;
 	#pathFinder;
-	#inputProcesses;
 	#stateAnimation;
+	#inputProcesses;
 	#updateProcesses;
+	#renderProcesses;
 
 	constructor(rect) {
 		if (!(rect instanceof Rectangle)) throw new TypeError('rect must be instance of Rectangle');
@@ -38,6 +39,7 @@ export class Character extends GameObject {
 		this.#stateAnimation = new AnimationStateMachine();
 		this.#updateProcesses = new Set();
 		this.#inputProcesses = new Set();
+		this.#renderProcesses = new Set();
 
 		this.#collider.setVelocity(this.#velocity);
 		this.#vision.setVelocity(this.#velocity);
@@ -181,6 +183,7 @@ export class Character extends GameObject {
 		this.#hitBox.render(canvasContext);
 		this.#collider.render(canvasContext);
 		this.#vision.render(canvasContext);
+		this.#renderProcesses.forEach(func => func(canvasContext));
 	}
 
 	addUpdateProcess(func) {
@@ -191,6 +194,11 @@ export class Character extends GameObject {
 	addProcessInput(func) {
 		if (typeof func !== 'function') throw new TypeError('func must be function');
 		this.#inputProcesses.add(func);
+	}
+
+	addRenderProcess(func) {
+		if (typeof func !== 'function') throw new TypeError('func must be function');
+		this.#renderProcesses.add(func);
 	}
 
 	handleEvent(event) {

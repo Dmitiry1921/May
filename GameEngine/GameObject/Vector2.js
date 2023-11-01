@@ -133,6 +133,10 @@ export class Vector2 {
 		return Math.sqrt(dx * dx + dy * dy);
 	}
 
+	clampToRange(trashHold, targetValue = 1) {
+		return Vector2.clampToRange(this, trashHold, targetValue);
+	}
+
 	/**
 	 * Создает новый вектор из текущего
 	 * @returns {Vector2}
@@ -266,5 +270,22 @@ export class Vector2 {
 			vector.clone().add(new Vector2(1, 0)),
 			vector.clone().add(new Vector2(0, 1)),
 		];
+	}
+
+	static clampToRange(vector2, trashHold, targetValue = 1) {
+		if(!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
+		if(typeof trashHold !== 'number') throw new TypeError('trashHold must be number');
+		if(typeof targetValue !== 'number') throw new TypeError('targetValue must be number');
+		const newVector2 = new Vector2(0 ,0);
+		// Проверьте, превышают ли значения x или y заданный трешхолд
+		if (Math.abs(vector2.x) > trashHold) {
+			newVector2.x = vector2.x > 0 ? targetValue : -targetValue;
+		}
+
+		if (Math.abs(vector2.y) > trashHold) {
+			newVector2.y = vector2.y > 0 ? targetValue : -targetValue;
+		}
+
+		return newVector2;
 	}
 }

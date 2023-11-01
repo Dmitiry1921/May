@@ -1,7 +1,17 @@
 'use strict';
 
-import {Collider, GameEngine, ImageLoader, Point, Rectangle, Sprite, storage, Vector2} from "../../../GameEngine";
+import {
+	Collider,
+	GameEngine,
+	ImageLoader,
+	Point,
+	Rectangle,
+	Sprite,
+	storage,
+	Vector2
+} from "../../../GameEngine";
 
+const minTileSize = 16;
 const Editor = new GameEngine({
 	canvasId: "wallEditorCanvas",
 	imageSmoothingEnabled: false,
@@ -12,7 +22,11 @@ const TilesCollection = new GameEngine({
 	imageSmoothingEnabled: false,
 	clearCanvasBeforeRender: true,
 });
-// storage._setAutoSaveInterval(10000);
+const TilePropertiesPreview = new GameEngine({
+	canvasId: "tilePropertiesPreview",
+	imageSmoothingEnabled: false,
+	clearCanvasBeforeRender: true,
+});
 const screens = {
 	imageLoading: document.getElementById('screen-01'),
 	jsonDataLoading: document.getElementById('screen-02'),
@@ -28,12 +42,20 @@ const markers = {
 	rightCenter: new Rectangle(0, 0, markerSize, markerSize),
 }
 const deltaGrid = new Vector2(0, 0);
+const previewDeltaGrid = new Vector2(0, 0);
 const delta = new Vector2(0, 0);
+const previewDelta = new Vector2(0, 0);
 const cursor = new Collider('cursor', new Rectangle(0, 0, 1, 1));
 
+let elTileWidth;
+let elTileHeight;
+let elEditorToolPencil;
+let elEditorToolEraser;
 let tileWidth = 0;
 let tileHeight = 0;
-let scale = 14;
+let scale = storage.editorScale || 14;
+let scaleCollection = storage.collectionScale || 2;
+let scaleTilePropertiesPreview = storage.tilePropertiesPreviewScale || 2;
 let currentTileIndex = null;
 let currentWall = null;
 let currentWallIndex = null;
@@ -41,7 +63,7 @@ let sourceRect = new Rectangle();
 let loader = null;
 let editorSprite = null;
 let collectionSprite = null;
-let scaleCollection = 4;
+let tilePropertiesPreviewSprite = null;
 let cellPoint = storage.cellPoint || null;
 let currentTile = null;
 let dragStart = null;
@@ -66,6 +88,7 @@ function showScreen(id) {
 			link.classList.remove('active')
 		}
 	});
+	storage.currentScreen = id;
 	resize();
 }
 
@@ -75,7 +98,21 @@ function getFileNameWithoutExtension(fileName) {
 }
 
 function createJSON() {
+	const jsonData = Array((imageTag.width / tileWidth) * (imageTag.height / tileHeight)).fill({
+		x: 0,
+		y: 0,
+		width: tileWidth,
+		height: tileHeight,
+		walls: [],
+	});
 
+	storage.json = JSON.parse(JSON.stringify(jsonData)).map((item, index) => {
+		item.x = (index % (imageTag.width / tileWidth)) * tileWidth;
+		item.y = Math.floor(index / (imageTag.width / tileWidth)) * tileHeight;
+		return item;
+	});
+
+	showScreen('wallEditor');
 }
 
 function downloadJSON() {
@@ -116,6 +153,7 @@ function getWallRect(wall) {
 }
 
 function drawWall(canvasContext) {
+	if (!currentTile) return;
 	currentTile.walls.forEach((wall) => {
 		const rect = getWallRect(wall);
 		rect.render(canvasContext, {style: "red", width: 1});
@@ -199,6 +237,32 @@ function drawGridCollection(canvasContext, {style = "blue", width = 1} = {}) {
 	}
 }
 
+function drawPreviewGrid(canvasContext, {style = "blue", width = 1} = {}) {
+	const center = new Point(TilePropertiesPreview.canvas.width / 2 - tilePropertiesPreviewSprite.width / 2, TilePropertiesPreview.canvas.height / 2 - tilePropertiesPreviewSprite.height / 2);
+	// Задаем цвет и толщину линии
+	canvasContext.lineWidth = width;
+	canvasContext.strokeStyle = style;
+	const cellSize = (Math.max((parseInt(storage.tileWidth) || elTileWidth.value), 16) * scaleTilePropertiesPreview);
+	const cellCountX = (loader.resource.width * scaleTilePropertiesPreview) / cellSize;
+	const cellCountY = (loader.resource.height * scaleTilePropertiesPreview) / cellSize;
+	// // Рисуем горизонтальные линии
+	for (let i = 0; i <= cellCountY; i++) {
+		const y = i * cellSize;
+		canvasContext.beginPath();
+		canvasContext.moveTo(center.x + previewDeltaGrid.x, center.y + y + previewDeltaGrid.y);
+		canvasContext.lineTo(center.x + previewDeltaGrid.x + (loader.resource.height * scaleTilePropertiesPreview),  center.y + y + previewDeltaGrid.y);
+		canvasContext.stroke();
+	}
+	// Рисуем вертикальные линии
+	for (let i = 0; i <= cellCountX; i++) {
+		const x = i * cellSize;
+		canvasContext.beginPath();
+		canvasContext.moveTo(center.x + x + previewDeltaGrid.x,  center.y + previewDeltaGrid.y);
+		canvasContext.lineTo(center.x + x + previewDeltaGrid.x,  center.y + (loader.resource.height * scaleTilePropertiesPreview) + previewDeltaGrid.y);
+		canvasContext.stroke();
+	}
+}
+
 function drawWallCollection(canvasContext) {
 	// Задаем цвет и толщину линии
 	canvasContext.lineWidth = .5;
@@ -239,17 +303,51 @@ function drawSelectedTile(canvasContext) {
 	rect.render(canvasContext, {style: "blue", width: 4});
 }
 
+function editorScaleHandler(id) {
+	if (id === 'editorScalePlus') {
+		scale = storage.editorScale = Math.min(storage.editorScale + 1, 20);
+	}
+	if (id === 'editorScaleMinus') {
+		scale = storage.editorScale = Math.max(storage.editorScale - 1, 1);
+	}
+}
+
+function collectionScaleHandler(id) {
+	if (id === 'collectionScalePlus') {
+		scaleCollection = storage.collectionScale = Math.min(storage.collectionScale + 1, 20);
+	}
+	if (id === 'collectionScaleMinus') {
+		scaleCollection = storage.collectionScale = Math.max(storage.collectionScale - 1, 1);
+	}
+}
+
+function previewScaleHandler(id) {
+	if(id === 'previewScalePlus') {
+		scaleTilePropertiesPreview = storage.tilePropertiesPreviewScale = Math.min(storage.tilePropertiesPreviewScale + 1, 20);
+	}
+	if(id === 'previewScaleMinus') {
+		scaleTilePropertiesPreview = storage.tilePropertiesPreviewScale = Math.max(storage.tilePropertiesPreviewScale - 1, 1);
+	}
+}
 const imageTag = new Image();
 imageTag.onload = function () {
-	console.log('image loaded');
+	console.info('image loaded');
+	resize();
 
 	const loader = new ImageLoader(imageTag.src);
 	TilesCollection.updateImage(loader);
 	Editor.updateImage(loader);
 	Editor.startLoop();
 	TilesCollection.startLoop();
+	TilePropertiesPreview.startLoop();
+
+
 	if (!storage.json) {
 		showScreen('tileProperties');
+		return;
+	}
+	if(storage.currentScreen) {
+		showScreen(storage.currentScreen);
 		return;
 	}
 	showScreen('wallEditor');
@@ -257,7 +355,6 @@ imageTag.onload = function () {
 
 Editor.canvas.addEventListener('click', (event) => {
 	cursor.moveTo(new Point(event.offsetX, event.offsetY));
-	// console.log(currentWall);
 	// Определяем на какую стену кликнули
 	if (!currentTile) return;
 	currentWallIndex = null;
@@ -307,7 +404,6 @@ Editor.canvas.addEventListener('mousemove', (event) => {
 				currentWall.width = Math.max(currentWall.width + diff.x, 1);
 				break;
 		}
-		// console.log(currentWall);
 		if (diff.x !== 0 || diff.y !== 0) {
 			dragStart.x = dragStop.x;
 			dragStart.y = dragStop.y;
@@ -363,6 +459,18 @@ TilesCollection.canvas.addEventListener('click', (event) => {
 	storage.cellPoint = cellPoint;
 });
 
+TilePropertiesPreview.canvas.addEventListener('wheel', (event) => {
+	event.preventDefault();
+	event.stopPropagation();
+
+	if (!tilePropertiesPreviewSprite) return;
+	previewDelta.x = event.deltaX;
+	previewDelta.y = event.deltaY;
+	tilePropertiesPreviewSprite.moveBy(previewDelta.invert());
+	previewDeltaGrid.add(previewDelta);
+});
+
+
 Editor.updateImage = function (loaderParam) {
 	loader = loaderParam;
 	loader.load().then((image) => {
@@ -372,13 +480,16 @@ Editor.updateImage = function (loaderParam) {
 Editor.addProcessInput(() => {
 	tileWidth = parseInt(storage.tileWidth);
 	tileHeight = parseInt(storage.tileHeight);
-	if(!storage.json) return;
+	if (!storage.json || !storage.cellPoint) return;
 	currentTile = storage.json.find((item, index) => {
 		if (item.x === storage.cellPoint.x * tileWidth && item.y === storage.cellPoint.y * tileHeight) {
 			currentTileIndex = index;
 			return true;
 		}
 	});
+	// Активируем или деактивируем кнопку "Карандаш"
+	elEditorToolPencil.disabled = !Boolean(currentTile);
+	elEditorToolEraser.disabled = !Boolean(currentWall);
 
 	sourceRect.resize(tileWidth, tileHeight);
 	sourceRect.moveTo(new Point(storage.cellPoint.x * tileWidth, storage.cellPoint.y * tileHeight));
@@ -387,25 +498,23 @@ Editor.addProcessInput(() => {
 	editorSprite.moveTo(new Point(Editor.canvas.width / 2 - editorSprite.width / 2, Editor.canvas.height / 2 - editorSprite.height / 2));
 });
 Editor.addProcessUpdate(() => {
-	// console.log('addProcessUpdate')
 });
 Editor.addProcessRender((canvasContext) => {
 	editorSprite.render(canvasContext);
 	drawWall(canvasContext);
 	drawMarkers(canvasContext);
-	cursor.render(canvasContext);
+	// Рисуем точку курсора
+	// cursor.render(canvasContext);
 });
 
 TilesCollection.updateImage = function (loaderParam) {
 	loader = loaderParam;
 	loader.load().then((image) => {
 		collectionSprite = new Sprite(loader, new Rectangle(0, 0, image.width, image.height));
+		tilePropertiesPreviewSprite = new Sprite(loader, new Rectangle(0, 0, image.width, image.height));
 	});
 }
 TilesCollection.addProcessInput(() => {
-	// console.log('addProcessInput')
-});
-TilesCollection.addProcessUpdate(() => {
 });
 TilesCollection.addProcessRender((canvasContext) => {
 	if (!collectionSprite) return;
@@ -416,13 +525,36 @@ TilesCollection.addProcessRender((canvasContext) => {
 	drawSelectedTile(canvasContext);
 });
 
+TilePropertiesPreview.addProcessUpdate(() => {
+	if(!tilePropertiesPreviewSprite) return;
+	const center = new Point(
+		(TilePropertiesPreview.canvas.width / 2 - tilePropertiesPreviewSprite.width / 2) + previewDeltaGrid.x,
+		(TilePropertiesPreview.canvas.height / 2 - tilePropertiesPreviewSprite.height / 2) + previewDeltaGrid.y,
+	);
+	tilePropertiesPreviewSprite.moveTo(center);
+	tilePropertiesPreviewSprite.resize(parseInt(loader.resource.width) * scaleTilePropertiesPreview, parseInt(loader.resource.height) * scaleTilePropertiesPreview);
+});
+TilePropertiesPreview.addProcessRender((canvasContext) => {
+	if (!tilePropertiesPreviewSprite) return;
+	tilePropertiesPreviewSprite.render(canvasContext);
+	drawPreviewGrid(canvasContext);
+});
+
 document.addEventListener('DOMContentLoaded', () => {
-	const elTileWidth = document.getElementById('tileWidth');
-	const elTileHeight = document.getElementById('tileHeight');
+	elTileWidth = document.getElementById('tileWidth');
+	elTileHeight = document.getElementById('tileHeight');
 	const elFileInputJson = document.getElementById('fileInputJson');
 	const elFileInputImage = document.getElementById('fileInputImage');
 	const elCreateJSON = document.getElementById('createJSON');
 	const elDownloadJSON = document.getElementById('downloadJSON');
+	const elEditorScalePlus = document.getElementById('editorScalePlus');
+	const elEditorScaleMinus = document.getElementById('editorScaleMinus');
+	const elCollectionScalePlus = document.getElementById('collectionScalePlus');
+	const elCollectionScaleMinus = document.getElementById('collectionScaleMinus');
+	const elPreviewScalePlus = document.getElementById('previewScalePlus');
+	const elPreviewScaleMinus = document.getElementById('previewScaleMinus');
+	elEditorToolPencil = document.getElementById('editorToolPencil');
+	elEditorToolEraser = document.getElementById('editorToolEraser');
 	document.querySelectorAll('.nav-link').forEach((link) => {
 		link.addEventListener("mouseover", function () {
 			if (link.classList.contains('active')) return;
@@ -432,6 +564,25 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (link.classList.contains('active')) return;
 			link.classList.add("link-secondary");
 		});
+	});
+	elEditorScalePlus.addEventListener('click', editorScaleHandler.bind(null, 'editorScalePlus'));
+	elEditorScaleMinus.addEventListener('click', editorScaleHandler.bind(null, 'editorScaleMinus'));
+	elCollectionScalePlus.addEventListener('click', collectionScaleHandler.bind(null, 'collectionScalePlus'));
+	elCollectionScaleMinus.addEventListener('click', collectionScaleHandler.bind(null, 'collectionScaleMinus'));
+	elPreviewScalePlus.addEventListener('click', previewScaleHandler.bind(null, 'previewScalePlus'));
+	elPreviewScaleMinus.addEventListener('click', previewScaleHandler.bind(null, 'previewScaleMinus'));
+	elEditorToolPencil.addEventListener('click', () => {
+		if (!currentTile) return;
+		// if (!currentTile.walls?.length) ;
+		currentTile.walls.push(new Rectangle(currentTile.x, currentTile.y, 5, 5));
+		currentWall = currentTile.walls[currentTile.walls.length - 1];
+		currentWallIndex = currentTile.walls.length - 1;
+	});
+	elEditorToolEraser.addEventListener('click', () => {
+		if (!currentTile?.walls) return;
+		if (currentWallIndex === null) return;
+		currentTile.walls.splice(currentWallIndex, 1);
+		currentWallIndex = null;
 	});
 	elCreateJSON.addEventListener('click', () => createJSON());
 	elDownloadJSON.addEventListener('click', () => downloadJSON());
@@ -480,13 +631,18 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	});
 	elTileWidth.addEventListener('change', (event) => {
-		storage.tileWidth = event.target.value;
+		const val = Math.max(event.target.value, minTileSize);
+		storage.tileWidth = val;
+		event.target.value = val;
 	});
 	elTileHeight.addEventListener('change', (event) => {
-		storage.tileHeight = event.target.value;
+		const val = Math.max(event.target.value, minTileSize);
+		storage.tileHeight =val;
+		event.target.value = val;
+
 	});
 	// получаем данные из хранилища
-	const {image, json, imageName, tileWidth, tileHeight} = storage;
+	const {image, tileWidth, tileHeight} = storage;
 
 	elTileWidth.value = tileWidth || elTileWidth.value;
 	elTileHeight.value = tileHeight || elTileHeight.value;

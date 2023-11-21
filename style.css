@@ -7,7 +7,7 @@ body {
 	font-weight: bold;
 	font-family: Tahoma, Geneva, sans-serif, arial, verdana;
 	background-color: #499af9;
-	background-image: url(./img/background.png);
+	background-image: url(src/img/background.png);
 	background-position: 0 0;
 	background-size: 32px 32px;
 }

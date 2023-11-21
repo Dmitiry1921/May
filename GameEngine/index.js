@@ -1,5 +1,7 @@
-export * from './GameEngine.js';
+'use strict';
+
 export * from './GameObject';
+export * from './GameEngine.js';
 export * from './InputManager';
 export * from './PathFinder';
 export * from './Level';

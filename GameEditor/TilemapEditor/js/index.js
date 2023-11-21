@@ -300,7 +300,7 @@ function drawSelectedTile(canvasContext) {
 		height,
 	);
 	rect.moveBy(deltaGrid);
-	rect.render(canvasContext, {style: "blue", width: 4});
+	rect.render(canvasContext, {style: "blue", width: 2 * scaleCollection});
 }
 
 function editorScaleHandler(id) {
@@ -456,6 +456,7 @@ TilesCollection.canvas.addEventListener('click', (event) => {
 		Math.floor((event.offsetX - deltaGrid.x) / (storage.tileWidth * scaleCollection)),
 		Math.floor((event.offsetY - deltaGrid.y) / (storage.tileHeight * scaleCollection)),
 	);
+	console.log('TileId:', (cellPoint.y * (collectionSprite.width / (storage.tileWidth * scaleCollection))) + cellPoint.x);
 	storage.cellPoint = cellPoint;
 });
 
@@ -474,6 +475,7 @@ TilePropertiesPreview.canvas.addEventListener('wheel', (event) => {
 Editor.updateImage = function (loaderParam) {
 	loader = loaderParam;
 	loader.load().then((image) => {
+		console.log({image});
 		editorSprite = new Sprite(loader, sourceRect);
 	});
 };
@@ -514,8 +516,6 @@ TilesCollection.updateImage = function (loaderParam) {
 		tilePropertiesPreviewSprite = new Sprite(loader, new Rectangle(0, 0, image.width, image.height));
 	});
 }
-TilesCollection.addProcessInput(() => {
-});
 TilesCollection.addProcessRender((canvasContext) => {
 	if (!collectionSprite) return;
 	collectionSprite.resize(parseInt(loader.resource.width) * scaleCollection, parseInt(loader.resource.height) * scaleCollection);
@@ -591,7 +591,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (file) {
 			const reader = new FileReader();
 			reader.readAsDataURL(file);
-			reader.onload = function (e) {
+			reader.onload = function () {
 				// Загружаем изображение после чтения файла
 				storage.image = reader.result;
 				storage.imageName = getFileNameWithoutExtension(file.name);
@@ -606,7 +606,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			const reader = new FileReader();
 			// reader.readAsDataURL(file);
 			reader.readAsText(file)
-			reader.onload = function (e) {
+			reader.onload = function () {
 				// Загружаем изображение после чтения файла
 				const jsonRaw = JSON.parse(reader.result);
 				storage.json = jsonRaw.map((item) => {

@@ -1,4 +1,6 @@
-export default class MobMicroTask {
+'use strict';
+
+export class MobMicroTask {
   constructor(codePath) {
     const [, pathString, argString] = codePath.match(/^(.*?)(\(.*)$/);
 

@@ -4,6 +4,7 @@ import {
 	Point,
 	Circle,
 	Vector2,
+	AutoWalk,
 	Collider,
 	Rectangle,
 	PathFinder,
@@ -12,12 +13,16 @@ import {
 	AnimationStateMachine,
 } from "../../../GameEngine";
 
+/**
+ * @extends GameObject
+ */
 export class Character extends GameObject {
 
 	#type;
 	#bound;
 	#hitBox;
 	#vision;
+	#autoWalk;
 	#velocity;
 	#collider;
 	#pathFinder;
@@ -27,14 +32,15 @@ export class Character extends GameObject {
 	#renderProcesses;
 
 	constructor(rect) {
-		if (!(rect instanceof Rectangle)) throw new TypeError('rect must be instance of Rectangle');
 		super();
+		if (!(rect instanceof Rectangle)) throw new TypeError('rect must be instance of Rectangle');
 		this.#type = 'Character';
 		this.#bound = new Rectangle(rect.x, rect.y, rect.width, rect.height); // по умолчанию
 		this.#velocity = new Vector2(0, 0); // по умолчанию
 		this.#vision = new Collider(this.#type, new Circle());
 		this.#collider = new Collider(this.#type, new Rectangle());
 		this.#pathFinder = new PathFinder(new Point(0, 0)); // Создаем болванку, все равно будет перезаписан в Level
+		this.#autoWalk = new AutoWalk(this);
 		this.#hitBox = new Collider(this.#type, new Circle()); // TODO поддержать
 		this.#stateAnimation = new AnimationStateMachine();
 		this.#updateProcesses = new Set();
@@ -71,6 +77,14 @@ export class Character extends GameObject {
 
 	get pathFinder() {
 		return this.#pathFinder;
+	}
+
+	get stateAnimation() {
+		return this.#stateAnimation;
+	}
+
+	get autoWalk() {
+		return this.#autoWalk;
 	}
 
 	setScale(value) {
@@ -117,6 +131,11 @@ export class Character extends GameObject {
 		this.#stateAnimation.moveBy(this.#velocity);
 	}
 
+
+	/**
+	 * @param point {Point}
+	 * @returns {Character}
+	 */
 	moveTo(point) {
 		if (!(point instanceof Point)) throw new TypeError('point must be instance of Point');
 		this.#collider.moveTo(point);
@@ -124,8 +143,15 @@ export class Character extends GameObject {
 		this.#hitBox.moveTo(point);
 		this.#bound.moveTo(point);
 		this.#stateAnimation.moveTo(point);
+
+		return this;
 	}
 
+	/**
+	 *
+	 * @param vector2 {Vector2}
+	 * @returns {Character}
+	 */
 	moveBy(vector2) {
 		if (!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
 		this.#collider.moveBy(vector2);
@@ -133,6 +159,8 @@ export class Character extends GameObject {
 		this.#hitBox.moveBy(vector2);
 		this.#bound.moveBy(vector2);
 		this.#stateAnimation.moveBy(vector2);
+
+		return this;
 	}
 
 	resize(width, height) {
@@ -161,6 +189,7 @@ export class Character extends GameObject {
 	 * Обработка ввода
 	 */
 	processInput(deltaTime) {
+		this.#autoWalk.processInput(deltaTime);
 		this.#inputProcesses.forEach(func => func(deltaTime));
 	}
 
@@ -169,10 +198,15 @@ export class Character extends GameObject {
 	 * @param deltaTime
 	 */
 	update(deltaTime) {
-		this.#collider.update(deltaTime);
-		this.#vision.update(deltaTime);
-		this.#stateAnimation.update(deltaTime);
-		this.#updateProcesses.forEach(func => func(deltaTime));
+		try {
+			this.#collider.update(deltaTime);
+			this.#vision.update(deltaTime);
+			this.#stateAnimation.update(deltaTime);
+			this.#updateProcesses.forEach(func => func(deltaTime));
+		} catch (err) {
+			console.info(this);
+			throw err;
+		}
 	}
 
 	render(canvasContext) {
@@ -203,6 +237,10 @@ export class Character extends GameObject {
 
 	handleEvent(event) {
 		this.#stateAnimation.handleEvent(event);
+	}
+
+	setDefaultState(state) {
+		this.#stateAnimation.defaultState = state;
 	}
 
 	/**

@@ -1,6 +1,6 @@
 'use strict';
 
-import {Loader} from "../../GameEngine";
+import {getRandomInt, Loader} from "../../GameEngine";
 import {logOnce} from "../utils/logger.js";
 
 export class GameObject {
@@ -84,5 +84,9 @@ export class GameObject {
 	 */
 	getCollider() {
 		logOnce('getCollider', this.constructor.name, 'not implemented');
+	}
+
+	randomItemOfArray(array) {
+		return array[getRandomInt(0, array.length - 1)];
 	}
 }

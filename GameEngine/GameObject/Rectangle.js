@@ -1,6 +1,6 @@
 'use strict';
 
-import {Point} from "./index.js";
+import {Point} from "./Point.js";
 
 export class Rectangle {
 

@@ -6,10 +6,20 @@ export class StateMachine {
 	states;
 	currentState;
 	previousState;
+	#defaultState;
 	constructor() {
 		this.states = new Map();
 		this.currentState = null;
 		this.previousState = null;
+	}
+
+	get defaultState() {
+		return this.#defaultState;
+	}
+
+	set defaultState(state) {
+		if(!(state instanceof State)) throw new TypeError('state must be instance of State');
+		this.#defaultState = state;
 	}
 
 	/**

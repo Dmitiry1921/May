@@ -2,7 +2,7 @@
 	"name": "may",
 	"version": "1.0.0",
 	"description": "Игра созданная для участия в конкурсе [SkanerSoft](https://www.youtube.com/c/SkanerSoft) # Скриншоты ![](https://raw.githubusercontent.com/Dmitiry1921/May/main/doc/img/0.jpg)",
-	"main": "index.js",
+	"main": "./src/index.js",
 	"type": "module",
 	"directories": {},
 	"scripts": {

@@ -23,6 +23,8 @@ export class PathFinder {
 	#pathways;
 	//
 	#path;
+	//
+	#visible;
 
 	constructor(tileCounts,  tileSize = 16, sectionCount = 1) {
 		// размер ячейки сетки
@@ -34,6 +36,7 @@ export class PathFinder {
 		this.#colliders = new Set();
 		this.#walls = new Set();
 		this.#pathways = new Set();
+		this.#visible = false;
 	}
 
 	get tileSize() {
@@ -70,6 +73,13 @@ export class PathFinder {
 	}
 	get cellSize() {
 		return this.#tileSize / this.#sectionCount;
+	}
+
+	hide() {
+		this.#visible = false;
+	}
+	show() {
+		this.#visible = true;
 	}
 
 	#createGrid() {
@@ -180,13 +190,15 @@ export class PathFinder {
 
 	}
 	render(canvasContext) {
-		// this.#drawGrid(canvasContext);
-		// this.#drawWall(canvasContext);
+		if(!this.#visible) return;
+		this.#drawGrid(canvasContext);
+		this.#drawWall(canvasContext);
 		this.#drawPath(canvasContext);
 	}
 	getRandomAvailablePoint() {
 		const randomIndex = Math.floor(Math.random() * this.#pathways.size);
 		const point = [...this.#pathways][randomIndex];
+		if(!point) return;
 		return this.#getPointOnMap(point);
 	}
 

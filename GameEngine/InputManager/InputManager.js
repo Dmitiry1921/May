@@ -53,7 +53,6 @@ export default new class InputManager {
 	 * @return {boolean}
 	 */
 	isPressed(key) {
-		// TODO переделать
 		return this.controllers.some(controller => controller.isPressed(key));
 	}
 	isReleased(key) {

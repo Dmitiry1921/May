@@ -58,7 +58,7 @@ export class Level extends GameObject {
 		this.#pathFinder.render(canvasContext);
 	}
 
-	async init() {
+	async load() {
 		await Promise.all(this.resources.map(resource => resource.load()));
 		this.resources.forEach(resource => {
 			if(resource instanceof ImageLoader) resource.sliceIntoTiles();
@@ -83,7 +83,11 @@ export class Level extends GameObject {
 			char.vision.addColliders(this.#colliders);
 		});
 	}
-
+	addCharacters(...characters) {
+		characters.flat(Infinity).forEach((character) => {
+			this.addCharacter(character);
+		});
+	}
 	/**
 	 * Задает функцию сортировки персонажей перед рисованием на canvas
 	 * @param compareFn {function} - функция сравнения

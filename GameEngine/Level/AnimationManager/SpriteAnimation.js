@@ -1,7 +1,6 @@
 'use strict';
 
-import {GameObject, Sprite} from "../../GameObject/index.js";
-import {ImageLoader} from "../Resources/index.js";
+import {GameObject, Sprite, ImageLoader} from "../../../GameEngine";
 
 export class SpriteAnimation extends GameObject {
 	#frameDuration;

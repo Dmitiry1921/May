@@ -3,6 +3,7 @@
 import {Loader, Point, Tile} from "../../../GameEngine";
 
 export class ImageLoader extends Loader {
+
 	#tiles;
 	#tileWidth;
 	#tileHeight;
@@ -60,7 +61,7 @@ export class ImageLoader extends Loader {
 		}
 		const width = tileWidth || this.#tileWidth;
 		const height = tileHeight || this.#tileHeight;
-		if(typeof width !== 'number' || typeof height !== 'number') throw new TypeError('tileWidth and tileHeight must be number');
+		if(typeof width !== 'number' || typeof height !== 'number') return;
 		if(width < 0 || height < 0) throw new RangeError('tileWidth and tileHeight must be greater than or equal to 0');
 
 		for (let x = 0; x < this.resource.width / width; x++) {
@@ -69,7 +70,9 @@ export class ImageLoader extends Loader {
 				if(!this.#tiles[x]) {
 					this.#tiles.push([]);
 				}
-				const rect = !this.#usedTiles.has(point.toString()) ? new Tile(this, this.#tileIndex) : this.#usedTiles.get(point.toString());
+				const rect = !this.#usedTiles.has(point.toString())
+					? new Tile(this, this.#tileIndex)
+					: this.#usedTiles.get(point.toString());
 				this.#tileIndex++;
 				rect.resize(width, height);
 				rect.moveTo(new Point(x * width, y * height));
@@ -95,5 +98,11 @@ export class ImageLoader extends Loader {
 		this.#tileIndex++;
 		this.#usedTiles.set(point.toString(), rect);
 		return rect;
+	}
+
+	async load() {
+		const result = await super.load();
+		this.sliceIntoTiles();
+		return result;
 	}
 }

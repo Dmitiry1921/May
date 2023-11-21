@@ -1,4 +1,6 @@
 {
+	"canvasWidth": 1280,
+	"canvasHeight": 704,
 	"canvasId": "myCanvas",
 	"imageSmoothingEnabled": false,
 	"clearCanvasBeforeRender": true

@@ -29,7 +29,9 @@ export class Layout extends GameObject {
 	 * Показывает слой
 	 */
 	show() {
-		this.#visible = true;
+		Promise.all(this.resources.map(resource => resource.load())).then(() => {
+			this.#visible = true;
+		});
 	}
 
 	/**
@@ -55,6 +57,8 @@ export class Layout extends GameObject {
 			.forEach(child => child.render(canvasContext));
   }
 
+	hasCollider() {
+	}
 	/**
 	 * Задает функцию сортировки персонажей перед рисованием на canvas
 	 * @param compareFn {function} - функция сравнения
@@ -72,5 +76,6 @@ export class Layout extends GameObject {
 		if(!(gameObject instanceof GameObject)) throw new TypeError('param gameObject must be instance of GameObject');
 		this.#children.push(gameObject);
 		if(gameObject.hasCollider()) this.#colliders.push(gameObject);
+		this.addResources(gameObject.resources);
 	}
 }

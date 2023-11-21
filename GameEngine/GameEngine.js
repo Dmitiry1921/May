@@ -1,5 +1,7 @@
 'use strict';
 
+import {Level} from "./Level/Level.js";
+
 const nextStep = (() => (
   window.requestAnimationFrame ||
   window.webkitRequestAnimationFrame ||
@@ -21,6 +23,8 @@ export class GameEngine {
 	#inputProcesses; // Набор уникальных функций для обработки ввода
 	#updateProcesses; // Набор уникальных функций для обработки обновлений
 	#renderProcesses; // Набор уникальных функций для обработки отрисовки
+
+	#levels; // Уровни
 
 	/**
 	 *
@@ -44,6 +48,8 @@ export class GameEngine {
 		this.#inputProcesses = new Set();
 		this.#updateProcesses = new Set();
 		this.#renderProcesses = new Set();
+
+		this.#levels = new Map();
   }
 
 	#setCanvasSettings() {
@@ -86,9 +92,11 @@ export class GameEngine {
     this.deltaTime = deltaTime; // Обновление значения delta time
   }
 
-  #init() {
-
-  }
+	#clearAllProcesses() {
+		this.#inputProcesses.clear();
+		this.#updateProcesses.clear();
+		this.#renderProcesses.clear();
+	}
 
 	#clearCanvas() {
 		const {clearCanvasBeforeRender = false} = this.#config;
@@ -196,5 +204,37 @@ export class GameEngine {
 	 */
 	deleteProcessRender(func) {
 		this.#renderProcesses.delete(func);
+	}
+
+	registerLevel(key, level) {
+		if(typeof key !== "string") throw new TypeError('param key should be string');
+		if(!(level instanceof Level)) throw new Error('param level should instance of Level');
+
+		this.#levels.set(key, level);
+	}
+
+	setLevel(key) {
+		if(typeof key !== "string") throw new TypeError('param key should be string');
+		if(!this.#levels.has(key)) throw new Error('key of level should be registered before usage');
+		const level = this.#levels.get(key);
+		// загружаем уровень
+		this.stopLoop();
+		// Очищаем ранее заданные процессы
+		this.#clearAllProcesses();
+		// Добавляем хуки уровня в движок:
+		this.addProcessInput(level.processInput.bind(level));
+		this.addProcessUpdate(level.update.bind(level));
+		this.addProcessRender(level.render.bind(level));
+
+
+
+		// Загружаем уровень
+		level.load()
+			// запускаем игровой процесс
+			.then(() => {
+				// level.init();
+				this.startLoop();
+			});
+
 	}
 }

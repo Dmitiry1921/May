@@ -1,6 +1,6 @@
 'use strict';
 
-import {Layout, Point, SpriteAnimation} from "../../index.js";
+import {Layout, Point, SpriteAnimation} from "../../../GameEngine";
 
 export class LayoutMap extends Layout {
 	#map; // двумерный массив с индексами тайлов

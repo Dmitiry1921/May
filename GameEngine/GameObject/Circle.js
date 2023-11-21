@@ -1,6 +1,6 @@
 'use strict';
 
-import {Point, Rectangle} from "./index.js";
+import {Point, Rectangle} from "../GameObject";
 
 export class Circle {
 

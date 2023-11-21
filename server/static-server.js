@@ -18,7 +18,6 @@ const server = http.createServer((req, res) => {
   }
 	const parsedPath = path.parse(req.url);
   const filePath = path.join(__dirname, '../', req.url, parsedPath.ext ? '' : 'index.js');
-	console.log({parsedPath, filePath});
   fs.access(filePath, fs.constants.F_OK, (err) => {
     if (err) {
       res.statusCode = 404;

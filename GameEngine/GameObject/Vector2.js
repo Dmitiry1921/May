@@ -133,6 +133,12 @@ export class Vector2 {
 		return Math.sqrt(dx * dx + dy * dy);
 	}
 
+	/**
+	 * Возвращает новый вектор с тем же направлением, но с длиной 1|0|-1
+	 * @param trashHold
+	 * @param targetValue
+	 * @returns {Vector2}
+	 */
 	clampToRange(trashHold, targetValue = 1) {
 		return Vector2.clampToRange(this, trashHold, targetValue);
 	}
@@ -272,6 +278,15 @@ export class Vector2 {
 		];
 	}
 
+	/**
+	 * Ограничивает значения x и y объекта Vector2 в заданных пределах.
+	 *
+	 * @param {Vector2} vector2 - Объект Vector2, который требуется ограничить.
+	 * @param {number} trashHold - Порог, при превышении которого значения будут ограничены.
+	 * @param {number} [targetValue=1] - Значение, которым будут заменены значения, превышающие порог.
+	 * @throws {TypeError} Если vector2 не является экземпляром Vector2 или trashHold/targetValue не является числом.
+	 * @returns {Vector2} Новый объект Vector2 с ограниченными значениями.
+	 */
 	static clampToRange(vector2, trashHold, targetValue = 1) {
 		if(!(vector2 instanceof Vector2)) throw new TypeError('vector2 must be instance of Vector2');
 		if(typeof trashHold !== 'number') throw new TypeError('trashHold must be number');

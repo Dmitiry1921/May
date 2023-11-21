@@ -1,3 +1,5 @@
+'use strict';
+
 export * from './AnimationManager';
 export * from './Character';
 export * from './Map';

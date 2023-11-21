@@ -3,6 +3,9 @@
 import {Rectangle, GameObject, Point, ImageLoader} from "../../GameEngine";
 
 export class Sprite extends GameObject {
+	// отображение по горизонтали и вертикали
+	#flip;
+	// изображение
 	#image;
 	// прямоугольник на спрайт карте
 	#sourceRectangle;
@@ -13,14 +16,10 @@ export class Sprite extends GameObject {
 		if (!(sourceRect instanceof Rectangle)) throw new TypeError('param rect must be instance of Rectangle');
 
 		super();
-		// Добавляем ресурс в игровой объект без этого его не смогут загрузить корректно
-		this.addResource(image);
-		// Задаем изображение
-		this.#image = image.resource;
-		// Задаем прямоугольник на спрайт карте
-		this.#sourceRectangle = sourceRect;
-		//  Задаем прямоугольник на canvas по умолчанию
-		this.#destinationRectangle = new Rectangle(0, 0, sourceRect.width, sourceRect.height);
+		// Отображение по горизонтали и вертикали
+		this.#flip = new Point(1, 1);
+		// Инициализируем спрайт
+		this.init(image, sourceRect);
 	}
 
 	/**
@@ -43,6 +42,42 @@ export class Sprite extends GameObject {
 		return this.#destinationRectangle.height;
 	}
 
+	init(image, sourceRect) {
+		// Добавляем ресурс в игровой объект без этого его не смогут загрузить корректно
+		this.addResource(image);
+		// Задаем изображение
+		this.#image = image.resource;
+		// Задаем прямоугольник на спрайт карте
+		this.#sourceRectangle = sourceRect;
+		//  Задаем прямоугольник на canvas по умолчанию
+		this.#destinationRectangle = new Rectangle(0, 0, sourceRect.width, sourceRect.height);
+	}
+
+	/**
+	 * Отображение по горизонтали и вертикали
+	 * @param string {string| undefined} - horizontal | vertical
+	 */
+	flip(string) {
+		if(string === undefined) {
+			this.#flip = new Point(1, 1);
+		}
+		switch (string) {
+			case Sprite.FLIP_NONE:
+				this.#flip = new Point(1, 1);
+				break;
+			case Sprite.FLIP_HORIZONTAL:
+				this.#flip = new Point(-1, 1);
+				this.#destinationRectangle.delta.moveTo(new Point(this.#destinationRectangle.delta.x + this.#destinationRectangle.width, this.#destinationRectangle.delta.y));
+				break;
+			case Sprite.FLIP_VERTICAL:
+				this.#flip = new Point(1, -1);
+				this.#destinationRectangle.delta.moveTo(new Point(this.#destinationRectangle.delta.x, this.#destinationRectangle.delta.y + this.#destinationRectangle.height));
+				break;
+			default:
+				throw new Error('unknown flip');
+		}
+	}
+
 	setScale(value) {
 		this.#destinationRectangle.setScale(value);
 	}
@@ -56,19 +91,29 @@ export class Sprite extends GameObject {
 		this.#destinationRectangle.resize(width, height);
 	}
 
+	processInput() {
+	}
+	update(deltaTime) {
+	}
+	hasCollider() {
+	}
 
 	render(canvasContext) {
+		canvasContext.save();
+		canvasContext.translate(Math.round(this.#destinationRectangle.x), Math.round(this.#destinationRectangle.y))
+		canvasContext.scale(this.#flip.x, this.#flip.y);
 		canvasContext.drawImage(
 			this.#image,
-			Math.round(this.#sourceRectangle.x),
-			Math.round(this.#sourceRectangle.y),
-			Math.round(this.#sourceRectangle.width),
-			Math.round(this.#sourceRectangle.height),
-			Math.round(this.#destinationRectangle.x),
-			Math.round(this.#destinationRectangle.y),
-			Math.round(this.#destinationRectangle.width),
-			Math.round(this.#destinationRectangle.height)
+			this.#sourceRectangle.x,
+			this.#sourceRectangle.y,
+			this.#sourceRectangle.width,
+			this.#sourceRectangle.height,
+			0,
+			0,
+			this.#destinationRectangle.width,
+			this.#destinationRectangle.height,
 		);
+		canvasContext.restore();
 	}
 
 	/**
@@ -85,5 +130,26 @@ export class Sprite extends GameObject {
 	 */
 	moveBy(vector2) {
 		this.#destinationRectangle.moveBy(vector2);
+	}
+
+	/**
+	 * @returns {string}
+	 */
+	static get FLIP_NONE() {
+		return 'none';
+	}
+
+	/**
+	 * @returns {string}
+	 */
+	static get FLIP_HORIZONTAL() {
+		return 'horizontal';
+	}
+
+	/**
+	 * @returns {string}
+	 */
+	static get FLIP_VERTICAL() {
+		return 'vertical';
 	}
 }

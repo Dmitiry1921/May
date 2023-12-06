@@ -1,8 +1,8 @@
 'use strict';
 
 // В случае если персонаж приближается к NPC тот смотрит в сторону персонажа
-import {ImageLoader, SpriteAnimation, Vector2, AnimationState} from "../../GameEngine";
-import {COLLIDER_TYPE, STATE, ANIMATION_FRAMES} from "../common";
+import {ImageLoader, SpriteAnimation, Vector2, AnimationState, COLLIDER_TYPE} from "../../GameEngine";
+import {STATE, ANIMATION_FRAMES} from "../common";
 
 export class GameLogic {
 	/**

@@ -3,6 +3,7 @@
 import {Rectangle, GameObject, Point, ImageLoader} from "../../GameEngine";
 
 export class Sprite extends GameObject {
+	#visible;
 	// отображение по горизонтали и вертикали
 	#flip;
 	// изображение
@@ -16,6 +17,7 @@ export class Sprite extends GameObject {
 		if (!(sourceRect instanceof Rectangle)) throw new TypeError('param rect must be instance of Rectangle');
 
 		super();
+		this.#visible = true;
 		// Отображение по горизонтали и вертикали
 		this.#flip = new Point(1, 1);
 		// Инициализируем спрайт
@@ -34,6 +36,10 @@ export class Sprite extends GameObject {
 		return this.#destinationRectangle.y;
 	}
 
+	get x() {
+		return this.#destinationRectangle.x;
+	}
+
 	get width() {
 		return this.#destinationRectangle.width;
 	}
@@ -42,6 +48,12 @@ export class Sprite extends GameObject {
 		return this.#destinationRectangle.height;
 	}
 
+	show() {
+		this.#visible = true;
+	}
+	hide() {
+		this.#visible = false;
+	}
 	init(image, sourceRect) {
 		// Добавляем ресурс в игровой объект без этого его не смогут загрузить корректно
 		this.addResource(image);
@@ -99,6 +111,7 @@ export class Sprite extends GameObject {
 	}
 
 	render(canvasContext) {
+		if(!this.#visible) return;
 		canvasContext.save();
 		canvasContext.translate(Math.round(this.#destinationRectangle.x), Math.round(this.#destinationRectangle.y))
 		canvasContext.scale(this.#flip.x, this.#flip.y);

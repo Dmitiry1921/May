@@ -10,7 +10,7 @@ import {
 	PathFinder,
 	GameObject,
 	AnimationState,
-	AnimationStateMachine,
+	AnimationStateMachine, Level,
 } from "../../../GameEngine";
 
 /**
@@ -25,6 +25,7 @@ export class Character extends GameObject {
 	#autoWalk;
 	#velocity;
 	#collider;
+	#level;
 	#pathFinder;
 	#stateAnimation;
 	#inputProcesses;
@@ -46,6 +47,7 @@ export class Character extends GameObject {
 		this.#updateProcesses = new Set();
 		this.#inputProcesses = new Set();
 		this.#renderProcesses = new Set();
+		this.#level = null;
 
 		this.#collider.setVelocity(this.#velocity);
 		this.#vision.setVelocity(this.#velocity);
@@ -85,6 +87,14 @@ export class Character extends GameObject {
 
 	get autoWalk() {
 		return this.#autoWalk;
+	}
+
+	setLevel(level) {
+		if(!(level instanceof Level)) throw new TypeError('level must be instance of Level');
+		this.#level = level;
+		// сбрасываем коллайдер персонажа
+		this.#collider.clear();
+		this.#collider.addColliders([...this.#level.collider.colliders]);
 	}
 
 	setScale(value) {

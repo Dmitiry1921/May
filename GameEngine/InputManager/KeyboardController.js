@@ -4,6 +4,12 @@ export const KEYBOARD = {
 	ESCAPE: 27,
 	ENTER: 13,
 	SPACE: 32,
+	COMMAND: 91,
+	WIN: 91,
+	CONTROL: 17,
+	ALT: 18,
+	BACKSPACE: 8,
+	TAB: 9,
 	LEFT: 37,
 	UP: 38,
 	RIGHT: 39,
@@ -39,8 +45,9 @@ export default new class KeyboardController {
 		this.#state = new Set();
 		this.#wasPressed = new Set();
 
-		window.addEventListener('keydown', this.keyPress.bind(this), false);
-		window.addEventListener('keyup', this.keyRelease.bind(this), false);
+		window.addEventListener('keydown', (event) => this.#keyDown(event));
+		window.addEventListener('keyup', (event) => this.#keyUp(event));
+		// window.addEventListener('keypress', (event) => this.#keyPress(event));
 	}
 
 	processInput() {}
@@ -49,13 +56,19 @@ export default new class KeyboardController {
 		return event.keyCode || event.which;
 	}
 
-	keyPress(event) {
+	#keyDown(event) {
 		const keyCode = this.getKeyCode(event);
 		this.#state.add(keyCode);
 		this.#wasPressed.add(keyCode);
 	}
 
-	keyRelease(event) {
+	#keyPress(event) {
+		// const keyCode = this.getKeyCode(event);
+		// this.#state.delete(keyCode);
+		// console.log('keyPress', this.getKeyCode(event), 'state', this.#state);
+	}
+
+	#keyUp(event) {
 		const keyCode = this.getKeyCode(event);
 		this.#state.delete(keyCode);
 	}
@@ -69,7 +82,6 @@ export default new class KeyboardController {
 	}
 
 	isReleased(key) {
-		console.log('pressed:', this.#state, this.#wasPressed);
 		const wasPressed = key[TYPE].some(key => {
 			return this.#wasPressed.has(key);
 		});

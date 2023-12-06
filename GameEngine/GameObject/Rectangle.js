@@ -1,8 +1,9 @@
 'use strict';
 
 import {Point} from "./Point.js";
+import {GameObject} from "./GameObject.js";
 
-export class Rectangle {
+export class Rectangle extends GameObject {
 
 	#point;
 	#delta;
@@ -10,6 +11,7 @@ export class Rectangle {
 	#height;
 	#scale;
 	#rotation;
+	#diagonals;
 	#visible;
 
 	/**
@@ -21,12 +23,15 @@ export class Rectangle {
 	 * @throws {TypeError} - если x, y, width или height не являются числами
 	 */
 	constructor(x = 0, y = 0, width = 0, height = 0) {
+		super();
 		if(typeof x !== "number") throw new TypeError('x must be number');
 		if(typeof y !== "number") throw new TypeError('y must be number');
 		if(typeof width !== 'number') throw new TypeError('width must be number');
 		if(typeof height !== 'number') throw new TypeError('height must be number');
 		this.#point = new Point(x, y);
 		this.#delta = new Point(0, 0);
+		this.#visible = true;
+		this.diagonals = false;
 		this.#scale = 1;
 		this.#width = width;
 		this.#height = height;
@@ -73,6 +78,22 @@ export class Rectangle {
 		this.#height = value;
 	}
 
+	set diagonals(value) {
+		if(typeof value !== 'boolean') throw new TypeError('diagonals must be boolean');
+		this.#diagonals = value;
+	}
+
+	get diagonals() {
+		return this.#diagonals;
+	}
+
+	hide() {
+		this.#visible = false;
+	}
+	show() {
+		this.#visible = true;
+	}
+
 	/**
 	 * Перемещает прямоугольник в указанную точку
 	 * @param point {Point} - точка
@@ -116,20 +137,41 @@ export class Rectangle {
 		if(typeof value !== "number") throw new TypeError('value must be number');
 		this.#scale = value;
 	}
+	hasCollider() {}
+	processInput() {}
+	update(){}
 	render(canvasContext, {style = "#0d6efd", width = 1} = {}) {
+		if(!this.#visible) return;
+		canvasContext.save();
 		// Задаем цвет и толщину линии
 		canvasContext.lineWidth = width;
 		canvasContext.strokeStyle = style;
 		// Рисуем прямоугольник на холсте
 		canvasContext.beginPath();
-		canvasContext.rect(Math.round(this.x) + .5, Math.round(this.y) + .5, this.width, this.height);
+		canvasContext.rect(Math.round(this.x) + .5, Math.round(this.y) + .5, Math.round(this.width), Math.round(this.height));
 		canvasContext.stroke();
+
+		if(this.#diagonals) {
+			canvasContext.save();
+			canvasContext.beginPath();
+			canvasContext.moveTo(Math.round(this.x) + .5, Math.round(this.y) + .5);
+			canvasContext.lineTo(Math.round(this.x + this.width) + .5, Math.round(this.y + this.height) + .5);
+			canvasContext.moveTo(Math.round(this.x + this.width) + .5, Math.round(this.y) + .5);
+			canvasContext.lineTo(Math.round(this.x) + .5, Math.round(this.y + this.height) + .5);
+			canvasContext.stroke();
+		}
+		canvasContext.restore();
 	}
 
 	fill(canvasContext, {style = "#0d6efd"} = {}) {
+		if(!this.#visible) return;
+		canvasContext.save();
 		canvasContext.fillStyle = style;
-		canvasContext.fillRect(Math.round(this.x) + .5, Math.round(this.y) + .5, this.width, this.height);
+		canvasContext.fillRect(Math.round(this.x), Math.round(this.y), this.width, this.height);
+		canvasContext.restore();
 	}
+
+
 
 	clone() {
 		return new Rectangle(this.x, this.y, this.width, this.height);
@@ -146,5 +188,9 @@ export class Rectangle {
 			width: this.#width,
 			height: this.#height,
 		}
+	}
+
+	toString() {
+		return `(${this.constructor.name}) {x: ${this.x}, y: ${this.y}, width: ${this.width}, height: ${this.height}}`;
 	}
 }

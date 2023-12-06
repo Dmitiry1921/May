@@ -226,13 +226,11 @@ export class GameEngine {
 		this.addProcessUpdate(level.update.bind(level));
 		this.addProcessRender(level.render.bind(level));
 
-
-
 		// Загружаем уровень
 		level.load()
 			// запускаем игровой процесс
 			.then(() => {
-				// level.init();
+				level.init();
 				this.startLoop();
 			});
 

@@ -57,10 +57,14 @@ levelTwo.addCharacters(
 	cows,
 );
 
+levelTwo.pathFinder.show();
 levelTwo.pathFinder.resize(32, 2);
 levelTwo.setSortCharactersBeforeRender((a, b) => (a.bound.y + a.bound.height) - (b.bound.y + b.bound.height));
 
-Hero.moveTo(new Point(25 * 32, 19 * 32 + 10));
-Astof.moveTo(new Point(27 * 32, 19 * 32 - 12));
-Astof.setDefaultState(Astof.STATES.IDLE_BOTTOM);
+
+levelTwo.addInitProcess(() => {
+	Hero.moveTo(new Point(25 * 32, 19 * 32 + 10));
+	Astof.moveTo(new Point(27 * 32, 19 * 32 - 12));
+	Astof.setDefaultState(Astof.STATES.IDLE_BOTTOM);
+});
 

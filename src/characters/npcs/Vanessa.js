@@ -18,7 +18,7 @@ Vanessa.autoWalk.speed = 70;
 Vanessa.addProcessInput(() => {
 	// Vanessa.autoWalk.searchPathOnce(new Point(35 * 32, 15 * 32));
 });
-Vanessa.setMicroTask(new MobMicroTask('_code.nps.vanessa()'));
+// Vanessa.setMicroTask(new MobMicroTask('_code.nps.vanessa()'));
 
 Vanessa.addUpdateProcess(() => {
 	if(Vanessa.autoWalk.pathExists()) {

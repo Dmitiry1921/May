@@ -8,7 +8,8 @@ import {
 	LayoutCharacters,
 	PathFinder,
 	Point,
-	LayoutMap
+	Collider,
+	LayoutMap,
 } from "../../GameEngine";
 
 export class Level extends GameObject {
@@ -16,6 +17,8 @@ export class Level extends GameObject {
 	#colliders;
 	#characters;
 	#pathFinder;
+	#initProcesses;
+	#collider;
 	#charactersLayer;
 
 	/**
@@ -27,14 +30,20 @@ export class Level extends GameObject {
 		this.#layouts = new LayoutArray();
 		this.#characters = new Map();
 		this.#colliders = new Set();
+		this.#collider = new Collider();
+		this.#initProcesses = new Set();
 
 		this.addLayouts(...layouts);
 		this.#pathFinder = new PathFinder(this.#getTileGridSize());
-		this.pathFinder.addColliders(this.#colliders);
+		this.pathFinder.addColliders(this.#collider.colliders);
 	}
 
 	get pathFinder() {
 		return this.#pathFinder;
+	}
+
+	get collider() {
+		return this.#collider;
 	}
 
 	#getTileGridSize() {
@@ -63,7 +72,9 @@ export class Level extends GameObject {
 		this.resources.forEach(resource => {
 			if(resource instanceof ImageLoader) resource.sliceIntoTiles();
 		});
+		console.log(this.#pathFinder);
 		this.#pathFinder.init();
+
 	}
 
 	#checkCharacterLayer() {
@@ -79,8 +90,8 @@ export class Level extends GameObject {
 		character.setPathFinder(this.#pathFinder);
 		// обновляем для всех персонажей коллайдеры
 		this.#characters.forEach(char => {
-			char.collider.addColliders(this.#colliders);
-			char.vision.addColliders(this.#colliders);
+			char.collider.addColliders([...this.#collider.colliders]);
+			char.vision.addColliders([...this.#collider.colliders]);
 		});
 	}
 	addCharacters(...characters) {
@@ -99,12 +110,12 @@ export class Level extends GameObject {
 
 	addCollider(collider) {
 		if(!(collider instanceof GameObject)) throw new TypeError('collider must be instance of GameObject');
-		this.#colliders.add(collider);
+		this.#collider.addCollider(collider);
 	}
 
-	addColliders(colliders) {
+	addColliders(...colliders) {
 		if(!Array.isArray(colliders)) throw new TypeError('colliders must be array');
-		colliders.forEach(collider => this.addCollider(collider));
+		colliders.flat(Infinity).forEach(collider => this.addCollider(collider));
 	}
 
 	addLayout(layout) {
@@ -122,6 +133,20 @@ export class Level extends GameObject {
 			}
 			this.addLayout(layout);
 		});
+	}
+
+	addInitProcess(func) {
+		if(typeof func !== 'function') throw new TypeError('func must be function');
+		this.#initProcesses.add(func);
+	}
+
+	init() {
+		console.log(this.#pathFinder);
+		this.#characters.forEach((character) => {
+			character.setPathFinder(this.#pathFinder);
+			character.setLevel(this);
+		})
+		this.#initProcesses.forEach(func => func());
 	}
 
 	static charactersLayer() {

@@ -10,6 +10,7 @@ export class ImageLoader extends Loader {
 	#usedTiles;
 	#tileIndex;
 	#usedTilesByIndex;
+	#onload;
 
 	/**
 	 * Загружает изображение
@@ -18,12 +19,13 @@ export class ImageLoader extends Loader {
 	 * @param [options.tileWidth] {number} - ширина плитки
 	 * @param[ options.tileHeight] {number} - высота плитки
 	 */
-  constructor(url, options = {})  {
+  constructor(url = '', options = {})  {
 		super(Image, url);
 		this.#usedTiles = new Map();
 		this.#usedTilesByIndex = new Map();
 		this.#tileIndex = 0;
 		this.#tiles = [[]];
+		this.#onload = () => {};
 		const {tileWidth, tileHeight} = options;
 		if(tileWidth && tileHeight) {
 			if((typeof tileWidth !== 'number'  || typeof tileHeight !== 'number')) throw new TypeError('tileHeight must be number');
@@ -37,6 +39,11 @@ export class ImageLoader extends Loader {
 	}
 	get tileHeight() {
 		return this.#tileHeight;
+	}
+
+	set onload(value) {
+		if(typeof value !== "function") throw new TypeError('onload must be function');
+		this.#onload = value;
 	}
 
 	/**
@@ -101,8 +108,10 @@ export class ImageLoader extends Loader {
 	}
 
 	async load() {
+		if(this.url === '') throw new Error('url is not defined');
 		const result = await super.load();
 		this.sliceIntoTiles();
+		this.#onload(result);
 		return result;
 	}
 }

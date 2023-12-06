@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Object Editor</title>
+	<link rel="shortcut icon" href="./images/favicon.png">
+	<link rel="stylesheet" href="./bootstrap.min.css">
+	<link rel="stylesheet" href="./style.css">
+	<script src="./bootstrap.bundle.min.js"></script>
+	<script src="./js/index.js" type="module"></script>
+</head>
+<body>
+<!--Меню-->
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+	 aria-labelledby="offcanvasWithBothOptionsLabel">
+	<div class="offcanvas-header">
+		<h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Navigator</h5>
+		<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+	</div>
+	<div class="offcanvas-body">
+		<ul class="nav nav-pills flex-column mb-auto">
+			<li class="nav-item">
+				<a href="#" onclick="showScreen('imageLoading')" data-target="imageLoading"
+				   class="nav-link link-secondary">
+					Open Image
+				</a>
+			</li>
+			<li>
+				<a href="#" onclick="showScreen('jsonDataLoading')" data-target="jsonDataLoading"
+				   class="nav-link link-secondary">
+					Json Data
+				</a>
+			</li>
+			<li>
+				<a href="#" onclick="showScreen('selectionOfObjects')" data-target="selectionOfObjects"
+				   class="nav-link link-secondary">
+					Selection of objects
+				</a>
+			</li>
+			<li>
+				<a href="#" onclick="showScreen('wallEditor')" data-target="wallEditor" class="nav-link link-secondary">
+					Wall Editor
+				</a>
+			</li>
+			<li>
+				<a href="#" onclick="showScreen('exportJsonData')" data-target="exportJsonData"
+				   class="nav-link link-secondary">
+					Export Json Data
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<!--Кнопка меню-->
+<div class="position-relative">
+	<a class="position-absolute top-0 start-0 p-1 m-2" data-bs-toggle="offcanvas"
+	   data-bs-target="#offcanvasWithBothOptions"
+	   aria-controls="offcanvasWithBothOptions" href="#">
+		<img src="./images/bars.svg" alt="Bootstrap" width="32" height="32">
+	</a>
+</div>
+<!--Загрузить изображение-->
+<div class="screen hide" id="screen-01">
+	<div class="container-fluid d-flex justify-content-center align-items-center">
+		<div class="col-12 text-center">
+			<div class="row">
+				<div class="col-12 pb-5">
+					<h2><b>Object Editor</b></h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<div class="row">
+						<span class="col-12 text-end text-center" style="line-height: 38px;">
+							Upload an image to select objects on it
+						</span>
+						<div class="col-12">
+							<button type="submit" class="btn btn-outline-primary"
+									onclick="document.getElementById('fileInputImage').click()">Choose file
+							</button>
+							<input type="file" class="form-control hide" id="fileInputImage" accept="image/png">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Загрузить JSON Data-->
+<div class="screen hide" id="screen-02">
+	<div class="container-fluid d-flex justify-content-center align-items-center">
+		<div class="col-12 text-center">
+			<div class="row">
+				<div class="col-12">
+					<h3>JSON Dataset</h3>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<div class="col-12 text-center">
+					<div class="btn-group">
+						<button type="submit" class="btn btn-outline-success" id="createJSON">Create</button>
+						<button type="submit" class="btn btn-outline-primary"
+								onclick="document.getElementById('fileInputJson').click()">Import
+						</button>
+					</div>
+					<input type="file" class="form-control-file hide" id="fileInputJson" accept="application/json">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--Object of selection-->
+<div class="screen hide" id="screen-03">
+	<div class="container-fluid d-flex p-0">
+		<div class="col-9">
+			<div class="col-12 h-100 p-0">
+				<canvas id="ObjectsSelectionPreview"></canvas>
+			</div>
+		</div>
+		<div class="d-flex flex-column col-3 overflow-auto ps-1 pe-1">
+			<div class="d-flex flex-column col-12">
+				<div class="d-flex">
+					<h5 class="col-12 text-center border-bottom pt-3 pb-2 m-0">Objects</h5>
+				</div>
+			</div>
+			<div class="d-flex col-12">
+				<div class="flex-grow-1 overflow-auto"></div>
+				<div class="" id="objectsPreview"></div>
+			</div>
+		</div>
+	</div>
+	<!-- Управление scale в коллекций-->
+	<div class="position-absolute bottom-0 start-0 p-3">
+		<div class="btn-group btn-group-sm" role="group">
+			<button id="previewScalePlus" type="button" class="btn btn-secondary">
+				<img src="./images/search-plus.svg" width="16px" height="16px" alt="zoom plus"/>
+			</button>
+			<button id="previewScaleMinus" type="button" class="btn btn-secondary">
+				<img src="./images/search-minus.svg" width="16px" height="16px" alt="zoom minus"/>
+			</button>
+		</div>
+	</div>
+</div>
+<!--Настройка стен-->
+<div class="screen hide" id="screen-04">
+	<div class="container-fluid d-flex p-0">
+		<div class="col-9">
+			<div class="col-12 h-100 p-0">
+				<canvas id="WallEditor"></canvas>
+			</div>
+		</div>
+		<div class="d-flex flex-column col-3 overflow-auto ps-1 pe-1">
+			<div class="d-flex flex-column col-12">
+				<div class="d-flex">
+					<h5 class="col-12 text-center border-bottom pt-3 pb-2 m-0">Objects</h5>
+				</div>
+			</div>
+			<div class="d-flex col-12">
+				<div class="flex-grow-1 overflow-auto"></div>
+				<div class="" id="wallPreview"></div>
+			</div>
+		</div>
+	</div>
+	<div class="position-absolute bottom-0 start-0 p-3">
+		<!-- Управление scale в редакторе -->
+		<div class="btn-group btn-group-sm" role="group">
+			<button id="editorScalePlus" type="button" class="btn btn-secondary">
+				<img src="./images/search-plus.svg" width="16px" height="16px" alt="zoom plus"/>
+			</button>
+			<button id="editorScaleMinus" type="button" class="btn btn-secondary">
+				<img src="./images/search-minus.svg" width="16px" height="16px" alt="zoom minus"/>
+			</button>
+		</div>
+	</div>
+</div>
+<!--Экспортировать JSON Dataset-->
+<div class="screen hide" id="screen-05">
+	<div class="container-fluid d-flex justify-content-center align-items-center">
+		<div class="col-12 text-center">
+			<div class="row">
+				<div class="col-12">
+					<h3>Export JSON Dataset</h3>
+				</div>
+			</div>
+			<div class="row mt-3">
+				<div class="col-12 text-center">
+					<button type="submit" class="btn btn-outline-success" id="downloadJSON">Download</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

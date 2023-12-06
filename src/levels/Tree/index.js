@@ -66,9 +66,14 @@ levelTree.addCharacters(
 levelTree.pathFinder.resize(32, 2);
 levelTree.setSortCharactersBeforeRender((a, b) => (a.bound.y + a.bound.height) - (b.bound.y + b.bound.height));
 
-Hero.moveTo(new Point(5 * 32, 13 * 32 + 10));
-Astof.moveTo(new Point(6 * 32 + 16,13 * 32));
-Astof.setDefaultState(Astof.STATES.IDLE_TOP);
-Creator.moveTo(new Point(12 * 32, 7 * 32 + 10));
-Batman.moveTo(new Point(32 * 32, 8 * 32));
+
+levelTree.addInitProcess(() => {
+	Hero.moveTo(new Point(5 * 32, 13 * 32 + 10));
+	Astof.moveTo(new Point(6 * 32 + 16,13 * 32));
+	Astof.setDefaultState(Astof.STATES.IDLE_TOP);
+	Creator.moveTo(new Point(12 * 32, 7 * 32 + 10));
+	Batman.moveTo(new Point(32 * 32, 8 * 32));
+});
+
+
 

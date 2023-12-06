@@ -1,14 +1,17 @@
 'use strict';
 
-import {Vector2, InputManager} from "../../../GameEngine";
+import {Vector2, InputManager, COLLIDER_TYPE} from "../../../GameEngine";
 import {Player} from '../../classes';
-import {sprites, KEYS, COLLIDER_TYPE, GameLogic} from "../../levels";
+import {sprites, KEYS, GameLogic} from "../../levels";
 
 const {hero0} = sprites;
 
 const states = GameLogic.getDefaultStates(hero0, new Vector2(6, 0));
 
 export const Hero = new Player('Персонаж', states);
+
+Hero.collider.handelType(COLLIDER_TYPE.WALL);
+Hero.collider.handelType(COLLIDER_TYPE.NPC);
 
 const speed = 64;
 // Hero.setScale(8);
@@ -51,9 +54,6 @@ Hero.addUpdateProcess(() => {
 	// Двигаем персонажа
 	Hero.move();
 });
-
-Hero.collider.handelType(COLLIDER_TYPE.WALL);
-Hero.collider.handelType(COLLIDER_TYPE.NPC);
 
 // Hero.pathFinder.walkRadius(30)
 

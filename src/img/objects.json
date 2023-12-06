@@ -1,0 +1,4594 @@
+{
+	"frames": [
+		{
+			"filename": "building-01.png",
+			"frame": {
+				"x": 332,
+				"y": 322,
+				"w": 69,
+				"h": 81
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 69,
+				"h": 81
+			},
+			"sourceSize": {
+				"w": 69,
+				"h": 81
+			}
+		},
+		{
+			"filename": "building-02.png",
+			"frame": {
+				"x": 311,
+				"y": 531,
+				"w": 82,
+				"h": 112
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 82,
+				"h": 112
+			},
+			"sourceSize": {
+				"w": 82,
+				"h": 112
+			}
+		},
+		{
+			"filename": "building-03.png",
+			"frame": {
+				"x": 807,
+				"y": 77,
+				"w": 32,
+				"h": 47
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 32,
+				"h": 47
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 47
+			}
+		},
+		{
+			"filename": "building-04.png",
+			"frame": {
+				"x": 841,
+				"y": 77,
+				"w": 22,
+				"h": 47
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 22,
+				"h": 47
+			},
+			"sourceSize": {
+				"w": 22,
+				"h": 47
+			}
+		},
+		{
+			"filename": "building-05.png",
+			"frame": {
+				"x": 1,
+				"y": 420,
+				"w": 106,
+				"h": 98
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 106,
+				"h": 98
+			},
+			"sourceSize": {
+				"w": 106,
+				"h": 98
+			}
+		},
+		{
+			"filename": "building-06.png",
+			"frame": {
+				"x": 167,
+				"y": 1,
+				"w": 16,
+				"h": 15
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 15
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 15
+			}
+		},
+		{
+			"filename": "building-07.png",
+			"frame": {
+				"x": 897,
+				"y": 1,
+				"w": 15,
+				"h": 29
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 15,
+				"h": 29
+			},
+			"sourceSize": {
+				"w": 15,
+				"h": 29
+			}
+		},
+		{
+			"filename": "building-08.png",
+			"frame": {
+				"x": 914,
+				"y": 1,
+				"w": 15,
+				"h": 29
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 15,
+				"h": 29
+			},
+			"sourceSize": {
+				"w": 15,
+				"h": 29
+			}
+		},
+		{
+			"filename": "building-09.png",
+			"frame": {
+				"x": 410,
+				"y": 420,
+				"w": 79,
+				"h": 107
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 79,
+				"h": 107
+			},
+			"sourceSize": {
+				"w": 79,
+				"h": 107
+			}
+		},
+		{
+			"filename": "building-10.png",
+			"frame": {
+				"x": 491,
+				"y": 420,
+				"w": 96,
+				"h": 107
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 96,
+				"h": 107
+			},
+			"sourceSize": {
+				"w": 96,
+				"h": 107
+			}
+		},
+		{
+			"filename": "building-11.png",
+			"frame": {
+				"x": 783,
+				"y": 322,
+				"w": 70,
+				"h": 96
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 70,
+				"h": 96
+			},
+			"sourceSize": {
+				"w": 70,
+				"h": 96
+			}
+		},
+		{
+			"filename": "building-12.png",
+			"frame": {
+				"x": 601,
+				"y": 322,
+				"w": 89,
+				"h": 95
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 89,
+				"h": 95
+			},
+			"sourceSize": {
+				"w": 89,
+				"h": 95
+			}
+		},
+		{
+			"filename": "building-13.png",
+			"frame": {
+				"x": 82,
+				"y": 780,
+				"w": 72,
+				"h": 131
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 72,
+				"h": 131
+			},
+			"sourceSize": {
+				"w": 72,
+				"h": 131
+			}
+		},
+		{
+			"filename": "building-14.png",
+			"frame": {
+				"x": 395,
+				"y": 531,
+				"w": 73,
+				"h": 112
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 73,
+				"h": 112
+			},
+			"sourceSize": {
+				"w": 73,
+				"h": 112
+			}
+		},
+		{
+			"filename": "building-15.png",
+			"frame": {
+				"x": 406,
+				"y": 780,
+				"w": 94,
+				"h": 133
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 94,
+				"h": 133
+			},
+			"sourceSize": {
+				"w": 94,
+				"h": 133
+			}
+		},
+		{
+			"filename": "building-16.png",
+			"frame": {
+				"x": 310,
+				"y": 780,
+				"w": 94,
+				"h": 132
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 94,
+				"h": 132
+			},
+			"sourceSize": {
+				"w": 94,
+				"h": 132
+			}
+		},
+		{
+			"filename": "building-17.png",
+			"frame": {
+				"x": 470,
+				"y": 531,
+				"w": 73,
+				"h": 112
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 73,
+				"h": 112
+			},
+			"sourceSize": {
+				"w": 73,
+				"h": 112
+			}
+		},
+		{
+			"filename": "building-18.png",
+			"frame": {
+				"x": 292,
+				"y": 420,
+				"w": 73,
+				"h": 106
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 73,
+				"h": 106
+			},
+			"sourceSize": {
+				"w": 73,
+				"h": 106
+			}
+		},
+		{
+			"filename": "building-19.png",
+			"frame": {
+				"x": 502,
+				"y": 780,
+				"w": 96,
+				"h": 145
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 96,
+				"h": 145
+			},
+			"sourceSize": {
+				"w": 96,
+				"h": 145
+			}
+		},
+		{
+			"filename": "building-20.png",
+			"frame": {
+				"x": 1,
+				"y": 650,
+				"w": 86,
+				"h": 121
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 86,
+				"h": 121
+			},
+			"sourceSize": {
+				"w": 86,
+				"h": 121
+			}
+		},
+		{
+			"filename": "building-21.png",
+			"frame": {
+				"x": 282,
+				"y": 322,
+				"w": 48,
+				"h": 80
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 48,
+				"h": 80
+			},
+			"sourceSize": {
+				"w": 48,
+				"h": 80
+			}
+		},
+		{
+			"filename": "building-22.png",
+			"frame": {
+				"x": 710,
+				"y": 780,
+				"w": 111,
+				"h": 152
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 111,
+				"h": 152
+			},
+			"sourceSize": {
+				"w": 111,
+				"h": 152
+			}
+		},
+		{
+			"filename": "building-23.png",
+			"frame": {
+				"x": 865,
+				"y": 77,
+				"w": 21,
+				"h": 47
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 21,
+				"h": 47
+			},
+			"sourceSize": {
+				"w": 21,
+				"h": 47
+			}
+		},
+		{
+			"filename": "building-24.png",
+			"frame": {
+				"x": 888,
+				"y": 77,
+				"w": 14,
+				"h": 47
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 14,
+				"h": 47
+			},
+			"sourceSize": {
+				"w": 14,
+				"h": 47
+			}
+		},
+		{
+			"filename": "building-25.png",
+			"frame": {
+				"x": 767,
+				"y": 420,
+				"w": 75,
+				"h": 109
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 75,
+				"h": 109
+			},
+			"sourceSize": {
+				"w": 75,
+				"h": 109
+			}
+		},
+		{
+			"filename": "building-26.png",
+			"frame": {
+				"x": 844,
+				"y": 420,
+				"w": 74,
+				"h": 109
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 74,
+				"h": 109
+			},
+			"sourceSize": {
+				"w": 74,
+				"h": 109
+			}
+		},
+		{
+			"filename": "building-27.png",
+			"frame": {
+				"x": 668,
+				"y": 32,
+				"w": 23,
+				"h": 41
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 23,
+				"h": 41
+			},
+			"sourceSize": {
+				"w": 23,
+				"h": 41
+			}
+		},
+		{
+			"filename": "building-28.png",
+			"frame": {
+				"x": 693,
+				"y": 32,
+				"w": 32,
+				"h": 41
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 32,
+				"h": 41
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 41
+			}
+		},
+		{
+			"filename": "building-30.png",
+			"frame": {
+				"x": 296,
+				"y": 184,
+				"w": 36,
+				"h": 62
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 36,
+				"h": 62
+			},
+			"sourceSize": {
+				"w": 36,
+				"h": 62
+			}
+		},
+		{
+			"filename": "building-31.png",
+			"frame": {
+				"x": 904,
+				"y": 77,
+				"w": 32,
+				"h": 47
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 32,
+				"h": 47
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 47
+			}
+		},
+		{
+			"filename": "building-32.png",
+			"frame": {
+				"x": 163,
+				"y": 937,
+				"w": 119,
+				"h": 170
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 119,
+				"h": 170
+			},
+			"sourceSize": {
+				"w": 119,
+				"h": 170
+			}
+		},
+		{
+			"filename": "building-33.png",
+			"frame": {
+				"x": 544,
+				"y": 322,
+				"w": 55,
+				"h": 91
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 2,
+				"w": 55,
+				"h": 91
+			},
+			"sourceSize": {
+				"w": 55,
+				"h": 93
+			}
+		},
+		{
+			"filename": "building-34.png",
+			"frame": {
+				"x": 152,
+				"y": 531,
+				"w": 73,
+				"h": 111
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 73,
+				"h": 111
+			},
+			"sourceSize": {
+				"w": 73,
+				"h": 111
+			}
+		},
+		{
+			"filename": "building-36.png",
+			"frame": {
+				"x": 227,
+				"y": 531,
+				"w": 82,
+				"h": 111
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 82,
+				"h": 111
+			},
+			"sourceSize": {
+				"w": 82,
+				"h": 111
+			}
+		},
+		{
+			"filename": "building-37.png",
+			"frame": {
+				"x": 589,
+				"y": 420,
+				"w": 79,
+				"h": 107
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 79,
+				"h": 107
+			},
+			"sourceSize": {
+				"w": 79,
+				"h": 107
+			}
+		},
+		{
+			"filename": "building-38.png",
+			"frame": {
+				"x": 109,
+				"y": 420,
+				"w": 106,
+				"h": 98
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 106,
+				"h": 98
+			},
+			"sourceSize": {
+				"w": 106,
+				"h": 98
+			}
+		},
+		{
+			"filename": "building-39.png",
+			"frame": {
+				"x": 367,
+				"y": 420,
+				"w": 41,
+				"h": 106
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 41,
+				"h": 106
+			},
+			"sourceSize": {
+				"w": 41,
+				"h": 106
+			}
+		},
+		{
+			"filename": "building-40.png",
+			"frame": {
+				"x": 670,
+				"y": 420,
+				"w": 95,
+				"h": 107
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 95,
+				"h": 107
+			},
+			"sourceSize": {
+				"w": 95,
+				"h": 107
+			}
+		},
+		{
+			"filename": "building-41.png",
+			"frame": {
+				"x": 855,
+				"y": 322,
+				"w": 71,
+				"h": 96
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 71,
+				"h": 96
+			},
+			"sourceSize": {
+				"w": 71,
+				"h": 96
+			}
+		},
+		{
+			"filename": "building-42.png",
+			"frame": {
+				"x": 692,
+				"y": 322,
+				"w": 89,
+				"h": 95
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 89,
+				"h": 95
+			},
+			"sourceSize": {
+				"w": 89,
+				"h": 95
+			}
+		},
+		{
+			"filename": "building-43.png",
+			"frame": {
+				"x": 156,
+				"y": 780,
+				"w": 72,
+				"h": 131
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 72,
+				"h": 131
+			},
+			"sourceSize": {
+				"w": 72,
+				"h": 131
+			}
+		},
+		{
+			"filename": "building-44.png",
+			"frame": {
+				"x": 119,
+				"y": 322,
+				"w": 83,
+				"h": 73
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 83,
+				"h": 73
+			},
+			"sourceSize": {
+				"w": 83,
+				"h": 73
+			}
+		},
+		{
+			"filename": "building-45.png",
+			"frame": {
+				"x": 403,
+				"y": 322,
+				"w": 71,
+				"h": 83
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 71,
+				"h": 83
+			},
+			"sourceSize": {
+				"w": 71,
+				"h": 83
+			}
+		},
+		{
+			"filename": "building-46.png",
+			"frame": {
+				"x": 786,
+				"y": 531,
+				"w": 71,
+				"h": 116
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 71,
+				"h": 116
+			},
+			"sourceSize": {
+				"w": 71,
+				"h": 116
+			}
+		},
+		{
+			"filename": "building-47.png",
+			"frame": {
+				"x": 476,
+				"y": 322,
+				"w": 66,
+				"h": 85
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 66,
+				"h": 85
+			},
+			"sourceSize": {
+				"w": 66,
+				"h": 85
+			}
+		},
+		{
+			"filename": "building-48.png",
+			"frame": {
+				"x": 545,
+				"y": 531,
+				"w": 72,
+				"h": 113
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 72,
+				"h": 113
+			},
+			"sourceSize": {
+				"w": 72,
+				"h": 113
+			}
+		},
+		{
+			"filename": "building-49.png",
+			"frame": {
+				"x": 89,
+				"y": 650,
+				"w": 87,
+				"h": 121
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 87,
+				"h": 121
+			},
+			"sourceSize": {
+				"w": 87,
+				"h": 121
+			}
+		},
+		{
+			"filename": "building-50.png",
+			"frame": {
+				"x": 178,
+				"y": 650,
+				"w": 126,
+				"h": 124
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 126,
+				"h": 124
+			},
+			"sourceSize": {
+				"w": 126,
+				"h": 124
+			}
+		},
+		{
+			"filename": "building-51.png",
+			"frame": {
+				"x": 811,
+				"y": 184,
+				"w": 39,
+				"h": 63
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 39,
+				"h": 63
+			},
+			"sourceSize": {
+				"w": 39,
+				"h": 63
+			}
+		},
+		{
+			"filename": "building-52.png",
+			"frame": {
+				"x": 230,
+				"y": 780,
+				"w": 78,
+				"h": 131
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 78,
+				"h": 131
+			},
+			"sourceSize": {
+				"w": 78,
+				"h": 131
+			}
+		},
+		{
+			"filename": "building-53.png",
+			"frame": {
+				"x": 1,
+				"y": 780,
+				"w": 79,
+				"h": 130
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 79,
+				"h": 130
+			},
+			"sourceSize": {
+				"w": 79,
+				"h": 130
+			}
+		},
+		{
+			"filename": "building-54.png",
+			"frame": {
+				"x": 619,
+				"y": 531,
+				"w": 73,
+				"h": 113
+			},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 73,
+				"h": 113
+			},
+			"sourceSize": {
+				"w": 73,
+				"h": 114
+			}
+		},
+		{
+			"filename": "building-55.png",
+			"frame": {
+				"x": 217,
+				"y": 420,
+				"w": 73,
+				"h": 104
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 73,
+				"h": 104
+			},
+			"sourceSize": {
+				"w": 73,
+				"h": 104
+			}
+		},
+		{
+			"filename": "building-56.png",
+			"frame": {
+				"x": 673,
+				"y": 937,
+				"w": 92,
+				"h": 245
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 92,
+				"h": 245
+			},
+			"sourceSize": {
+				"w": 92,
+				"h": 245
+			}
+		},
+		{
+			"filename": "building-57.png",
+			"frame": {
+				"x": 595,
+				"y": 937,
+				"w": 76,
+				"h": 226
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 76,
+				"h": 226
+			},
+			"sourceSize": {
+				"w": 76,
+				"h": 226
+			}
+		},
+		{
+			"filename": "building-58.png",
+			"frame": {
+				"x": 462,
+				"y": 937,
+				"w": 131,
+				"h": 189
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 131,
+				"h": 189
+			},
+			"sourceSize": {
+				"w": 131,
+				"h": 189
+			}
+		},
+		{
+			"filename": "building-59.png",
+			"frame": {
+				"x": 334,
+				"y": 184,
+				"w": 109,
+				"h": 62
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 109,
+				"h": 62
+			},
+			"sourceSize": {
+				"w": 109,
+				"h": 62
+			}
+		},
+		{
+			"filename": "building-60.png",
+			"frame": {
+				"x": 1,
+				"y": 249,
+				"w": 64,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 64,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 64,
+				"h": 64
+			}
+		},
+		{
+			"filename": "building-61.png",
+			"frame": {
+				"x": 445,
+				"y": 184,
+				"w": 109,
+				"h": 62
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 109,
+				"h": 62
+			},
+			"sourceSize": {
+				"w": 109,
+				"h": 62
+			}
+		},
+		{
+			"filename": "building-62.png",
+			"frame": {
+				"x": 67,
+				"y": 249,
+				"w": 30,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 30,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 30,
+				"h": 64
+			}
+		},
+		{
+			"filename": "building-63.png",
+			"frame": {
+				"x": 99,
+				"y": 249,
+				"w": 30,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 30,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 30,
+				"h": 64
+			}
+		},
+		{
+			"filename": "building-64.png",
+			"frame": {
+				"x": 556,
+				"y": 184,
+				"w": 109,
+				"h": 62
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 109,
+				"h": 62
+			},
+			"sourceSize": {
+				"w": 109,
+				"h": 62
+			}
+		},
+		{
+			"filename": "building-65.png",
+			"frame": {
+				"x": 120,
+				"y": 126,
+				"w": 30,
+				"h": 48
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 30,
+				"h": 48
+			},
+			"sourceSize": {
+				"w": 30,
+				"h": 48
+			}
+		},
+		{
+			"filename": "building-66.png",
+			"frame": {
+				"x": 326,
+				"y": 126,
+				"w": 30,
+				"h": 49
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 30,
+				"h": 49
+			},
+			"sourceSize": {
+				"w": 30,
+				"h": 49
+			}
+		},
+		{
+			"filename": "building-67.png",
+			"frame": {
+				"x": 755,
+				"y": 32,
+				"w": 119,
+				"h": 43
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 119,
+				"h": 43
+			},
+			"sourceSize": {
+				"w": 119,
+				"h": 43
+			}
+		},
+		{
+			"filename": "building-68.png",
+			"frame": {
+				"x": 131,
+				"y": 249,
+				"w": 30,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 30,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 30,
+				"h": 64
+			}
+		},
+		{
+			"filename": "building-69.png",
+			"frame": {
+				"x": 358,
+				"y": 126,
+				"w": 15,
+				"h": 49
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 15,
+				"h": 49
+			},
+			"sourceSize": {
+				"w": 15,
+				"h": 49
+			}
+		},
+		{
+			"filename": "building-70.png",
+			"frame": {
+				"x": 1,
+				"y": 77,
+				"w": 120,
+				"h": 44
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 120,
+				"h": 44
+			},
+			"sourceSize": {
+				"w": 120,
+				"h": 44
+			}
+		},
+		{
+			"filename": "building-71.png",
+			"frame": {
+				"x": 163,
+				"y": 249,
+				"w": 39,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 39,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 39,
+				"h": 64
+			}
+		},
+		{
+			"filename": "building-72.png",
+			"frame": {
+				"x": 600,
+				"y": 780,
+				"w": 108,
+				"h": 150
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 108,
+				"h": 150
+			},
+			"sourceSize": {
+				"w": 108,
+				"h": 150
+			}
+		},
+		{
+			"filename": "building-73.png",
+			"frame": {
+				"x": 894,
+				"y": 650,
+				"w": 98,
+				"h": 128
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 98,
+				"h": 128
+			},
+			"sourceSize": {
+				"w": 98,
+				"h": 128
+			}
+		},
+		{
+			"filename": "building-74.png",
+			"frame": {
+				"x": 1,
+				"y": 937,
+				"w": 160,
+				"h": 168
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 160,
+				"h": 168
+			},
+			"sourceSize": {
+				"w": 160,
+				"h": 168
+			}
+		},
+		{
+			"filename": "building-75.png",
+			"frame": {
+				"x": 871,
+				"y": 937,
+				"w": 117,
+				"h": 345
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 117,
+				"h": 345
+			},
+			"sourceSize": {
+				"w": 117,
+				"h": 345
+			}
+		},
+		{
+			"filename": "building-76.png",
+			"frame": {
+				"x": 284,
+				"y": 937,
+				"w": 176,
+				"h": 186
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 176,
+				"h": 186
+			},
+			"sourceSize": {
+				"w": 176,
+				"h": 186
+			}
+		},
+		{
+			"filename": "building-77.png",
+			"frame": {
+				"x": 767,
+				"y": 937,
+				"w": 102,
+				"h": 284
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 102,
+				"h": 284
+			},
+			"sourceSize": {
+				"w": 102,
+				"h": 284
+			}
+		},
+		{
+			"filename": "building-78.png",
+			"frame": {
+				"x": 487,
+				"y": 126,
+				"w": 66,
+				"h": 51
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 66,
+				"h": 51
+			},
+			"sourceSize": {
+				"w": 66,
+				"h": 51
+			}
+		},
+		{
+			"filename": "building-79.png",
+			"frame": {
+				"x": 694,
+				"y": 531,
+				"w": 90,
+				"h": 115
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 90,
+				"h": 115
+			},
+			"sourceSize": {
+				"w": 90,
+				"h": 115
+			}
+		},
+		{
+			"filename": "building-80.png",
+			"frame": {
+				"x": 823,
+				"y": 780,
+				"w": 73,
+				"h": 155
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 73,
+				"h": 155
+			},
+			"sourceSize": {
+				"w": 73,
+				"h": 155
+			}
+		},
+		{
+			"filename": "building-81.png",
+			"frame": {
+				"x": 1,
+				"y": 531,
+				"w": 74,
+				"h": 110
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 74,
+				"h": 110
+			},
+			"sourceSize": {
+				"w": 74,
+				"h": 110
+			}
+		},
+		{
+			"filename": "building-82.png",
+			"frame": {
+				"x": 77,
+				"y": 531,
+				"w": 73,
+				"h": 110
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 73,
+				"h": 110
+			},
+			"sourceSize": {
+				"w": 73,
+				"h": 110
+			}
+		},
+		{
+			"filename": "building-83.png",
+			"frame": {
+				"x": 419,
+				"y": 126,
+				"w": 66,
+				"h": 50
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 66,
+				"h": 50
+			},
+			"sourceSize": {
+				"w": 66,
+				"h": 50
+			}
+		},
+		{
+			"filename": "building-84.png",
+			"frame": {
+				"x": 859,
+				"y": 531,
+				"w": 63,
+				"h": 117
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 63,
+				"h": 117
+			},
+			"sourceSize": {
+				"w": 63,
+				"h": 117
+			}
+		},
+		{
+			"filename": "plane-001.png",
+			"frame": {
+				"x": 306,
+				"y": 650,
+				"w": 83,
+				"h": 126
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 83,
+				"h": 126
+			},
+			"sourceSize": {
+				"w": 83,
+				"h": 126
+			}
+		},
+		{
+			"filename": "plane-002.png",
+			"frame": {
+				"x": 391,
+				"y": 650,
+				"w": 83,
+				"h": 126
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 83,
+				"h": 126
+			},
+			"sourceSize": {
+				"w": 83,
+				"h": 126
+			}
+		},
+		{
+			"filename": "plane-003.png",
+			"frame": {
+				"x": 476,
+				"y": 650,
+				"w": 81,
+				"h": 126
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 81,
+				"h": 126
+			},
+			"sourceSize": {
+				"w": 81,
+				"h": 126
+			}
+		},
+		{
+			"filename": "plane-004.png",
+			"frame": {
+				"x": 559,
+				"y": 650,
+				"w": 81,
+				"h": 126
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 81,
+				"h": 126
+			},
+			"sourceSize": {
+				"w": 81,
+				"h": 126
+			}
+		},
+		{
+			"filename": "plane-005.png",
+			"frame": {
+				"x": 642,
+				"y": 650,
+				"w": 81,
+				"h": 126
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 81,
+				"h": 126
+			},
+			"sourceSize": {
+				"w": 81,
+				"h": 126
+			}
+		},
+		{
+			"filename": "plane-006.png",
+			"frame": {
+				"x": 725,
+				"y": 650,
+				"w": 82,
+				"h": 126
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 82,
+				"h": 126
+			},
+			"sourceSize": {
+				"w": 82,
+				"h": 126
+			}
+		},
+		{
+			"filename": "plane-007.png",
+			"frame": {
+				"x": 204,
+				"y": 322,
+				"w": 76,
+				"h": 78
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 76,
+				"h": 78
+			},
+			"sourceSize": {
+				"w": 76,
+				"h": 78
+			}
+		},
+		{
+			"filename": "plane-008.png",
+			"frame": {
+				"x": 163,
+				"y": 77,
+				"w": 37,
+				"h": 45
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 37,
+				"h": 45
+			},
+			"sourceSize": {
+				"w": 37,
+				"h": 45
+			}
+		},
+		{
+			"filename": "plane-009.png",
+			"frame": {
+				"x": 202,
+				"y": 77,
+				"w": 36,
+				"h": 45
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 36,
+				"h": 45
+			},
+			"sourceSize": {
+				"w": 36,
+				"h": 45
+			}
+		},
+		{
+			"filename": "plane-010.png",
+			"frame": {
+				"x": 240,
+				"y": 77,
+				"w": 36,
+				"h": 45
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 36,
+				"h": 45
+			},
+			"sourceSize": {
+				"w": 36,
+				"h": 45
+			}
+		},
+		{
+			"filename": "plane-0011.png",
+			"frame": {
+				"x": 809,
+				"y": 650,
+				"w": 83,
+				"h": 126
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 83,
+				"h": 126
+			},
+			"sourceSize": {
+				"w": 83,
+				"h": 126
+			}
+		},
+		{
+			"filename": "plane-011.png",
+			"frame": {
+				"x": 278,
+				"y": 77,
+				"w": 36,
+				"h": 45
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 36,
+				"h": 45
+			},
+			"sourceSize": {
+				"w": 36,
+				"h": 45
+			}
+		},
+		{
+			"filename": "plane-012.png",
+			"frame": {
+				"x": 316,
+				"y": 77,
+				"w": 40,
+				"h": 45
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 40,
+				"h": 45
+			},
+			"sourceSize": {
+				"w": 40,
+				"h": 45
+			}
+		},
+		{
+			"filename": "plane-013.png",
+			"frame": {
+				"x": 358,
+				"y": 77,
+				"w": 40,
+				"h": 45
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 40,
+				"h": 45
+			},
+			"sourceSize": {
+				"w": 40,
+				"h": 45
+			}
+		},
+		{
+			"filename": "plane-014.png",
+			"frame": {
+				"x": 400,
+				"y": 77,
+				"w": 40,
+				"h": 45
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 40,
+				"h": 45
+			},
+			"sourceSize": {
+				"w": 40,
+				"h": 45
+			}
+		},
+		{
+			"filename": "plane-015.png",
+			"frame": {
+				"x": 442,
+				"y": 77,
+				"w": 40,
+				"h": 45
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 40,
+				"h": 45
+			},
+			"sourceSize": {
+				"w": 40,
+				"h": 45
+			}
+		},
+		{
+			"filename": "plane-016.png",
+			"frame": {
+				"x": 555,
+				"y": 126,
+				"w": 46,
+				"h": 51
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 46,
+				"h": 51
+			},
+			"sourceSize": {
+				"w": 46,
+				"h": 51
+			}
+		},
+		{
+			"filename": "plane-017.png",
+			"frame": {
+				"x": 603,
+				"y": 126,
+				"w": 46,
+				"h": 51
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 46,
+				"h": 51
+			},
+			"sourceSize": {
+				"w": 46,
+				"h": 51
+			}
+		},
+		{
+			"filename": "plane-018.png",
+			"frame": {
+				"x": 651,
+				"y": 126,
+				"w": 46,
+				"h": 51
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 46,
+				"h": 51
+			},
+			"sourceSize": {
+				"w": 46,
+				"h": 51
+			}
+		},
+		{
+			"filename": "plane-019.png",
+			"frame": {
+				"x": 699,
+				"y": 126,
+				"w": 46,
+				"h": 51
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 46,
+				"h": 51
+			},
+			"sourceSize": {
+				"w": 46,
+				"h": 51
+			}
+		},
+		{
+			"filename": "plane-020.png",
+			"frame": {
+				"x": 938,
+				"y": 77,
+				"w": 40,
+				"h": 47
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 40,
+				"h": 47
+			},
+			"sourceSize": {
+				"w": 40,
+				"h": 47
+			}
+		},
+		{
+			"filename": "plane-021.png",
+			"frame": {
+				"x": 1,
+				"y": 126,
+				"w": 40,
+				"h": 47
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 40,
+				"h": 47
+			},
+			"sourceSize": {
+				"w": 40,
+				"h": 47
+			}
+		},
+		{
+			"filename": "plane-022.png",
+			"frame": {
+				"x": 152,
+				"y": 126,
+				"w": 40,
+				"h": 48
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 40,
+				"h": 48
+			},
+			"sourceSize": {
+				"w": 40,
+				"h": 48
+			}
+		},
+		{
+			"filename": "plane-023.png",
+			"frame": {
+				"x": 194,
+				"y": 126,
+				"w": 40,
+				"h": 48
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 40,
+				"h": 48
+			},
+			"sourceSize": {
+				"w": 40,
+				"h": 48
+			}
+		},
+		{
+			"filename": "plane-024.png",
+			"frame": {
+				"x": 872,
+				"y": 126,
+				"w": 47,
+				"h": 56
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 47,
+				"h": 56
+			},
+			"sourceSize": {
+				"w": 47,
+				"h": 56
+			}
+		},
+		{
+			"filename": "plane-025.png",
+			"frame": {
+				"x": 921,
+				"y": 126,
+				"w": 47,
+				"h": 56
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 47,
+				"h": 56
+			},
+			"sourceSize": {
+				"w": 47,
+				"h": 56
+			}
+		},
+		{
+			"filename": "plane-026.png",
+			"frame": {
+				"x": 1,
+				"y": 184,
+				"w": 47,
+				"h": 56
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 47,
+				"h": 56
+			},
+			"sourceSize": {
+				"w": 47,
+				"h": 56
+			}
+		},
+		{
+			"filename": "plane-027.png",
+			"frame": {
+				"x": 50,
+				"y": 184,
+				"w": 47,
+				"h": 56
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 47,
+				"h": 56
+			},
+			"sourceSize": {
+				"w": 47,
+				"h": 56
+			}
+		},
+		{
+			"filename": "plane-028.png",
+			"frame": {
+				"x": 99,
+				"y": 184,
+				"w": 47,
+				"h": 56
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 47,
+				"h": 56
+			},
+			"sourceSize": {
+				"w": 47,
+				"h": 56
+			}
+		},
+		{
+			"filename": "plane-029.png",
+			"frame": {
+				"x": 148,
+				"y": 184,
+				"w": 47,
+				"h": 56
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 47,
+				"h": 56
+			},
+			"sourceSize": {
+				"w": 47,
+				"h": 56
+			}
+		},
+		{
+			"filename": "plane-030.png",
+			"frame": {
+				"x": 197,
+				"y": 184,
+				"w": 47,
+				"h": 56
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 47,
+				"h": 56
+			},
+			"sourceSize": {
+				"w": 47,
+				"h": 56
+			}
+		},
+		{
+			"filename": "plane-031.png",
+			"frame": {
+				"x": 123,
+				"y": 77,
+				"w": 38,
+				"h": 44
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 38,
+				"h": 44
+			},
+			"sourceSize": {
+				"w": 38,
+				"h": 44
+			}
+		},
+		{
+			"filename": "plane-032.png",
+			"frame": {
+				"x": 852,
+				"y": 184,
+				"w": 56,
+				"h": 63
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 56,
+				"h": 63
+			},
+			"sourceSize": {
+				"w": 56,
+				"h": 63
+			}
+		},
+		{
+			"filename": "plane-033.png",
+			"frame": {
+				"x": 910,
+				"y": 184,
+				"w": 56,
+				"h": 63
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 56,
+				"h": 63
+			},
+			"sourceSize": {
+				"w": 56,
+				"h": 63
+			}
+		},
+		{
+			"filename": "plane-034.png",
+			"frame": {
+				"x": 204,
+				"y": 249,
+				"w": 56,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 56,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 56,
+				"h": 64
+			}
+		},
+		{
+			"filename": "plane-035.png",
+			"frame": {
+				"x": 262,
+				"y": 249,
+				"w": 56,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 56,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 56,
+				"h": 64
+			}
+		},
+		{
+			"filename": "plane-036.png",
+			"frame": {
+				"x": 375,
+				"y": 126,
+				"w": 42,
+				"h": 49
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 42,
+				"h": 49
+			},
+			"sourceSize": {
+				"w": 42,
+				"h": 49
+			}
+		},
+		{
+			"filename": "plane-037.png",
+			"frame": {
+				"x": 246,
+				"y": 184,
+				"w": 48,
+				"h": 58
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 48,
+				"h": 58
+			},
+			"sourceSize": {
+				"w": 48,
+				"h": 58
+			}
+		},
+		{
+			"filename": "plane-038.png",
+			"frame": {
+				"x": 320,
+				"y": 249,
+				"w": 53,
+				"h": 64
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 53,
+				"h": 64
+			},
+			"sourceSize": {
+				"w": 53,
+				"h": 64
+			}
+		},
+		{
+			"filename": "plane-039.png",
+			"frame": {
+				"x": 793,
+				"y": 126,
+				"w": 40,
+				"h": 53
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 40,
+				"h": 53
+			},
+			"sourceSize": {
+				"w": 40,
+				"h": 53
+			}
+		},
+		{
+			"filename": "plane-040.png",
+			"frame": {
+				"x": 565,
+				"y": 77,
+				"w": 48,
+				"h": 46
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 48,
+				"h": 46
+			},
+			"sourceSize": {
+				"w": 48,
+				"h": 46
+			}
+		},
+		{
+			"filename": "plane-041.png",
+			"frame": {
+				"x": 615,
+				"y": 77,
+				"w": 48,
+				"h": 46
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 48,
+				"h": 46
+			},
+			"sourceSize": {
+				"w": 48,
+				"h": 46
+			}
+		},
+		{
+			"filename": "plane-042.png",
+			"frame": {
+				"x": 665,
+				"y": 77,
+				"w": 48,
+				"h": 46
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 48,
+				"h": 46
+			},
+			"sourceSize": {
+				"w": 48,
+				"h": 46
+			}
+		},
+		{
+			"filename": "plane-043.png",
+			"frame": {
+				"x": 715,
+				"y": 77,
+				"w": 48,
+				"h": 46
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 48,
+				"h": 46
+			},
+			"sourceSize": {
+				"w": 48,
+				"h": 46
+			}
+		},
+		{
+			"filename": "plane-044.png",
+			"frame": {
+				"x": 765,
+				"y": 77,
+				"w": 40,
+				"h": 46
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 40,
+				"h": 46
+			},
+			"sourceSize": {
+				"w": 40,
+				"h": 46
+			}
+		},
+		{
+			"filename": "plane-045.png",
+			"frame": {
+				"x": 484,
+				"y": 77,
+				"w": 35,
+				"h": 45
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 35,
+				"h": 45
+			},
+			"sourceSize": {
+				"w": 35,
+				"h": 45
+			}
+		},
+		{
+			"filename": "plane-046.png",
+			"frame": {
+				"x": 521,
+				"y": 77,
+				"w": 42,
+				"h": 45
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 42,
+				"h": 45
+			},
+			"sourceSize": {
+				"w": 42,
+				"h": 45
+			}
+		},
+		{
+			"filename": "plane-047.png",
+			"frame": {
+				"x": 236,
+				"y": 126,
+				"w": 48,
+				"h": 48
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 48,
+				"h": 48
+			},
+			"sourceSize": {
+				"w": 48,
+				"h": 48
+			}
+		},
+		{
+			"filename": "plane-048.png",
+			"frame": {
+				"x": 876,
+				"y": 32,
+				"w": 26,
+				"h": 43
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 26,
+				"h": 43
+			},
+			"sourceSize": {
+				"w": 26,
+				"h": 43
+			}
+		},
+		{
+			"filename": "plane-049.png",
+			"frame": {
+				"x": 727,
+				"y": 32,
+				"w": 26,
+				"h": 42
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 26,
+				"h": 42
+			},
+			"sourceSize": {
+				"w": 26,
+				"h": 42
+			}
+		},
+		{
+			"filename": "plane-050.png",
+			"frame": {
+				"x": 747,
+				"y": 126,
+				"w": 44,
+				"h": 51
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 44,
+				"h": 51
+			},
+			"sourceSize": {
+				"w": 44,
+				"h": 51
+			}
+		},
+		{
+			"filename": "plane-051.png",
+			"frame": {
+				"x": 43,
+				"y": 126,
+				"w": 40,
+				"h": 47
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 40,
+				"h": 47
+			},
+			"sourceSize": {
+				"w": 40,
+				"h": 47
+			}
+		},
+		{
+			"filename": "plane-052.png",
+			"frame": {
+				"x": 85,
+				"y": 126,
+				"w": 33,
+				"h": 47
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 33,
+				"h": 47
+			},
+			"sourceSize": {
+				"w": 33,
+				"h": 47
+			}
+		},
+		{
+			"filename": "plane-053.png",
+			"frame": {
+				"x": 286,
+				"y": 126,
+				"w": 38,
+				"h": 48
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 38,
+				"h": 48
+			},
+			"sourceSize": {
+				"w": 38,
+				"h": 48
+			}
+		},
+		{
+			"filename": "plane-054.png",
+			"frame": {
+				"x": 650,
+				"y": 32,
+				"w": 16,
+				"h": 36
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 36
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 36
+			}
+		},
+		{
+			"filename": "plane-055.png",
+			"frame": {
+				"x": 354,
+				"y": 32,
+				"w": 100,
+				"h": 32
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 100,
+				"h": 32
+			},
+			"sourceSize": {
+				"w": 100,
+				"h": 32
+			}
+		},
+		{
+			"filename": "plane-056.png",
+			"frame": {
+				"x": 214,
+				"y": 32,
+				"w": 16,
+				"h": 31
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 31
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 31
+			}
+		},
+		{
+			"filename": "plane-057.png",
+			"frame": {
+				"x": 574,
+				"y": 1,
+				"w": 16,
+				"h": 20
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 20
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 20
+			}
+		},
+		{
+			"filename": "plane-058.png",
+			"frame": {
+				"x": 835,
+				"y": 126,
+				"w": 35,
+				"h": 54
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 35,
+				"h": 54
+			},
+			"sourceSize": {
+				"w": 35,
+				"h": 54
+			}
+		},
+		{
+			"filename": "plane-059.png",
+			"frame": {
+				"x": 405,
+				"y": 249,
+				"w": 53,
+				"h": 69
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 53,
+				"h": 69
+			},
+			"sourceSize": {
+				"w": 53,
+				"h": 69
+			}
+		},
+		{
+			"filename": "plane-060.png",
+			"frame": {
+				"x": 460,
+				"y": 249,
+				"w": 53,
+				"h": 69
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 53,
+				"h": 69
+			},
+			"sourceSize": {
+				"w": 53,
+				"h": 69
+			}
+		},
+		{
+			"filename": "plane-061.png",
+			"frame": {
+				"x": 515,
+				"y": 249,
+				"w": 53,
+				"h": 69
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 53,
+				"h": 69
+			},
+			"sourceSize": {
+				"w": 53,
+				"h": 69
+			}
+		},
+		{
+			"filename": "plane-062.png",
+			"frame": {
+				"x": 570,
+				"y": 249,
+				"w": 53,
+				"h": 69
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 53,
+				"h": 69
+			},
+			"sourceSize": {
+				"w": 53,
+				"h": 69
+			}
+		},
+		{
+			"filename": "plane-063.png",
+			"frame": {
+				"x": 681,
+				"y": 249,
+				"w": 54,
+				"h": 70
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 54,
+				"h": 70
+			},
+			"sourceSize": {
+				"w": 54,
+				"h": 70
+			}
+		},
+		{
+			"filename": "plane-064.png",
+			"frame": {
+				"x": 625,
+				"y": 249,
+				"w": 54,
+				"h": 69
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 54,
+				"h": 69
+			},
+			"sourceSize": {
+				"w": 54,
+				"h": 69
+			}
+		},
+		{
+			"filename": "plane-065.png",
+			"frame": {
+				"x": 737,
+				"y": 249,
+				"w": 54,
+				"h": 70
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 54,
+				"h": 70
+			},
+			"sourceSize": {
+				"w": 54,
+				"h": 70
+			}
+		},
+		{
+			"filename": "plane-066.png",
+			"frame": {
+				"x": 793,
+				"y": 249,
+				"w": 54,
+				"h": 70
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 54,
+				"h": 70
+			},
+			"sourceSize": {
+				"w": 54,
+				"h": 70
+			}
+		},
+		{
+			"filename": "plane-067.png",
+			"frame": {
+				"x": 849,
+				"y": 249,
+				"w": 57,
+				"h": 71
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 57,
+				"h": 71
+			},
+			"sourceSize": {
+				"w": 57,
+				"h": 71
+			}
+		},
+		{
+			"filename": "plane-068.png",
+			"frame": {
+				"x": 908,
+				"y": 249,
+				"w": 57,
+				"h": 71
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 57,
+				"h": 71
+			},
+			"sourceSize": {
+				"w": 57,
+				"h": 71
+			}
+		},
+		{
+			"filename": "plane-069.png",
+			"frame": {
+				"x": 1,
+				"y": 322,
+				"w": 57,
+				"h": 71
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 57,
+				"h": 71
+			},
+			"sourceSize": {
+				"w": 57,
+				"h": 71
+			}
+		},
+		{
+			"filename": "plane-070.png",
+			"frame": {
+				"x": 60,
+				"y": 322,
+				"w": 57,
+				"h": 71
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 57,
+				"h": 71
+			},
+			"sourceSize": {
+				"w": 57,
+				"h": 71
+			}
+		},
+		{
+			"filename": "plane-071.png",
+			"frame": {
+				"x": 592,
+				"y": 1,
+				"w": 16,
+				"h": 20
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 20
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 20
+			}
+		},
+		{
+			"filename": "plane-072.png",
+			"frame": {
+				"x": 79,
+				"y": 1,
+				"w": 16,
+				"h": 14
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 14
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 14
+			}
+		},
+		{
+			"filename": "plane-073.png",
+			"frame": {
+				"x": 65,
+				"y": 32,
+				"w": 16,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 30
+			}
+		},
+		{
+			"filename": "plane-074.png",
+			"frame": {
+				"x": 384,
+				"y": 1,
+				"w": 16,
+				"h": 16
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 16
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 16
+			}
+		},
+		{
+			"filename": "plane-075.png",
+			"frame": {
+				"x": 491,
+				"y": 1,
+				"w": 31,
+				"h": 17
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 31,
+				"h": 17
+			},
+			"sourceSize": {
+				"w": 31,
+				"h": 17
+			}
+		},
+		{
+			"filename": "plane-076.png",
+			"frame": {
+				"x": 97,
+				"y": 1,
+				"w": 16,
+				"h": 14
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 14
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 14
+			}
+		},
+		{
+			"filename": "plane-077.png",
+			"frame": {
+				"x": 115,
+				"y": 1,
+				"w": 32,
+				"h": 14
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 32,
+				"h": 14
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 14
+			}
+		},
+		{
+			"filename": "plane-078.png",
+			"frame": {
+				"x": 402,
+				"y": 1,
+				"w": 16,
+				"h": 16
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 16
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 16
+			}
+		},
+		{
+			"filename": "plane-079.png",
+			"frame": {
+				"x": 420,
+				"y": 1,
+				"w": 16,
+				"h": 16
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 16
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 16
+			}
+		},
+		{
+			"filename": "plane-080.png",
+			"frame": {
+				"x": 185,
+				"y": 1,
+				"w": 15,
+				"h": 15
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 15,
+				"h": 15
+			},
+			"sourceSize": {
+				"w": 15,
+				"h": 15
+			}
+		},
+		{
+			"filename": "plane-081.png",
+			"frame": {
+				"x": 202,
+				"y": 1,
+				"w": 14,
+				"h": 15
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 14,
+				"h": 15
+			},
+			"sourceSize": {
+				"w": 14,
+				"h": 15
+			}
+		},
+		{
+			"filename": "plane-082.png",
+			"frame": {
+				"x": 149,
+				"y": 1,
+				"w": 16,
+				"h": 14
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 14
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 14
+			}
+		},
+		{
+			"filename": "plane-083.png",
+			"frame": {
+				"x": 667,
+				"y": 184,
+				"w": 68,
+				"h": 62
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 68,
+				"h": 62
+			},
+			"sourceSize": {
+				"w": 68,
+				"h": 62
+			}
+		},
+		{
+			"filename": "plane-084.png",
+			"frame": {
+				"x": 737,
+				"y": 184,
+				"w": 72,
+				"h": 62
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 72,
+				"h": 62
+			},
+			"sourceSize": {
+				"w": 72,
+				"h": 62
+			}
+		},
+		{
+			"filename": "plane-085.png",
+			"frame": {
+				"x": 456,
+				"y": 32,
+				"w": 68,
+				"h": 32
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 68,
+				"h": 32
+			},
+			"sourceSize": {
+				"w": 68,
+				"h": 32
+			}
+		},
+		{
+			"filename": "plane-086.png",
+			"frame": {
+				"x": 526,
+				"y": 32,
+				"w": 72,
+				"h": 32
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 72,
+				"h": 32
+			},
+			"sourceSize": {
+				"w": 72,
+				"h": 32
+			}
+		},
+		{
+			"filename": "plane-087.png",
+			"frame": {
+				"x": 438,
+				"y": 1,
+				"w": 15,
+				"h": 16
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 15,
+				"h": 16
+			},
+			"sourceSize": {
+				"w": 15,
+				"h": 16
+			}
+		},
+		{
+			"filename": "plane-088.png",
+			"frame": {
+				"x": 524,
+				"y": 1,
+				"w": 16,
+				"h": 17
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 17
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 17
+			}
+		},
+		{
+			"filename": "plane-089.png",
+			"frame": {
+				"x": 218,
+				"y": 1,
+				"w": 13,
+				"h": 15
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 13,
+				"h": 15
+			},
+			"sourceSize": {
+				"w": 13,
+				"h": 15
+			}
+		},
+		{
+			"filename": "plane-090.png",
+			"frame": {
+				"x": 48,
+				"y": 1,
+				"w": 13,
+				"h": 12
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 13,
+				"h": 12
+			},
+			"sourceSize": {
+				"w": 13,
+				"h": 12
+			}
+		},
+		{
+			"filename": "plane-091.png",
+			"frame": {
+				"x": 233,
+				"y": 1,
+				"w": 14,
+				"h": 15
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 14,
+				"h": 15
+			},
+			"sourceSize": {
+				"w": 14,
+				"h": 15
+			}
+		},
+		{
+			"filename": "plane-092.png",
+			"frame": {
+				"x": 249,
+				"y": 1,
+				"w": 14,
+				"h": 15
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 14,
+				"h": 15
+			},
+			"sourceSize": {
+				"w": 14,
+				"h": 15
+			}
+		},
+		{
+			"filename": "plane-093.png",
+			"frame": {
+				"x": 375,
+				"y": 249,
+				"w": 28,
+				"h": 66
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 28,
+				"h": 66
+			},
+			"sourceSize": {
+				"w": 28,
+				"h": 66
+			}
+		},
+		{
+			"filename": "plane-094.png",
+			"frame": {
+				"x": 83,
+				"y": 32,
+				"w": 32,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 32,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 30
+			}
+		},
+		{
+			"filename": "plane-095.png",
+			"frame": {
+				"x": 232,
+				"y": 32,
+				"w": 31,
+				"h": 31
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 31,
+				"h": 31
+			},
+			"sourceSize": {
+				"w": 31,
+				"h": 31
+			}
+		},
+		{
+			"filename": "plane-096.png",
+			"frame": {
+				"x": 265,
+				"y": 1,
+				"w": 15,
+				"h": 15
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 15,
+				"h": 15
+			},
+			"sourceSize": {
+				"w": 15,
+				"h": 15
+			}
+		},
+		{
+			"filename": "plane-097.png",
+			"frame": {
+				"x": 282,
+				"y": 1,
+				"w": 15,
+				"h": 15
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 15,
+				"h": 15
+			},
+			"sourceSize": {
+				"w": 15,
+				"h": 15
+			}
+		},
+		{
+			"filename": "plane-098.png",
+			"frame": {
+				"x": 455,
+				"y": 1,
+				"w": 16,
+				"h": 16
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 16
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 16
+			}
+		},
+		{
+			"filename": "plane-099.png",
+			"frame": {
+				"x": 265,
+				"y": 32,
+				"w": 32,
+				"h": 31
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 32,
+				"h": 31
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 31
+			}
+		},
+		{
+			"filename": "plane-100.png",
+			"frame": {
+				"x": 600,
+				"y": 32,
+				"w": 32,
+				"h": 32
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 32,
+				"h": 32
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 32
+			}
+		},
+		{
+			"filename": "plane-101.png",
+			"frame": {
+				"x": 299,
+				"y": 1,
+				"w": 15,
+				"h": 15
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 15,
+				"h": 15
+			},
+			"sourceSize": {
+				"w": 15,
+				"h": 15
+			}
+		},
+		{
+			"filename": "plane-102.png",
+			"frame": {
+				"x": 473,
+				"y": 1,
+				"w": 16,
+				"h": 16
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 16
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 16
+			}
+		},
+		{
+			"filename": "plane-103.png",
+			"frame": {
+				"x": 316,
+				"y": 1,
+				"w": 16,
+				"h": 15
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 15
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 15
+			}
+		},
+		{
+			"filename": "plane-104.png",
+			"frame": {
+				"x": 860,
+				"y": 1,
+				"w": 16,
+				"h": 25
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 25
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 25
+			}
+		},
+		{
+			"filename": "plane-105.png",
+			"frame": {
+				"x": 634,
+				"y": 32,
+				"w": 14,
+				"h": 32
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 14,
+				"h": 32
+			},
+			"sourceSize": {
+				"w": 14,
+				"h": 32
+			}
+		},
+		{
+			"filename": "plane-106.png",
+			"frame": {
+				"x": 743,
+				"y": 1,
+				"w": 12,
+				"h": 24
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 12,
+				"h": 24
+			},
+			"sourceSize": {
+				"w": 12,
+				"h": 24
+			}
+		},
+		{
+			"filename": "plane-107.png",
+			"frame": {
+				"x": 757,
+				"y": 1,
+				"w": 12,
+				"h": 24
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 12,
+				"h": 24
+			},
+			"sourceSize": {
+				"w": 12,
+				"h": 24
+			}
+		},
+		{
+			"filename": "plane-108.png",
+			"frame": {
+				"x": 32,
+				"y": 1,
+				"w": 14,
+				"h": 11
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 14,
+				"h": 11
+			},
+			"sourceSize": {
+				"w": 14,
+				"h": 11
+			}
+		},
+		{
+			"filename": "plane-109.png",
+			"frame": {
+				"x": 117,
+				"y": 32,
+				"w": 46,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 46,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 46,
+				"h": 30
+			}
+		},
+		{
+			"filename": "plane-110.png",
+			"frame": {
+				"x": 629,
+				"y": 1,
+				"w": 46,
+				"h": 23
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 46,
+				"h": 23
+			},
+			"sourceSize": {
+				"w": 46,
+				"h": 23
+			}
+		},
+		{
+			"filename": "plane-111.png",
+			"frame": {
+				"x": 677,
+				"y": 1,
+				"w": 46,
+				"h": 23
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 46,
+				"h": 23
+			},
+			"sourceSize": {
+				"w": 46,
+				"h": 23
+			}
+		},
+		{
+			"filename": "plane-112.png",
+			"frame": {
+				"x": 165,
+				"y": 32,
+				"w": 14,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 14,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 14,
+				"h": 30
+			}
+		},
+		{
+			"filename": "plane-113.png",
+			"frame": {
+				"x": 558,
+				"y": 1,
+				"w": 14,
+				"h": 19
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 14,
+				"h": 19
+			},
+			"sourceSize": {
+				"w": 14,
+				"h": 19
+			}
+		},
+		{
+			"filename": "plane-114.png",
+			"frame": {
+				"x": 542,
+				"y": 1,
+				"w": 14,
+				"h": 18
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 14,
+				"h": 18
+			},
+			"sourceSize": {
+				"w": 14,
+				"h": 18
+			}
+		},
+		{
+			"filename": "plane-115.png",
+			"frame": {
+				"x": 771,
+				"y": 1,
+				"w": 16,
+				"h": 24
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 24
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 24
+			}
+		},
+		{
+			"filename": "plane-116.png",
+			"frame": {
+				"x": 789,
+				"y": 1,
+				"w": 17,
+				"h": 24
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 17,
+				"h": 24
+			},
+			"sourceSize": {
+				"w": 17,
+				"h": 24
+			}
+		},
+		{
+			"filename": "plane-117.png",
+			"frame": {
+				"x": 931,
+				"y": 1,
+				"w": 17,
+				"h": 29
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 17,
+				"h": 29
+			},
+			"sourceSize": {
+				"w": 17,
+				"h": 29
+			}
+		},
+		{
+			"filename": "plane-118.png",
+			"frame": {
+				"x": 725,
+				"y": 1,
+				"w": 16,
+				"h": 23
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 23
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 23
+			}
+		},
+		{
+			"filename": "plane-119.png",
+			"frame": {
+				"x": 63,
+				"y": 1,
+				"w": 14,
+				"h": 13
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 14,
+				"h": 13
+			},
+			"sourceSize": {
+				"w": 14,
+				"h": 13
+			}
+		},
+		{
+			"filename": "plane-120.png",
+			"frame": {
+				"x": 16,
+				"y": 1,
+				"w": 14,
+				"h": 10
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 14,
+				"h": 10
+			},
+			"sourceSize": {
+				"w": 14,
+				"h": 10
+			}
+		},
+		{
+			"filename": "plane-121.png",
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 13,
+				"h": 8
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 13,
+				"h": 8
+			},
+			"sourceSize": {
+				"w": 13,
+				"h": 8
+			}
+		},
+		{
+			"filename": "plane-122.png",
+			"frame": {
+				"x": 334,
+				"y": 1,
+				"w": 15,
+				"h": 15
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 15,
+				"h": 15
+			},
+			"sourceSize": {
+				"w": 15,
+				"h": 15
+			}
+		},
+		{
+			"filename": "plane-123.png",
+			"frame": {
+				"x": 950,
+				"y": 1,
+				"w": 16,
+				"h": 29
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 29
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 29
+			}
+		},
+		{
+			"filename": "plane-124.png",
+			"frame": {
+				"x": 808,
+				"y": 1,
+				"w": 16,
+				"h": 24
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 24
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 24
+			}
+		},
+		{
+			"filename": "plane-125.png",
+			"frame": {
+				"x": 351,
+				"y": 1,
+				"w": 14,
+				"h": 15
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 14,
+				"h": 15
+			},
+			"sourceSize": {
+				"w": 14,
+				"h": 15
+			}
+		},
+		{
+			"filename": "plane-126.png",
+			"frame": {
+				"x": 367,
+				"y": 1,
+				"w": 15,
+				"h": 15
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 15,
+				"h": 15
+			},
+			"sourceSize": {
+				"w": 15,
+				"h": 15
+			}
+		},
+		{
+			"filename": "plane-127.png",
+			"frame": {
+				"x": 1,
+				"y": 32,
+				"w": 30,
+				"h": 29
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 30,
+				"h": 29
+			},
+			"sourceSize": {
+				"w": 30,
+				"h": 29
+			}
+		},
+		{
+			"filename": "plane-128.png",
+			"frame": {
+				"x": 33,
+				"y": 32,
+				"w": 30,
+				"h": 29
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 30,
+				"h": 29
+			},
+			"sourceSize": {
+				"w": 30,
+				"h": 29
+			}
+		},
+		{
+			"filename": "plane-129.png",
+			"frame": {
+				"x": 878,
+				"y": 1,
+				"w": 17,
+				"h": 26
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 17,
+				"h": 26
+			},
+			"sourceSize": {
+				"w": 17,
+				"h": 26
+			}
+		},
+		{
+			"filename": "plane-130.png",
+			"frame": {
+				"x": 826,
+				"y": 1,
+				"w": 32,
+				"h": 24
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 32,
+				"h": 24
+			},
+			"sourceSize": {
+				"w": 32,
+				"h": 24
+			}
+		},
+		{
+			"filename": "plane-131.png",
+			"frame": {
+				"x": 299,
+				"y": 32,
+				"w": 16,
+				"h": 31
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 31
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 31
+			}
+		},
+		{
+			"filename": "plane-132.png",
+			"frame": {
+				"x": 181,
+				"y": 32,
+				"w": 31,
+				"h": 30
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 31,
+				"h": 30
+			},
+			"sourceSize": {
+				"w": 31,
+				"h": 30
+			}
+		},
+		{
+			"filename": "plane-133.png",
+			"frame": {
+				"x": 317,
+				"y": 32,
+				"w": 16,
+				"h": 31
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 16,
+				"h": 31
+			},
+			"sourceSize": {
+				"w": 16,
+				"h": 31
+			}
+		},
+		{
+			"filename": "plane-134.png",
+			"frame": {
+				"x": 610,
+				"y": 1,
+				"w": 17,
+				"h": 22
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 17,
+				"h": 22
+			},
+			"sourceSize": {
+				"w": 17,
+				"h": 22
+			}
+		},
+		{
+			"filename": "plane-135.png",
+			"frame": {
+				"x": 335,
+				"y": 32,
+				"w": 17,
+				"h": 31
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 17,
+				"h": 31
+			},
+			"sourceSize": {
+				"w": 17,
+				"h": 31
+			}
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "objects.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 993,
+			"h": 1283
+		},
+		"scale": "1",
+		"smartupdate": "$TexturePacker:SmartUpdate:9fa6ad8a9a370c8a1aa00bfc8fba1554:2e159e52ddbcd3ba6cdb67e1cf216457:8d6d12ff4d5234f2a4b19e0a906dbf52$"
+	}
+}

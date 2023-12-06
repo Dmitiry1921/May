@@ -4,7 +4,7 @@
  * Created by Dima101 on 24.04.2016.
  */
 import {storage, MobMicroTask, Point, Face} from "../../GameEngine";
-import {Dialog, dialog, quest, inventory} from "../interfaces";
+import {Dialog, dialog, quest, inventory, healthPower} from "../interfaces";
 import {sprites} from "../assets";
 import {Astof} from "../characters";
 
@@ -14,7 +14,6 @@ const {astofFace, heroFaceM, vanessaFace} = sprites;
 export const microtasksScope = {
 	nps: {
 		astof() {
-			console.log(astofFace);
 			dialog.set([
 				{
 					text: "- Привет Салага, я слыхал о тебе..",
@@ -26,90 +25,92 @@ export const microtasksScope = {
 					faceLeft: '',
 					faceRight: '',
 				},
-				{
-					text: '..В КРИЗИС !!!',
-					faceLeft: '',
-					faceRight: Dialog.setFace(astofFace, astofFace.getTile(3, 0), Face.FLIP_NONE),
-				},
-				{
-					text: 'Угу. Да эт. Я..',
-					faceLeft: '',
-					faceRight: Dialog.setFace(astofFace, astofFace.getTile(0, 0), Face.FLIP_NONE),
-				},
-				{
-					text: "- Как мне известно денег у тебя больше не осталось..",
-					faceLeft: '',
-					faceRight: Dialog.setFace(astofFace, astofFace.getTile(1, 0), Face.FLIP_NONE),
-				},
-				{
-					text: 'Да это точно, чертов рубль..',
-					faceLeft: '',
-					faceRight: Dialog.setFace(astofFace, astofFace.getTile(0, 1), Face.FLIP_NONE),
-				},
-				{
-					text: '..когда он обвалился моих денег хватило только на рулон туалетной бумаги..',
-					faceLeft: '',
-					faceRight: Dialog.setFace(astofFace, astofFace.getTile(0, 1), Face.FLIP_NONE),
-				},
-				{
-					text: '- И что же ты собираешься делать ?',
-					faceLeft: '',
-					faceRight: Dialog.setFace(astofFace, astofFace.getTile(2, 0), Face.FLIP_NONE),
-				},
-				{
-					text: 'Надо свалить с этих островов..',
-					faceLeft: '',
-					faceRight: Dialog.setFace(astofFace, astofFace.getTile(2, 1), Face.FLIP_NONE),
-				},
-				{
-					text: '- А что это с тобой. Где тебя так потаскало ?',
-					faceLeft: '',
-					faceRight: Dialog.setFace(astofFace, astofFace.getTile(0, 0), Face.FLIP_NONE),
-				},
-				{
-					text: 'Хотел есть, пришлось драться с крысой за остатки тухлой рыбы..',
-					faceLeft: '',
-					faceRight: Dialog.setFace(astofFace, astofFace.getTile(1, 1), Face.FLIP_NONE),
-				},
-				{
-					text: '- Ну в общем я всегда в твоем распоряжении..',
-					faceLeft: '',
-					faceRight: Dialog.setFace(astofFace, astofFace.getTile(1, 0), Face.FLIP_NONE),
-				},
-				{
-					text: '.. у меня есть лодка я могу отвезти тебе но..',
-					faceLeft: '',
-					faceRight: Dialog.setFace(astofFace, astofFace.getTile(2, 1), Face.FLIP_NONE),
-				},
-				{
-					text: '..только на соседние острова, горючего у меня не так много...',
-					faceLeft: '',
-					faceRight: Dialog.setFace(astofFace, astofFace.getTile(2, 1), Face.FLIP_NONE),
-				},
-				{
-					text: '..Не благодари, я тебя подлечил :)',
-					faceLeft: '',
-					faceRight: Dialog.setFace(astofFace, astofFace.getTile(2, 1), Face.FLIP_NONE),
-				},
-				{
-					text: 'Отлично, пойду осмотрюсь может какая работенка найдется.',
-					faceLeft: '',
-					faceRight: Dialog.setFace(astofFace, astofFace.getTile(1, 0), Face.FLIP_NONE),
-				},
-				{
-					text: '- Кстати, меня зовут ' + this.currentNPC.name,
-					faceLeft: '',
-					faceRight: Dialog.setFace(astofFace, astofFace.getTile(3, 1), Face.FLIP_NONE),
-				},
+				// {
+				// 	text: '..В КРИЗИС !!!',
+				// 	faceLeft: '',
+				// 	faceRight: Dialog.setFace(astofFace, astofFace.getTile(3, 0), Face.FLIP_NONE),
+				// },
+				// {
+				// 	text: 'Угу. Да эт. Я..',
+				// 	faceLeft: '',
+				// 	faceRight: Dialog.setFace(astofFace, astofFace.getTile(0, 0), Face.FLIP_NONE),
+				// },
+				// {
+				// 	text: "- Как мне известно денег у тебя больше не осталось..",
+				// 	faceLeft: '',
+				// 	faceRight: Dialog.setFace(astofFace, astofFace.getTile(1, 0), Face.FLIP_NONE),
+				// },
+				// {
+				// 	text: 'Да это точно, чертов рубль..',
+				// 	faceLeft: '',
+				// 	faceRight: Dialog.setFace(astofFace, astofFace.getTile(0, 1), Face.FLIP_NONE),
+				// },
+				// {
+				// 	text: '..когда он обвалился моих денег хватило только на рулон туалетной бумаги..',
+				// 	faceLeft: '',
+				// 	faceRight: Dialog.setFace(astofFace, astofFace.getTile(0, 1), Face.FLIP_NONE),
+				// },
+				// {
+				// 	text: '- И что же ты собираешься делать ?',
+				// 	faceLeft: '',
+				// 	faceRight: Dialog.setFace(astofFace, astofFace.getTile(2, 0), Face.FLIP_NONE),
+				// },
+				// {
+				// 	text: 'Надо свалить с этих островов..',
+				// 	faceLeft: '',
+				// 	faceRight: Dialog.setFace(astofFace, astofFace.getTile(2, 1), Face.FLIP_NONE),
+				// },
+				// {
+				// 	text: '- А что это с тобой. Где тебя так потаскало ?',
+				// 	faceLeft: '',
+				// 	faceRight: Dialog.setFace(astofFace, astofFace.getTile(0, 0), Face.FLIP_NONE),
+				// },
+				// {
+				// 	text: 'Хотел есть, пришлось драться с крысой за остатки тухлой рыбы..',
+				// 	faceLeft: '',
+				// 	faceRight: Dialog.setFace(astofFace, astofFace.getTile(1, 1), Face.FLIP_NONE),
+				// },
+				// {
+				// 	text: '- Ну в общем я всегда в твоем распоряжении..',
+				// 	faceLeft: '',
+				// 	faceRight: Dialog.setFace(astofFace, astofFace.getTile(1, 0), Face.FLIP_NONE),
+				// },
+				// {
+				// 	text: '.. у меня есть лодка я могу отвезти тебе но..',
+				// 	faceLeft: '',
+				// 	faceRight: Dialog.setFace(astofFace, astofFace.getTile(2, 1), Face.FLIP_NONE),
+				// },
+				// {
+				// 	text: '..только на соседние острова, горючего у меня не так много...',
+				// 	faceLeft: '',
+				// 	faceRight: Dialog.setFace(astofFace, astofFace.getTile(2, 1), Face.FLIP_NONE),
+				// },
+				// {
+				// 	text: '..Не благодари, я тебя подлечил :)',
+				// 	faceLeft: '',
+				// 	faceRight: Dialog.setFace(astofFace, astofFace.getTile(2, 1), Face.FLIP_NONE),
+				// },
+				// {
+				// 	text: 'Отлично, пойду осмотрюсь может какая работенка найдется.',
+				// 	faceLeft: '',
+				// 	faceRight: Dialog.setFace(astofFace, astofFace.getTile(1, 0), Face.FLIP_NONE),
+				// },
+				// {
+				// 	text: '- Кстати, меня зовут ' + this.currentNPC.name,
+				// 	faceLeft: '',
+				// 	faceRight: Dialog.setFace(astofFace, astofFace.getTile(3, 1), Face.FLIP_NONE),
+				// },
 			]);
 			dialog.then(() => {
 				// TODO
-				 quest.set("Найти уже девушку..^.^");
-				//  this._Hero.options.health = 5; //Лечим игрока.
+				quest.set("Найти уже девушку..^.^");
+				healthPower.value = healthPower.max; // Лечим игрока.
 				this.currentNPC.autoWalk.searchPathOnce(new Point(5 * 32, 32));
 				this.currentNPC.autoWalk.then(() => {
 					// Задаем микро задачу для НПС
-					this.currentNPC.setMicroTask(new MobMicroTask('code.nps.astofWait()'));
+					setTimeout(() => {
+						this.currentNPC.setMicroTask(new MobMicroTask('code.nps.astofWait()'));
+					}, 3000);
 				});
 			})
 

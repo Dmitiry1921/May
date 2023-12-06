@@ -4,10 +4,15 @@ import {GameObject, Rectangle} from "../../GameEngine";
 
 export class Text extends GameObject {
 	#text;
+	#textAlign;
 	#rect;
+	#visible;
 	#fillStyle;
 	#lineHeight;
 	#font;
+	#fontSize;
+	#fontFamily;
+	#fontStyle;
 	#words;
 	#localCanvasContext; //
 	/**
@@ -15,14 +20,23 @@ export class Text extends GameObject {
 	 */
 	#lines;
 
-	constructor(text = '') {
+	constructor(options = {
+		rect: new Rectangle(0, 0, 100, 100),
+		text: '',
+	}) {
 		super();
+		if(typeof options !== 'object') throw new TypeError('param must be a Object');
+		const {text, rect, textAlign, fontSize} = options;
 		this.text = text;
-		this.#rect = new Rectangle(0, 0, 400, 300);
-		this.#fillStyle = "#000";
+		this.rect = rect;
+		this.#fillStyle = '#000';
 		this.#lineHeight = 20;
-		this.#font = 'bold 15px Arial';
+		this.textAlign = textAlign || Text.ALIGN.LEFT;
+		this.fontSize = fontSize || '15px';
+		this.#fontFamily = 'Arial';
+		this.#fontStyle = 'bold';
 		this.#localCanvasContext = null;
+		this.#visible = true;
 		this.#words = [];
 		this.#lines = [];
 	}
@@ -36,8 +50,33 @@ export class Text extends GameObject {
 		return measureText;
 	}
 
+	get bound() {
+		return this.#rect;
+	}
+
+	set rect(value) {
+		if(!(value instanceof Rectangle)) throw new TypeError('value must be a Rectangle');
+		this.#rect = value;
+	}
+
 	get text() {
 		return this.#text;
+	}
+
+	get fillStyle() {
+		return this.#fillStyle;
+	}
+
+	get fontSize() {
+		return this.#fontSize;
+	}
+
+	set fontSize(value) {
+		this.#fontSize = value;
+	}
+
+	set fillStyle(value) {
+		this.#fillStyle = value;
 	}
 
 	set text(value) {
@@ -46,6 +85,17 @@ export class Text extends GameObject {
 		this.#text = value;
 		this.#lines = [];
 		this.#wrapText();
+	}
+
+	set textAlign(value) {
+		const availableValue = Object.values(Text.ALIGN);
+		if(!availableValue.includes(value)) throw Error(`textAlign unavailable value use Text.ALIGN or (${availableValue.join(', ')})`);
+
+		this.#textAlign = value;
+	}
+
+	get textAlign() {
+		return this.#textAlign;
 	}
 
 	get x() {
@@ -92,8 +142,17 @@ export class Text extends GameObject {
 	#style(context) {
 		if(!context) return;
 		context.font = this.#font;
+		context.textAlign = this.#textAlign;
 		context.fillStyle = this.#fillStyle;
 		context.textBaseline = 'top';
+	}
+
+	show() {
+		this.#visible = true;
+	}
+
+	hide() {
+		this.#visible = false;
 	}
 
 	moveTo(point) {
@@ -112,9 +171,11 @@ export class Text extends GameObject {
 	}
 
 	update(deltaTime) {
+		this.#font = `${this.#fontStyle} ${this.#fontSize} ${this.#fontFamily}`;
 	}
 
 	render(canvasContext) {
+		if(!this.#visible) return;
 		if(!this.#localCanvasContext) {
 			this.#localCanvasContext = canvasContext;
 			this.text = this.#text; // инициализируем текст
@@ -122,9 +183,21 @@ export class Text extends GameObject {
 		}
 		// this.#rect.render(canvasContext);
 		canvasContext.save();
+		this.#style(canvasContext);
 		this.#lines.forEach((line, index) => {
-			this.#style(canvasContext);
-			canvasContext.fillText(line.text, Math.round(this.x), Math.round(this.y + (this.#lineHeight * index)));
+			let x = 0;
+			switch (this.#textAlign) {
+				case Text.ALIGN.CENTER:
+					x = this.width / 2 - line.width / 2;
+					break;
+				case Text.ALIGN.RIGHT:
+					x = this.width - line.width;
+					break;
+				case Text.ALIGN.LEFT:
+					x = 0;
+					break;
+			}
+			canvasContext.fillText(line.text, Math.round(this.x + x), Math.round(this.y + (this.#lineHeight * index)));
 		});
 		canvasContext.restore();
 	}
@@ -132,4 +205,16 @@ export class Text extends GameObject {
 	hasCollider() {
 	}
 
+	/**
+	 * Доступные ориентации текста
+	 * @returns {{CENTER: string<'center'>, LEFT: string<'left'>, RIGHT: string<'right'>}}
+	 * @constructor
+	 */
+	static get ALIGN() {
+		return {
+			CENTER: 'center',
+			RIGHT: 'right',
+			LEFT: 'left',
+		}
+	}
 }

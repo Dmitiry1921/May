@@ -8,7 +8,7 @@ const {batman} = sprites;
 
 export const states = GameLogic.getDefaultStates(batman, new Vector2(0, 0));
 
-export const Batman = new NPC('Ярик', states); // Астоф
+export const Batman = new NPC('Batman', states); // Астоф
 
 // TODO REMOVE
 Batman.moveTo(new Point(21 * 32, 7 * 32));

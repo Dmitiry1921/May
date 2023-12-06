@@ -83,7 +83,7 @@ export class PathFinder {
 	}
 
 	#createGrid() {
-		const colliders = [...this.#colliders];
+		console.log('#createGrid');
 		const arr2d = create2DArray(this.#cellCountX, this.#cellCountY, 1);
 		for (let x = 0; x < arr2d.length; x++) {
 			for (let y = 0; y < arr2d[x].length; y++) {
@@ -93,7 +93,7 @@ export class PathFinder {
 					this.cellSize,
 					this.cellSize,
 				);
-				if(colliders.some(collider => {
+				if([...this.#colliders].some(collider => {
 					return Collider.Rectangle2Rectangle(rect, collider);
 				})) {
 					this.#walls.add(new Point(x, y));
@@ -203,11 +203,16 @@ export class PathFinder {
 	}
 
 	searchPath(start, end) {
-		const startOnGrid = this.#getPointOnGrid(start);
-		const endOnGrid = this.#getPointOnGrid(end);
-		const startNode = this.#grid[startOnGrid.x][startOnGrid.y];
-		const endNode = this.#grid[endOnGrid.x][endOnGrid.y];
-		return astar.search(this.#graph, startNode, endNode)
-			.map(item => this.#getPointOnMap(new Point(item.x, item.y)));
+		try {
+			const startOnGrid = this.#getPointOnGrid(start);
+			const endOnGrid = this.#getPointOnGrid(end);
+			const startNode = this.#grid[startOnGrid.x][startOnGrid.y];
+			const endNode = this.#grid[endOnGrid.x][endOnGrid.y];
+			return astar.search(this.#graph, startNode, endNode)
+				.map(item => this.#getPointOnMap(new Point(item.x, item.y)));
+		} catch (err) {
+			console.error(this, err);
+			throw err;
+		}
 	}
 }

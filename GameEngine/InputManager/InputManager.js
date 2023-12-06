@@ -1,3 +1,5 @@
+'use strict';
+
 import KeyboardController from "./KeyboardController.js";
 import GamePadController from "./GamePadController.js";
 

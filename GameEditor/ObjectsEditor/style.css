@@ -1,0 +1,30 @@
+.screen {
+	display: flex;
+	width: 100vw;
+	height: 100vh;
+	background-color: #eaedf0;
+}
+#objectsPreview > canvas, #wallPreview > canvas {
+	border: 2px solid transparent;
+	margin: 2.5px;
+}
+.active {
+	border-color: #0d6efd!important;
+
+	/*background-color: #0d6efd;*/
+	/*background-image: none;*/
+}
+
+.hide {
+	display: none;
+}
+
+#fileInput {
+	display: none;
+}
+
+canvas {
+	background-image: url("images/empty.png");
+	image-rendering: pixelated;
+}
+

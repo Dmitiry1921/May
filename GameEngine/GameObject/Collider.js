@@ -7,6 +7,13 @@ const Shapes = [
 	'Rectangle',
 ];
 
+export const COLLIDER_TYPE = {
+	NPC: 'NPC',
+	PLAYER: 'Player',
+	WALL: 'Wall',
+	PATH_FINDER: 'PathFinder',
+};
+
 export class Collider extends GameObject {
 	#type;
 	#shape;
@@ -18,6 +25,7 @@ export class Collider extends GameObject {
 	// С каким коллайдером столкнулся данный коллайдер
 	#colliders;
 	#handledTypes;
+	#collidersByType;
 	#collidedNextFrame;
 	#availableDirections;
 
@@ -25,7 +33,8 @@ export class Collider extends GameObject {
 		super();
 		this.#shape = shape;
 		this.#type = type;
-		this.#colliders = new Map();
+		this.#colliders = new Set();
+		this.#collidersByType = new Map();
 		this.#handlers = new Map();
 		this.#handledTypes = new Set();
 
@@ -100,6 +109,16 @@ export class Collider extends GameObject {
 		this.#shape = value;
 	}
 
+	get colliders() {
+		return this.#colliders;
+	}
+
+	get collidersByType() {
+		return this.#collidersByType;
+	}
+
+	getAllCollider
+
 	bound() {
 		this.#shape.bound();
 	}
@@ -129,7 +148,7 @@ export class Collider extends GameObject {
 		// Если есть события для обработки пересечения
 		uniqTypes.forEach(type => {
 			// Берем все коллайдеры с этим типом
-			this.#colliders.get(type)?.forEach((collider) => {
+			this.#collidersByType.get(type)?.forEach((collider) => {
 				callback(collider, type);
 			});
 		});
@@ -190,6 +209,21 @@ export class Collider extends GameObject {
 		});
 	}
 
+	/**
+	 * Полностью очищает класс
+	 */
+	clear() {
+		this.#colliders.clear();
+		this.#collidersByType.clear();
+
+		this.#collided.clear();
+		this.#collidedNextFrame.clear();
+		this.#availableDirections.clear();
+	}
+
+	/**
+	 * Сбрасывает состояние после каждого кадра
+	 */
 	#reset() {
 		// Сбрасываем состояние
 		this.#collided.clear();
@@ -313,15 +347,17 @@ export class Collider extends GameObject {
 	 */
 	addCollider(collider) {
 		if (!(collider instanceof GameObject)) throw new TypeError('collider must be instance of GameObject');
-		if (!this.#colliders.has(collider.type)) {
-			this.#colliders.set(collider.type, new Set());
+		if (!this.#collidersByType.has(collider.type)) {
+			this.#collidersByType.set(collider.type, new Set());
 		}
-		this.#colliders.get(collider.type).add(collider);
+		this.#colliders.add(collider);
+		this.#collidersByType.get(collider.type).add(collider);
 	}
 
-	addColliders(colliders) {
-		// console.log(colliders);
-		[...colliders].flat().forEach(collider => this.addCollider(collider.getCollider()));
+	addColliders(...colliders) {
+		[...colliders].flat(Infinity).forEach(collider => {
+				this.addCollider(collider.getCollider())
+		});
 	}
 
 	/**
@@ -344,7 +380,7 @@ export class Collider extends GameObject {
 		if (!(collider2 instanceof Collider)) throw new TypeError('collider2 must be instance of Collider');
 		const collisionKey = [collider1.shape.constructor.name, '2', collider2.shape.constructor.name];
 		const collision = Collider[collisionKey.join('')] || Collider[collisionKey.reverse().join('')];
-		if (typeof collision !== "function") throw new Error(`Collision method ${collisionKey.join(', ')} not implemented`);
+		if (typeof collision !== "function") throw new Error(`Collision method ${collisionKey.join('')} not implemented`);
 		return collision(collider1, collider2);
 	}
 

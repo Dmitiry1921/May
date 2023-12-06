@@ -1,0 +1,1307 @@
+{
+	"frames": [
+		{
+			"filename": "building.aseprite",
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 192,
+				"h": 5408
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 192,
+				"h": 5408
+			},
+			"sourceSize": {
+				"w": 192,
+				"h": 5408
+			},
+			"duration": 100
+		}
+	],
+	"meta": {
+		"app": "https://www.aseprite.org/",
+		"version": "1.3-rc9-x64",
+		"format": "RGBA8888",
+		"size": {
+			"w": 192,
+			"h": 5408
+		},
+		"scale": "1",
+		"frameTags": [
+		],
+		"layers": [
+			{
+				"name": "Layer",
+				"opacity": 255,
+				"blendMode": "normal"
+			}
+		],
+		"slices": [
+			{
+				"name": "Slice 1",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 12,
+							"y": 10,
+							"w": 69,
+							"h": 81
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 2",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 107,
+							"y": 9,
+							"w": 82,
+							"h": 112
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 3",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 128,
+							"y": 137,
+							"w": 32,
+							"h": 47
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 4",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 164,
+							"y": 137,
+							"w": 22,
+							"h": 47
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 5",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 0,
+							"y": 96,
+							"w": 106,
+							"h": 98
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 6",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 104,
+							"y": 201,
+							"w": 16,
+							"h": 15
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 7",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 137,
+							"y": 194,
+							"w": 15,
+							"h": 29
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 8",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 165,
+							"y": 194,
+							"w": 15,
+							"h": 29
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 9",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 9,
+							"y": 234,
+							"w": 79,
+							"h": 107
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 10",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 96,
+							"y": 235,
+							"w": 96,
+							"h": 107
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 11",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 14,
+							"y": 352,
+							"w": 70,
+							"h": 96
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 12",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 100,
+							"y": 352,
+							"w": 89,
+							"h": 95
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 13",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 14,
+							"y": 463,
+							"w": 72,
+							"h": 131
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 14",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 110,
+							"y": 456,
+							"w": 73,
+							"h": 112
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 15",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 2,
+							"y": 747,
+							"w": 94,
+							"h": 133
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 16",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 96,
+							"y": 714,
+							"w": 94,
+							"h": 132
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 17",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 110,
+							"y": 579,
+							"w": 73,
+							"h": 112
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 18",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 14,
+							"y": 616,
+							"w": 73,
+							"h": 106
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 19",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 96,
+							"y": 864,
+							"w": 96,
+							"h": 145
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 20",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 1,
+							"y": 896,
+							"w": 86,
+							"h": 121
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 21",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 8,
+							"y": 1027,
+							"w": 48,
+							"h": 80
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 22",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 78,
+							"y": 1026,
+							"w": 111,
+							"h": 152
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 23",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 5,
+							"y": 1129,
+							"w": 21,
+							"h": 47
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 24",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 41,
+							"y": 1129,
+							"w": 14,
+							"h": 47
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 25",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 11,
+							"y": 1189,
+							"w": 75,
+							"h": 109
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 26",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 110,
+							"y": 1189,
+							"w": 74,
+							"h": 109
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 27",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 4,
+							"y": 1324,
+							"w": 23,
+							"h": 41
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 28",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 32,
+							"y": 1324,
+							"w": 32,
+							"h": 41
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 29",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 64,
+							"y": 1324,
+							"w": 32,
+							"h": 41
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 30",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 109,
+							"y": 1314,
+							"w": 36,
+							"h": 62
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 31",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 160,
+							"y": 1353,
+							"w": 32,
+							"h": 47
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 32",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 70,
+							"y": 1408,
+							"w": 119,
+							"h": 170
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 33",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 5,
+							"y": 1440,
+							"w": 55,
+							"h": 93
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 34",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 12,
+							"y": 1577,
+							"w": 73,
+							"h": 111
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 35",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 105,
+							"y": 1607,
+							"w": 69,
+							"h": 81
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 36",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 8,
+							"y": 1702,
+							"w": 82,
+							"h": 111
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 37",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 105,
+							"y": 1706,
+							"w": 79,
+							"h": 107
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 38",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 6,
+							"y": 1844,
+							"w": 106,
+							"h": 98
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 39",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 139,
+							"y": 1835,
+							"w": 41,
+							"h": 106
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 40",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 1,
+							"y": 1973,
+							"w": 95,
+							"h": 107
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 41",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 109,
+							"y": 1952,
+							"w": 71,
+							"h": 96
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 42",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 4,
+							"y": 2080,
+							"w": 89,
+							"h": 95
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 43",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 108,
+							"y": 2055,
+							"w": 72,
+							"h": 131
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 44",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 7,
+							"y": 2191,
+							"w": 83,
+							"h": 73
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 45",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 108,
+							"y": 2215,
+							"w": 71,
+							"h": 83
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 46",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 14,
+							"y": 2273,
+							"w": 71,
+							"h": 116
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 47",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 112,
+							"y": 2306,
+							"w": 66,
+							"h": 85
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 48",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 14,
+							"y": 2412,
+							"w": 72,
+							"h": 113
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 49",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 99,
+							"y": 2400,
+							"w": 87,
+							"h": 121
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 50",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 2,
+							"y": 2532,
+							"w": 126,
+							"h": 124
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 51",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 139,
+							"y": 2528,
+							"w": 39,
+							"h": 63
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 52",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 8,
+							"y": 2666,
+							"w": 78,
+							"h": 131
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 53",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 104,
+							"y": 2666,
+							"w": 79,
+							"h": 130
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 54",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 11,
+							"y": 2830,
+							"w": 73,
+							"h": 114
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 55",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 110,
+							"y": 2837,
+							"w": 73,
+							"h": 104
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 56",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 2,
+							"y": 2946,
+							"w": 92,
+							"h": 245
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 57",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 109,
+							"y": 2948,
+							"w": 76,
+							"h": 226
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 58",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 21,
+							"y": 3202,
+							"w": 131,
+							"h": 189
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 59",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 8,
+							"y": 3394,
+							"w": 109,
+							"h": 62
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 60",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 128,
+							"y": 3392,
+							"w": 64,
+							"h": 64
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 61",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 8,
+							"y": 3458,
+							"w": 109,
+							"h": 62
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 62",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 130,
+							"y": 3456,
+							"w": 30,
+							"h": 64
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 63",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 162,
+							"y": 3456,
+							"w": 30,
+							"h": 64
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 64",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 8,
+							"y": 3522,
+							"w": 109,
+							"h": 62
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 65",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 129,
+							"y": 3532,
+							"w": 30,
+							"h": 48
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 66",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 161,
+							"y": 3532,
+							"w": 30,
+							"h": 49
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 67",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 7,
+							"y": 3598,
+							"w": 119,
+							"h": 43
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 68",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 130,
+							"y": 3584,
+							"w": 30,
+							"h": 64
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 69",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 169,
+							"y": 3591,
+							"w": 15,
+							"h": 49
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 70",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 7,
+							"y": 3661,
+							"w": 120,
+							"h": 44
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 71",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 143,
+							"y": 3648,
+							"w": 39,
+							"h": 64
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 72",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 11,
+							"y": 3719,
+							"w": 108,
+							"h": 150
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 73",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 13,
+							"y": 3872,
+							"w": 98,
+							"h": 128
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 74",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 0,
+							"y": 4000,
+							"w": 160,
+							"h": 168
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 75",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 5,
+							"y": 4199,
+							"w": 117,
+							"h": 345
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 76",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 8,
+							"y": 4550,
+							"w": 176,
+							"h": 186
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 77",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 16,
+							"y": 4740,
+							"w": 102,
+							"h": 284
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 78",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 15,
+							"y": 5038,
+							"w": 66,
+							"h": 51
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 79",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 98,
+							"y": 5037,
+							"w": 90,
+							"h": 115
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 80",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 14,
+							"y": 5115,
+							"w": 73,
+							"h": 155
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 81",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 102,
+							"y": 5160,
+							"w": 74,
+							"h": 110
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 82",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 103,
+							"y": 5287,
+							"w": 73,
+							"h": 110
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 83",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 111,
+							"y": 4750,
+							"w": 66,
+							"h": 50
+						}
+					}
+				]
+			},
+			{
+				"name": "Slice 84",
+				"color": "#0000ffff",
+				"keys": [
+					{
+						"frame": 0,
+						"bounds": {
+							"x": 128,
+							"y": 4326,
+							"w": 63,
+							"h": 117
+						}
+					}
+				]
+			}
+		]
+	}
+}

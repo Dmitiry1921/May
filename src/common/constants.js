@@ -2,13 +2,6 @@
 
 import {Point} from "../../GameEngine"
 
-export const COLLIDER_TYPE = {
-	NPC: 'NPC',
-	PLAYER: 'Player',
-	WALL: 'Wall',
-	PATH_FINDER: 'PathFinder',
-};
-
 export const DEFAULT = {
 	// Коллизия для персонажей по умолчанию
 	COLLISION_BOX: {

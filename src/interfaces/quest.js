@@ -7,16 +7,17 @@ import {sprites} from '../assets';
 const {canvasWidth} = gameEngineConfig;
 const {interfaceResources} = sprites;
 
-class Quest extends Container {
+export const quest = new class Quest extends Container {
 	#text;
 	#background;
 	constructor() {
 		super();
 		this.#background = new Sprite(interfaceResources, new Rectangle(772, 30, 199, 18));
 		this.#text = new Text();
-
+		this.#text.resize(199, 18);
 		// правый верхний угол
 		this.moveTo(new Point(canvasWidth - this.#background.width, 0));
+		this.#text.fontSize = '14px';
 		this.#text.moveTo(new Point(3, 2));
 
 		this.addChild(this.#background);
@@ -30,5 +31,3 @@ class Quest extends Container {
 		this.show();
 	}
 }
-
-export const quest = new Quest();

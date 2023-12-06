@@ -2,7 +2,7 @@
 
 import {Level, Point} from "../../../GameEngine";
 import {Hero, Vanessa, Hodgepodge, Astof, Artaka, Boy, Girl, Her, Cow, Butterfly, Cat, Chicken} from '../../characters';
-import {interfaceLayout} from '../../interfaces';
+import {interfaceLayout, quest} from '../../interfaces';
 import {parseMap} from "../../common";
 import mapData from "./mapData.json" assert {type: 'json'};
 
@@ -33,9 +33,9 @@ levelZero.pathFinder.resize(32, 2);
 // Задаем сортировку отображения персонажей в зависимости от их координат и размера
 levelZero.setSortCharactersBeforeRender((a, b) => (a.bound.y + a.bound.height) - (b.bound.y + b.bound.height));
 
-const butterflyPink = Butterfly.createPinkOnPoint(28,1);
-const butterflyYellow = Butterfly.createYellowOnPoint(17,10);
-const cat = Cat.createOnPoint(37,10);
+const butterflyPink = Butterfly.createPinkOnPoint(28, 1);
+const butterflyYellow = Butterfly.createYellowOnPoint(17, 10);
+const cat = Cat.createOnPoint(37, 10);
 const cows = Cow.createForEachPoint([
 	{x: 1, y: 11},
 	{x: 4, y: 13},
@@ -63,13 +63,20 @@ levelZero.addCharacters(
 	butterflyPink,
 	butterflyYellow,
 	cat,
-	chickens);
+	chickens,
+);
 
-Hero.moveTo(new Point(5 * 32, 3 * 32));
-Hero.setState(Hero.STATES.IDLE_BOTTOM.name);
+quest.set("Поговори с парнем");
+
+levelZero.addInitProcess(() => {
+	Hero.moveTo(new Point(5 * 32, 3 * 32));
+	Astof.moveTo(new Point(4.7 * 32, 5 * 32));
+	Hero.setState(Hero.STATES.IDLE_BOTTOM.name);
+	Astof.setDefaultState(Astof.STATES.IDLE_RIGHT);
+});
+
 // Hero.moveTo(new Point(21 * 32, 19 * 32 + 10));
 
 // Hero.moveTo(new Point(21 * 32, 13 * 32));
 // Hero.resize(32 * 2, 32 * 2);
-
 export {levelZero};

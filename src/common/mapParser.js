@@ -1,7 +1,6 @@
 'use strict';
 
-import {LayoutMap, Layout, SpriteAnimation, Point, Rectangle, Collider} from "../../GameEngine";
-import {COLLIDER_TYPE} from "./constants.js";
+import {LayoutMap, Layout, SpriteAnimation, Point, Rectangle, Collider, COLLIDER_TYPE} from "../../GameEngine";
 import {sprites, spritesConfiguration} from "../assets";
 
 const tileMap = {
@@ -20,19 +19,20 @@ const tileResources = {
 export function parseMap(mapData) {
 	// Разделяем карту на слои для отрисовки
 	const layoutBackground = new LayoutMap();
-	 const layoutBackward1 = new LayoutMap();
-	 const layoutBackward2 = new LayoutMap();
-	 const layoutBackward3 = new LayoutMap();
-	 const layoutBackward4 = new LayoutMap();
-	 const layoutForward = new LayoutMap();
-	 const layoutForward1 = new LayoutMap();
-	 const layoutWalls = new Layout();
+	const layoutBackward1 = new LayoutMap();
+	const layoutBackward2 = new LayoutMap();
+	const layoutBackward3 = new LayoutMap();
+	const layoutBackward4 = new LayoutMap();
+	const layoutForward = new LayoutMap();
+	const layoutForward1 = new LayoutMap();
+	const layoutWalls = new Layout();
 
+	// console.log(mapData.length, mapData[0].length);
 	mapData.forEach((xArr, x) => {
 		xArr.forEach((yArr, y) => {
 			yArr.forEach((item, index) => {
 				if (item.tile === null && item.id === null) return;
-
+				// if(parseInt(item.tile) !== 1) return;
 				const resource = tileResources[item.tile];
 				const properties = tileMap[item.tile][item.id];
 
@@ -50,9 +50,6 @@ export function parseMap(mapData) {
 						layoutForward1.addSpriteAnimation(x, y, animation);
 					}
 					return;
-				}
-				if(item.id === 812) {
-					console.log(properties);
 				}
 				if (tileMap[item.tile][item.id].walls) {
 					tileMap[item.tile][item.id].walls.forEach((wallData) => {
@@ -89,14 +86,14 @@ export function parseMap(mapData) {
 		});
 	});
 
-	 return {
-		 layoutBackground,
-		 layoutBackward1,
-		 layoutBackward2,
-		 layoutBackward3,
-		 layoutBackward4,
-		 layoutForward,
-		 layoutForward1,
-		 layoutWalls,
-	 };
+	return {
+		layoutBackground,
+		layoutBackward1,
+		layoutBackward2,
+		layoutBackward3,
+		layoutBackward4,
+		layoutForward,
+		layoutForward1,
+		layoutWalls,
+	};
 }

@@ -50,4 +50,12 @@ export const KEYS = {
 			KEYBOARD.ENTER,
 		],
 	},
+	ESCAPE: {
+		GAMEPAD: [
+			GAMEPAD.XBOX.MENU,
+		],
+		KEYBOARD: [
+			KEYBOARD.ESCAPE,
+		],
+	}
 }

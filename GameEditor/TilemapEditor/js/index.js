@@ -10,6 +10,7 @@ import {
 	storage,
 	Vector2
 } from "../../../GameEngine";
+import {json2tsx, tsx2json} from "../../tsxParser.js";
 
 const minTileSize = 16;
 const Editor = new GameEngine({
@@ -103,7 +104,7 @@ function createJSON() {
 		y: 0,
 		width: tileWidth,
 		height: tileHeight,
-		walls: [],
+		rigidBodies: [],
 	});
 
 	storage.json = JSON.parse(JSON.stringify(jsonData)).map((item, index) => {
@@ -128,6 +129,64 @@ function downloadJSON() {
 	a.download = `${storage.imageName}.json`; // Указываем имя файла
 	a.click();
 }
+
+function downloadTSX() {
+	const pathTo = prompt('Path to image relative to .tsx file', storage.objectEditorPathTo || '');
+	if(pathTo === null) return;
+	storage.objectEditorPathTo = pathTo;
+
+
+	// Преобразуем объект в строку TSX
+	const tsxString = json2tsx({
+		tileset: {
+			version: "1.10",
+			tiledversion: "1.10.2",
+			name: storage.imageName,
+			tilewidth: storage.tileWidth,
+			tileheight: storage.tileHeight,
+			tilecount: storage.json.length,
+			grid: {
+				orientation: "orthogonal",
+				width: "1",
+				height: "1"
+			},
+			image: {
+				width: loader.resource.width,
+				height: loader.resource.height,
+				source: [pathTo, `${storage.imageName}.png`].join('/').replace('//', '/'),
+			},
+			tiles: storage.json
+				.filter((tile) => !((tile.width === 0 || tile.height === 0)))
+				.map((tile, index) => ({
+					id: index,
+					x: tile.x,
+					y: tile.y,
+					width: tile.width,
+					height: tile.height,
+					objectgroup: {
+						id: index,
+						objects: tile.rigidBodies.map((rigidBody, index) => ({
+							id: index,
+							x: rigidBody.x - tile.x,
+							y: rigidBody.y -  tile.y,
+							width: rigidBody.width,
+							height: rigidBody.height,
+						})),
+					}
+				})),
+		}
+	});
+	// Создаем Blob объект с TSX данными
+	const blob = new Blob([tsxString], {type: "text/plain"});
+	// Создаем ссылку для скачивания файла
+	const url = URL.createObjectURL(blob);
+	// Создаем элемент <a> для скачивания
+	const a = document.createElement("a");
+	a.href = url;
+	a.download = `${storage.imageName}-tile-set.tsx`; // Указываем имя файла
+	a.click();
+}
+
 
 function resize() {
 	document.querySelectorAll('canvas').forEach((canvas) => {
@@ -154,7 +213,7 @@ function getWallRect(wall) {
 
 function drawWall(canvasContext) {
 	if (!currentTile) return;
-	currentTile.walls.forEach((wall) => {
+	currentTile.rigidBodies.forEach((wall) => {
 		const rect = getWallRect(wall);
 		rect.render(canvasContext, {style: "red", width: 1});
 
@@ -268,7 +327,7 @@ function drawWallCollection(canvasContext) {
 	canvasContext.lineWidth = .5;
 	canvasContext.strokeStyle = "red";
 	storage?.json?.forEach((tile) => {
-		tile.walls.forEach((wall) => {
+		tile.rigidBodies.forEach((wall) => {
 			const rect = new Rectangle(wall.x * scaleCollection, wall.y * scaleCollection, wall.width, wall.height);
 			rect.setScale(scaleCollection);
 			rect.moveBy(deltaGrid);
@@ -329,6 +388,7 @@ function previewScaleHandler(id) {
 		scaleTilePropertiesPreview = storage.tilePropertiesPreviewScale = Math.max(storage.tilePropertiesPreviewScale - 1, 1);
 	}
 }
+
 const imageTag = new Image();
 imageTag.onload = function () {
 	console.info('image loaded');
@@ -359,7 +419,7 @@ Editor.canvas.addEventListener('click', (event) => {
 	if (!currentTile) return;
 	currentWallIndex = null;
 	currentWall = null;
-	currentTile.walls.find((wall, index) => {
+	currentTile.rigidBodies.find((wall, index) => {
 		const rect = new Rectangle(wall.x * scale, wall.y * scale, wall.width, wall.height);
 		rect.setScale(scale);
 		const collider = new Collider('wall', rect);
@@ -547,6 +607,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const elFileInputImage = document.getElementById('fileInputImage');
 	const elCreateJSON = document.getElementById('createJSON');
 	const elDownloadJSON = document.getElementById('downloadJSON');
+	const elDownloadTSX = document.getElementById('downloadTSX');
 	const elEditorScalePlus = document.getElementById('editorScalePlus');
 	const elEditorScaleMinus = document.getElementById('editorScaleMinus');
 	const elCollectionScalePlus = document.getElementById('collectionScalePlus');
@@ -573,19 +634,20 @@ document.addEventListener('DOMContentLoaded', () => {
 	elPreviewScaleMinus.addEventListener('click', previewScaleHandler.bind(null, 'previewScaleMinus'));
 	elEditorToolPencil.addEventListener('click', () => {
 		if (!currentTile) return;
-		// if (!currentTile.walls?.length) ;
-		currentTile.walls.push(new Rectangle(currentTile.x, currentTile.y, 5, 5));
-		currentWall = currentTile.walls[currentTile.walls.length - 1];
-		currentWallIndex = currentTile.walls.length - 1;
+		// if (!currentTile.rigidBodies?.length) ;
+		currentTile.rigidBodies.push(new Rectangle(currentTile.x, currentTile.y, 5, 5));
+		currentWall = currentTile.rigidBodies[currentTile.rigidBodies.length - 1];
+		currentWallIndex = currentTile.rigidBodies.length - 1;
 	});
 	elEditorToolEraser.addEventListener('click', () => {
-		if (!currentTile?.walls) return;
+		if (!currentTile?.rigidBodies) return;
 		if (currentWallIndex === null) return;
-		currentTile.walls.splice(currentWallIndex, 1);
+		currentTile.rigidBodies.splice(currentWallIndex, 1);
 		currentWallIndex = null;
 	});
 	elCreateJSON.addEventListener('click', () => createJSON());
 	elDownloadJSON.addEventListener('click', () => downloadJSON());
+	elDownloadTSX.addEventListener('click', () => downloadTSX());
 	elFileInputImage.addEventListener('change', (event) => {
 		const file = event.target.files[0];
 		if (file) {
@@ -612,10 +674,10 @@ document.addEventListener('DOMContentLoaded', () => {
 				storage.json = jsonRaw.map((item) => {
 					const tileWidth = item.width || parseInt(storage.tileWidth);
 					const tileHeight = item.height || parseInt(storage.tileHeight);
-					if (!item.walls) {
-						item.walls = [];
+					if (!item.rigidBodies) {
+						item.rigidBodies = [];
 						if (item.wall === 1) {
-							item.walls = [new Rectangle(item.x, item.y, tileWidth, tileHeight)];
+							item.rigidBodies = [new Rectangle(item.x, item.y, tileWidth, tileHeight)];
 						}
 					}
 

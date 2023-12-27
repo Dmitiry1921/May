@@ -3,35 +3,39 @@
 import {Level, Point} from "../../../GameEngine";
 import {Hero, Vanessa, Hodgepodge, Astof, Artaka, Boy, Girl, Her, Cow, Butterfly, Cat, Chicken} from '../../characters';
 import {interfaceLayout, quest} from '../../interfaces';
-import {parseMap} from "../../common";
+import {parseMap, parseTmxMap} from "../../common";
 import mapData from "./mapData.json" assert {type: 'json'};
+import tmxMapData from "./Zero.json" assert {type: 'json'};
 
-const {
-	layoutForward,
-	layoutWalls,
-	layoutBackground,
-	layoutForward1,
-	layoutBackward2,
-	layoutBackward1
-} = parseMap(mapData);
+// const {
+// 	layoutForward,
+// 	layoutWalls,
+// 	layoutBackground,
+// 	layoutForward1,
+// 	layoutBackward2,
+// 	layoutBackward1,
+// } = parseMap(mapData);
+
+const level = parseTmxMap(tmxMapData);
+console.log({level});
 
 // TODO есть что оптимизировать как минимум кол-во слоев как максимум не подвижные элементы имеет смысл объеденять в большие пачки
 const levelZero = new Level(
-	layoutBackground,
-	layoutBackward1,
-	layoutBackward2,
-	Level.charactersLayer(),
-	layoutForward,
-	layoutForward1,
-	layoutWalls,
-	interfaceLayout,
+	// layoutBackground,
+	// layoutBackward1,
+	// layoutBackward2,
+	// Level.charactersLayer(),
+	// layoutForward,
+	// layoutForward1,
+	// layoutWalls,
+	// interfaceLayout,
 );
 
 levelZero.pathFinder.resize(32, 2);
 // levelZero.pathFinder.show();
 
 // Задаем сортировку отображения персонажей в зависимости от их координат и размера
-levelZero.setSortCharactersBeforeRender((a, b) => (a.bound.y + a.bound.height) - (b.bound.y + b.bound.height));
+// levelZero.setSortCharactersBeforeRender((a, b) => (a.bound.y + a.bound.height) - (b.bound.y + b.bound.height));
 
 const butterflyPink = Butterfly.createPinkOnPoint(28, 1);
 const butterflyYellow = Butterfly.createYellowOnPoint(17, 10);
@@ -50,21 +54,21 @@ const chickens = Chicken.createForEachPoint([
 
 
 // Добавляем персонажей на уровень
-levelZero.addCharacters(
-	Vanessa,
-	Hodgepodge,
-	Astof,
-	Hero,
-	Artaka,
-	Boy,
-	Girl,
-	Her,
-	cows,
-	butterflyPink,
-	butterflyYellow,
-	cat,
-	chickens,
-);
+// levelZero.addCharacters(
+// 	Vanessa,
+// 	Hodgepodge,
+// 	Astof,
+// 	Hero,
+// 	Artaka,
+// 	Boy,
+// 	Girl,
+// 	Her,
+// 	cows,
+// 	butterflyPink,
+// 	butterflyYellow,
+// 	cat,
+// 	chickens,
+// );
 
 quest.set("Поговори с парнем");
 

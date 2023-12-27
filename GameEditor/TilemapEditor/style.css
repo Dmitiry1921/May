@@ -18,3 +18,8 @@ canvas {
 	image-rendering: pixelated;
 }
 
+#screen-05 .card-img-top {
+	max-height: 155px;
+	object-fit: contain;
+}
+

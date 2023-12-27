@@ -1,0 +1,8 @@
+{
+	"watch": [
+		"devServer/tiledWatch.js"
+	],
+	"events": {
+		"start": "clear"
+	}
+}

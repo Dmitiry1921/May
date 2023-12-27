@@ -3,20 +3,21 @@
 import {LayoutMap, Layout, SpriteAnimation, Point, Rectangle, Collider, COLLIDER_TYPE} from "../../GameEngine";
 import {sprites, spritesConfiguration} from "../assets";
 
-const tileMap = {
-	1: spritesConfiguration.main,
-	2: spritesConfiguration.tiled,
-	3: spritesConfiguration.building,
-	11: spritesConfiguration.plane,
-};
-const tileResources = {
-	1: sprites.main,
-	2: sprites.tiled,
-	3: sprites.building,
-	11: sprites.plane,
-};
+// const tileMap = {
+// 	1: spritesConfiguration.main,
+// 	2: spritesConfiguration.tiled,
+// 	3: spritesConfiguration.building,
+// 	11: spritesConfiguration.plane,
+// };
+// const tileResources = {
+// 	1: sprites.main,
+// 	2: sprites.tiled,
+// 	3: sprites.building,
+// 	11: sprites.plane,
+// };
 
 export function parseMap(mapData) {
+	console.log('Map size: ', mapData.length, mapData[0].length);
 	// Разделяем карту на слои для отрисовки
 	const layoutBackground = new LayoutMap();
 	const layoutBackward1 = new LayoutMap();
@@ -27,7 +28,6 @@ export function parseMap(mapData) {
 	const layoutForward1 = new LayoutMap();
 	const layoutWalls = new Layout();
 
-	// console.log(mapData.length, mapData[0].length);
 	mapData.forEach((xArr, x) => {
 		xArr.forEach((yArr, y) => {
 			yArr.forEach((item, index) => {
@@ -59,7 +59,6 @@ export function parseMap(mapData) {
 						// wall.resize(wallData.width, wallData.height);
 						layoutWalls.addChild(wall);
 					})
-
 				}
 				if (index === 0) {
 					layoutBackground.addSpriteAnimation(x, y, animation);
@@ -96,4 +95,18 @@ export function parseMap(mapData) {
 		layoutForward1,
 		layoutWalls,
 	};
+}
+
+export function parseTmxMap({map}) {
+	const result = {};
+	const {layer: layers, ...rest} = map;
+	console.log({layers, ...rest});
+
+	return layers.reduce((acc, layer) => {
+		console.log({layer});
+		const {data, name} = layer;
+		acc[name] = new LayoutMap();
+		return acc;
+
+	}, result);
 }

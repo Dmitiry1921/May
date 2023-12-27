@@ -14,6 +14,7 @@ import {
 } from "../../../GameEngine";
 import {Entity} from "./Entity.js";
 import {OBJECT_EDITOR_KEYS} from "./keys.js";
+import {json2tsx, tsx2json} from "../../tsxParser.js";
 
 const ObjectsSelectionPreview = new GameEngine({
 	canvasId: "ObjectsSelectionPreview",
@@ -95,7 +96,6 @@ function showScreen(id) {
 			link.classList.remove('active')
 		}
 	});
-	console.log({id});
 	storage.currentScreen = id;
 	Object.values(engines)
 		.flat()
@@ -132,6 +132,62 @@ function downloadJSON() {
 	const a = document.createElement("a");
 	a.href = url;
 	a.download = `${storage.imageName}-objects.json`; // Указываем имя файла
+	a.click();
+}
+
+function downloadTSX() {
+	const pathTo = prompt('Path to image relative to .tsx file', storage.objectEditorPathTo || '');
+	if(pathTo === null) return;
+	storage.objectEditorPathTo = pathTo;
+
+	// Преобразуем объект в строку TSX
+	const tsxString = json2tsx({
+		tileset: {
+			version: "1.10",
+			tiledversion: "1.10.2",
+			name: storage.imageName,
+			tilewidth: 128,
+			tileheight: 128,
+			tilecount: storage.entities.length,
+			grid: {
+				orientation: "orthogonal",
+				width: "1",
+				height: "1"
+			},
+			image: {
+				width: loader.resource.width,
+				height: loader.resource.height,
+				source: [pathTo, `${storage.imageName}.png`].join('/').replace('//', '/'),
+			},
+			tiles: storage.entities
+				.filter((entity) => !(entity.width === 0 || entity.height === 0))
+				.map((entity, index) => ({
+				id: index,
+				x: entity.x,
+				y: entity.y,
+				width: entity.width,
+				height: entity.height,
+				objectgroup: {
+					id: index,
+					objects: entity.rigidBodies.map((rigidBody, index) => ({
+						id: index,
+						x: rigidBody.x - entity.x,
+						y: rigidBody.y -  entity.y,
+						width: rigidBody.width,
+						height: rigidBody.height,
+					})),
+				}
+			})),
+		}
+	});
+	// Создаем Blob объект с TSX данными
+	const blob = new Blob([tsxString], {type: "text/plain"});
+	// Создаем ссылку для скачивания файла
+	const url = URL.createObjectURL(blob);
+	// Создаем элемент <a> для скачивания
+	const a = document.createElement("a");
+	a.href = url;
+	a.download = `${storage.imageName}-objects.tsx`; // Указываем имя файла
 	a.click();
 }
 
@@ -784,9 +840,11 @@ WallEditor.addProcessRender((canvasContext) => {
 
 document.addEventListener('DOMContentLoaded', () => {
 	const elFileInputJson = document.getElementById('fileInputJson');
+	const elFileInputTSX = document.getElementById('fileInputTSX');
 	const elFileInputImage = document.getElementById('fileInputImage');
 	const elCreateJSON = document.getElementById('createJSON');
 	const elDownloadJSON = document.getElementById('downloadJSON');
+	const elDownloadTSX = document.getElementById('downloadTSX');
 	const elEditorScalePlus = document.getElementById('editorScalePlus');
 	const elEditorScaleMinus = document.getElementById('editorScaleMinus');
 	const elPreviewScalePlus = document.getElementById('previewScalePlus');
@@ -809,6 +867,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	elPreviewScaleMinus.addEventListener('click', previewScaleHandler.bind(null, 'previewScaleMinus'));
 	elCreateJSON.addEventListener('click', () => createJSON());
 	elDownloadJSON.addEventListener('click', () => downloadJSON());
+	elDownloadTSX.addEventListener('click', () => downloadTSX());
 	elFileInputImage.addEventListener('change', async (event) => {
 		const file = event.target.files[0];
 		if (file) {
@@ -854,6 +913,21 @@ document.addEventListener('DOMContentLoaded', () => {
 				createPreviewImages();
 				createPreviewImages(document.getElementById('wallPreview'));
 				showScreen('selectionOfObjects');
+			};
+		}
+	});
+	elFileInputTSX.addEventListener('change', (event) => {
+		const file = event.target.files[0];
+		if (file) {
+			const reader = new FileReader();
+			reader.readAsText(file);
+			reader.onload = function () {
+				// Загружаем изображение после чтения файла
+				const jsonRaw = tsx2json(reader.result);
+				const xmlData = json2tsx(jsonRaw);
+				console.log(JSON.stringify(jsonRaw));
+				console.log(xmlData);
+				console.log('TODO!!!')
 			};
 		}
 	});

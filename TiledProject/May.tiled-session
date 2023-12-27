@@ -1,0 +1,138 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "plane-objects.tsx",
+    "automapping.whileDrawing": true,
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "//Mac/Home/Downloads/automapExample/cliffRules.tmx": {
+            "scale": 1.7198958333333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 240.1308218763249,
+                "y": 239.84010659560295
+            }
+        },
+        "//Mac/Home/Downloads/automapExample/cliffRules2.tmx": {
+            "scale": 1.7198958333333332,
+            "selectedLayer": 4,
+            "viewCenter": {
+                "x": 592.4777421113198,
+                "y": 347.9861910241657
+            }
+        },
+        "//Mac/Home/Downloads/automapExample/grassRules.tmx": {
+            "scale": 1.7198958333333332,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 240.1308218763249,
+                "y": 239.84010659560295
+            }
+        },
+        "//Mac/Home/Downloads/automapExample/tileset.tsx": {
+            "scaleInDock": 1
+        },
+        ":/automap-tiles.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "Zero-experiment.tmx": {
+            "scale": 0.8498046874999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 576.0147092622386,
+                "y": 318.30843484256496
+            }
+        },
+        "Zero.tmx": {
+            "expandedObjectLayers": [
+                10
+            ],
+            "scale": 1.5,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 474.33333333333326,
+                "y": 285.6666666666667
+            }
+        },
+        "building-objects.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "buildings.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "levels/Zero.tmx": {
+            "scale": 1.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 533,
+                "y": 430.3333333333333
+            }
+        },
+        "levels/building-objects.tsx": {
+            "scaleInDock": 1
+        },
+        "levels/main.tsx": {
+            "scaleInDock": 1
+        },
+        "levels/plane-objects.tsx": {
+            "scaleInDock": 1
+        },
+        "main-rules.tmx": {
+            "scale": 1,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": -101.5,
+                "y": 775.5
+            }
+        },
+        "main.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "plane-objects.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.exportedFilePath": "Y:/May/src/img/tiles",
+    "last.externalTilesetPath": "Y:/May/TiledProject",
+    "last.imagePath": "Y:/May/src/img/tiles",
+    "lastUsedTilesetExportFilter": "All Files (*)",
+    "map.fixedSize": false,
+    "map.height": 22,
+    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedFormat": "tmx",
+    "map.width": 40,
+    "openFiles": [
+        "Zero.tmx",
+        "main.tsx",
+        "plane-objects.tsx"
+    ],
+    "project": "May.tiled-project",
+    "recentFiles": [
+        "main.tsx",
+        "building-objects.tsx",
+        "Zero.tmx",
+        "plane-objects.tsx",
+        "main-rules.tmx",
+        "buildings.tsx",
+        "Zero-experiment.tmx",
+        "//Mac/Home/Downloads/automapExample/grassRules.tmx",
+        "//Mac/Home/Downloads/automapExample/cliffRules.tmx",
+        "//Mac/Home/Downloads/automapExample/cliffRules2.tmx"
+    ],
+    "resizeMap.removeObjects": true,
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.type": 1
+}

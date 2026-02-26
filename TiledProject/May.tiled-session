@@ -3,9 +3,10 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "plane-objects.tsx",
+    "activeFile": "levels/Zero.tmx",
     "automapping.whileDrawing": true,
     "expandedProjectPaths": [
+        "levels",
         "."
     ],
     "fileStates": {
@@ -69,12 +70,20 @@
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "hero.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "levels/Zero.tmx": {
-            "scale": 1.5,
-            "selectedLayer": 0,
+            "expandedObjectLayers": [
+                10
+            ],
+            "scale": 2,
+            "selectedLayer": -1,
             "viewCenter": {
-                "x": 533,
-                "y": 430.3333333333333
+                "x": 285,
+                "y": 141.25
             }
         },
         "levels/building-objects.tsx": {
@@ -90,9 +99,14 @@
             "scale": 1,
             "selectedLayer": 3,
             "viewCenter": {
-                "x": -101.5,
-                "y": 775.5
+                "x": 658,
+                "y": -307.5
             }
+        },
+        "main-tile-set.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "main.tsx": {
             "dynamicWrapping": false,
@@ -107,7 +121,7 @@
     },
     "last.exportedFilePath": "Y:/May/src/img/tiles",
     "last.externalTilesetPath": "Y:/May/TiledProject",
-    "last.imagePath": "Y:/May/src/img/tiles",
+    "last.imagePath": "Y:/May/src/img/sprite",
     "lastUsedTilesetExportFilter": "All Files (*)",
     "map.fixedSize": false,
     "map.height": 22,
@@ -115,24 +129,30 @@
     "map.lastUsedFormat": "tmx",
     "map.width": 40,
     "openFiles": [
-        "Zero.tmx",
         "main.tsx",
-        "plane-objects.tsx"
+        "main-rules.tmx",
+        "main-tile-set.tsx",
+        "plane-objects.tsx",
+        "building-objects.tsx",
+        "hero.tsx",
+        "levels/Zero.tmx"
     ],
     "project": "May.tiled-project",
     "recentFiles": [
         "main.tsx",
-        "building-objects.tsx",
-        "Zero.tmx",
-        "plane-objects.tsx",
         "main-rules.tmx",
+        "main-tile-set.tsx",
+        "plane-objects.tsx",
+        "building-objects.tsx",
+        "hero.tsx",
+        "levels/Zero.tmx",
+        "Zero.tmx",
         "buildings.tsx",
         "Zero-experiment.tmx",
         "//Mac/Home/Downloads/automapExample/grassRules.tmx",
-        "//Mac/Home/Downloads/automapExample/cliffRules.tmx",
-        "//Mac/Home/Downloads/automapExample/cliffRules2.tmx"
+        "//Mac/Home/Downloads/automapExample/cliffRules.tmx"
     ],
     "resizeMap.removeObjects": true,
     "tileset.lastUsedFormat": "tsx",
-    "tileset.type": 1
+    "tileset.type": 0
 }

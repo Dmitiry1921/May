@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.10.2" name="building" tilewidth="128" tileheight="128" tilecount="132">
+<tileset version="1.10" tiledversion="1.10.2" name="building" tilewidth="128" tileheight="128" tilecount="132" columns="0">
+ <editorsettings>
+  <export target="../src/img/tiles/building.tsx.json" format="json"/>
+ </editorsettings>
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0" x="12" y="10" width="69" height="81">
   <image width="192" height="5408" source="../src/img/tiles/building.png"/>
@@ -345,8 +348,8 @@
  </tile>
  <tile id="54" x="21" y="3202" width="130" height="188">
   <image width="192" height="5408" source="../src/img/tiles/building.png"/>
-  <objectgroup id="54">
-   <object id="0" x="0" y="40" width="118" height="87"/>
+  <objectgroup draworder="index" id="54">
+   <object id="3" x="0.25" y="46.75" width="118" height="80"/>
    <object id="1" x="70" y="127" width="21" height="9"/>
    <object id="2" x="27" y="127" width="21" height="9"/>
   </objectgroup>
@@ -747,28 +750,28 @@
  </tile>
  <tile id="126" x="162" y="4800" width="30" height="18">
   <image width="192" height="5408" source="../src/img/tiles/building.png"/>
-  <objectgroup id="126">
-   <object id="0" x="0" y="16" width="30" height="2"/>
+  <objectgroup draworder="index" id="126">
+   <object id="2" x="0" y="15" width="30" height="3"/>
   </objectgroup>
  </tile>
  <tile id="127" x="128" y="4832" width="18" height="18">
   <image width="192" height="5408" source="../src/img/tiles/building.png"/>
-  <objectgroup id="127">
-   <object id="0" x="0" y="16" width="18" height="2"/>
+  <objectgroup draworder="index" id="127">
+   <object id="1" x="0" y="15" width="18" height="3"/>
   </objectgroup>
  </tile>
  <tile id="128" x="174" y="4832" width="18" height="32">
   <image width="192" height="5408" source="../src/img/tiles/building.png"/>
-  <objectgroup id="128">
-   <object id="0" x="0" y="23" width="4" height="18"/>
+  <objectgroup draworder="index" id="128">
+   <object id="2" x="0" y="23" width="3" height="18"/>
    <object id="1" x="0" y="20" width="18" height="3"/>
   </objectgroup>
  </tile>
  <tile id="129" x="159" y="4864" width="19" height="32">
   <image width="192" height="5408" source="../src/img/tiles/building.png"/>
-  <objectgroup id="129">
-   <object id="0" x="15" y="24" width="4" height="15"/>
-   <object id="1" x="0" y="20" width="19" height="4"/>
+  <objectgroup draworder="index" id="129">
+   <object id="2" x="16" y="19" width="3" height="28"/>
+   <object id="1" x="0" y="16" width="19" height="3"/>
   </objectgroup>
  </tile>
  <tile id="130" x="128" y="4864" width="31" height="32">
@@ -780,6 +783,8 @@
  </tile>
  <tile id="131" x="174" y="4896" width="4" height="50">
   <image width="192" height="5408" source="../src/img/tiles/building.png"/>
-  <objectgroup id="131"/>
+  <objectgroup draworder="index" id="131">
+   <object id="1" x="0.125" y="18.125" width="4" height="32.125"/>
+  </objectgroup>
  </tile>
 </tileset>

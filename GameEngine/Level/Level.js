@@ -3,13 +3,13 @@
 import {
 	GameObject,
 	ImageLoader,
-	LayoutArray,
-	Layout,
-	LayoutCharacters,
+	LayerArray,
+	Layer,
+	LayerCharacters,
 	PathFinder,
 	Point,
 	Collider,
-	LayoutMap,
+	LayerMap,
 } from "../../GameEngine";
 
 export class Level extends GameObject {
@@ -23,11 +23,11 @@ export class Level extends GameObject {
 
 	/**
 	 *
-	 * @param layouts[] {Layout | LayoutCharacters} - Порядок расположения слоев карты
+	 * @param layouts[] {Layer | LayerCharacters} - Порядок расположения слоев карты
 	 */
 	constructor(...layouts) {
 		super();
-		this.#layouts = new LayoutArray();
+		this.#layouts = new LayerArray();
 		this.#characters = new Map();
 		this.#colliders = new Set();
 		this.#collider = new Collider();
@@ -47,7 +47,7 @@ export class Level extends GameObject {
 	}
 
 	#getTileGridSize() {
-		return this.#layouts.find(layout => layout instanceof LayoutMap)?.getTileGridSize() || new Point(0, 0);
+		return this.#layouts.find(layout => layout instanceof LayerMap)?.getTileGridSize() || new Point(0, 0);
 	}
 
 	processInput(deltaTime) {
@@ -68,6 +68,7 @@ export class Level extends GameObject {
 	}
 
 	async load() {
+		console.log(this.resources);
 		await Promise.all(this.resources.map(resource => resource.load()));
 		this.resources.forEach(resource => {
 			if(resource instanceof ImageLoader) resource.sliceIntoTiles();
@@ -119,18 +120,20 @@ export class Level extends GameObject {
 	}
 
 	addLayout(layout) {
-		if(!(layout instanceof Layout)) throw new Error('layout must be instance of Layout');
+		if(!(layout instanceof Layer)) throw new Error('layout must be instance of Layer');
 		this.addResources(layout.resources);
 		this.addColliders(layout.colliders);
 		this.#layouts.push(layout);
 	}
 
 	addLayouts(...layouts) {
-		layouts.flat().forEach(layout => {
-			if(layout instanceof LayoutCharacters) {
+		layouts.flat(Infinity).forEach(layout => {
+			if(layout instanceof LayerCharacters) {
 				if(this.#charactersLayer !== undefined) throw new Error('Level characters layer is already defined');
 				this.#charactersLayer = layout;
 			}
+			layout.parent = this;
+			console.log('asdasds')
 			this.addLayout(layout);
 		});
 	}
@@ -150,7 +153,7 @@ export class Level extends GameObject {
 	}
 
 	static charactersLayer() {
-		return new LayoutCharacters();
+		return new LayerCharacters();
 	}
 
 }

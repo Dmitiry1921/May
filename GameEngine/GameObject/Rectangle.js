@@ -152,7 +152,6 @@ export class Rectangle extends GameObject {
 		canvasContext.stroke();
 
 		if(this.#diagonals) {
-			canvasContext.save();
 			canvasContext.beginPath();
 			canvasContext.moveTo(Math.round(this.x) + .5, Math.round(this.y) + .5);
 			canvasContext.lineTo(Math.round(this.x + this.width) + .5, Math.round(this.y + this.height) + .5);

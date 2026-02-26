@@ -25,8 +25,8 @@ Game
 ├── Resources
 │   ├── ImageLoader
 │   └── Map (Prototype) <- Level
-│       ├── Layout (слой карты)
-│       ├── LayoutArray <- Array (порядок рисования слоев карты)
+│       ├── Layer (слой карты)
+│       ├── LayerArray <- Array (порядок рисования слоев карты)
 │       └── CharacterArray <- Array
 └── Storage (Singleton)
     ├── LocalStorage

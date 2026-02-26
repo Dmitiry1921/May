@@ -1,8 +1,8 @@
 'use strict';
 
-import {Layout, Point} from "../../../GameEngine";
+import {Layer, Point} from "../../../GameEngine";
 
-export class Container extends Layout {
+export class Container extends Layer {
 	#point;
 
 	constructor() {
@@ -21,9 +21,9 @@ export class Container extends Layout {
 	}
 
 	render(canvasContext) {
-		const oldTransform = canvasContext.getTransform();
+		canvasContext.save();
 		canvasContext.translate(this.#point.x, this.#point.y);
 		super.render(canvasContext);
-		canvasContext.setTransform(oldTransform);
+		canvasContext.restore();
 	}
 }

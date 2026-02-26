@@ -154,15 +154,15 @@ function downloadTSX() {
 				width: "1",
 				height: "1"
 			},
-			image: {
-				width: loader.resource.width,
-				height: loader.resource.height,
-				source: [pathTo, `${storage.imageName}.png`].join('/').replace('//', '/'),
-			},
 			tiles: storage.entities
 				.filter((entity) => !(entity.width === 0 || entity.height === 0))
 				.map((entity, index) => ({
 				id: index,
+				image: {
+					width: loader.resource.width,
+					height: loader.resource.height,
+					source: [pathTo, `${storage.imageName}.png`].join('/').replace('//', '/'),
+				},
 				x: entity.x,
 				y: entity.y,
 				width: entity.width,

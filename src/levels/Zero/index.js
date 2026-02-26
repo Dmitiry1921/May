@@ -16,11 +16,14 @@ import tmxMapData from "./Zero.json" assert {type: 'json'};
 // 	layoutBackward1,
 // } = parseMap(mapData);
 
-const level = parseTmxMap(tmxMapData);
-console.log({level});
+const {landscape, objects, walls} = parseTmxMap(tmxMapData);
 
 // TODO есть что оптимизировать как минимум кол-во слоев как максимум не подвижные элементы имеет смысл объеденять в большие пачки
 const levelZero = new Level(
+	landscape,
+	// Level.charactersLayer(),
+	objects,
+	walls,
 	// layoutBackground,
 	// layoutBackward1,
 	// layoutBackward2,
@@ -30,6 +33,29 @@ const levelZero = new Level(
 	// layoutWalls,
 	// interfaceLayout,
 );
+
+objects.addChild(Hero);
+objects.addChild(Vanessa);
+objects.addChild(Hodgepodge);
+objects.addChild(Astof);
+objects.addChild(Artaka);
+objects.addChild(Boy);
+objects.addChild(Girl);
+
+// objects.setSortBeforeRender((objLeft, objRight) => {
+// 	console.log(objLeft, objRight);
+// 	throw new Error('not implemented');
+// 	return -1;
+// });
+
+console.log({levelZero});
+
+// TODO bug с множеством событий на одном персонаже
+// objects.addChild(Hero);
+// objects.addChild(Hero);
+// objects.addChild(Hero);
+// objects.addChild(Hero);
+// objects.addChild(Hero);
 
 levelZero.pathFinder.resize(32, 2);
 // levelZero.pathFinder.show();

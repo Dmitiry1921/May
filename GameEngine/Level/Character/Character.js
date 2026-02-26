@@ -10,14 +10,15 @@ import {
 	PathFinder,
 	GameObject,
 	AnimationState,
-	AnimationStateMachine, Level,
+	AnimationStateMachine,
+	Level,
+	Container,
 } from "../../../GameEngine";
 
 /**
  * @extends GameObject
  */
-export class Character extends GameObject {
-
+export class Character extends Container {
 	#type;
 	#bound;
 	#hitBox;

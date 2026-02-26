@@ -115,6 +115,7 @@ export class Sprite extends GameObject {
 		canvasContext.save();
 		canvasContext.translate(Math.round(this.#destinationRectangle.x), Math.round(this.#destinationRectangle.y))
 		canvasContext.scale(this.#flip.x, this.#flip.y);
+		// console.log(this.#sourceRectangle);
 		canvasContext.drawImage(
 			this.#image,
 			this.#sourceRectangle.x,

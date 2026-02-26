@@ -1,6 +1,6 @@
 'use strict';
 
-import {LayoutMap, Layout, SpriteAnimation, Point, Rectangle, Collider, COLLIDER_TYPE} from "../../GameEngine";
+import {LayerMap, Layer, SpriteAnimation, Point, Rectangle, Collider, COLLIDER_TYPE} from "../../GameEngine";
 import {sprites, spritesConfiguration} from "../assets";
 
 // const tileMap = {
@@ -16,17 +16,22 @@ import {sprites, spritesConfiguration} from "../assets";
 // 	11: sprites.plane,
 // };
 
+/**
+ * @deprecated
+ * @param mapData
+ * @returns {{layoutWalls: Layer, layoutBackground: LayerMap, layoutForward1: LayerMap, layoutBackward1: LayerMap, layoutBackward2: LayerMap, layoutForward: LayerMap, layoutBackward3: LayerMap, layoutBackward4: LayerMap}}
+ */
 export function parseMap(mapData) {
 	console.log('Map size: ', mapData.length, mapData[0].length);
 	// Разделяем карту на слои для отрисовки
-	const layoutBackground = new LayoutMap();
-	const layoutBackward1 = new LayoutMap();
-	const layoutBackward2 = new LayoutMap();
-	const layoutBackward3 = new LayoutMap();
-	const layoutBackward4 = new LayoutMap();
-	const layoutForward = new LayoutMap();
-	const layoutForward1 = new LayoutMap();
-	const layoutWalls = new Layout();
+	const layoutBackground = new LayerMap();
+	const layoutBackward1 = new LayerMap();
+	const layoutBackward2 = new LayerMap();
+	const layoutBackward3 = new LayerMap();
+	const layoutBackward4 = new LayerMap();
+	const layoutForward = new LayerMap();
+	const layoutForward1 = new LayerMap();
+	const layoutWalls = new Layer();
 
 	mapData.forEach((xArr, x) => {
 		xArr.forEach((yArr, y) => {
@@ -98,15 +103,84 @@ export function parseMap(mapData) {
 }
 
 export function parseTmxMap({map}) {
-	const result = {};
-	const {layer: layers, ...rest} = map;
-	console.log({layers, ...rest});
+	const walls = new Layer();
+	let result = {
+		walls,
+	};
+	const {layer: layers, objectgroup, tileset, ...rest} = map;
+	const sortedTileSets = tileset.sort((a, b) => b.firstGid - a.firstGid);
 
-	return layers.reduce((acc, layer) => {
-		console.log({layer});
-		const {data, name} = layer;
-		acc[name] = new LayoutMap();
+	layers.reduce((acc, layerData) => {
+		const {data: xArr, name} = layerData;
+		const layout = new LayerMap();
+		xArr.forEach((yArr, y) => {
+			yArr.forEach((tileGid, x) => {
+				const tileSet = sortedTileSets.find((tileSet) => tileGid >= tileSet.firstGid);
+				if (!tileSet) return;
+				const tileId = tileGid - tileSet.firstGid;
+				const resource = sprites[tileSet.name];
+				const properties = spritesConfiguration[tileSet.name].tiles[tileId];
+				const animation = new SpriteAnimation(resource, [
+					resource.getTile(properties.x / resource.tileWidth, properties.y / resource.tileHeight),
+				]);
+				//
+				animation.moveTo(new Point(x * resource.tileWidth, y * resource.tileHeight));
+				animation.resize(resource.tileWidth, resource.tileHeight);
+				// добавляем анимацию на слой
+				layout.addSpriteAnimation(x, y, animation);
+
+				properties.rigidBodies.forEach((rigidBody) => {
+					const rect = new Rectangle((x * resource.tileWidth) + rigidBody.x % resource.tileWidth, y * resource.tileHeight + rigidBody.y % resource.tileWidth, rigidBody.width, rigidBody.height);
+					// rect.delta.moveTo();
+					const wall = new Collider(COLLIDER_TYPE.WALL, rect);
+					// wall.resize(wallData.width, wallData.height);
+					walls.addChild(wall);
+				});
+			});
+		});
+
+		acc[name] = layout;
 		return acc;
 
+	}, result);
+
+	// // Создаем слои объектов
+	return objectgroup.reduce((acc, layer) => {
+		const layout = new LayerMap();
+		const {object: objects, name} = layer;
+
+		// TODO убрать
+		// acc[name] = layout;
+		// return acc;
+		//
+		objects.forEach((object) => {
+			const {gid, x, y, width, height} = object;
+			const tileSet = sortedTileSets.find((tileSet) => gid >= tileSet.firstGid);
+			const index = gid - tileSet.firstGid;
+			const resource = sprites[tileSet.name];
+			const properties = spritesConfiguration[tileSet.name]?.tiles?.[index];
+			if(!properties) {
+				console.warn(`not found properties for gid: ${gid}`);
+				return;
+			}
+			const animation = new SpriteAnimation(resource, [
+				new Rectangle(properties.x, properties.y, properties.width, properties.height),
+			]);
+			//
+			const point = new Point(x, y - height);
+			animation.moveTo(point);
+			animation.resize(width, height);
+			// добавляем анимацию на слой
+			layout.addSpriteAnimation(x, y, animation);
+			properties.rigidBodies.forEach((rigidBody) => {
+				const rect = new Rectangle(point.x + rigidBody.x, point.y + rigidBody.y, rigidBody.width, rigidBody.height);
+				// rect.delta.moveTo();
+				const wall = new Collider(COLLIDER_TYPE.WALL, rect);
+				// wall.resize(wallData.width, wallData.height);
+				walls.addChild(wall);
+			})
+		});
+		acc[name] = layout;
+		return acc;
 	}, result);
 }

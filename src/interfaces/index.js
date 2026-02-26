@@ -1,13 +1,13 @@
 'use strict';
 
-import {Layout} from "../../GameEngine";
+import {Layer} from "../../GameEngine";
 
 import {dialog, Dialog} from './dialog.js';
 import {quest} from './quest.js';
 import {inventory} from './inventory.js';
 import {healthPower} from './healthPower.js'
 
-const interfaceLayout = new Layout();
+const interfaceLayout = new Layer();
 
 interfaceLayout.addChild(dialog);
 interfaceLayout.addChild(quest);

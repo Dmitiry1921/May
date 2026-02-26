@@ -1,13 +1,17 @@
 'use strict';
 
-import {getRandomInt, Loader} from "../../GameEngine";
+import {Collider, getRandomInt, Loader} from "../../GameEngine";
 import {logOnce} from "../utils/logger.js";
 
 export class GameObject {
+	#parent;
+	#rigidBodies;
 	#resources;
 
 	constructor() {
+		this.#parent = null;
 		this.#resources = new Map();
+		this.#rigidBodies = [];
 	}
 
 	/**
@@ -29,6 +33,27 @@ export class GameObject {
 	addResources(resources) {
 		if (!Array.isArray(resources)) throw new TypeError('resources must be array');
 		resources.forEach(resource => this.addResource(resource));
+		if(!!this.parent) this.parent.addResources(resources);
+	}
+
+
+	set parent(parent) {
+		if(!(parent instanceof GameObject)) throw new TypeError('param parent must be instance of GameObject');
+		this.#parent = parent;
+	}
+
+	get parent() {
+		return this.#parent;
+	}
+
+	get rigidBodies() {
+		return this.#rigidBodies;
+	}
+
+	set rigidBodies(rigidBodies) {
+		if (!Array.isArray(rigidBodies)) throw new TypeError('rigidBodies must be array');
+		if(rigidBodies.some(rigidBody => !(rigidBody instanceof Collider))) throw new TypeError('rigidBodies must be array of Collider');
+		this.#rigidBodies = rigidBodies;
 	}
 
 	get resources() {

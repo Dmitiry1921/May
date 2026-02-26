@@ -1,7 +1,7 @@
 'use strict';
 
-export * from "./Layout.js"
+export * from "./Layer.js"
 export * from "./Container.js"
-export * from "./LayoutArray.js"
-export * from "./LayoutCharacters.js"
-export * from "./LayoutMap.js"
+export * from "./LayerArray.js"
+export * from "./LayerCharacters.js"
+export * from "./LayerMap.js"

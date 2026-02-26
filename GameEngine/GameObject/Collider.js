@@ -41,7 +41,7 @@ export class Collider extends GameObject {
 		this.#collided = new Map();
 		this.#collidedNextFrame = new Map();
 		this.#availableDirections = new Map();
-		this.#visible = false;
+		this.#visible = true;
 
 		this.#reset();
 	}

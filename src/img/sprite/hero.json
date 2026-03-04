@@ -1,0 +1,128 @@
+{
+  "image": {
+    "source": "../src/img/sprite/hero.png",
+    "width": "384",
+    "height": "256"
+  },
+  "version": "1.10",
+  "tiledversion": "1.10.2",
+  "name": "hero",
+  "columns": 12,
+  "tileCount": 96,
+  "tileWidth": 32,
+  "tileHeight": 32,
+  "tiles": [
+    {
+      "animation": {
+        "frame": [
+          {
+            "tileid": "7",
+            "duration": "100"
+          },
+          {
+            "tileid": "6",
+            "duration": "100"
+          },
+          {
+            "tileid": "7",
+            "duration": "100"
+          },
+          {
+            "tileid": "8",
+            "duration": "100"
+          }
+        ]
+      },
+      "id": 7,
+      "x": 224,
+      "y": 0,
+      "width": 32,
+      "height": 32,
+      "rigidBodies": []
+    },
+    {
+      "animation": {
+        "frame": [
+          {
+            "tileid": "19",
+            "duration": "100"
+          },
+          {
+            "tileid": "18",
+            "duration": "100"
+          },
+          {
+            "tileid": "19",
+            "duration": "100"
+          },
+          {
+            "tileid": "20",
+            "duration": "100"
+          }
+        ]
+      },
+      "id": 19,
+      "x": 224,
+      "y": 32,
+      "width": 32,
+      "height": 32,
+      "rigidBodies": []
+    },
+    {
+      "animation": {
+        "frame": [
+          {
+            "tileid": "31",
+            "duration": "100"
+          },
+          {
+            "tileid": "30",
+            "duration": "100"
+          },
+          {
+            "tileid": "31",
+            "duration": "100"
+          },
+          {
+            "tileid": "32",
+            "duration": "100"
+          }
+        ]
+      },
+      "id": 31,
+      "x": 224,
+      "y": 64,
+      "width": 32,
+      "height": 32,
+      "rigidBodies": []
+    },
+    {
+      "animation": {
+        "frame": [
+          {
+            "tileid": "43",
+            "duration": "100"
+          },
+          {
+            "tileid": "42",
+            "duration": "100"
+          },
+          {
+            "tileid": "43",
+            "duration": "100"
+          },
+          {
+            "tileid": "44",
+            "duration": "100"
+          }
+        ]
+      },
+      "id": 43,
+      "x": 224,
+      "y": 96,
+      "width": 32,
+      "height": 32,
+      "rigidBodies": []
+    }
+  ]
+}

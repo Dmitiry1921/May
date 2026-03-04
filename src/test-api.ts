@@ -147,6 +147,7 @@ export function setupTestApi(game: Phaser.Game): void {
       };
     },
 
+
     getQuestText(): string | null {
       return (storage as any)._quest || null;
     },

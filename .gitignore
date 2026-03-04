@@ -1,1 +1,16 @@
 .idea
+.DS_Store
+AGENTS.md
+node_modules/
+coverage/
+playwright-report/
+test-results/
+.sisyphus/
+
+# Debug screenshots
+*.png
+!doc/**/*.png
+!img/**/*.png
+!src/img/**/*.png
+!assets/**/*.png
+!tests/visual/**/*.png

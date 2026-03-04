@@ -8,7 +8,14 @@
     "doc": "doc"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "test": "vitest run && npx playwright test tests/e2e",
+    "test:e2e": "npx playwright test",
+    "test:e2e:headed": "npx playwright test --headed",
+    "test:e2e:ui": "npx playwright test --ui",
+    "test:visual": "npx playwright test tests/visual",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "repository": {
     "type": "git",
@@ -22,6 +29,16 @@
   },
   "homepage": "https://github.com/Dmitiry1921/May#readme",
   "devDependencies": {
-    "mocha": "10.2.0"
+    "@playwright/test": "^1.58.2",
+    "@types/node": "^25.3.2",
+    "@vitest/coverage-v8": "^1.0.0",
+    "jsdom": "^28.1.0",
+    "serve": "^14.2.5",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vitest": "^1.0.0"
+  },
+  "dependencies": {
+    "phaser": "^3.90.0"
   }
 }
